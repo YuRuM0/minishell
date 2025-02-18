@@ -2,7 +2,8 @@
 *.out
 *.o
 *.a
+.vscode
 minishell
 # ignore any files or testing folders
 # /execution/tests/*
-# /parsing/tests/*
+/parsing/tests/*
