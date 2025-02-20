@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/02/18 22:13:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/02/20 21:39:38 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,38 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <stdlib.h>
 # include <string.h>
-# include <stdbool.h>
+# include <errno.h>
 # include "../../includes/libft.h"
+# include "tokenization.h"
 
-//part of binary tree to hold the cmd's attributes
-typedef struct s_cmd_args
+// 
+# define METACHAR "<>| "
+# define VAR_BLOCK " <>|?\'\"/$"
+# define BLANK "\t\n\v\f\r "
+# define S_QUOTE '\''
+# define D_QUOTES '\"'
+
+typedef struct s_simple_cmd
 {
 	int		nbr_of_args;
 	char	**args;
 	char	*value;
 	bool	pipe;
-}	t_cmd_args;
-
-//binary tree to save all the commands and their falgs and values.
-typedef struct s_commands
-{
-	struct	s_commands	*next_cmd;
-	struct	s_cmd_args	*flags;
-}	t_commands;
+}	t_simple_cmd;
 
 //main structure to hold all the data 
 typedef struct s_main_data
-{
-	int					nbr_of_cmds;
-	char				*infile;
-	char				*outfile;
-	char				*errfile; //where and when is it used?
-	struct	s_commands	cmds;
+{	
+	int						nbr_of_cmds;
+	char					*pipeline;
+	char					*heredoc_content;
+	char					*infile;
+	char					*outfile;
+	char					*errfile; //where and when is it used?
+	struct	s_simple_cmd	**cmds;
 }	t_main_data;
-
-//split the cmd line into token using these syntax
-typedef enum s_syntax
-{
-	PIPE,		// |
-	EQUAL,		// =
-	REDIR_IN,	// <
-	REDIR_OUT,	// >
-	GREATGREAT,	// >>
-	LESSLESS,	// <<
-	VARIABLE,	// $
-	D_QUOTE,	// ""
-	S_QUOTE,	// ''
-	WORD,		//CMD, CMD_ARG OR VALUE
-}	t_syntax;
-
-typedef struct s_token
-{
-	char			*cont;
-	enum s_syntax	token;
-	struct s_token	*next;
-}					t_token;
 
 #endif

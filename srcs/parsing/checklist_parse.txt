@@ -1,0 +1,3 @@
+SIGNAL CTRL + D;                    OK
+FAIL MEMORY ALLOC READLINE CHECK ;  OK
+HEREDOC;                            IN PROCESS 
