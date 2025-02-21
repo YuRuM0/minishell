@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/02/20 22:14:28 by filipe           ###   ########.fr       */
+/*   Updated: 2025/02/21 22:02:06 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ char    *ft_strtoken(char *str)
     int     start;
     char    *token;
 
+    if (!*str)
+        return (NULL);
+    i = 0;
     while (str[i] == '\t' || str[i] == '\n' || \
         str[i] == '\r' || str[i] == ' ')
         i++;

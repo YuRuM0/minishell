@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/02/20 21:39:38 by filipe           ###   ########.fr       */
+/*   Updated: 2025/02/21 20:31:59 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,9 @@ typedef struct s_main_data
 	char					*errfile; //where and when is it used?
 	struct	s_simple_cmd	**cmds;
 }	t_main_data;
+
+void    parse(t_main_data *data);
+void    check_heredoc(t_main_data *data);
+char    *ft_strtoken(char *str);
 
 #endif

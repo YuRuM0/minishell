@@ -6,13 +6,13 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/02/19 19:19:23 by filipe           ###   ########.fr       */
+/*   Updated: 2025/02/21 20:28:06 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishell.h"
 
-void    get_tokens(t_main_data data)
-{
+// void	get_tokens(t_main_data data)
+// {
     
-}
+// }

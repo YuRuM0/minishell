@@ -6,13 +6,13 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/02/20 21:40:10 by filipe           ###   ########.fr       */
+/*   Updated: 2025/02/21 20:32:31 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*read_tty(void)
+static char	*read_tty(void)
 {
 	char	*pipeline;
 
@@ -30,10 +30,11 @@ char	*read_tty(void)
 		exit(1);
 	}
 	if (pipeline && ft_strlen(pipeline))
-		add_history(pipeline);
+		add_history(pipeline); //add here?
 	return (pipeline);
 }
-void	loop_minishell(t_main_data *data)
+
+static void	loop_minishell(t_main_data *data)
 {	
 	while (true)
 	{
