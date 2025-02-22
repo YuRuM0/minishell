@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenization.c                                     :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/02/22 22:07:40 by flima            ###   ########.fr       */
+/*   Created: 2025/02/22 20:56:49 by flima             #+#    #+#             */
+/*   Updated: 2025/02/22 21:04:38 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-// void	tokenize_input(t_main_data *data)
-// {
-// 	t_token		*tokens;
-// 	const char 	*input;
-// 	int			count_tok;
-
-// 	input = data->pipeline;
-// 	count_tok = 0;
-// 	tokens = NULL;
-// 	while (*input)
-// 	{
-// 		if (ft_isspace(*input))
-// 			input++;
-// 		else if (*input == '|')
-			
-// 	}
-	
-
-	
-// }
+int	ft_isspace(int c)
+{
+    if (c == ' '  || c == '\t' || c == '\n' || \
+        c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
+}
