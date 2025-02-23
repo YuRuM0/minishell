@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/02/22 22:05:45 by flima            ###   ########.fr       */
+/*   Updated: 2025/02/23 17:01:23 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static void	init_data(t_main_data *data)
 	data->tty_line = 0;
 	data->heredoc_content = NULL;
 	data->cmds = NULL;
-	data->infile = NULL;
-	data->outfile = NULL;
+	data->tokens = NULL;
 	data->errfile = NULL;
 }
 

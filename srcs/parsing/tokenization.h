@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/02/22 22:22:30 by flima            ###   ########.fr       */
+/*   Updated: 2025/02/23 17:17:52 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 
 # include "minishell.h"
 
+# define META_CHARS_SET " \t\n|<>\'\"$"
+
 //split the cmd line into token using these syntax
-typedef enum s_syntax
+typedef enum e_syntax
 {
-	PIPE,          // | (Pipe)
+	SPACE_CHAR,
+	TAB_CHAR,          
+	NEW_LINE,       // \n (Newline, indicating end of command or separator)
+	PIPE,			// | (Pipe)
 	EQUAL,         // = (Equal sign)
 	REDIR_IN,      // < (Input redirection)
 	REDIR_OUT,     // > (Output redirection)
@@ -28,10 +33,29 @@ typedef enum s_syntax
 	D_QUOTE,       // "" (Double quotes for string)
 	S_QUOTE,       // '' (Single quotes for literal string)
 	WORD,          // CMD, CMD_ARG or generic string value
-	NEW_LINE,       // \n (Newline, indicating end of command or separator)
-	//END_OF_INPUT,  // End of input, e.g., EOF
-	ERROR,         // Error in tokenization (when a token is unrecognized)
 } t_syntax;
+
+typedef enum e_parsing_codes //modificar error codes
+{
+	PARSE_SUCCESS,
+	ERR_CMD_SUBSTIT,
+	ERR_SYNTAX_NL,
+	ERR_UNCLOSED_QUOTES,
+	ERR_SYNTAX_OPEN_PAR,
+	ERR_SYNTAX_CLOSE_PAR,
+	ERR_SYNTAX_PIPE,
+	ERR_SYNTAX_OR,
+	ERR_SYNTAX_AND,
+	ERR_SYNTAX_REDIR,
+	ERR_SYNTAX_AMPER,
+	ERR_SYNTAX_ERROR,
+	ERR_BG_PROCESS,
+	ERR_PARSING_ERROR,
+	ERR_MEM_ALLOC,
+	ERR_EXPAND,
+	ERR_CMD,
+	SIGINT_HDOC,
+}	t_ercode_pars;
 
 typedef enum e_redir_type
 {
@@ -62,12 +86,12 @@ typedef struct s_command
 typedef struct s_token
 {
 	char			*value;
-	int				size;
-	enum s_syntax	type;
+	enum e_syntax	type;
 	struct s_token	*next;
 }					t_token;
 
-// void	tokenize_input(t_main_data *data);
-// t_token	*add_new_token(void *content, t_syntax type);
-// void	creat_token(t_token **head, t_token *new);
+t_ercode_pars	tokenize_input(t_main_data *data, char	*input);
+t_token			*add_new_token(void);
+void			add_token_back(t_token **head, t_token *new);
+t_token			*last_token(t_token *list);
 #endif
