@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/02/23 17:09:34 by filipe           ###   ########.fr       */
+/*   Updated: 2025/02/26 21:40:58 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include <errno.h>
 # include "../../includes/libft.h"
 # include "tokenization.h"
+//# include "../execution/execution.h"
 
-// 
+//
 // # define METACHAR "<>| "
 // # define VAR_BLOCK " <>|?\'\"/$"
 // # define BLANK "\t\n\v\f\r "
@@ -33,7 +34,7 @@
 "\001\033[38;5;46m\002m\001\033[38;5;154m\002i\001\033[38;5;226m\002n\
 \001\033[38;5;190m\002i\001\033[38;5;33m\002s\001\033[38;5;21m\002h\
 \001\033[38;5;160m\002e\001\033[38;5;196m\002l\001\033[38;5;255m\002l\
-\001\033[38;5;240m\002$\001\033[0m\002 " 
+\001\033[38;5;240m\002$\001\033[0m\002 "
 
 typedef enum e_exit_code
 {
@@ -48,9 +49,9 @@ typedef enum e_exit_code
 	EXIT_SIGINT = 130,
 	EXIT_SIGQUIT = 131
 }	t_exit_code;
-//main structure to hold all the data 
+//main structure to hold all the data
 typedef struct s_main_data
-{	
+{
 	int						nbr_of_cmds;
 	int						tty_line;
 	char					*pipeline;

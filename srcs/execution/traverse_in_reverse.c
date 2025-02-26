@@ -6,9 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:02:57 by yulpark           #+#    #+#             */
-/*   Updated: 2025/02/25 19:10:38 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/02/26 18:32:45 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 int	tree_traverser()
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/02/22 20:07:56 by flima            ###   ########.fr       */
+/*   Updated: 2025/02/26 18:54:51 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*capture_heredoc(t_main_data *data, char *delim)
 {
 	char	*content;
 	char	*line;
-	
+
 	content = ft_strdup("");
 	//check erro NULL
 	while (true)
@@ -57,8 +57,9 @@ void	get_heredoc_delim(t_main_data *data)
     	return ;
 	}
 	if (heredoc_delim == NULL)
-		return ; //error in malloc 
+		return ; //error in malloc
 	data->heredoc_content = capture_heredoc(data, heredoc_delim);
+	printf("%s\n", data->heredoc_content);
 	if (*(data->heredoc_content) == '\0')
 		return ; //free?
 }
@@ -71,4 +72,4 @@ void    parse(t_main_data *data)
 	{
 		get_heredoc_delim(data);
 	}
-} 
+}

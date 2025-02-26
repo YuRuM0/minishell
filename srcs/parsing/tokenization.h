@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/02/23 17:17:52 by filipe           ###   ########.fr       */
+/*   Updated: 2025/02/26 21:55:28 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef enum e_syntax
 {
 	SPACE_CHAR,
-	TAB_CHAR,          
+	TAB_CHAR,
 	NEW_LINE,       // \n (Newline, indicating end of command or separator)
 	PIPE,			// | (Pipe)
 	EQUAL,         // = (Equal sign)
@@ -90,8 +90,8 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
-t_ercode_pars	tokenize_input(t_main_data *data, char	*input);
-t_token			*add_new_token(void);
-void			add_token_back(t_token **head, t_token *new);
-t_token			*last_token(t_token *list);
+//t_ercode_pars	tokenize_input(t_main_data *data, char	*input);
+//t_token			*add_new_token(void);
+//void			add_token_back(t_token **head, t_token *new);
+//t_token			*last_token(t_token *list);
 #endif
