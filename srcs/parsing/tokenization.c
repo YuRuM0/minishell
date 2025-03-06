@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/06 19:56:40 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/06 20:14:16 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_pars_err	parser(t_main_data *data)
 	t_pars_err	status;
 
 	status = tokenize_input(data, data->pipeline);
-	
 
-	
+
+
 }
