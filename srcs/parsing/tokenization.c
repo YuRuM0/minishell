@@ -3,25 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/02/23 17:05:27 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/06 19:56:40 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_ercode_pars	get_tokens(char *input, int *i, t_token *token)
+// static	void	assign_lex_funcs(t_lex_functions *process)
+// {
+// 	process[0] =
+// 	process[1] =
+// 	process[2] =
+// 	process[3] =
+// 	process[4] =
+// 	process[5] =
+// 	process[6] =
+// 	process[7] =
+// 	process[8] =
+// 	process[9] =
+// 	process[10] = 
+// }
+
+t_syntax	get_token_type(char cha)
 {
+	t_syntax	type;
+
+	type = SPACE_CHAR;
+	while (type != WORD)
+	{
+		if (cha == METACHARS[type])
+			return (type);
+		type++;
+	}
+	return (WORD);
+}
+
+/**
+* @brief Assign the token type and its value (a string)
+* 
+* Get the type of the token to access a corresponding function 
+* through an array of functions and return a value indicating 
+* whether obtaining the token content was successful or resulted in an error.
+*
+*/
+
+t_pars_err	assign_token(char *input, size_t *current_pos, t_token *token)
+{
+	t_lex_functions	process[10];
+	t_pars_err		status;
+	int				start;
+
+	start = *current_pos;
+	assign_lex_funcs(process);
+	token->type = get_token_type(input[*current_pos]);
+	status = process[token->type](input, current_pos, token->type);
+	token->value = ft_substr(input, start, current_pos - start);
+	// if (token->value == NULL)
+	// 	//handle_error
+	return(SUCCESS);
+	
 	
 }
 
-t_ercode_pars	tokenize_input(t_main_data *data, char	*input)
+
+t_pars_err	tokenize_input(t_main_data *data, char	*input)
 {
 	t_token			*token;
 	size_t			i;
-	t_ercode_pars	status;
+	t_pars_err	status;
 
 	i = 0;
 	while(input[i])
@@ -29,17 +81,17 @@ t_ercode_pars	tokenize_input(t_main_data *data, char	*input)
 		token = add_new_token();
 		if (!token)
 			return (ERR_MEM_ALLOC);
-		status = get_tokens(input, &i, token);
+		status = assign_token(input, &i, token);
 		//check err code in status 
 		//if (status == ?)
 		add_token_back(&data->tokens, token);
 	}
-	return(PARSE_SUCCESS);
+	return(SUCCESS);
 }
 
-t_ercode_pars	parser(t_main_data *data)
+t_pars_err	parser(t_main_data *data)
 {
-	t_ercode_pars	status;
+	t_pars_err	status;
 
 	status = tokenize_input(data, data->pipeline);
 	

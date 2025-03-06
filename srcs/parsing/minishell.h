@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/02/23 17:09:34 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/06 17:42:09 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@
 # include "../../includes/libft.h"
 # include "tokenization.h"
 
-// 
-// # define METACHAR "<>| "
-// # define VAR_BLOCK " <>|?\'\"/$"
-// # define BLANK "\t\n\v\f\r "
-// # define S_QUOTE '\''
-// # define D_QUOTES '\"'
+
 
 //mix of brasilian and corean flags haha
 #define MINISHELL_PROMPT \
