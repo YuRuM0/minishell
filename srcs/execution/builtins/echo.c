@@ -6,11 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:45:11 by yulpark           #+#    #+#             */
-/*   Updated: 2025/02/26 21:47:13 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/03/07 14:54:33 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parsing/minishell.h"
+#include "../execution.h"
 
 int echo(char **args)
 {
