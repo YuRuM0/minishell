@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/10 15:33:33 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/10 18:48:21 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ typedef enum e_syntax
 typedef enum e_parsing_err //modificar error codes
 {
 	SUCCESS,
-	ERR_MEM_ALLOC,
-	ERR_PIPE_START,
+	ERROR_MEM_ALLOC,
+	ERROR_PIPE_START,
+	ERROR_CMD_SUBSTITUTION,
 }	t_pars_err;
 
 typedef enum e_redir_type

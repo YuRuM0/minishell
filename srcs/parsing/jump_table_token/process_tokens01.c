@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_tokens.c                                   :+:      :+:    :+:   */
+/*   process_tokens01.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:44:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/10 15:52:53 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/10 19:51:37 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,21 @@ t_pars_err	process_less_n_append(char *input, size_t *i, t_syntax *tok_type)
 	return (SUCCESS);
 }
 
+// handle env_var, we dont handle command substitution $(CMD)
+// we just handle special char ?
 t_pars_err	process_env_var(char *input, size_t *i, t_syntax *tok_type)
 {
 	(void)tok_type;
 	(*i)++;
-	while (input[*i] && get_token_type(input[*i]) == WORD)
+	if (input[*i] == '?')
+	{
+		(*i)++;
+		return (SUCCESS);
+	}
+	if (input[*i] == '(')
+		return (ERROR_CMD_SUBSTITUTION);
+	if ()
+	while ()
 		(*i)++;
 	return(SUCCESS);
 }
