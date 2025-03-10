@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/06 20:11:50 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/10 15:33:33 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef enum e_parsing_err //modificar error codes
 {
 	SUCCESS,
 	ERR_MEM_ALLOC,
+	ERR_PIPE_START,
 }	t_pars_err;
 
 typedef enum e_redir_type
@@ -83,4 +84,5 @@ t_pars_err		tokenize_input(t_main_data *data, char	*input);
 t_token			*add_new_token(void);
 void			add_token_back(t_token **head, t_token *new);
 t_token			*last_token(t_token *list);
+t_syntax		get_token_type(char cha);
 #endif

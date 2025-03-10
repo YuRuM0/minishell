@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/06 20:14:16 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/10 14:43:15 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 // 	process[10] = 
 // }
 
+//identify the token type and return it.
 t_syntax	get_token_type(char cha)
 {
 	t_syntax	type;
@@ -67,7 +68,6 @@ t_pars_err	assign_token(char *input, size_t *current_pos, t_token *token)
 	
 	
 }
-
 
 t_pars_err	tokenize_input(t_main_data *data, char	*input)
 {

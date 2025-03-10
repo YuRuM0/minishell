@@ -7,3 +7,4 @@ minishell
 # ignore any files or testing folders
 # /execution/tests/*
 /parsing/tests/*
+test.c
