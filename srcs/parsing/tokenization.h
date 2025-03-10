@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/10 18:48:21 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/10 20:27:00 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef enum e_parsing_err //modificar error codes
 	ERROR_MEM_ALLOC,
 	ERROR_PIPE_START,
 	ERROR_CMD_SUBSTITUTION,
+	UNCLOSED_QUOTE
 }	t_pars_err;
 
 typedef enum e_redir_type
@@ -86,4 +87,12 @@ t_token			*add_new_token(void);
 void			add_token_back(t_token **head, t_token *new);
 t_token			*last_token(t_token *list);
 t_syntax		get_token_type(char cha);
+//lexer functions
+t_pars_err		process_single_quotes(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err		process_double_quotes(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err		process_word_n_spaces(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err		process_pipe(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err		process_great_n_herdoc(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err		process_less_n_append(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err		process_env_var(char *input, size_t *i, t_syntax *tok_type);
 #endif

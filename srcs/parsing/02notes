@@ -4,3 +4,6 @@ Exit status codes in general:
 	exit(127) : command not found
 	exit(12): Specifically for memory errors like ENOMEM.
 	exit(130): Ctrl + C SIGINT (interrupt signal)
+
+SAME BEHAVIOR AS BASH:
+	should I handle UNCLOSED QUOTE like bash or just return syntax_error and restart the prompt?
