@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:44:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/10 19:51:37 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/10 20:05:26 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ t_pars_err	process_env_var(char *input, size_t *i, t_syntax *tok_type)
 	}
 	if (input[*i] == '(')
 		return (ERROR_CMD_SUBSTITUTION);
-	if ()
-	while ()
+	if (!ft_isalpha(input[*i] && input[*i] != '_'))
+		return (SUCCESS);
+	(*i)++;
+	while (ft_isalnum(input[*i] || input[*i] == '_'))
 		(*i)++;
 	return(SUCCESS);
 }
