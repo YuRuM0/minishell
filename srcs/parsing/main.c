@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/02/23 17:01:23 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/11 13:59:50 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 static char	*read_tty(void)
 {
@@ -35,8 +35,8 @@ static void	loop_minishell(t_main_data *data)
 	while (true)
 	{
 		data->pipeline = read_tty();
-		data->tty_line += 1;
-		parse(data);
+		data->tty_line += 1; // to count the lines in terminal
+		parser(data);
 		free(data->pipeline);
 	}	
 	

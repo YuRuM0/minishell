@@ -6,26 +6,25 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/10 14:43:15 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 14:01:59 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
-// static	void	assign_lex_funcs(t_lex_functions *process)
-// {
-// 	process[0] =
-// 	process[1] =
-// 	process[2] =
-// 	process[3] =
-// 	process[4] =
-// 	process[5] =
-// 	process[6] =
-// 	process[7] =
-// 	process[8] =
-// 	process[9] =
-// 	process[10] = 
-// }
+static	void	assign_lex_funcs(t_lex_functions *process)
+{
+	process[0] = process_word_n_spaces;
+	process[1] = process_word_n_spaces;
+	process[2] = process_word_n_spaces;
+	process[3] = process_pipe;
+	process[4] = process_less_n_append;
+	process[5] = process_great_n_herdoc;
+	process[6] = process_env_var;
+	process[7] = process_double_quotes;
+	process[8] = process_single_quotes;
+	process[9] = process_word_n_spaces;
+}
 
 //identify the token type and return it.
 t_syntax	get_token_type(char cha)
@@ -80,7 +79,7 @@ t_pars_err	tokenize_input(t_main_data *data, char	*input)
 	{
 		token = add_new_token();
 		if (!token)
-			return (ERR_MEM_ALLOC);
+			return (ERROR_MEM_ALLOC);
 		status = assign_token(input, &i, token);
 		//check err code in status 
 		//if (status == ?)
@@ -89,12 +88,3 @@ t_pars_err	tokenize_input(t_main_data *data, char	*input)
 	return(SUCCESS);
 }
 
-t_pars_err	parser(t_main_data *data)
-{
-	t_pars_err	status;
-
-	status = tokenize_input(data, data->pipeline);
-
-
-
-}

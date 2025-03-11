@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_functions02.c                              :+:      :+:    :+:   */
+/*   process_tokens02.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:51:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/10 20:21:27 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:58:34 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../../includes/minishell.h"
 
 // handle with \" and \'
 // should I handle (cmd = echo "test)? bash: works like heredoc

@@ -6,11 +6,11 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 18:16:47 by flima             #+#    #+#             */
-/*   Updated: 2025/02/22 22:08:24 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:59:36 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../includes/minishell.h"
 
 void	error_msg(char *msg, int out_status)
 {

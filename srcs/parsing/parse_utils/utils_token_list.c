@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_token_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:18:40 by flima             #+#    #+#             */
-/*   Updated: 2025/02/23 15:25:15 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/11 13:59:26 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../includes/minishell.h"
 
 /**
  * @brief Creates a new token.

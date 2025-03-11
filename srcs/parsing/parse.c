@@ -3,73 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/02/26 18:54:51 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:03:42 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
-char	*capture_heredoc(t_main_data *data, char *delim)
+void    parser(t_main_data *data)
 {
-	char	*content;
-	char	*line;
+	t_pars_err	status;
 
-	content = ft_strdup("");
-	//check erro NULL
-	while (true)
-	{
-		line = readline_heredoc(data, "> ", delim);
-		if (line == NULL)
-		{
-			free(data->heredoc_content);
-			break ;
-		}
-		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
-		{
-			free(line);
-			break ;
-		}
-		content = ft_strjoin(content, line);
-		content = ft_strjoin(content, "\n");
-		//check error NULL;
-		free(line);
-	}
-	return (content);
+	if (*(data->pipeline) == '\0')
+		return ;
+	status = tokenize_input(data, data->pipeline);
+	debugging(data);
+	
 }
 
-void	get_heredoc_delim(t_main_data *data)
-{
-    char    *heredoc_start;
-    char    *heredoc_delim;
-    char    *tmp;
 
-    tmp = data->pipeline;
-    heredoc_start = ft_strnstr(tmp, "<<", ft_strlen(tmp)); //simple handler
-    if (heredoc_start == NULL)
-        return ; //free data->pipeline
-	heredoc_delim = ft_strtoken(heredoc_start + 2);
-    if (*heredoc_delim == '\0')
-	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
-    	return ;
-	}
-	if (heredoc_delim == NULL)
-		return ; //error in malloc
-	data->heredoc_content = capture_heredoc(data, heredoc_delim);
-	printf("%s\n", data->heredoc_content);
-	if (*(data->heredoc_content) == '\0')
-		return ; //free?
-}
+// char	*capture_heredoc(t_main_data *data, char *delim)
+// {
+// 	char	*content;
+// 	char	*line;
 
-void    parse(t_main_data *data)
-{
-    if (*(data->pipeline) == '\0')
-        return ;
-    if (ft_strnstr(data->pipeline, "<<", ft_strlen(data->pipeline)) != NULL)
-	{
-		get_heredoc_delim(data);
-	}
-}
+// 	content = ft_strdup("");
+// 	//check erro NULL
+// 	while (true)
+// 	{
+// 		line = readline_heredoc(data, "> ", delim);
+// 		if (line == NULL)
+// 		{
+// 			free(data->heredoc_content);
+// 			break ;
+// 		}
+// 		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
+// 		{
+// 			free(line);
+// 			break ;
+// 		}
+// 		content = ft_strjoin(content, line);
+// 		content = ft_strjoin(content, "\n");
+// 		//check error NULL;
+// 		free(line);
+// 	}
+// 	return (content);
+// }
+
+// void	get_heredoc_delim(t_main_data *data)
+// {
+//     char    *heredoc_start;
+//     char    *heredoc_delim;
+//     char    *tmp;
+
+//     tmp = data->pipeline;
+//     heredoc_start = ft_strnstr(tmp, "<<", ft_strlen(tmp)); //simple handler
+//     if (heredoc_start == NULL)
+//         return ; //free data->pipeline
+// 	heredoc_delim = ft_strtoken(heredoc_start + 2);
+//     if (*heredoc_delim == '\0')
+// 	{
+// 		printf("minishell: syntax error near unexpected token `newline'\n");
+//     	return ;
+// 	}
+// 	if (heredoc_delim == NULL)
+// 		return ; //error in malloc
+// 	data->heredoc_content = capture_heredoc(data, heredoc_delim);
+// 	printf("%s\n", data->heredoc_content);
+// 	if (*(data->heredoc_content) == '\0')
+// 		return ; //free?
+// }
+

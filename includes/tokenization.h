@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/10 20:27:00 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 14:48:10 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef enum e_syntax
 	D_QUOTE,       // "" (Double quotes for string)
 	S_QUOTE,       // '' (Single quotes for literal string)
 	WORD,          // CMD, CMD_ARG or generic string value
-	// EQUAL,         // = (Equal sign)?? NEDD CREAT VARIABLES??
 	APPEND,       // >> (Append to output)
 	HEREDOC,       // << (Here-document)
 } t_syntax;
@@ -95,4 +94,6 @@ t_pars_err		process_pipe(char *input, size_t *i, t_syntax *tok_type);
 t_pars_err		process_great_n_herdoc(char *input, size_t *i, t_syntax *tok_type);
 t_pars_err		process_less_n_append(char *input, size_t *i, t_syntax *tok_type);
 t_pars_err		process_env_var(char *input, size_t *i, t_syntax *tok_type);
+//debugging
+void	debugging(t_main_data *data);
 #endif

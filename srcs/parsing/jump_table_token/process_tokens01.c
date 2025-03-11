@@ -6,11 +6,11 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:44:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/10 20:26:35 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:59:08 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../../includes/minishell.h"
 
 // moves i true the input while tok_type is equal the current token type in input[i]
 // returns a error code

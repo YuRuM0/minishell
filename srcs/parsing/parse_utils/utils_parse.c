@@ -6,11 +6,11 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/02/22 21:19:09 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:59:22 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../includes/minishell.h"
 
 char    *ft_strtoken(char *str)
 {
