@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:44:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/11 16:43:05 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 18:35:37 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ t_pars_err	process_pipe(char *input, size_t *i, t_syntax *tok_type)
 
 t_pars_err	process_great_n_herdoc(char *input, size_t *i, t_syntax *tok_type)
 {
-	if (input[*i + 1] == '<')
+	if (input[*i + 1] == '>')
 	{
 		(*i)++;
-		*tok_type = HEREDOC;
+		*tok_type = APPEND;
 	}
 	(*i)++;
 	return (SUCCESS);
@@ -42,10 +42,10 @@ t_pars_err	process_great_n_herdoc(char *input, size_t *i, t_syntax *tok_type)
 
 t_pars_err	process_less_n_append(char *input, size_t *i, t_syntax *tok_type)
 {
-	if (input[*i + 1] == '>')
+	if (input[*i + 1] == '<')
 	{
 		(*i)++;
-		*tok_type = APPEND;
+		*tok_type = HEREDOC;
 	}
 	(*i)++;
 	return (SUCCESS);

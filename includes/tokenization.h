@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/11 18:28:14 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 18:36:30 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef enum e_syntax
 	TAB_CHAR,         // \t (tab) 
 	NEW_LINE,       // \n (Newline, indicating end of command or separator)
 	PIPE,			// | (Pipe)
-	LESS,     // > (Output redirection)
-	GREAT,      // < (Input redirection)
+	LESS,     // < (Output redirection)
+	GREAT,      // > (Input redirection)
 	VARIABLE,      // $ (Variable expansion)
 	D_QUOTE,       // "" (Double quotes for string)
 	S_QUOTE,       // '' (Single quotes for literal string)
