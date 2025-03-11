@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/11 18:36:30 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 20:07:55 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ typedef enum e_syntax
 typedef enum e_parsing_err //modificar error codes
 {
 	SUCCESS,
-	ERROR_MEM_ALLOC,
 	ERROR_PIPE_START,
 	ERROR_CMD_SUBSTITUTION,
-	UNCLOSED_QUOTE
+	UNCLOSED_QUOTE,
+	ERROR_MEM_ALLOC,
 }	t_pars_err;
 
 typedef enum e_redir_type
@@ -98,4 +98,6 @@ t_pars_err			process_env_var(char *input, size_t *i, t_syntax *tok_type);
 void				debugging(t_main_data *data);
 //free functions
 void	free_tokens(t_token **tokens);
+//error handlers 
+typedef void (*t_handle_error)(t_main_data *data, t_pars_err status);
 #endif

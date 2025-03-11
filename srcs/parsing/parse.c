@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/11 18:27:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 20:01:42 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void    parser(t_main_data *data)
 	if (*(data->pipeline) == '\0')
 		return ;
 	status = tokenize_input(data, data->pipeline);
+	// if (status != SUCCESS)
+	// 	handle_status_error(data, status);
 	debugging(data);
 	free_tokens(&data->tokens);
 	

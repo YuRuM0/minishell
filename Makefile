@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/03/11 18:24:47 by flima            ###   ########.fr        #
+#    Updated: 2025/03/11 19:39:04 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,15 +74,15 @@ $(LIBFT):
 clean:
 	@$(MAKE) --no-print-directory clean -C Libft
 	@if [ -d $(OBJS_DIR) ]; then \
-		echo "\n$(GREEN)Object files have been removed   ✅$(RESET)\n"; \
+		echo "$(YELLOW)Object files have been removed   ✅$(RESET)"; \
 	fi
 	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	@$(MAKE) --no-print-directory fclean -C Libft
 	@rm -f $(NAME)
-	@echo "\n$(GREEN)Executable file has been removed ✅$(RESET)\n"
+	@echo "$(YELLOW)Executable file has been removed ✅$(RESET)"
 
 re: fclean all
-
+	@echo "$(GREEN)Rebuild complete! All files cleaned and recompiled ✅$(RESET)\n"
 .PHONY: all clean fclean re
