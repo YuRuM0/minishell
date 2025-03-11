@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/11 17:04:08 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 18:28:14 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,24 @@ typedef struct s_token
 }					t_token;
 
 //Jump table tokenization 
-typedef t_pars_err (*t_lex_functions)(char *str, size_t *i, t_syntax *type);
 
 //Tokanization
-t_pars_err		tokenize_input(t_main_data *data, char	*input);
-t_token			*add_new_token(void);
-void			add_token_back(t_token **head, t_token *new);
-t_token			*last_token(t_token *list);
-t_syntax		get_token_type(char cha);
+t_pars_err			tokenize_input(t_main_data *data, char	*input);
+t_token				*add_new_token(void);
+void				add_token_back(t_token **head, t_token *new);
+t_token				*last_token(t_token *list);
+t_syntax			get_token_type(char cha);
 //lexer functions
-t_pars_err		process_single_quotes(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err		process_double_quotes(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err		process_word_n_spaces(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err		process_pipe(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err		process_great_n_herdoc(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err		process_less_n_append(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err		process_env_var(char *input, size_t *i, t_syntax *tok_type);
+typedef t_pars_err (*t_lex_functions)(char *str, size_t *i, t_syntax *type);
+t_pars_err			process_single_quotes(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err			process_double_quotes(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err			process_word_n_spaces(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err			process_pipe(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err			process_great_n_herdoc(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err			process_less_n_append(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err			process_env_var(char *input, size_t *i, t_syntax *tok_type);
 //debugging
-void	debugging(t_main_data *data);
+void				debugging(t_main_data *data);
+//free functions
+void	free_tokens(t_token **tokens);
 #endif

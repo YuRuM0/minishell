@@ -2,3 +2,4 @@ SIGNAL CTRL + D;                    OK
 FAIL MEMORY ALLOC READLINE CHECK ;  OK
 HEREDOC;                            IN PROCESS 
 TODO error handler in case safe_readline fails 
+TODO : handle returned error in tokenize_input after assign token 

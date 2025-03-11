@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/03/11 17:10:10 by flima            ###   ########.fr        #
+#    Updated: 2025/03/11 18:24:47 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,11 @@ PARSE_UTILS_FILES = $(PARSE_UTILS_DIR)/utils_parse.c \
 DEBUG_DIR = $(PARSE_DIR)/debugging
 DEBUG_FILES = $(DEBUG_DIR)/print_tokens.c
 
+FREE_DIR = $(PARSE_DIR)/free_memory
+FREE_FILE = $(FREE_DIR)/free_parse.c
+
 SRC_FILES = $(PARSE_FILES) $(ERROR_FILE) $(JUMP_PARSE_FILES) \
-				$(PARSE_UTILS_FILES) $(DEBUG_FILES)
+				$(PARSE_UTILS_FILES) $(DEBUG_FILES) $(FREE_FILE)
 
 OBJS_DIR = objs
 OBJS = $(patsubst $(SCRS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRC_FILES))
