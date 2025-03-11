@@ -6,11 +6,14 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 21:12:39 by flima             #+#    #+#              #
-#    Updated: 2025/03/11 16:13:20 by flima            ###   ########.fr        #
+#    Updated: 2025/03/11 16:59:39 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
+RESET   = \033[0m
+GREEN   = \033[32m
 
 CC= cc
 OBJ_DIR = objs
@@ -37,7 +40,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
-	@echo "Library created!"
+	@echo "$(GREEN)Library created!$(RESET)\n"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)

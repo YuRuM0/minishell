@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/03/11 16:19:59 by flima            ###   ########.fr        #
+#    Updated: 2025/03/11 17:10:10 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,17 @@ GREEN   = \033[32m
 YELLOW  = \033[33m
 BLUE    = \033[34m
 
-FLAGS = -Wall -Werror -Wextra -g
-# FLAGS += -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g
+# CFLAGS += -fsanitize=address
 
 LIBFT_DIR = Libft
-LIBFT = LIBFT_DIR/libft.a
+LIBFT = $(LIBFT_DIR)/libft.a
 
 INCLUDE = includes
-
+HEADERS = $(INCLUDE)/libft.h \
+			$(INCLUDE)/minishell.h \
+			$(INCLUDE)/tokenization.h
+			
 SCRS_DIR = srcs
 PARSE_DIR = $(SCRS_DIR)/parsing
 PARSE_FILES = $(PARSE_DIR)/main.c \
@@ -54,11 +57,10 @@ OBJS = $(patsubst $(SCRS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRC_FILES))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@echo "\n$(BLUE)Compiling minishell program...$(RESET)\n"
-	@$(CC) $(CFLAGS) $(OBJS) -I$(INCLUDE) -o $(NAME)
-	@echo "$(GREEN)minishell  [OK]$(RESET)\n"
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -I$(INCLUDE) -lreadline -o $(NAME)
+	@echo "\n$(GREEN)minishell  ✅$(RESET)\n"
 
-$(OBJS_DIR)/%.o: $(SCRS_DIR)/%.c
+$(OBJS_DIR)/%.o: $(SCRS_DIR)/%.c $(HEADERS)
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $@
 	@echo "$(GREEN)Compiling: $< into $@$(RESET)"
@@ -69,14 +71,14 @@ $(LIBFT):
 clean:
 	@$(MAKE) --no-print-directory clean -C Libft
 	@if [ -d $(OBJS_DIR) ]; then \
-		echo "\n$(GREEN)Object files have been removed   [OK]$(RESET)\n"; \
+		echo "\n$(GREEN)Object files have been removed   ✅$(RESET)\n"; \
 	fi
 	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	@$(MAKE) --no-print-directory fclean -C Libft
 	@rm -f $(NAME)
-	@echo "\n$(GREEN)Executable file has been removed [OK]$(RESET)\n"
+	@echo "\n$(GREEN)Executable file has been removed ✅$(RESET)\n"
 
 re: fclean all
 

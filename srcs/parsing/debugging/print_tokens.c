@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_lists.c                                      :+:      :+:    :+:   */
+/*   print_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/03/11 14:26:23 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 17:01:23 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "tokenization.h"
 
-static char	**get_str_type(void)
+static void	get_str_type(char **tokens)
 {
-	char **tokens;
-
 	tokens[0] = "SPACE_CHAR";
 	tokens[1] = "TAB_CHAR";
 	tokens[2] = "NEW_LINE";
@@ -28,16 +26,15 @@ static char	**get_str_type(void)
 	tokens[9] = "WORD";
 	tokens[10] = "APPEND";
 	tokens[11] = "HEREDOC";
-	return (tokens);
+
 }
 
 static	void	print_token(t_token *token, int i)
 {
-	char **str_tok;
+	char *str_tok[12];
 
-	str_tok = get_str_type();
+	get_str_type(str_tok);
 	printf("\n");
-	printf("	");
 	printf("token(%d)", i);
 	printf("	");
 	printf ("token_type: |%s|", str_tok[token->type]);

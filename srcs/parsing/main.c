@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/03/11 13:59:50 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 16:39:16 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ int	main(int argc, char **argv, char **envp)
 	t_main_data	data;
 
 	(void)argv;
-	// if (argc != 1)
-	// {
-	// 	ft_putstr_fd("Error\n No arguments needed", 2);
-	// 	return (1);
-	// }
+	(void)envp;
+	if (argc != 1)
+	{
+		ft_putstr_fd("Error\n No arguments needed", 2);
+		return (1);
+	}
 	//signals func
 	init_data(&data);
 	loop_minishell(&data);

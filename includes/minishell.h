@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/03/11 14:24:32 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 17:03:46 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <readline/history.h>
 # include <string.h>
 # include <errno.h>
-# include "../../includes/libft.h"
-# include "tokenization.h"
+# include "libft.h"
 //# include "../execution/execution.h"
 
 
@@ -54,7 +53,7 @@ typedef struct s_main_data
 	char					*errfile; //where and when is it used?
 	struct s_commands		**cmds;
 	struct s_token			*tokens;
-}	t_main_data;
+}							t_main_data;
 
 //parsing function
 void    parser(t_main_data *data);

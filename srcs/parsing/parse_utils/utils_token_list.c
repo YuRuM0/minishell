@@ -6,11 +6,11 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:18:40 by flima             #+#    #+#             */
-/*   Updated: 2025/03/11 13:59:26 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 16:30:30 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "tokenization.h"
 
 /**
  * @brief Creates a new token.

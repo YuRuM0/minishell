@@ -6,11 +6,11 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/11 14:01:59 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 16:42:15 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "tokenization.h"
 
 static	void	assign_lex_funcs(t_lex_functions *process)
 {
@@ -52,15 +52,15 @@ t_syntax	get_token_type(char cha)
 
 t_pars_err	assign_token(char *input, size_t *current_pos, t_token *token)
 {
-	t_lex_functions	process[10];
-	t_pars_err		status;
-	int				start;
+	t_lex_functions		process[10];
+	t_pars_err			status;
+	size_t				start;
 
 	start = *current_pos;
 	assign_lex_funcs(process);
 	token->type = get_token_type(input[*current_pos]);
-	status = process[token->type](input, current_pos, token->type);
-	token->value = ft_substr(input, start, current_pos - start);
+	status = process[token->type](input, current_pos, &token->type);
+	token->value = ft_substr(input, start, *current_pos - start);
 	// if (token->value == NULL)
 	// 	//handle_error
 	return(SUCCESS);
