@@ -6,12 +6,13 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/11 16:42:15 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/11 18:38:36 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
+//jump table to the lexer functions 
 static	void	assign_lex_funcs(t_lex_functions *process)
 {
 	process[0] = process_word_n_spaces;
