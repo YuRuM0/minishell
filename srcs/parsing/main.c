@@ -6,11 +6,12 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/03/11 16:39:16 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/12 17:14:40 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
+#include "tokenization.h"
 
 static char	*read_tty(void)
 {
@@ -18,12 +19,16 @@ static char	*read_tty(void)
 
 	pipeline = readline(MINISHELL_PROMPT);
 	if (pipeline == NULL && errno == ENOMEM)
-		error_msg("Error allocating memory\n", 12);
-	else if (pipeline == NULL && errno == 0) // dignal ctrl + D
+	{
+		perror("minishell");
+		exit(EXIT_MEM_FAILURE);
+	}
+	else if (pipeline == NULL && errno == 0)
 	{
 		rl_clear_history();
 		//set teminal tcgetattr function, learn it
-		error_msg("exit\n", 0);
+		error_msg("exit\n");
+		exit(EXIT_SUCCESSFULLY);
 	}
 	if (pipeline && ft_strlen(pipeline))
 		add_history(pipeline);
@@ -31,15 +36,14 @@ static char	*read_tty(void)
 }
 
 static void	loop_minishell(t_main_data *data)
-{	
+{
 	while (true)
 	{
 		data->pipeline = read_tty();
-		data->tty_line += 1; // to count the lines in terminal
+		// data->tty_line += 1;
 		parser(data);
-		free(data->pipeline);
-	}	
-	
+		clean_all_data(data);
+	}
 }
 
 static void	init_data(t_main_data *data)

@@ -7,3 +7,4 @@ Exit status codes in general:
 
 SAME BEHAVIOR AS BASH:
 	should I handle UNCLOSED QUOTE like bash or just return syntax_error and restart the prompt?
+

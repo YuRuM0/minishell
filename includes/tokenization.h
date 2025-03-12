@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/11 20:07:55 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/12 17:10:50 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,22 @@
 
 # define METACHARS " \t\n|<>$\"\'"
 
-
 //split the cmd line into token using these syntax
 typedef enum e_syntax
 {
 	SPACE_CHAR,
-	TAB_CHAR,         // \t (tab) 
-	NEW_LINE,       // \n (Newline, indicating end of command or separator)
-	PIPE,			// | (Pipe)
-	LESS,     // < (Output redirection)
-	GREAT,      // > (Input redirection)
-	VARIABLE,      // $ (Variable expansion)
-	D_QUOTE,       // "" (Double quotes for string)
-	S_QUOTE,       // '' (Single quotes for literal string)
-	WORD,          // CMD, CMD_ARG or generic string value
-	APPEND,       // >> (Append to output)
-	HEREDOC,       // << (Here-document)
-} t_syntax;
+	TAB_CHAR,// \t (tab) 
+	NEW_LINE,// \n (Newline, indicating end of command or separator)
+	PIPE,// | (Pipe)
+	LESS,// < (Output redirection)
+	GREAT,// > (Input redirection)
+	VARIABLE,// $ (Variable expansion)
+	D_QUOTE,// "" (Double quotes for string)
+	S_QUOTE,// '' (Single quotes for literal string)
+	WORD,// CMD, CMD_ARG or generic string value
+	APPEND,// >> (Append to output)
+	HEREDOC,// << (Here-document)
+}	t_syntax;
 
 typedef enum e_parsing_err //modificar error codes
 {
@@ -67,8 +66,8 @@ typedef struct s_command
 	t_redir				*redir;
 	int					last_in;
 	int					last_out;
-	struct	s_command	*next;
-}						s_command;
+	struct s_command	*next;
+}						t_command;
 
 typedef struct s_token
 {
@@ -80,24 +79,32 @@ typedef struct s_token
 //Jump table tokenization 
 
 //Tokanization
-t_pars_err			tokenize_input(t_main_data *data, char	*input);
-t_token				*add_new_token(void);
-void				add_token_back(t_token **head, t_token *new);
-t_token				*last_token(t_token *list);
-t_syntax			get_token_type(char cha);
+t_pars_err	tokenize_input(t_main_data *data, char	*input);
+t_token		*add_new_token(void);
+void		add_token_back(t_token **head, t_token *new);
+t_token		*last_token(t_token *list);
+t_syntax	get_token_type(char cha);
+
 //lexer functions
-typedef t_pars_err (*t_lex_functions)(char *str, size_t *i, t_syntax *type);
-t_pars_err			process_single_quotes(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err			process_double_quotes(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err			process_word_n_spaces(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err			process_pipe(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err			process_great_n_herdoc(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err			process_less_n_append(char *input, size_t *i, t_syntax *tok_type);
-t_pars_err			process_env_var(char *input, size_t *i, t_syntax *tok_type);
+typedef t_pars_err	(*t_lex_functions)(char *str, size_t *i, t_syntax *type);
+t_pars_err	process_single_quotes(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err	process_double_quotes(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err	process_word_n_spaces(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err	process_pipe(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err	process_great_n_herdoc(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err	process_less_n_append(char *input, size_t *i, t_syntax *tok_type);
+t_pars_err	process_env_var(char *input, size_t *i, t_syntax *tok_type);
+
 //debugging
-void				debugging(t_main_data *data);
+void		debugging(t_main_data *data);
+
 //free functions
-void	free_tokens(t_token **tokens);
-//error handlers 
-typedef void (*t_handle_error)(t_main_data *data, t_pars_err status);
+void		free_tokens(t_token **tokens);
+void		clean_all_data(t_main_data *data);
+void		clean_all_data_error(t_main_data *data, int out_status);
+
+//error handlers
+// typedef void (*t_handle_error)(t_main_data *data, t_pars_err status);
+void		status_error_tokeniz(t_main_data *data, t_pars_err status);
+void		error_msg(char *msg);
 #endif

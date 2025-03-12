@@ -3,3 +3,8 @@ FAIL MEMORY ALLOC READLINE CHECK ;  OK
 HEREDOC;                            IN PROCESS 
 TODO error handler in case safe_readline fails 
 TODO : handle returned error in tokenize_input after assign token 
+
+to learn
+	How can I check for leaks?
+		use: size_t size = 1L * 1024 * 1024 * 1024 * 1024;  // 1 TB
+    			void *ptr = malloc(size);

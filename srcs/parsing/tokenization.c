@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/11 20:04:37 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/12 17:16:47 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,9 @@ t_pars_err	assign_token(char *input, size_t *current_pos, t_token *token)
 	if (status != SUCCESS)
 		return (status);
 	token->value = ft_substr(input, start, *current_pos - start);
-	// if (token->value == NULL)
-	// 	///check NULL return MEMORY / liberar e fechar o programa 
-	return(SUCCESS);
-	
-	
+	if (token->value == NULL)
+		return (ERROR_MEM_ALLOC);
+	return (SUCCESS);
 }
 
 t_pars_err	tokenize_input(t_main_data *data, char	*input)
@@ -78,20 +76,15 @@ t_pars_err	tokenize_input(t_main_data *data, char	*input)
 	t_pars_err		status;
 
 	i = 0;
-	while(input[i])
+	while (input[i])
 	{
 		token = add_new_token();
-		//check NULL return MEMORY / liberar e fechar o programa 
 		if (!token)
 			return (ERROR_MEM_ALLOC);
 		status = assign_token(input, &i, token);
-		if (status != SUCCESS)
-		{
-			free(token);
-			return (status);
-		}
 		add_token_back(&data->tokens, token);
+		if (status != SUCCESS)
+			return (status);
 	}
-	return(SUCCESS);
+	return (SUCCESS);
 }
-

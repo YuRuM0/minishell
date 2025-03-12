@@ -6,26 +6,26 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/11 20:01:42 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/12 17:15:36 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-void    parser(t_main_data *data)
+void	parser(t_main_data *data)
 {
 	t_pars_err	status;
 
 	if (*(data->pipeline) == '\0')
 		return ;
 	status = tokenize_input(data, data->pipeline);
-	// if (status != SUCCESS)
-	// 	handle_status_error(data, status);
+	if (status != SUCCESS)
+	{
+		status_error_tokeniz(data, status);
+		return ;
+	}
 	debugging(data);
-	free_tokens(&data->tokens);
-	
 }
-
 
 // char	*capture_heredoc(t_main_data *data, char *delim)
 // {
@@ -78,4 +78,3 @@ void    parser(t_main_data *data)
 // 	if (*(data->heredoc_content) == '\0')
 // 		return ; //free?
 // }
-
