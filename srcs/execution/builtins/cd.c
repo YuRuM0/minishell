@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:46:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/03/07 15:18:21 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/03/14 18:57:38 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ char	*ft_strputjoin(char *src1, char *src2, char c, char *dst)
 	dst[j] = c;
 	j++;
 	i = 0;
-
-
 	while (src2[i])
 	{
 		dst[j] = src2[i];
@@ -40,69 +38,46 @@ char	*ft_strputjoin(char *src1, char *src2, char c, char *dst)
 	return (dst);
 }
 
-int	relative(char **args, t_env *env)
+
+
+int ft_cd(int ac, char *av[])
 {
-	char	*pwd;
-	char	*new_path;
-	int		i;
-	char	*cwd;
-
-	i = 0;
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
+	if (ac > 1)
 		return (-1);
-	new_path = malloc((ft_strlen(pwd) + ft_strlen(args[1]) + 2) * sizeof(char));
-	if (!new_path)
-		return (-1);
-	new_path = ft_strputjoin(pwd, args[1], '/', new_path);
-	free(pwd);
-	if (chdir(new_path) == -1)
-		return (-1);
-	cwd = get_cwd(NULL, 0); //why this arg? yet to read about it...
-	ft_env_update(env, "PWD", cwd);
-	free(cwd);
-	free(new_path);
-	return (0);
-}
-
-
-int	cd(char **args , t_env *env)
-{
-	char	*home;
-	char	*pwd;
-	char	*cwd;
-
-	if (!args[1]) //if empty bring it home
+	if (!av[1] || av[1] == '~')
 	{
-		home = getenv("HOME");
-		if (!home)
-			return (-1);
-		chdir(home);
-		return (0);
+		//call home
 	}
-	else if (args[1][0] != '/') //relative
-		relative(args, env);
+	else if (av[1] == '-')
+	{
+		//get OLPWD env variable
+		//if not found print error,return
+		//if found
+			//change the directory to OLDPWD using chdir
+			//print the new directory to STDOUT using ft_putnbr typea func
+			//return
+	}
 	else
 	{
-		chdir(args[1]);
-		if (chdir(args[1]) == -1)
-			return (-1);
-		cwd = get_cwd(NULL, 0); //why this arg? yet to read about it...
-		ft_env_update(env, "PWD", cwd);
-		free(cwd);
+		//1. check if the directory exists
+		//2. if directory exists
+			// change directory using chdir
+			// if fails, check if the path is a directory using opendir
+
+		// get the new working directory using getcwd
+		// update pwd and oldpwd using change_pwd_value
 	}
-	return (0);
 }
 
-//int main(void)
+//int main(int ac, char *av[], char **env)
 //{
-//	char **args;
+//	char *pwd_before;
+//	char *pwd;
 
-//	args = malloc(5 * sizeof(char*));
-//	args[0] = "echo";
-//	args[1] = "cd.c";
-//	cd(args);
-//	free(args);
-
+//	pwd_before = getcwd(NULL, 0);
+//	printf("%s\n", pwd_before);
+//	cd(av, env);
+//	pwd = getcwd(NULL, 0);
+//	printf("%s\n", pwd);
 //	return (0);
 //}
