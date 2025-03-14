@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/12 17:10:50 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/14 18:26:47 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ t_pars_err	process_pipe(char *input, size_t *i, t_syntax *tok_type);
 t_pars_err	process_great_n_herdoc(char *input, size_t *i, t_syntax *tok_type);
 t_pars_err	process_less_n_append(char *input, size_t *i, t_syntax *tok_type);
 t_pars_err	process_env_var(char *input, size_t *i, t_syntax *tok_type);
+
+//syntax functions
+typedef t_pars_err	(*t_syntax_check)(t_token *previous, t_token *current);
 
 //debugging
 void		debugging(t_main_data *data);

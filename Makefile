@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/03/12 17:01:53 by flima            ###   ########.fr        #
+#    Updated: 2025/03/14 18:33:07 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ PARSE_FILES = $(PARSE_DIR)/main.c \
 ERROR_DIR = $(PARSE_DIR)/error_handling
 ERROR_FILE = $(ERROR_DIR)/errors_handler.c
 
-JUMP_PARSE_DIR = $(PARSE_DIR)/jump_table_token
+JUMP_PARSE_DIR = $(PARSE_DIR)/jump_tables
 JUMP_PARSE_FILES = $(JUMP_PARSE_DIR)/process_tokens01.c \
 					$(JUMP_PARSE_DIR)/process_tokens02.c
 					
