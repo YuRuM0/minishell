@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:03:24 by flima             #+#    #+#             */
-/*   Updated: 2025/03/17 18:42:43 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:55:14 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ t_pars_err	syntax(t_main_data *data)
 	{
 		if (syntax_table[current->type] != NULL)
 			status = syntax_table[current->type](previous, current);
+		else
+			return(SUCCESS); //for test, remove after
 		if (status != SUCCESS)
 			return (status);
 		previous = current;

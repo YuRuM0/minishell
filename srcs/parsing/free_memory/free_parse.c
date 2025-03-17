@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/03/12 17:25:29 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/17 19:32:17 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	free_tokens(t_token **tokens)
 	{
 		tmp = *tokens;
 		*tokens = (*tokens)->next;
+		free(tmp->value);
 		free(tmp);
 	}
 }
