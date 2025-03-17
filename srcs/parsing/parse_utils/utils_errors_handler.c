@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_check.c                                     :+:      :+:    :+:   */
+/*   utils_errors_handler.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 18:34:46 by flima             #+#    #+#             */
-/*   Updated: 2025/03/17 18:33:18 by flima            ###   ########.fr       */
+/*   Created: 2025/03/17 16:49:49 by flima             #+#    #+#             */
+/*   Updated: 2025/03/17 18:15:11 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-t_pars_err	syntax_pipe(t_token *previous, t_token *current)
+void	error_msg(char *msg)
 {
-	t_token	*tmp;
+	write(STDOUT_FILENO, msg, ft_strlen(msg));
+}
 
-	tmp = current->next;
-	if (previous == NULL)
-		return (ERROR_PIPE_BEGIN);
-	tmp = skip_blank_nodes_n_get_next(tmp, 1);
-	if (tmp == NULL)
-		return(ERROR_PIPE_END);
-	if (current->next != NULL && current->next->type == PIPE)
-		return(ERROR_PIPE_DOUBLE);
-	return (SUCCESS);
+void	assign_error_table_msg(char **table)
+{
+	table[0] = "minishell: syntax error near unexpected token 'newline'\n";
+	table[1] = "minishell: syntax error near unexpected token '|'\n";
 }

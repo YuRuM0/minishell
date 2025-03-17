@@ -1,58 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sytanx.c                                           :+:      :+:    :+:   */
+/*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:03:24 by flima             #+#    #+#             */
-/*   Updated: 2025/03/14 18:32:23 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:42:43 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
 // identify syntax erros in the tokens list
-t_token	*skip_blank_nodes_n_get_next(t_token *tokens)
+t_token	*skip_blank_nodes_n_get_next(t_token *tokens, int flag)
 {
 	t_token	*current;
 
-	if (!tokens)
+	if (tokens == NULL)
 		return (NULL);
-	current = tokens->next;
-	while (current && current->type != SPACE_CHAR && \
-		current->type != NEW_LINE && current->type != TAB_CHAR)
+	if  (flag != 0)
+		current = tokens;
+	else
+		current = tokens->next;
+	while (current && (current->type == SPACE_CHAR || \
+		current->type == NEW_LINE || current->type == TAB_CHAR))
 		current = current->next;
 	return (current);
 }
 
-vstatic void	assign_syntax_func(t_syntax_check *table)
+static void	assign_syntax_func(t_syntax_check *table)
 {
-	table[0] = 
-	table[1] = 
-	table[2] = 
-	table[3] = 
-	table[4] = 
-	table[5] = 
-	table[6] = 
-	table[7] = 
-	table[8] =  
+	table[0] = NULL;
+	table[1] = NULL;
+	table[2] = NULL;
+	table[3] = syntax_pipe;
+	table[4] = NULL;
+	table[5] = NULL;
+	table[6] = NULL;
+	table[7] = NULL;
+	table[8] = NULL;
+	table[9] = NULL;
+	table[10] = NULL;
+	table[11] = NULL;
 }
 t_pars_err	syntax(t_main_data *data)
 {
 	t_token			*current;
 	t_token			*previous;
 	t_pars_err		status;
-	t_syntax_check syntax_table[9];
+	t_syntax_check	syntax_table[12];
 
 	
 	previous = NULL;
 	current = data->tokens;
-	assign_syntax_funcs(syntax_table);
+	assign_syntax_func(syntax_table);
+	current = skip_blank_nodes_n_get_next(current, 1);
 	while (current != NULL)
 	{
-		//syntax_table function(previous, current);
+		if (syntax_table[current->type] != NULL)
+			status = syntax_table[current->type](previous, current);
+		if (status != SUCCESS)
+			return (status);
 		previous = current;
-		current = skip_blank_nodes(current);
+		current = skip_blank_nodes_n_get_next(current, 0);
 	}
+	return (SUCCESS);
 }

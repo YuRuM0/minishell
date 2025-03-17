@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/03/14 18:33:07 by flima            ###   ########.fr        #
+#    Updated: 2025/03/17 17:59:26 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ YELLOW  = \033[33m
 BLUE    = \033[34m
 
 CFLAGS = -Wall -Werror -Wextra -g
-CFLAGS += -fsanitize=address
+# CFLAGS += -fsanitize=address
 
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -32,18 +32,21 @@ SCRS_DIR = srcs
 PARSE_DIR = $(SCRS_DIR)/parsing
 PARSE_FILES = $(PARSE_DIR)/main.c \
 				$(PARSE_DIR)/parse.c \
-				$(PARSE_DIR)/tokenization.c
+				$(PARSE_DIR)/tokenization.c \
+				$(PARSE_DIR)/syntax.c
 				
 ERROR_DIR = $(PARSE_DIR)/error_handling
 ERROR_FILE = $(ERROR_DIR)/errors_handler.c
 
 JUMP_PARSE_DIR = $(PARSE_DIR)/jump_tables
 JUMP_PARSE_FILES = $(JUMP_PARSE_DIR)/process_tokens01.c \
-					$(JUMP_PARSE_DIR)/process_tokens02.c
+					$(JUMP_PARSE_DIR)/process_tokens02.c \
+					$(JUMP_PARSE_DIR)/syntax_check.c
 					
 PARSE_UTILS_DIR = $(PARSE_DIR)/parse_utils
 PARSE_UTILS_FILES = $(PARSE_UTILS_DIR)/utils_parse.c \
-					$(PARSE_UTILS_DIR)/utils_token_list.c
+					$(PARSE_UTILS_DIR)/utils_token_list.c \
+					$(PARSE_UTILS_DIR)/utils_errors_handler.c
 
 DEBUG_DIR = $(PARSE_DIR)/debugging
 DEBUG_FILES = $(DEBUG_DIR)/print_tokens.c

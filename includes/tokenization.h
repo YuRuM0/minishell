@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/14 18:26:47 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:27:59 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ typedef enum e_syntax
 typedef enum e_parsing_err //modificar error codes
 {
 	SUCCESS,
-	ERROR_PIPE_START,
-	ERROR_CMD_SUBSTITUTION,
-	UNCLOSED_QUOTE,
 	ERROR_MEM_ALLOC,
+	UNCLOSED_QUOTE,
+	ERROR_CMD_SUBSTITUTION,
+	ERROR_PIPE_BEGIN,
+	ERROR_PIPE_END,
+	ERROR_PIPE_DOUBLE,
 }	t_pars_err;
 
 typedef enum e_redir_type
@@ -97,6 +99,9 @@ t_pars_err	process_env_var(char *input, size_t *i, t_syntax *tok_type);
 
 //syntax functions
 typedef t_pars_err	(*t_syntax_check)(t_token *previous, t_token *current);
+t_pars_err	syntax(t_main_data *data);
+t_token		*skip_blank_nodes_n_get_next(t_token *tokens, int flag);
+t_pars_err	syntax_pipe(t_token *previous, t_token *current);
 
 //debugging
 void		debugging(t_main_data *data);
@@ -110,4 +115,6 @@ void		clean_all_data_error(t_main_data *data, int out_status);
 // typedef void (*t_handle_error)(t_main_data *data, t_pars_err status);
 void		status_error_tokeniz(t_main_data *data, t_pars_err status);
 void		error_msg(char *msg);
+void		status_error_syntax(t_main_data *data, t_pars_err status);
+void		assign_error_table_msg(char **table);
 #endif
