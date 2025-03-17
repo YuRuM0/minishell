@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 18:34:46 by flima             #+#    #+#             */
-/*   Updated: 2025/03/17 18:33:18 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/17 19:58:02 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,9 @@ t_pars_err	syntax_pipe(t_token *previous, t_token *current)
 	if (current->next != NULL && current->next->type == PIPE)
 		return(ERROR_PIPE_DOUBLE);
 	return (SUCCESS);
+}
+
+t_pars_err	syntax_great(t_token *previous, t_token *current)
+{
+	
 }
