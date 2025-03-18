@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:03:24 by flima             #+#    #+#             */
-/*   Updated: 2025/03/17 19:37:14 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/18 16:24:58 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static void	assign_syntax_func(t_syntax_check *table)
 	table[2] = NULL;
 	table[3] = syntax_pipe;
 	table[4] = NULL;
-	table[5] = NULL;
+	table[5] = syntax_great;
 	table[6] = NULL;
 	table[7] = NULL;
 	table[8] = NULL;
 	table[9] = NULL;
-	table[10] = NULL;
+	table[10] = syntax_append;
 	table[11] = NULL;
 }
 t_pars_err	syntax(t_main_data *data)
@@ -65,7 +65,6 @@ t_pars_err	syntax(t_main_data *data)
 			return (status);
 		previous = current;
 		current = skip_blank_nodes_n_get_next(current, 0);
-		status = SUCCESS;// remove after
 	}
 	return (SUCCESS);
 }

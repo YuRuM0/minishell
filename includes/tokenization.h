@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/17 18:27:59 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/18 16:22:50 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,13 @@ typedef enum e_parsing_err //modificar error codes
 	ERROR_MEM_ALLOC,
 	UNCLOSED_QUOTE,
 	ERROR_CMD_SUBSTITUTION,
-	ERROR_PIPE_BEGIN,
+	ERROR_MTCH_END,
 	ERROR_PIPE_END,
-	ERROR_PIPE_DOUBLE,
+	ERROR_UNEXPEC_PIPE,
+	ERROR_UNEXPEC_LESS,
+	ERROR_UNEXPEC_GREAT,
+	ERROR_UNEXPEC_APPEND,
+	ERROR_UNEXPEC_HERDOC,
 }	t_pars_err;
 
 typedef enum e_redir_type
@@ -102,6 +106,8 @@ typedef t_pars_err	(*t_syntax_check)(t_token *previous, t_token *current);
 t_pars_err	syntax(t_main_data *data);
 t_token		*skip_blank_nodes_n_get_next(t_token *tokens, int flag);
 t_pars_err	syntax_pipe(t_token *previous, t_token *current);
+t_pars_err	syntax_great(t_token *previous, t_token *current);
+t_pars_err	syntax_append(t_token *previous, t_token *current);
 
 //debugging
 void		debugging(t_main_data *data);
