@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:03:24 by flima             #+#    #+#             */
-/*   Updated: 2025/03/18 16:24:58 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/18 19:15:18 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token	*skip_blank_nodes_n_get_next(t_token *tokens, int flag)
 
 	if (tokens == NULL)
 		return (NULL);
-	if  (flag != 0)
+	if (flag != 0)
 		current = tokens;
 	else
 		current = tokens->next;
@@ -35,15 +35,16 @@ static void	assign_syntax_func(t_syntax_check *table)
 	table[1] = NULL;
 	table[2] = NULL;
 	table[3] = syntax_pipe;
-	table[4] = NULL;
+	table[4] = syntax_less;
 	table[5] = syntax_great;
 	table[6] = NULL;
 	table[7] = NULL;
 	table[8] = NULL;
 	table[9] = NULL;
 	table[10] = syntax_append;
-	table[11] = NULL;
+	table[11] = syntax_heredoc;
 }
+
 t_pars_err	syntax(t_main_data *data)
 {
 	t_token			*current;
@@ -51,8 +52,7 @@ t_pars_err	syntax(t_main_data *data)
 	t_pars_err		status;
 	t_syntax_check	syntax_table[12];
 
-	
-	status = SUCCESS; //for testing, remove after.
+	status = SUCCESS;
 	previous = NULL;
 	current = data->tokens;
 	assign_syntax_func(syntax_table);
