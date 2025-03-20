@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/20 17:29:09 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/20 19:03:22 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	parser(t_main_data *data)
 	status = syntax(data);
 	if (status != SUCCESS)
 		status_error_syntax(data, status);
-	debugging(data);
+	// debugging(data);
 }
 
 // char	*capture_heredoc(t_main_data *data, char *delim)

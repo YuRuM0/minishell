@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/20 17:33:36 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/20 18:43:31 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ typedef enum e_parsing_err //modificar error codes
 	ERROR_CMD_SUBSTITUTION,
 	ERROR_MTCH_END,
 	ERROR_PIPE_END,
-	ERROR_BI_REDIR,
-	ERROR_HERE_STR,
 	ERROR_UNEXPEC_PIPE,
 	ERROR_UNEXPEC_LESS,
 	ERROR_UNEXPEC_GREAT,

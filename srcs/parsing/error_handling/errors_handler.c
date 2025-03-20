@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 18:16:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/20 18:22:33 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/20 18:43:54 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	status_error_tokeniz(t_main_data *data, t_pars_err status)
 
 void	status_error_syntax(t_main_data *data, t_pars_err status)
 {
-	char	*table[10];
+	char	*table[8];
 
 	(void)data;
 	assign_error_table_msg(table);

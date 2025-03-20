@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 18:34:46 by flima             #+#    #+#             */
-/*   Updated: 2025/03/20 18:14:58 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/20 18:56:13 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,13 @@ t_pars_err	syntax_heredoc(t_token *previous, t_token *current)
 	if (next_token == NULL)
 		return (ERROR_MTCH_END);
 	if (next_token->type == LESS)
-		return (ERROR_HERE_STR);
+		return (ERROR_UNEXPEC_LESS);
 	if (next_token->type == GREAT)
 		return (ERROR_UNEXPEC_GREAT);
 	if (next_token->type == APPEND)
 		return (ERROR_UNEXPEC_APPEND);
 	if (next_token->type == HEREDOC)
-		return (ERROR_HERE_STR);
+		return (ERROR_UNEXPEC_HERDOC);
 	if (next_token->type == PIPE)
 		return (ERROR_UNEXPEC_PIPE);
 	if (next_token->type == WORD && \
