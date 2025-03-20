@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/03/12 17:25:10 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/20 18:38:23 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ static void	get_str_type(char **tokens)
 	tokens[6] = "VARIABLE";
 	tokens[7] = "D_QUOTE";
 	tokens[8] = "S_QUOTE";
-	tokens[9] = "WORD";
-	tokens[10] = "APPEND";
-	tokens[11] = "HEREDOC";
+	tokens[9] = "AND";
+	tokens[10] = "WORD";
+	tokens[11] = "APPEND";
+	tokens[12] = "HEREDOC";
 }
 
 static	void	print_token(t_token *token, int i)
 {
-	char	*str_tok[12];
+	char	*str_tok[13];
 
 	get_str_type(str_tok);
 	if (i == 0)

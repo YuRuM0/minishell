@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:03:24 by flima             #+#    #+#             */
-/*   Updated: 2025/03/18 19:15:18 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/20 18:30:06 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ static void	assign_syntax_func(t_syntax_check *table)
 	table[7] = NULL;
 	table[8] = NULL;
 	table[9] = NULL;
-	table[10] = syntax_append;
-	table[11] = syntax_heredoc;
+	table[10] = NULL;
+	table[11] = syntax_append;
+	table[12] = syntax_heredoc;
 }
 
 t_pars_err	syntax(t_main_data *data)
@@ -50,7 +51,7 @@ t_pars_err	syntax(t_main_data *data)
 	t_token			*current;
 	t_token			*previous;
 	t_pars_err		status;
-	t_syntax_check	syntax_table[12];
+	t_syntax_check	syntax_table[13];
 
 	status = SUCCESS;
 	previous = NULL;

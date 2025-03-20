@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/18 19:04:13 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/20 17:33:36 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-# define METACHARS " \t\n|<>$\"\'"
+# define METACHARS " \t\n|<>$\"\'&"
 
 //split the cmd line into token using these syntax
 typedef enum e_syntax
@@ -29,6 +29,7 @@ typedef enum e_syntax
 	VARIABLE,// $ (Variable expansion)
 	D_QUOTE,// "" (Double quotes for string)
 	S_QUOTE,// '' (Single quotes for literal string)
+	AND,// & (AND operator)
 	WORD,// CMD, CMD_ARG or generic string value
 	APPEND,// >> (Append to output)
 	HEREDOC,// << (Here-document)
@@ -39,6 +40,7 @@ typedef enum e_parsing_err //modificar error codes
 	SUCCESS,
 	ERROR_MEM_ALLOC,
 	UNCLOSED_QUOTE,
+	ERROR_AND_OPERATOR,
 	ERROR_CMD_SUBSTITUTION,
 	ERROR_MTCH_END,
 	ERROR_PIPE_END,

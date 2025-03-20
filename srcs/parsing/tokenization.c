@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/12 17:16:47 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/20 17:35:34 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static	void	assign_lex_funcs(t_lex_functions *process)
 	process[6] = process_env_var;
 	process[7] = process_double_quotes;
 	process[8] = process_single_quotes;
-	process[9] = process_word_n_spaces;
+	process[9] = NULL;
+	process[10] = process_word_n_spaces;
 }
 
 //identify the token type and return it.
@@ -53,13 +54,15 @@ t_syntax	get_token_type(char cha)
 
 t_pars_err	assign_token(char *input, size_t *current_pos, t_token *token)
 {
-	t_lex_functions		process[10];
+	t_lex_functions		process[11];
 	t_pars_err			status;
 	size_t				start;
 
 	start = *current_pos;
 	assign_lex_funcs(process);
 	token->type = get_token_type(input[*current_pos]);
+	if (token->type == AND)
+		return (ERROR_AND_OPERATOR);
 	status = process[token->type](input, current_pos, &token->type);
 	if (status != SUCCESS)
 		return (status);
