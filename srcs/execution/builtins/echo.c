@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:45:11 by yulpark           #+#    #+#             */
-/*   Updated: 2025/03/07 14:54:33 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/03/20 17:22:56 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int echo(char **args)
 		ft_putchar_fd('\n', 1);
 	return (0);
 }
-
-
 
 //int main(void)
 //{
