@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Caminho para o arquivo de comandos
+COMMANDS_FILE="tests/tests_errs_parser.txt"
+
+# Função para executar um comando no minishell e verificar a saída
+run_test() {
+    local command="$1"
+    local expected_output="$2"
+    local output
+
+    output=$(echo "$command" | ./minishell)
+    if [[ $output == *"$expected_output"* ]]; then
+        echo -e "\033[32mTest passed\033[0m: $command"
+    else
+        echo -e "\033[33mTest failed\033[0m $command"
+        echo -e "\033[33mExpected\033[0m: $expected_output"
+        echo -e "\033[33mGot\033[0m: $output"
+    fi
+}
+
+
+run_test "cat arquivo.txt || wc -l" "syntax error near unexpected token '|'"
+run_test "cat arquivo.txt | wc -l |" "multiples lines command not suported"
+run_test "| cat arquivo.txt | grep "palavra"" "syntax error near unexpected token '|'"
+run_test "ls -l >| sort" "syntax error near unexpected token '|'"
+run_test "ls -l >>| head -n 10" "syntax error near unexpected token '|'"
+run_test "ps aux >> > wc -l" "syntax error near unexpected token '>'"
+run_test "ps aux > < grep firefox" "syntax error near unexpected token '<'"
+run_test "ps aux >>>> grep test" "syntax error near unexpected token '>>'"
+run_test "cat \"arquivo.txt | tr ' ' '\n' | sort | uniq -c" "syntax error: unclosed quotes"
+run_test "grep -n \'erro\" arquivo.log | less" "syntax error: unclosed quotes"
+run_test "find . -name "*.tmp" | xargs rm >" "syntax error near unexpected token 'newline'"
+run_test "df -h | sort -k 5 -n > >" "syntax error near unexpected token '>'"
+run_test "ls -lt head -n 5 >" "syntax error near unexpected token 'newline'"
+
+
