@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/03/20 18:38:23 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/23 16:56:15 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ void	debugging(t_main_data *data)
 		tmp = tmp->next;
 		i++;
 	}
+	write(STDOUT_FILENO, "\n", 1);
 }

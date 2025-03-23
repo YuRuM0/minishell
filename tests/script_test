@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Caminho para o arquivo de comandos
-COMMANDS_FILE="tests/tests_errs_parser.txt"
-
-# Função para executar um comando no minishell e verificar a saída
 run_test() {
     local command="$1"
     local expected_output="$2"

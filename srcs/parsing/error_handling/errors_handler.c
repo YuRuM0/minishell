@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   errors_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 18:16:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/20 18:43:54 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/23 16:38:52 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-void	status_error_tokeniz(t_main_data *data, t_pars_err status)
+void	status_error(t_main_data *data, t_pars_err status)
 {
 	if (status == UNCLOSED_QUOTE)
 		error_msg("syntax error: unclosed quotes\n");

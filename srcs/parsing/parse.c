@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/22 12:12:48 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/23 17:04:14 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ void	parser(t_main_data *data)
 		return ;
 	status = tokenize_input(data, data->pipeline);
 	if (status != SUCCESS)
-		return (status_error_tokeniz(data, status));
+		status_error(data, status);
 	status = syntax(data);
 	if (status != SUCCESS)
 		status_error_syntax(data, status);
-	// debugging(data);
+	debugging(data);
+	status = merge_adjacent_tokens(data);
+	if (status != SUCCESS)
+		status_error(data, status);
+	debugging(data);
 }
 
 // char	*capture_heredoc(t_main_data *data, char *delim)

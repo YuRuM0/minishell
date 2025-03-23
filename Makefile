@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
+#    By: filipe <filipe@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/03/17 17:59:26 by flima            ###   ########.fr        #
+#    Updated: 2025/03/23 16:36:16 by filipe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ PARSE_DIR = $(SCRS_DIR)/parsing
 PARSE_FILES = $(PARSE_DIR)/main.c \
 				$(PARSE_DIR)/parse.c \
 				$(PARSE_DIR)/tokenization.c \
-				$(PARSE_DIR)/syntax.c
+				$(PARSE_DIR)/syntax.c \
+				$(PARSE_DIR)/merge_tokens.c
 				
 ERROR_DIR = $(PARSE_DIR)/error_handling
 ERROR_FILE = $(ERROR_DIR)/errors_handler.c

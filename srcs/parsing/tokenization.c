@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:18:11 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/20 17:35:34 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/23 15:22:12 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_pars_err	assign_token(char *input, size_t *current_pos, t_token *token)
 	return (SUCCESS);
 }
 
+// tokenize the input string and assign the tokens to the tokens list
 t_pars_err	tokenize_input(t_main_data *data, char	*input)
 {
 	t_token			*token;

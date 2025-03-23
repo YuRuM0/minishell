@@ -6,20 +6,20 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/03/23 11:35:02 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/23 17:03:41 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-void	free_tokens(t_token **tokens)
+void	free_tokens(t_token *tokens)
 {
 	t_token	*tmp;
 
-	while (*tokens != NULL)
+	while (tokens != NULL)
 	{
-		tmp = *tokens;
-		*tokens = (*tokens)->next;
+		tmp = tokens;
+		tokens = tokens->next;
 		free(tmp->value);
 		free(tmp);
 	}
@@ -27,7 +27,8 @@ void	free_tokens(t_token **tokens)
 
 void	clean_all_data(t_main_data *data)
 {
-	free_tokens(&data->tokens);
+	free_tokens(data->tokens);
+	data->tokens = NULL;
 	free(data->pipeline);
 }
 
@@ -35,7 +36,8 @@ void	clean_all_data_error(t_main_data *data, int out_status)
 {
 	rl_clear_history();
 	//set_terminal
-	free_tokens(&data->tokens);
+	free_tokens(data->tokens);
+	data->tokens = NULL;
 	free(data->pipeline);
 	exit(out_status);
 }
