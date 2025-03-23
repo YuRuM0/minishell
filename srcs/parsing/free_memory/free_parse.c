@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/03/23 17:03:41 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/23 23:07:44 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	clean_all_data_error(t_main_data *data, int out_status)
 	rl_clear_history();
 	//set_terminal
 	free_tokens(data->tokens);
-	data->tokens = NULL;
 	free(data->pipeline);
+	data->tokens = NULL;
+	data->pipeline = NULL;
 	exit(out_status);
 }
