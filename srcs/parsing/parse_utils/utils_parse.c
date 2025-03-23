@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/12 17:21:30 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/22 12:06:58 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 
 //     if (!*str)
 //         return ("\0");
-//     i = 0;
-//     while (str[i] == '\t' || str[i] == '\n' || \
+    // i = 0;
+    // while (str[i] == '\t' || str[i] == '\n' || 
 //         str[i] == '\r' || str[i] == ' ')
 //         i++;
 //     if (!str[i])
 //         return (NULL);
 //     start = i;
-//     while (str[i] != '\t' && str[i] != '\n' && \
+//     while (str[i] != '\t' && str[i] != '\n' && 
 //         str[i] != '\r' && str[i] != ' ' && str[i])
 //         i++;
 //     token = ft_substr(str, start, i - start);

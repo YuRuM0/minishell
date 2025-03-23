@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/03/17 19:30:44 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/23 11:50:44 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*read_tty(void)
 	pipeline = readline(MINISHELL_PROMPT);
 	if (pipeline == NULL && errno == ENOMEM)
 	{
-		perror("minishell");
+		error_msg(NULL);
 		exit(EXIT_MEM_FAILURE);
 	}
 	else if (pipeline == NULL && errno == 0)
@@ -35,12 +35,31 @@ static char	*read_tty(void)
 	return (pipeline);
 }
 
+static char	*read_file(void)
+{
+	char	*line;
+
+	line = get_next_line(STDIN_FILENO);
+	if (line == NULL && errno == ENOMEM)
+	{
+		error_msg(NULL);
+		exit(EXIT_MEM_FAILURE);
+	}
+	else if (line == NULL && errno == 0)
+		exit(EXIT_SUCCESSFULLY);
+	return (line);
+}
+
 static void	loop_minishell(t_main_data *data)
 {
 	while (true)
 	{
-		data->pipeline = read_tty();
-		// data->tty_line += 1;
+		if (isatty(STDIN_FILENO))
+			data->pipeline = read_tty();
+		else
+			data->pipeline = read_file();
+		if (data->pipeline == NULL)
+			break ;
 		parser(data);
 		clean_all_data(data);
 	}
@@ -49,7 +68,6 @@ static void	loop_minishell(t_main_data *data)
 static void	init_data(t_main_data *data)
 {
 	data->nbr_of_cmds = 0;
-	data->tty_line = 0;
 	data->heredoc_content = NULL;
 	data->cmds = NULL;
 	data->tokens = NULL;

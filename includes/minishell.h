@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/03/12 21:19:30 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/03/23 11:33:23 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef enum e_exit_code
 typedef struct s_main_data
 {
 	int						nbr_of_cmds;
-	int						tty_line;
 	char					*pipeline;
 	char					*heredoc_content;
 	char					*errfile; //where and when is it used?

@@ -1,12 +1,12 @@
 SIGNAL CTRL + D;                    OK
 FAIL MEMORY ALLOC READLINE CHECK ;  OK
 HEREDOC;                            IN PROCESS 
-DONE : handle returned error in tokenize_input after assign token OK
-TODO error handler in case safe_readline fails 
+DID : handle returned error in tokenize_input after assign token OK
+DID error handler in case safe_readline fails 
 TODO: handle $_HOME, $HOME, $1HOME (right input) and $!HOME (wrong first type of char)
-TODO: HANDLE | as the last char in the input line (should I handle it \
+DID: HANDLE | as the last char in the input line (should I handle it \
 		like bash or just return an syntax error)
-TODO: add metachar ( e )
+DID: add metachar ( e )
 to learn
 	How can I check for leaks?
 		use: size_t size = 1L * 1024 * 1024 * 1024 * 1024;  // 1 TB

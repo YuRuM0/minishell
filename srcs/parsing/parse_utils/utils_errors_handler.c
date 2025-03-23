@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_errors_handler.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:49:49 by flima             #+#    #+#             */
-/*   Updated: 2025/03/20 18:43:44 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/23 11:26:20 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 void	error_msg(char *msg)
 {
-	write(STDOUT_FILENO, "minishell: ", 12);
-	write(STDOUT_FILENO, msg, ft_strlen(msg));
+	if (msg)
+	{
+		write(STDOUT_FILENO, "minishell: ", 12);
+		write(STDOUT_FILENO, msg, ft_strlen(msg));
+	}
+	if (errno == ENOMEM)
+	{
+		perror("minishell");
+		//set_terminal
+		if (isatty(STDIN_FILENO))
+			rl_clear_history();
+	}
 }
 
 void	assign_error_table_msg(char **table)

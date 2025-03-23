@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/03/17 19:32:17 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/23 11:35:02 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	clean_all_data(t_main_data *data)
 void	clean_all_data_error(t_main_data *data, int out_status)
 {
 	rl_clear_history();
+	//set_terminal
 	free_tokens(&data->tokens);
 	free(data->pipeline);
 	exit(out_status);

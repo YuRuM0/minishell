@@ -10,4 +10,4 @@ cat "arquivo.txt | tr ' ' '\n' | sort | uniq -c
 grep -n 'erro" arquivo.log | less
 find . -name "*.tmp" | xargs rm >
 df -h | sort -k 5 -n >>
-ls -lt ||| head -n 5
+ls -lt head -n 5 >

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:30:34 by flima             #+#    #+#             */
-/*   Updated: 2024/10/14 14:58:24 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/22 13:42:00 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -27,8 +27,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 }
 // int	main()
 // {
-// 	char	str[] = "2Codam nightss2";
-// 	char	set[] = "12";
+// 	char	str[] = "Codamt";
+// 	char	set[] = "t";
 // 	char	*strnew;
 // 	size_t	i;
 
