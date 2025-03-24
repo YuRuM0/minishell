@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:51:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/20 16:33:03 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/24 18:28:20 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ t_pars_err	process_double_quotes(char *input, size_t *i, t_syntax *tok_type)
 	(*i)++;
 	return (SUCCESS);
 }
-

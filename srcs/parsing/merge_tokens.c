@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:45:28 by flima             #+#    #+#             */
-/*   Updated: 2025/03/24 17:15:29 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/24 18:27:31 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 // and double quotes and single.
 //
 
-static void remove_blank_tokens(t_token **current)
+static void	remove_blank_tokens(t_token **current)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	while (*current != NULL)
 	{
@@ -36,9 +36,9 @@ static void remove_blank_tokens(t_token **current)
 	}
 }
 
-static void remove_next_token(t_token *current)
+static void	remove_next_token(t_token *current)
 {
-	t_token *tmp_token;
+	t_token	*tmp_token;
 
 	tmp_token = current->next;
 	current->next = current->next->next;
@@ -46,13 +46,13 @@ static void remove_next_token(t_token *current)
 	free_tokens(tmp_token);
 }
 
-static t_pars_err merge_quotes(t_token *current)
+static t_pars_err	merge_quotes(t_token *current)
 {
-	char *tmp_str;
+	char	*tmp_str;
 
-	while (current->next && (current->next->type == D_QUOTE ||
-							 current->next->type == S_QUOTE ||
-							 current->next->type == WORD))
+	while (current->next && (current->next->type == D_QUOTE || \
+			current->next->type == S_QUOTE || \
+			current->next->type == WORD))
 	{
 		tmp_str = current->value;
 		current->value = ft_strjoin(tmp_str, current->next->value);
@@ -64,10 +64,10 @@ static t_pars_err merge_quotes(t_token *current)
 	return (SUCCESS);
 }
 
-static t_pars_err merge_env_var(t_token *current)
+static t_pars_err	merge_env_var(t_token *current)
 {
-	char *tmp_str;
-	
+	char	*tmp_str;
+
 	if (!current->next || (ft_strlen(current->value) == 1 \
 			&& current->next && \
 			(current->next->type == TAB_CHAR || \
@@ -86,15 +86,15 @@ static t_pars_err merge_env_var(t_token *current)
 	return (SUCCESS);
 }
 
-t_pars_err merge_adjacent_tokens(t_main_data *data)
+t_pars_err	merge_adjacent_tokens(t_main_data *data)
 {
-	t_token *current;
+	t_token	*current;
 
 	current = data->tokens;
 	while (current != NULL)
 	{
-		if (current->type == D_QUOTE ||
-			current->type == S_QUOTE ||
+		if (current->type == D_QUOTE || \
+			current->type == S_QUOTE || \
 			current->type == WORD)
 		{
 			if (merge_quotes(current) != SUCCESS)
