@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:45:28 by flima             #+#    #+#             */
-/*   Updated: 2025/03/24 16:04:23 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/24 17:15:29 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,26 @@
 // merge_adjacent_tokens like enviroment variables $
 // and double quotes and single.
 //
+
+static void remove_blank_tokens(t_token **current)
+{
+	t_token *tmp;
+
+	while (*current != NULL)
+	{
+		if ((*current)->type == NEW_LINE || \
+			(*current)->type == TAB_CHAR || \
+			(*current)->type == SPACE_CHAR)
+		{
+			tmp = *current;
+			*current = (*current)->next;
+			tmp->next = NULL;
+			free_tokens(tmp);
+		}
+		else
+			current = &(*current)->next;
+	}
+}
 
 static void remove_next_token(t_token *current)
 {
@@ -65,6 +85,7 @@ static t_pars_err merge_env_var(t_token *current)
 	}
 	return (SUCCESS);
 }
+
 t_pars_err merge_adjacent_tokens(t_main_data *data)
 {
 	t_token *current;
@@ -86,5 +107,6 @@ t_pars_err merge_adjacent_tokens(t_main_data *data)
 		}
 		current = current->next;
 	}
+	remove_blank_tokens(&data->tokens);
 	return (SUCCESS);
 }
