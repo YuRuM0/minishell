@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:45:28 by flima             #+#    #+#             */
-/*   Updated: 2025/03/24 18:27:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/24 18:30:52 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static t_pars_err	merge_env_var(t_token *current)
 	return (SUCCESS);
 }
 
-t_pars_err	merge_adjacent_tokens(t_main_data *data)
+t_pars_err	merge_tokens_n_rm_blank_tokens(t_main_data *data)
 {
 	t_token	*current;
 

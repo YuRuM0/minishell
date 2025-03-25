@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/23 16:41:32 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/25 19:07:11 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,17 @@ t_pars_err	syntax_less(t_token *previous, t_token *current);
 t_pars_err	syntax_heredoc(t_token *previous, t_token *current);
 
 //append functions
-t_pars_err merge_adjacent_tokens(t_main_data *data);
+t_pars_err	merge_tokens_n_rm_blank_tokens(t_main_data *data);
 
+// heredoc functions
+void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg);
 //debugging
 void		debugging(t_main_data *data);
 
 //free functions
 void		free_tokens(t_token *tokens);
 void		clean_all_data(t_main_data *data);
-void		clean_all_data_error(t_main_data *data, int out_status);
+void		clean_all_data_exit(t_main_data *data, int out_status);
 
 //error handlers
 // typedef void (*t_handle_error)(t_main_data *data, t_pars_err status);

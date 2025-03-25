@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 18:16:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/23 16:38:52 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/25 19:07:11 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	status_error(t_main_data *data, t_pars_err status)
 	else
 	{
 		perror("minishell");
-		clean_all_data_error(data, EXIT_MEM_FAILURE);
+		clean_all_data_exit(data, EXIT_MEM_FAILURE);
 	}
 }
 
