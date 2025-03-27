@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/24 18:32:53 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/27 15:35:25 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	parser(t_main_data *data)
 	status = merge_tokens_n_rm_blank_tokens(data);
 	if (status != SUCCESS)
 		status_error(data, status);
-	debugging(data);
+	status = capture_heredocs(data);
+	if (status != SUCCESS)
+		status_error(data, status);
+	// debugging(data);
 }
 
 // char	*capture_heredoc(t_main_data *data, char *delim)

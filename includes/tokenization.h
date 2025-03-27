@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/25 19:07:11 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/27 15:34:02 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,9 @@ t_pars_err	syntax_heredoc(t_token *previous, t_token *current);
 t_pars_err	merge_tokens_n_rm_blank_tokens(t_main_data *data);
 
 // heredoc functions
+t_pars_err	capture_heredocs(t_main_data *data);
 void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg);
+void	heredoc_reading(t_main_data *data, char *file_name, char *delim);
 //debugging
 void		debugging(t_main_data *data);
 
