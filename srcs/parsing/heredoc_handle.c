@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:57:30 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 18:01:00 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/27 18:50:38 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,38 @@ static t_pars_err	creat_file_name(char **file_name, int nbr_heredoc)
 	free(heredoc_name);
 	return (SUCCESS);
 }
-
+static t_pars_err	assign_fd_token(t_token *current, int fd)
+{
+	free(current->next->value);
+	current->value = NULL;
+	current->next->value = ft_itoa(fd);
+	if (current->next->value == NULL)
+		return (ERROR_MEM_ALLOC);
+	return (SUCCESS);
+}
 static t_pars_err	get_current_heredoc(t_main_data *data, t_token *current, int *nbr_heredoc)
 {
 	int				fd;
 	t_pars_err		status;
 	char 			*file_name;
+	char			*delimiter;
 
 	status = creat_file_name(&file_name, *nbr_heredoc);
 	if (status != SUCCESS)
 		return (status);
 	(*nbr_heredoc)++;
-	fd = read_heredoc_input(data, file_name, current->next->value);
-	
+	delimiter = current->next->value;
+	if (current->next->type == D_QUOTE || current->next->type == S_QUOTE)
+	{
+		if (delimiter[0] == '\'')
+			delimiter = ft_strtrim(delimiter, "\'");
+		else if (delimiter[0] == '\"')
+			delimiter = ft_strtrim(delimiter, "\"");
+	}
+	fd = read_heredoc_input(data, file_name, delimiter);
+	status = assign_fd_token(current, fd);
+	if (status != SUCCESS)
+		return (ERROR_MEM_ALLOC);
 	return (SUCCESS);
 }
 

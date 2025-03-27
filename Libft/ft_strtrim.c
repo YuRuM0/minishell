@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:30:34 by flima             #+#    #+#             */
-/*   Updated: 2025/03/22 13:42:00 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/27 18:38:34 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 }
 // int	main()
 // {
-// 	char	str[] = "Codamt";
+// 	char	str[] = "tCodamt";
 // 	char	set[] = "t";
 // 	char	*strnew;
 // 	size_t	i;
