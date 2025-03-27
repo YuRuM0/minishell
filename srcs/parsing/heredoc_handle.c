@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:57:30 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 18:50:38 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/27 19:03:32 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_pars_err	creat_file_name(char **file_name, int nbr_heredoc)
 static t_pars_err	assign_fd_token(t_token *current, int fd)
 {
 	free(current->next->value);
-	current->value = NULL;
+	current->next->value = NULL;
 	current->next->value = ft_itoa(fd);
 	if (current->next->value == NULL)
 		return (ERROR_MEM_ALLOC);

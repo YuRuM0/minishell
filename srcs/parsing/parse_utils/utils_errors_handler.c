@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:49:49 by flima             #+#    #+#             */
-/*   Updated: 2025/03/23 11:26:20 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/27 19:01:22 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	error_msg(char *msg)
 		write(STDOUT_FILENO, "minishell: ", 12);
 		write(STDOUT_FILENO, msg, ft_strlen(msg));
 	}
-	if (errno == ENOMEM)
+	if (!msg && errno == ENOMEM)
 	{
 		perror("minishell");
 		//set_terminal

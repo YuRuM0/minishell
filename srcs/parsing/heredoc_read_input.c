@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:13:08 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 17:09:32 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/27 19:02:23 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg)
 static t_exit_code readline_heredoc(int fd, char *delim)
 {
 	char	*input;
-
 	while(true)
 	{
 		input = readline(">");
