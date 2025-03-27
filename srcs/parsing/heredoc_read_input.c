@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:13:08 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 15:37:23 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/27 17:09:32 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ static t_exit_code readline_heredoc(int fd, char *delim)
 			return(EXIT_MEM_FAILURE);
 		if (input == NULL)
 			break ;
-		if (!ft_strncmp(input, delim, ft_strlen(delim)))
-			break ;
-		if (write(fd, input, ft_strlen(input)) == -1)
+		if (!ft_strncmp(input, delim, ft_strlen(delim) + 1))
 		{
 			free(input);
-			return (EXIT_DENIED);
+			break ;
 		}
+		write(fd, input, ft_strlen(input));
 		write(fd, "\n", 1);
 		free(input);
 	}
@@ -63,7 +62,10 @@ void	heredoc_reading(t_main_data *data, char *file_name, char *delim)
 	rl_clear_history();
 	fd = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
+	{
+		free(file_name);
 		hered_err_exit(data, EXIT_FAIL, NULL);
+	}
 	status = readline_heredoc(fd, delim);
 	close(fd);
 	if (status != EXIT_SUCCESSFULLY)

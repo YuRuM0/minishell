@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:57:30 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 15:31:39 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/27 18:01:00 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,18 @@ static int	read_heredoc_input(t_main_data *data, char *file_name, char *delimite
 		heredoc_reading(data, file_name, delimiter);
 	waitpid(child_pid, &exit_status, 0);
 	if (WEXITSTATUS(exit_status) == EXIT_FAIL)
-		hered_err_exit(data, EXIT_FAIL, NULL);
+	{
+		free(file_name);
+		clean_all_data_exit(data, EXIT_CHILD_FAILURE);
+	}
 	//handle signal_status
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
+	{
+		unlink(file_name);
 		hered_err_exit(data, EXIT_DENIED, file_name);
+	}
 	unlink(file_name);
-	printf("%s: %d\n", file_name, fd);//test
 	free(file_name);
 	return (fd);
 }
@@ -64,7 +69,7 @@ static t_pars_err	get_current_heredoc(t_main_data *data, t_token *current, int *
 		return (status);
 	(*nbr_heredoc)++;
 	fd = read_heredoc_input(data, file_name, current->next->value);
-	printf("%d\n", fd);//test
+	
 	return (SUCCESS);
 }
 

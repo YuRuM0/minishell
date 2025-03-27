@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/27 15:34:02 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/27 18:00:20 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,12 @@ t_pars_err	syntax_heredoc(t_token *previous, t_token *current);
 
 //append functions
 t_pars_err	merge_tokens_n_rm_blank_tokens(t_main_data *data);
+void		remove_next_token(t_token *current);
 
 // heredoc functions
 t_pars_err	capture_heredocs(t_main_data *data);
-void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg);
-void	heredoc_reading(t_main_data *data, char *file_name, char *delim);
+void		hered_err_exit(t_main_data *data, t_exit_code status, char *msg);
+void		heredoc_reading(t_main_data *data, char *file_name, char *delim);
 //debugging
 void		debugging(t_main_data *data);
 

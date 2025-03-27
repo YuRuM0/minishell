@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:45:28 by flima             #+#    #+#             */
-/*   Updated: 2025/03/24 18:30:52 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/27 17:59:41 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	remove_blank_tokens(t_token **current)
 	}
 }
 
-static void	remove_next_token(t_token *current)
+void	remove_next_token(t_token *current)
 {
 	t_token	*tmp_token;
 

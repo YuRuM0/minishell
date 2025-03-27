@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 15:27:41 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/27 16:04:07 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum e_exit_code
 	EXIT_FAIL = 1,
 	EXIT_DENIED,
 	EXIT_MEM_FAILURE = 3, //should be 137?
+	EXIT_CHILD_FAILURE,
 	EXIT_CMD_NOT_EXECUTABLE = 126,
 	EXIT_CMD_NOT_FOUND = 127,
 	EXIT_SIGNAL_CODE = 128,
