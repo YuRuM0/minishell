@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/28 19:17:45 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/28 21:47:06 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ t_syntax	get_token_type(char cha);
 //environment variables functions
 t_env_var	*add_new_var(void);
 void		add_var_back(t_env_var **head, t_env_var *new);
-t_pars_err	duplicate_env_var(t_main_data *data, char **env);
+void		duplicate_env_var(t_main_data *data, char **env);
+char	*find_environment_var(t_main_data *data, t_env_var *envp, \
+	const char *var_name);
 
 //lexer functions
 typedef t_pars_err	(*t_lex_functions)(char *str, size_t *i, t_syntax *type);
