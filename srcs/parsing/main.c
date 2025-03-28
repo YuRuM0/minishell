@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/03/23 11:50:44 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/28 19:18:07 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,25 @@ static void	loop_minishell(t_main_data *data)
 		if (data->pipeline == NULL)
 			break ;
 		parser(data);
-		clean_all_data(data);
+		clean_temp_data(data);
 	}
 }
 
-static void	init_data(t_main_data *data)
+void	init_data(t_main_data *data)
 {
 	data->nbr_of_cmds = 0;
-	data->heredoc_content = NULL;
+	data->pipeline = NULL;
+	data->env_vars = NULL;
 	data->cmds = NULL;
 	data->tokens = NULL;
 	data->errfile = NULL;
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **env)
 {
 	t_main_data	data;
 
 	(void)argv;
-	(void)envp;
 	if (argc != 1)
 	{
 		ft_putstr_fd("Error\n No arguments needed", 2);
@@ -87,6 +87,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	//signals func
 	init_data(&data);
+	duplicate_env_var(&data, env);
 	loop_minishell(&data);
 	return (0);
 }

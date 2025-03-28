@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 16:04:07 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/28 19:10:37 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_main_data
 {
 	int						nbr_of_cmds;
 	char					*pipeline;
-	char					*heredoc_content;
 	char					*errfile; //where and when is it used?
+	struct s_env_var		*env_vars;
 	struct s_commands		**cmds;
 	struct s_token			*tokens;
 }							t_main_data;

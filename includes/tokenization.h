@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/27 18:00:20 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/28 19:17:45 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,22 @@ typedef enum e_redir_type
 {
 	REDIR,
 	IN,
-	HERE,
-	OUT,
+	HERE_D,
+	STDOUT,
 	APP
 }	t_redir_type;
+
+typedef struct s_env_var
+{
+	char				*variable;
+	struct s_env_var	*next;
+}						t_env_var;
 
 typedef struct s_redir
 {
 	t_redir_type	redir_type;
 	int				fd;
 	char			*file;
-	struct s_redir	*next;
 }					t_redir;
 
 typedef struct s_command
@@ -93,6 +98,11 @@ t_token		*add_new_token(void);
 void		add_token_back(t_token **head, t_token *new);
 t_token		*last_token(t_token *list);
 t_syntax	get_token_type(char cha);
+
+//environment variables functions
+t_env_var	*add_new_var(void);
+void		add_var_back(t_env_var **head, t_env_var *new);
+t_pars_err	duplicate_env_var(t_main_data *data, char **env);
 
 //lexer functions
 typedef t_pars_err	(*t_lex_functions)(char *str, size_t *i, t_syntax *type);
@@ -126,8 +136,10 @@ void		heredoc_reading(t_main_data *data, char *file_name, char *delim);
 void		debugging(t_main_data *data);
 
 //free functions
+void		init_data(t_main_data *data);
 void		free_tokens(t_token *tokens);
-void		clean_all_data(t_main_data *data);
+void		clean_temp_data(t_main_data *data);
+void		free_env_vars(t_env_var *head);
 void		clean_all_data_exit(t_main_data *data, int out_status);
 
 //error handlers
@@ -136,4 +148,5 @@ void		status_error(t_main_data *data, t_pars_err status);
 void		error_msg(char *msg);
 void		status_error_syntax(t_main_data *data, t_pars_err status);
 void		assign_error_table_msg(char **table);
+
 #endif

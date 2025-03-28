@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: filipe <filipe@student.42.fr>              +#+  +:+       +#+         #
+#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/03/27 15:24:54 by filipe           ###   ########.fr        #
+#    Updated: 2025/03/28 19:00:06 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,10 @@ PARSE_FILES = $(PARSE_DIR)/main.c \
 				$(PARSE_DIR)/heredoc_handle.c \
 				$(PARSE_DIR)/heredoc_read_input.c
 				
+ENVIRONMENT_VAR_DIR = $(PARSE_DIR)/env_variables
+ENVIRONMENT_VAR_FILES = $(ENVIRONMENT_VAR_DIR)/env_var_utils.c \
+						$(ENVIRONMENT_VAR_DIR)/environment_var.c
+
 ERROR_DIR = $(PARSE_DIR)/error_handling
 ERROR_FILE = $(ERROR_DIR)/errors_handler.c
 
@@ -47,7 +51,7 @@ JUMP_PARSE_FILES = $(JUMP_PARSE_DIR)/process_tokens01.c \
 					$(JUMP_PARSE_DIR)/syntax_check.c
 					
 PARSE_UTILS_DIR = $(PARSE_DIR)/parse_utils
-PARSE_UTILS_FILES = $(PARSE_UTILS_DIR)/utils_parse.c \
+PARSE_UTILS_FILES = $(PARSE_UTILS_DIR)/utils_parsing.c \
 					$(PARSE_UTILS_DIR)/utils_token_list.c \
 					$(PARSE_UTILS_DIR)/utils_errors_handler.c
 
@@ -58,7 +62,8 @@ FREE_DIR = $(PARSE_DIR)/free_memory
 FREE_FILE = $(FREE_DIR)/free_parse.c
 
 SRC_FILES = $(PARSE_FILES) $(ERROR_FILE) $(JUMP_PARSE_FILES) \
-				$(PARSE_UTILS_FILES) $(DEBUG_FILES) $(FREE_FILE)
+				$(PARSE_UTILS_FILES) $(DEBUG_FILES) $(FREE_FILE) \
+				$(ENVIRONMENT_VAR_FILES)
 
 OBJS_DIR = objs
 OBJS = $(patsubst $(SCRS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRC_FILES))
