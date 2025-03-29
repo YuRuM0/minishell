@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/03/29 20:57:38 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/03/29 21:27:11 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // can contain underscores
 // = only appears once, after the identifier name
 
-int input_checker(char *input)
+static int input_checker(char *input)
 {
 	int i;
 	int equal_counter;
@@ -46,47 +46,8 @@ int input_checker(char *input)
 //	;
 //}
 
-char *get_key(char *arg)
-{
-	int i;
-	char *result;
-
-	if (!arg)
-		return (NULL);
-	i = 0;
-	while (arg[i] && arg[i] != '=')
-		i++;
-	if (arg[i] != '=') //if no =
-		return (NULL);
-	result = malloc(sizeof(char) * (i + 1));
-	if (!result)
-		return (NULL);
-	ft_strlcpy(result, arg, i + 1);
-	return (result);
-}
-
-char *get_value(char *arg)
-{
-	int i;
-	char *result;
-
-	i = 0;
-	if (!arg)
-		return (NULL);
-	while (arg[i] && arg[i] != '=')
-		i++;
-	if (!arg) //incase no = 
-		return (NULL);
-	i++;
-	result = malloc(sizeof(char) * ft_strlen(arg + i) + 1);
-	if (!result)
-		return (NULL);
-	ft_strlcpy(result, &arg[i], ft_strlen(arg + i) + 1);
-	return (result);
-}
-
 // only handles one arg at a time from the long list with many args
-int export_arg(char *arg, t_varlist ** var_list)
+int export_arg(char *arg, t_varlist * var_list)
 {
 	int i;
 	char *key;
@@ -99,17 +60,20 @@ int export_arg(char *arg, t_varlist ** var_list)
 	if (!key)
 		return (perror("Export: Malloc Error"), -1);
 	value = get_value(arg); // if this is NULL then only add key to the node
-	
+	add_key_value_node(var_list, key, value);
+	free(key);
+	free(value);
+	return (0);
 }
 
-int main()
-{
-	char *input3 = "VAR=VALUE";
-	char *key;
-	char *val;
+//int main()
+//{
+//	char *input3 = "VAR=VALUE";
+//	char *key;
+//	char *val;
 
-	key = get_key(input3);
-	val = get_value(input3);
-	printf("%s\n", key);
-	printf("%s", val);
-}
+//	key = get_key(input3);
+//	val = get_value(input3);
+//	printf("%s\n", key);
+//	printf("%s", val);
+//}
