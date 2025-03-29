@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:41:41 by yulpark           #+#    #+#             */
-/*   Updated: 2025/03/20 19:10:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/03/29 20:41:21 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,62 +23,87 @@
 //	char *next;
 //}	t_env;
 
-static void ft_delete_node(t_varlist *current, t_varlist *begin)
+
+void ft_delete_node(t_varlist **begin, t_varlist *current)
 {
-	if (current->prev == NULL)
-		begin = current->next;
-	else
-	{
-		current->prev->next = current->next;
-		current = current->next;
-	}
+    if (!current)
+        return;
+    if (current->prev == NULL) // Deleting the first node
+        *begin = current->next;
+    else
+        current->prev->next = current->next;
+    if (current->next != NULL) // Avoid accessing NULL->prev
+        current->next->prev = current->prev;
+    free(current->key);
+    free(current->content);
+    free(current);
 }
 
 //handling if the input is more than 2 (unset _ )
-int fd_unset(char **args, t_varlist *listinho)
+int fd_unset(char **args, t_varlist **listinho)
 {
-	int i;
 	t_varlist *cur_node;
-
-	i = 0;
-	cur_node = listinho;
-	if (!args[1])
-		return (0);
-	while (cur_node != NULL)
-	{
-		if (ft_strncmp(cur_node->key, args[1], ft_strlen(args[1])) == 0)
-			ft_delete_node(cur_node, listinho);
-		else
-			cur_node = cur_node->next;
-	}
-	return (0);
+	t_varlist *next_node;
+	
+    if (!args[1] || !*listinho)
+        return (0);
+    while (cur_node)
+    {
+        next_node = cur_node->next;
+        if (strncmp(cur_node->key, args[1], strlen(args[1]) + 1) == 0) //include null
+            ft_delete_node(listinho, cur_node);
+        cur_node = next_node;
+    }
+    return (0);
 }
 
-int main()
-{
-	t_varlist *variables;
+//t_varlist *create_node(char *key, char *content)
+//{
+//    t_varlist *node = malloc(sizeof(t_varlist));
+//    node->key = strdup(key);
+//    node->content = strdup(content);
+//    node->prev = NULL;
+//    node->next = NULL;
+//    return node;
+//}
 
-	variables = malloc(sizeof(t_varlist));
-	if (!variables)
-		return (0);
-	variables->prev = NULL;
-	variables->key = ft_strdup("HOME");
-	variables->content = ft_strdup("/home/yulpark");
-	variables->next = malloc(sizeof(t_varlist));
-	variables->next->prev = variables;
-	variables->next->key = ft_strdup("PATH");
-	variables->next->content = ft_strdup("/blablabla");
-	variables->next->next = NULL;
-	char **args;
-	args = malloc(sizeof(char*) * 3);
-	args[0] = "unset";
-	args[1] = "PATH";
-	args[2] = NULL;
-	fd_unset(args, variables);
-	while (variables->key)
-	{
-		printf("%s", variables->key);
-		variables = variables->next;
-	}
-	return (0);
-}
+//void print_list(t_varlist *list)
+//{
+//    printf("Current list:\n");
+//    while (list)
+//    {
+//        printf("%s:%s\n", list->key, list->content);
+//        list = list->next;
+//    }
+//}
+
+//int main()
+//{
+//    t_varlist *list = NULL;
+//    t_varlist *node1 = create_node("VAR1", "value1");
+//    t_varlist *node2 = create_node("VAR2", "value2");
+//    t_varlist *node3 = create_node("VAR3", "value3");
+//    node1->next = node2;
+//    node2->prev = node1;
+//    node2->next = node3;
+//    node3->prev = node2;
+//    list = node1;
+//    printf("Initial list:\n");
+//    print_list(list);
+    
+//    char *args1[] = {"unset", "VAR2"};
+//    fd_unset(args1, &list);
+//    printf("Deleting VAR2:\n");
+//    print_list(list);
+    
+//    char *args2[] = {"unset", "VAR1", NULL};
+//    fd_unset(args2, &list);
+//    printf("Deleting VAR1:\n");
+//    print_list(list);
+    
+//    char *args4[] = {"unset", "NONEXISTENT", NULL};
+//    fd_unset(args4, &list);
+//    printf("After deleting NONEXISTENT (empty list):\n");
+//    print_list(list);
+//    return 0;
+//}
