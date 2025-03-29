@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/03/28 21:57:53 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/29 21:43:31 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,17 @@ int	main(int argc, char **argv, char **envp)
 	t_main_data	data;
 	char *str;
 
-	(void)argv;
-	if (argc != 1)
-	{
-		ft_putstr_fd("Error\n No arguments needed", 2);
-		return (1);
-	}
+	(void)argc;
+	// if (argc != 1)
+	// {
+	// 	ft_putstr_fd("Error\n No arguments needed", 2);
+	// 	return (1);
+	// }
 	//signals func
 	init_data(&data);
 	duplicate_env_var(&data, envp);
-	str = find_environment_var(&data, data.env_vars, "PATH");
+	str = expand_environ_var(&data, argv[1]);
+	printf("%s\n", str);
 	//doing function to expand env var ... usar ft_strtrim to remove the name of variable. like HOME
 	clean_all_data_exit(&data, 0);
 	// loop_minishell(&data);
