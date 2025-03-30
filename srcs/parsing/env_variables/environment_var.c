@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/03/30 18:38:02 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/30 23:30:49 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ char *extract_var_name(char *str)
 	int len;
 
 	len = 0;
-	while (str[len] && (str[len] != ' ' || str[len] == '?'))
+	while (str[len] && ft_isalnum(str[len]))
 		len++;
-	if (str[len] == '?')
+	if (str[len] == '?' && len == 0)
 		len++;
 	var_name = ft_substr(str, 0, len);
 	return (var_name);
@@ -73,13 +73,13 @@ char *append_expanded_var(char	**expand, char *var_value, int *i, \
 	char *new_expand;
 	int len;
 
-	len = ft_strlen(*expand) + ft_strlen(var_value) - ft_strlen(var_name) - 1;
+	len = ft_strlen(*expand) + ft_strlen(var_value) - ft_strlen(var_name);
 	new_expand = ft_calloc(len + 1, sizeof(char));
 	if (new_expand == NULL && errno == ENOMEM)
 		return (NULL);
-	ft_strlcpy(new_expand, *expand, *i - 1);
+	ft_strlcpy(new_expand, *expand, *i + 1);
 	ft_strlcat(new_expand, var_value, len);
-	ft_strlcat(new_expand, *expand + *i + ft_strlen(var_name), len);
+	ft_strlcat(new_expand, *expand + (*i + ft_strlen(var_name) + 1), len);
 	(*i) += ft_strlen(var_value - 1);
 	free(var_value);
 	free(*expand);
