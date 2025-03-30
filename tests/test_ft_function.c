@@ -1,10 +1,14 @@
-#include "../includes/libft.h"
-#include "string.h"
 
-int	main(void)
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
 {
-	char *str = NULL;
+    char *current_dir = getenv("PWD");
+    if (current_dir)
+        printf("Diretório atual: %s\n", current_dir);
+    else
+        printf("Variável PWD não encontrada.\n");
 
-	str = strdup(str);
-	return (0);
+    return 0;
 }

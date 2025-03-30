@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/29 21:42:03 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/30 18:35:54 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void		duplicate_env_var(t_main_data *data, char **env);
 char		*find_environment_var(t_main_data *data, char *var_name);
 t_pars_err	get_environ_var_value(char **environ_var, char *var_name);
 char	*expand_environ_var(t_main_data *data, char *var_name);
+char *expand_env_instr(t_main_data *data, char *expand);
 
 //lexer functions
 typedef t_pars_err	(*t_lex_functions)(char *str, size_t *i, t_syntax *type);
