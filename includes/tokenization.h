@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/30 18:35:54 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/31 17:51:51 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ t_syntax	get_token_type(char cha);
 t_env_var	*add_new_var(void);
 void		add_var_back(t_env_var **head, t_env_var *new);
 void		duplicate_env_var(t_main_data *data, char **env);
-char		*find_environment_var(t_main_data *data, char *var_name);
+t_pars_err 	find_environment_var(t_env_var *envp, char *var_name, char **environ_var);
 t_pars_err	get_environ_var_value(char **environ_var, char *var_name);
-char	*expand_environ_var(t_main_data *data, char *var_name);
-char *expand_env_instr(t_main_data *data, char *expand);
+t_pars_err 	expand_environ_var(t_env_var *envp, char *var_name, char **environ_var);
+t_pars_err 	expand_env_instr(t_env_var *envp, char **expand);
 
 //lexer functions
 typedef t_pars_err	(*t_lex_functions)(char *str, size_t *i, t_syntax *type);

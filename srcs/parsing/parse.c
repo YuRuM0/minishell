@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/30 23:33:01 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/31 17:58:12 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	parser(t_main_data *data)
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
 		return (status_error(data, status));
-	data->tokens->value = expand_env_instr(data, data->tokens->value);
+	expand_env_instr(data->env_vars, &data->tokens->value);
 	debugging(data);
 }
