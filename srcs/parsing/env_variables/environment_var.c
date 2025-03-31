@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/03/31 20:09:09 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/31 21:45:26 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_pars_err	append_expanded_var(char **expand, char *var_value, int *i, \
 	ft_strlcpy(new_expand, *expand, *i + 1);
 	ft_strlcat(new_expand, var_value, len);
 	ft_strlcat(new_expand, *expand + (*i + ft_strlen(var_name) + 1), len);
-	(*i) += ft_strlen(var_value - 1);
+	(*i) += ft_strlen(var_value) -1;
 	free(*expand);
 	*expand = new_expand;
 	return (SUCCESS);

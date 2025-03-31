@@ -3,10 +3,16 @@ FAIL MEMORY ALLOC READLINE CHECK ;  OK
 HEREDOC;                            IN PROCESS 
 DID : handle returned error in tokenize_input after assign token OK
 DID error handler in case safe_readline fails 
-TODO: handle $_HOME, $HOME, $1HOME (right input) and $!HOME (wrong first type of char)
+DID: handle $_HOME, $HOME, $1HOME (right input) and $!HOME (wrong first type of char)
 DID: HANDLE | as the last char in the input line (should I handle it \
 		like bash or just return an syntax error)
 DID: add metachar ( e )
+
+TODO:expand the variables when I append D_quote, S_quote and word in func
+		merge_tokens_n_rm_blank_tokens
+
+
+
 to learn
 	How can I check for leaks?
 		use: size_t size = 1L * 1024 * 1024 * 1024 * 1024;  // 1 TB
