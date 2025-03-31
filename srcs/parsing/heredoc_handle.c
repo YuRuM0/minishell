@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handle.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:57:30 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 19:03:32 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/31 19:46:20 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-static int	read_heredoc_input(t_main_data *data, char *file_name, char *delimiter)
+static int	read_heredoc_input(t_main_data *data, char *file_name, \
+	char *delimiter)
 {
 	int		fd;
 	int		exit_status;
@@ -43,7 +44,7 @@ static t_pars_err	creat_file_name(char **file_name, int nbr_heredoc)
 {
 	char	*prefix;
 	char	*heredoc_name;
-	
+
 	prefix = "/tmp/heredoc_";
 	heredoc_name = ft_itoa(nbr_heredoc);
 	if (heredoc_name == NULL)
@@ -57,6 +58,7 @@ static t_pars_err	creat_file_name(char **file_name, int nbr_heredoc)
 	free(heredoc_name);
 	return (SUCCESS);
 }
+
 static t_pars_err	assign_fd_token(t_token *current, int fd)
 {
 	free(current->next->value);
@@ -66,11 +68,13 @@ static t_pars_err	assign_fd_token(t_token *current, int fd)
 		return (ERROR_MEM_ALLOC);
 	return (SUCCESS);
 }
-static t_pars_err	get_current_heredoc(t_main_data *data, t_token *current, int *nbr_heredoc)
+
+static t_pars_err	get_current_heredoc(t_main_data *data, \
+	t_token *current, int *nbr_heredoc)
 {
 	int				fd;
 	t_pars_err		status;
-	char 			*file_name;
+	char			*file_name;
 	char			*delimiter;
 
 	status = creat_file_name(&file_name, *nbr_heredoc);
@@ -97,7 +101,7 @@ t_pars_err	capture_heredocs(t_main_data *data)
 	int			nbr_of_heredoc;
 	t_pars_err	status;
 	t_token		*current;
-	
+
 	nbr_of_heredoc = 0;
 	current = data->tokens;
 	while (current)

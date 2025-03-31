@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:54:50 by flima             #+#    #+#             */
-/*   Updated: 2025/03/31 16:56:15 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/31 19:49:34 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,6 @@ void	add_var_back(t_env_var **head, t_env_var *new)
 			temp = temp->next;
 		temp->next = new;
 	}
-}
-
-// 1*
-t_pars_err find_environment_var(t_env_var *envp, char *var_name, char **environ_var)
-{
-	size_t		len;
-	
-	*environ_var = NULL;
-	len = ft_strlen(var_name);
-	while (envp)
-	{
-		if ((ft_strncmp(envp->variable, var_name, len)) == 0)
-		{
-			*environ_var = ft_strdup(envp->variable);
-			if (*environ_var == NULL && errno == ENOMEM)
-				return (ERROR_MEM_ALLOC);
-			break ;
-		}
-		envp = envp->next;
-	}
-	if (*environ_var == NULL)
-		*environ_var = ft_strdup("");
-	if (*environ_var == NULL && errno == ENOMEM)
-		return (ERROR_MEM_ALLOC);
-	return (SUCCESS);
 }
 
 void	duplicate_env_var(t_main_data *data, char **envp)

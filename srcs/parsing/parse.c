@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/31 17:58:12 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/31 19:18:29 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	parser(t_main_data *data)
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
 		return (status_error(data, status));
-	expand_env_instr(data->env_vars, &data->tokens->value);
+	status = expand_env_instr(data->env_vars, &data->tokens->value);
+	if (status != SUCCESS)
+		return (status_error(data, status));
 	debugging(data);
 }

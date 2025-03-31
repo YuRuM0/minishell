@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_read_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:13:08 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 19:02:23 by filipe           ###   ########.fr       */
+/*   Updated: 2025/03/31 19:47:45 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
-
 
 void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg)
 {
@@ -30,15 +29,15 @@ void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg)
 	}
 }
 
-
-static t_exit_code readline_heredoc(int fd, char *delim)
+static t_exit_code	readline_heredoc(int fd, char *delim)
 {
 	char	*input;
-	while(true)
+
+	while (true)
 	{
 		input = readline(">");
 		if (input == NULL && errno == ENOMEM)
-			return(EXIT_MEM_FAILURE);
+			return (EXIT_MEM_FAILURE);
 		if (input == NULL)
 			break ;
 		if (!ft_strncmp(input, delim, ft_strlen(delim) + 1))
@@ -57,7 +56,7 @@ void	heredoc_reading(t_main_data *data, char *file_name, char *delim)
 {
 	int			fd;
 	t_exit_code	status;
-	
+
 	rl_clear_history();
 	fd = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
