@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/03/31 18:03:52 by flima            ###   ########.fr       */
+/*   Updated: 2025/03/31 18:28:18 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ t_pars_err	expand_valid_env(t_env_var *envp, char **expand, int *i)
 	status = extract_var_name(*expand + *i + 1, &var_name);
 	if (status == ERROR_MEM_ALLOC)
 		return (ERROR_MEM_ALLOC);
-	//in case of error, free var_name and var_value
 	status = expand_environ_var(envp, var_name, &var_value);
 	if (status == ERROR_MEM_ALLOC)
 	{
@@ -107,6 +106,23 @@ t_pars_err	expand_valid_env(t_env_var *envp, char **expand, int *i)
 	return (SUCCESS);
 }
 
+t_pars_err	expand_invalid_env(char **expand, int *i)
+{
+	char 		*var_name;
+	t_pars_err 	status;
+	
+	status = extract_var_name(*expand + *i + 1, &var_name);
+	if (status == ERROR_MEM_ALLOC)
+		return (ERROR_MEM_ALLOC);
+	status = append_expanded_var(expand, var_name + 1, i, var_name);
+	if (status == ERROR_MEM_ALLOC)
+	{
+		free(var_name);
+		return (ERROR_MEM_ALLOC);
+	}
+	return (SUCCESS);
+}
+
 t_pars_err expand_env_instr(t_env_var *envp, char **expand)
 {
 	int 		i;
@@ -115,25 +131,19 @@ t_pars_err expand_env_instr(t_env_var *envp, char **expand)
 	i = 0;
 	while ((*expand)[i])
 	{
-		if ((*expand)[i] == '$' && (*expand)[i + 1] && (ft_isalnum((*expand)[i + 1])\
+		if ((*expand)[i] == '$' && (*expand)[i + 1] && (ft_isalpha((*expand)[i + 1])\
 			|| (*expand)[i + 1] == '?' || (*expand)[i + 1] == '_'))
 		{
 			status = expand_valid_env(envp, expand, &i);
 			if (status == ERROR_MEM_ALLOC)
 				return (ERROR_MEM_ALLOC);
 		}
-		// else if (expand[i] == '$' && expand[i + 1] != ' ')
-		// {
-		// 	var_name = extract_var_name(expand + i + 1);
-		// 	// if (var_name == NULL)
-		// 	// 	return (ERROR_MEM_ALLOC);
-		// 	append_expanded_var(&expand, var_name + 1, &i, var_name);
-		// 	// if (var_name == NULL)
-		// 	// {
-		// 	// 	free(var_name);
-		// 	// 	return (ERROR_MEM_ALLOC);
-		// 	// }
-		// }
+		else if ((*expand)[i] == '$' && (*expand)[i + 1] != ' ')
+		{
+			status = expand_invalid_env(expand, &i);
+			if (status == ERROR_MEM_ALLOC)
+				return (ERROR_MEM_ALLOC);
+		}
 		else
 			i++;
 	}
