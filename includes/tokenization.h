@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/31 17:51:51 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/01 14:25:01 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ t_pars_err 	find_environment_var(t_env_var *envp, char *var_name, char **environ
 t_pars_err	get_environ_var_value(char **environ_var, char *var_name);
 t_pars_err 	expand_environ_var(t_env_var *envp, char *var_name, char **environ_var);
 t_pars_err 	expand_env_instr(t_env_var *envp, char **expand);
+t_pars_err	expand_token_n_trim_quote(t_env_var *envp, t_token *token);
 
 //lexer functions
 typedef t_pars_err	(*t_lex_functions)(char *str, size_t *i, t_syntax *type);

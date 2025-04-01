@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/03/31 19:40:55 by flima            ###   ########.fr        #
+#    Updated: 2025/04/01 14:48:05 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ YELLOW  = \033[33m
 BLUE    = \033[34m
 
 CFLAGS = -Wall -Werror -Wextra -g
-# CFLAGS += -fsanitize=address
+CFLAGS += -fsanitize=address
 
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a

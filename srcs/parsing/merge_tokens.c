@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:45:28 by flima             #+#    #+#             */
-/*   Updated: 2025/03/27 17:59:41 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/01 14:41:23 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ t_pars_err	merge_tokens_n_rm_blank_tokens(t_main_data *data)
 	t_token	*current;
 
 	current = data->tokens;
+	if (expand_token_n_trim_quote(data->env_vars, current) != 0)
+		return (ERROR_MEM_ALLOC);
 	while (current != NULL)
 	{
 		if (current->type == D_QUOTE || \

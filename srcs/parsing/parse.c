@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/03/31 19:18:29 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:44:30 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	parser(t_main_data *data)
 	status = syntax(data);
 	if (status != SUCCESS)
 		return (status_error_syntax(data, status));
+	debugging(data);
 	status = merge_tokens_n_rm_blank_tokens(data);
 	if (status != SUCCESS)
 		return (status_error(data, status));
-	debugging(data);
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
 		return (status_error(data, status));
-	status = expand_env_instr(data->env_vars, &data->tokens->value);
-	if (status != SUCCESS)
-		return (status_error(data, status));
+	// status = expand_env_instr(data->env_vars, &data->tokens->value);
+	// if (status != SUCCESS)
+	// 	return (status_error(data, status));
 	debugging(data);
 }
