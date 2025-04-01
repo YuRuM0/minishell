@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/05 15:31:20 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/03/31 19:25:50 by yulpark          ###   ########.fr       */
+/*   Created: 2025/03/06 00:00:31 by yuleumpark        #+#    #+#             */
+/*   Updated: 2025/03/12 22:00:04 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-//char *getcwd(char *buf, size_t size);
-
-int pwd()
+t_env *ft_find_env(t_env *env, char *key)
 {
-	char *pwd;
-
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-		return (-1);
-	printf("%s\n", pwd);
-	return (0);
+	while (env)
+	{
+		if (ft_strncmp(env->key, key, ft_strlen(key)) == 0)
+			return env;
+		env = env->next;
+	}
+	return NULL;
 }
 
-//int main(void)
-//{
-//	char **args;
-//	args = malloc(5 * sizeof(char*));
-//	args[0] = "pwd";
-//	pwd(args);
-//	free(args);
-//	return (0);
-//}
+
+int ft_env_update(t_env *env, char *name, char *path)
+{
+	t_env *temp;
+
+	temp = ft_find_env(env, name);
+	if (temp)
+	{
+		free(temp->value);
+		temp->value = ft_strdup(path); //malloc
+		if (!temp->value)
+			return (-1);
+	}
+	return (0);
+}
