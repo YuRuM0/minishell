@@ -8,9 +8,9 @@ DID: HANDLE | as the last char in the input line (should I handle it \
 		like bash or just return an syntax error)
 DID: add metachar ( e )
 
-TODO:expand the variables when I append D_quote, S_quote and word in func
+DID:expand the variables when I append D_quote, S_quote and word in func
 		merge_tokens_n_rm_blank_tokens
-
+TODO : HANDLE \' OR \" IN A STRING
 
 
 to learn

@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/01 14:25:01 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/01 16:27:57 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,36 +52,38 @@ typedef enum e_parsing_err //modificar error codes
 	ERROR_UNEXPEC_PARENTH,
 }	t_pars_err;
 
-typedef enum e_redir_type
-{
-	REDIR,
-	IN,
-	HERE_D,
-	STDOUT,
-	APP
-}	t_redir_type;
-
 typedef struct s_env_var
 {
 	char				*variable;
 	struct s_env_var	*next;
 }						t_env_var;
 
-typedef struct s_redir
+typedef enum e_redir_id
 {
-	t_redir_type	redir_type;
-	int				fd;
-	char			*file;
-}					t_redir;
+	REDIR_NONE,
+	REDIR_IN,
+	REDIR_HEREDOC,
+	REDIR_OUT,
+	REDIR_APPEND,
+} 	t_redir_id;
+
 
 typedef struct s_command
 {
 	char				**args;
-	t_redir				*redir;
-	int					last_in;
-	int					last_out;
+	t_redir				*redir_list;
+	bool				is_builtin;
+	bool				is_pipe_next;
 	struct s_command	*next;
 }						t_command;
+
+typedef struct s_redir
+{
+	t_redir_id		redir_id;
+	int				fd;
+	char			*file;
+	struct s_redir 	*next;
+}					t_redir;
 
 typedef struct s_token
 {
@@ -132,6 +134,13 @@ t_pars_err	syntax_heredoc(t_token *previous, t_token *current);
 //append functions
 t_pars_err	merge_tokens_n_rm_blank_tokens(t_main_data *data);
 void		remove_next_token(t_token *current);
+
+//	command builder functions
+t_command	*add_new_cmd(void);
+void		add_cmd_back(t_command **head, t_command *new);
+t_redir		*add_new_redir(void);
+void		add_redir_back(t_redir **head, t_redir *new);
+t_pars_err	commands_builder(t_main_data *data);
 
 // heredoc functions
 t_pars_err	capture_heredocs(t_main_data *data);
