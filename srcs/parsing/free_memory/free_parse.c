@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/03/31 19:26:44 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/03 21:54:38 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,33 @@ void	free_env_vars(t_env_var *head)
 	}
 }
 
+void free_cmds(t_command *cmds)
+{
+	t_redir	*tmp;
+	t_command	*tmp_cmd;
+
+	while (cmds != NULL)
+	{
+		while (cmds->redir_list != NULL)
+		{
+			tmp = cmds->redir_list;
+			cmds->redir_list = cmds->redir_list->next;
+			free(tmp->fd);
+			free(tmp->file);
+			free(tmp);
+		}
+		tmp_cmd = cmds;
+		cmds = cmds->next;
+		free(tmp_cmd->args);
+		free(tmp_cmd);
+	}
+}
 void	clean_temp_data(t_main_data *data)
 {
 	free_tokens(data->tokens);
+	free_cmds(data->cmds);
 	free(data->pipeline);
+	data->cmds = NULL;
 	data->pipeline = NULL;
 	data->tokens = NULL;
 }
@@ -52,6 +75,7 @@ void	clean_all_data_exit(t_main_data *data, int out_status)
 	//set_terminal
 	free_env_vars(data->env_vars);
 	free_tokens(data->tokens);
+	free_cmds(data->cmds);
 	free(data->pipeline);
 	exit(out_status);
 }

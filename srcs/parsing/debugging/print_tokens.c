@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/04/03 15:52:12 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/03 23:05:50 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ static	void	print_token(t_token *token, int i)
 	printf("%-10d %-20s %-20s\n", i, str_tok[token->type], token->value);
 }
 
-static	void	print_commands(t_command *cmd)
+static	void	print_commands(t_command *cmd, int nb)
 {
 	char	*str_cmd[4];
 	int		i;
 
 	i = 0;
 	get_str_cmd(str_cmd);
-	printf("%s: %s\n", "Command", cmd->args[0]);
+	printf("%s[%d] %-20s\n", "Command", nb, cmd->args[0]);
 	while (cmd->args[++i] != NULL)
 	{
 		printf("%s[%d] %-20s\n", "args", i, cmd->args[i]);
@@ -64,11 +64,12 @@ static	void	print_commands(t_command *cmd)
 	while (cmd->redir_list != NULL)
 	{
 		if (cmd->redir_list->redir_id == REDIR_HEREDOC)
-			printf("REDIR : %s FILE: %s\n", str_cmd[cmd->redir_list->redir_id], cmd->redir_list->fd);
+			printf("REDIR : %-20s fd: %s\n", str_cmd[cmd->redir_list->redir_id], cmd->redir_list->fd);
 		else
-			printf("REDIR : %s FILE: %s\n", str_cmd[cmd->redir_list->redir_id], cmd->redir_list->file);
-		cmd = cmd->next;
+			printf("REDIR : %-20s fili_name: %s\n", str_cmd[cmd->redir_list->redir_id], cmd->redir_list->file);
+		cmd->redir_list = cmd->redir_list->next;
 	}
+	write(STDOUT_FILENO, "\n", 1);
 }
 
 void	debugging(t_main_data *data)
@@ -79,18 +80,22 @@ void	debugging(t_main_data *data)
 
 	i = 0;
 	tmp = data->tokens;
-	while (tmp != NULL)
+	if (data->cmds == NULL)
 	{
-		print_token(tmp, i);
-		tmp = tmp->next;
-		i++;
+		while (tmp != NULL)
+		{
+			print_token(tmp, i);
+			tmp = tmp->next;
+			i++;
+		}
 	}
-	write(STDOUT_FILENO, "\n", 1);
+	printf("--------------------------------------------\n");
 	cmd = data->cmds;
-	i = -1;
-	if (cmd != NULL)
+	i = 0;
+	while (cmd != NULL)
 	{
-		print_commands(cmd);
+		print_commands(cmd, i);
 		cmd = cmd->next;
+		i++;
 	}
 }

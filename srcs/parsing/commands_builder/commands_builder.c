@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:44:02 by flima             #+#    #+#             */
-/*   Updated: 2025/04/03 15:19:37 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/03 16:23:01 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_args_size(t_token *tokens)
 			size++;
 		tokens = tokens->next;
 	}
-	size = size - less;
+	size = size - (less * 2);
 	return (size);
 }
 
@@ -107,7 +107,7 @@ t_pars_err	append_token_in_cmd(t_command *cmd, t_token **current)
 				return (ERROR_MEM_ALLOC);
 			*current = (*current)->next->next;
 		}
-		if ((*current)->type == WORD || (*current)->type == D_QUOTE\
+		else if ((*current)->type == WORD || (*current)->type == D_QUOTE\
 			|| (*current)->type == S_QUOTE || (*current)->type == VARIABLE)
 		{
 			if (assign_args(cmd, *current, &i) != SUCCESS)
@@ -136,6 +136,7 @@ t_pars_err	commands_builder(t_main_data *data)
 			cmd = add_new_cmd();
 			if (cmd == NULL)
 				return (ERROR_MEM_ALLOC);
+			add_cmd_back(&data->cmds, cmd);
 			token = token->next;
 		}
 		if (append_token_in_cmd(cmd, &token) != SUCCESS)
