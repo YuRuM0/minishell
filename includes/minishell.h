@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/03/28 19:10:37 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/03 12:53:34 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_main_data
 	char					*pipeline;
 	char					*errfile; //where and when is it used?
 	struct s_env_var		*env_vars;
-	struct s_commands		**cmds;
+	struct s_command		*cmds;
 	struct s_token			*tokens;
 }							t_main_data;
 

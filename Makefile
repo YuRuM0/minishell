@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
+#    By: filipe <filipe@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/01 14:48:05 by flima            ###   ########.fr        #
+#    Updated: 2025/04/03 13:22:28 by filipe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,10 @@ ENVIRONMENT_VAR_FILES = $(ENVIRONMENT_VAR_DIR)/env_var_utils.c \
 						$(ENVIRONMENT_VAR_DIR)/environment_var.c \
 						$(ENVIRONMENT_VAR_DIR)/env_expand_utils.c
 
+COMMANDS_DIR = $(PARSE_DIR)/commands_builder
+COMMANDS_FILES = $(COMMANDS_DIR)/commands_builder.c\
+					$(COMMANDS_DIR)/utils_commands_list.c
+
 ERROR_DIR = $(PARSE_DIR)/error_handling
 ERROR_FILE = $(ERROR_DIR)/errors_handler.c
 
@@ -64,7 +68,7 @@ FREE_FILE = $(FREE_DIR)/free_parse.c
 
 SRC_FILES = $(PARSE_FILES) $(ERROR_FILE) $(JUMP_PARSE_FILES) \
 				$(PARSE_UTILS_FILES) $(DEBUG_FILES) $(FREE_FILE) \
-				$(ENVIRONMENT_VAR_FILES)
+				$(ENVIRONMENT_VAR_FILES) $(COMMANDS_FILES)
 
 OBJS_DIR = objs
 OBJS = $(patsubst $(SCRS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRC_FILES))

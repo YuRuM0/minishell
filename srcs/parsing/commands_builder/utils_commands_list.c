@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands_utils.c                                   :+:      :+:    :+:   */
+/*   utils_commands_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:19:04 by flima             #+#    #+#             */
-/*   Updated: 2025/04/01 16:26:27 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/03 15:19:02 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	add_cmd_back(t_command **head, t_command *new)
 {
 	t_command	*temp;
 
+	if (new == NULL)
+		return ;
 	if (*head == NULL)
 		*head = new;
 	else
@@ -50,7 +52,7 @@ t_redir	*add_new_redir(void)
 	if (node == NULL)
 		return (NULL);
 	node->redir_id = -1;
-	node->fd = -1;
+	node->fd = NULL;
 	node->file = NULL;
 	node->next = NULL;
 	return (node);

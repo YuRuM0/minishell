@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/01 16:27:57 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/03 15:18:47 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_env_var
 
 typedef enum e_redir_id
 {
-	REDIR_NONE,
 	REDIR_IN,
 	REDIR_HEREDOC,
 	REDIR_OUT,
@@ -71,7 +70,7 @@ typedef enum e_redir_id
 typedef struct s_command
 {
 	char				**args;
-	t_redir				*redir_list;
+	struct s_redir		*redir_list;
 	bool				is_builtin;
 	bool				is_pipe_next;
 	struct s_command	*next;
@@ -80,7 +79,7 @@ typedef struct s_command
 typedef struct s_redir
 {
 	t_redir_id		redir_id;
-	int				fd;
+	char			*fd;
 	char			*file;
 	struct s_redir 	*next;
 }					t_redir;
