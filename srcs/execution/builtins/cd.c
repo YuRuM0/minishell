@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:46:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/03/20 16:30:13 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/04 17:22:31 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,12 +191,8 @@ t_address *ft_init_addlist(void)
 
 //int main(void)
 //{
-//    printf("===== Starting tests =====\n");
-//    // Test ft_cd
 //    //test_ft_cd();
-
-//	test_cd_dash();
-
+//	 test_cd_dash();
 //    printf("\n===== All tests completed =====\n");
 //    return (0);
 //}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/01 23:57:24 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/04 17:20:18 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,23 @@ int export_noarg(t_env_var *envp)
 	char *to_print;
 	int i;
 
-	i = 0;
 	if (!envp)
 		return (-1);
 	while (envp)
 	{
-		//to_print = ft_strjoin("declare -x", envp->variable);
-		//ft_printf("%s\n", to_print);
-		//envp = envp->next;
-		write(1, "declare -x ", 12);
-		while (envp->variable[i])
+		if (envp->is_exported == 1)
 		{
-			write(1, &envp->variable[i], 1);
-			if (envp->variable[i] == '=')
-				write(1, "\"", 1);
-			i++;
+			i = 0;
+			write(1, "declare -x ", 12);
+			while (envp->variable[i])
+			{
+				write(1, &envp->variable[i], 1);
+				if (envp->variable[i] == '=')
+					write(1, "\"", 1);
+				i++;
+			}
+			write(1, "\"\n", 2);
 		}
-		write(1, "\"\n", 2);
-		i = 0;
 		envp = envp->next;
 	}
 	return (0);
@@ -98,21 +97,20 @@ int export_arg(char *arg, t_env_var **envp)
 	t_env_var *head;
 
 	j = 0;
-	head = *envp;
 	if (input_checker(arg) == -1)
 		return (-1);
+	head = *envp;
 	while (head)
 	{
-		while (head->variable[j] != '=')
-			j++;
 		if (ft_strncmp(head->variable, arg, j + 1) == 0)
 		{
-			head->variable = ft_strdup(arg);
+			head->is_exported = 1;
 			return (0);
 		}
 		head = head->next;
 	}
 	new_var = add_new_var();
+	new_var->is_exported = 1;
 	add_var_back(envp, new_var);
 	ft_add_key_val(envp, arg);
 	return (0);
