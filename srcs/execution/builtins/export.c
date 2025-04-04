@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/04 17:20:18 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/04 19:42:17 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 // can contain underscores
 // = only appears once, after the identifier name
 
-static int input_checker(char *input)
+static int	input_checker(char *input)
 {
-	int i;
-	int equal_counter;
+	int	i;
+	int	equal_counter;
 
 	i = 1;
 	if (input && !(ft_isalpha(input[0]) == 1 || input[0] == '_'))
@@ -43,10 +43,10 @@ static int input_checker(char *input)
 }
 
 // if the args[1] is empty; "export"
-int export_noarg(t_env_var *envp)
+static int	export_noarg(t_env_var *envp)
 {
-	char *to_print;
-	int i;
+	char	*to_print;
+	int		i;
 
 	if (!envp)
 		return (-1);
@@ -90,11 +90,11 @@ int	ft_add_key_val(t_env_var **head, char *keyvalue)
 // only handles one arg at a time from the long list with many args
 // envp - contains all env variables, coming from duplicate_env_var (?)
 
-int export_arg(char *arg, t_env_var **envp)
+int	export_arg(char *arg, t_env_var **envp, int builtchecker)
 {
-	t_env_var *new_var;
-	int j;
-	t_env_var *head;
+	t_env_var	*new_var;
+	int			j;
+	t_env_var	*head;
 
 	j = 0;
 	if (input_checker(arg) == -1)
@@ -110,15 +110,18 @@ int export_arg(char *arg, t_env_var **envp)
 		head = head->next;
 	}
 	new_var = add_new_var();
-	new_var->is_exported = 1;
+	if (!new_var)
+		return(perror("Export: Malloc Error"), -1);
+	if (builtchecker == 0)
+		new_var->is_exported = 0;
 	add_var_back(envp, new_var);
 	ft_add_key_val(envp, arg);
 	return (0);
 }
 
-int export(char **args, t_env_var **envp)
+int	export(char **args, t_env_var **envp)
 {
-	int i;
+	int	i;
 
 	if (!args)
 		return (perror("Export: no input"), -1);
@@ -127,9 +130,9 @@ int export(char **args, t_env_var **envp)
 	i = 1;
 	while (args[i])
 	{
-		if (export_arg(args[i], envp) == -1)
+		if (export_arg(args[i], envp, 1) == -1)
 			return (perror("Export: Invalid Input"), -1);
-		if (export_arg(args[i], envp) == -2)
+		if (export_arg(args[i], envp, 1) == -2)
 			return(perror("Export: Malloc Error"), -1);
 		else
 			i++;

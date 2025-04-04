@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:54:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/03 12:59:02 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/04 19:33:25 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_env_var	*add_new_var(void)
 	if (node == NULL)
 		return (NULL);
 	node->variable = NULL;
+	node->is_exported = 1;
 	node->next = NULL;
 	return (node);
 }

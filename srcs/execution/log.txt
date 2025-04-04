@@ -1,11 +1,29 @@
-Builtins:
+Note on redir
+>: output redir w/ stdout
+e.g. ls -al > listings
 
-working on:
-cd env update
-add env argument to cd
+if the same name file exists, overwrites
 
-to do:
-export
-unset
-env
-exit
+>>: to add not overwrite
+
+<: input redirection
+
+Every file has a number: FD
+
+Heredoc explanation:
+cat <<EOF
+This is line 1
+This is line 2
+The delimiter is EOF
+EOF
+
+
+
+To do:
+fix cd
+fix pwd -> something is wrong i think?
+
+
+// i made a func for var=value case: export_arg w/ builtchecker=0
+
+make a func. that connects parsing w/ builtin checker -> builtins

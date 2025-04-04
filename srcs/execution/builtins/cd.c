@@ -6,13 +6,13 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:46:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/04 17:22:31 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/04 18:37:43 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-char	*ft_strputjoin(char *src1, char *src2, char c)
+static char	*ft_strputjoin(char *src1, char *src2, char c)
 {
 	int	i;
 	int	j;
@@ -42,6 +42,30 @@ char	*ft_strputjoin(char *src1, char *src2, char c)
 	}
 	dst[j] = '\0';
 	return (dst);
+}
+
+static t_address *ft_init_addlist(void)
+{
+    t_address *current;
+    t_address *previous;
+
+    current = malloc(sizeof(t_address));
+    if (!current)
+        return NULL;
+    previous = malloc(sizeof(t_address));
+    if (!previous)
+    {
+        free(current);
+        return NULL;
+    }
+    current->address = NULL;
+    current->prev = previous;
+    current->next = NULL;
+    previous->address = NULL;
+    previous->prev = NULL;
+    previous->next = current;
+
+    return current;
 }
 
 // must be a checker that checks the number of input
@@ -106,30 +130,6 @@ int ft_cd(char *path, t_address add_list)
 	if (joined)
 		//free(joined);
 	return (0);
-}
-
-t_address *ft_init_addlist(void)
-{
-    t_address *current;
-    t_address *previous;
-
-    current = malloc(sizeof(t_address));
-    if (!current)
-        return NULL;
-    previous = malloc(sizeof(t_address));
-    if (!previous)
-    {
-        free(current);
-        return NULL;
-    }
-    current->address = NULL;
-    current->prev = previous;
-    current->next = NULL;
-    previous->address = NULL;
-    previous->prev = NULL;
-    previous->next = current;
-
-    return current;
 }
 
 //void test_cd_dash(void)

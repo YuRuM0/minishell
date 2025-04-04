@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_builder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:44:02 by flima             #+#    #+#             */
-/*   Updated: 2025/04/03 23:16:14 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/04 19:10:11 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_pars_err	assign_redir(t_command *cmd, t_token *current)
 	return (SUCCESS);
 }
 
-t_pars_err	assign_args(t_command *cmd, t_token *current, int *i) 
+t_pars_err	assign_args(t_command *cmd, t_token *current, int *i)
 {
 	(cmd->args)[*i] = ft_strdup(current->value);
 	if ((cmd->args)[*i] == NULL)
@@ -76,16 +76,16 @@ t_pars_err	init_cmd_args(t_command *cmd, t_token *current)
 {
 	int			size;
 	char		**args;
-	
+
 	size = get_args_size(current);
 	if (size >= 0)
 	{
 		args = malloc(sizeof(char *) * (size + 1));
 		if (args == NULL)
 			return (ERROR_MEM_ALLOC);
-		args[size] = NULL;	
+		args[size] = NULL;
+		cmd->args = args;
 	}
-	cmd->args = args;
 	return (SUCCESS);
 }
 

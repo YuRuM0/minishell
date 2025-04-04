@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/03 15:18:47 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/04 19:19:01 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef enum e_syntax
 {
 	SPACE_CHAR,
-	TAB_CHAR,// \t (tab) 
+	TAB_CHAR,// \t (tab)
 	NEW_LINE,// \n (Newline, indicating end of command or separator)
 	PIPE,// | (Pipe)
 	LESS,// < (Output redirection)
@@ -55,15 +55,16 @@ typedef enum e_parsing_err //modificar error codes
 typedef struct s_env_var
 {
 	char				*variable;
+	int					is_exported;
 	struct s_env_var	*next;
 }						t_env_var;
 
 typedef enum e_redir_id
 {
-	REDIR_IN,
-	REDIR_HEREDOC,
-	REDIR_OUT,
-	REDIR_APPEND,
+	REDIR_IN, // <
+	REDIR_HEREDOC, // <<
+	REDIR_OUT, // >
+	REDIR_APPEND, // >>
 } 	t_redir_id;
 
 
@@ -91,7 +92,7 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
-//Jump table tokenization 
+//Jump table tokenization
 
 //Tokanization
 t_pars_err	tokenize_input(t_main_data *data, char	*input);

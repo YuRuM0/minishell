@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:54:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/04 17:20:06 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/04 18:39:29 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,6 @@ void	add_var_back(t_env_var **head, t_env_var *new)
 		temp->next = new;
 	}
 }
-
-//char	*find_environment_var(t_main_data *data, char *var_name)
-//{
-//	size_t		len;
-//	t_env_var	*current;
-//	char 		*environ_var;
-
-//	current = data->env_vars;
-//	environ_var = NULL;
-//	len = ft_strlen(var_name);
-//	while (current)
-//	{
-//		if ((ft_strncmp(current->variable, var_name, len)) == 0)
-//		{
-//			environ_var = ft_strdup(current->variable);
-//			break;
-//		}
-//		current = current->next;
-//	}
-//	if (environ_var == NULL)
-//		environ_var = ft_strdup("");
-//	return (environ_var);
-//}
 
 void	duplicate_env_var(t_main_data *data, char **envp)
 {

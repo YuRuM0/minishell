@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 23:50:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/01 23:58:08 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/04 18:40:06 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 // if env: display env variables
 // if env VAR=value command (e.g ls): run a command with a temporary environment variable setting.
 
-int env(t_env_var *envp, char **args)
+int	env(t_env_var *envp, char **args)
 {
-	int i;
+	int	i;
 	if (!args[1])
 	{
 		while (envp)

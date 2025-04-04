@@ -6,24 +6,14 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:22:40 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/04 18:26:23 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/04 19:07:16 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
-// if more than one arg must print "exit: too many arguments"
-// possible args: 0, 1, -- (then prints exit but doesn't exit?) , 2 (misuse of shell builtins)
+// check extra leaks
 
-void cleanup(t_main_data *data)
-{
-	free(data->env_vars);
-	if (data->cmds)
-	{
-		free(data->cmds);
-	}
-}
-
-int ft_isnum(char *s)
+static int	ft_isnum(char *s)
 {
 	int i;
 
@@ -39,7 +29,7 @@ int ft_isnum(char *s)
 	return (1);
 }
 
-void exit_one_arg(char *cmd, t_main_data *data)
+static void	exit_one_arg(char *cmd, t_main_data *data)
 {
 	int exit_code;
 
@@ -50,17 +40,16 @@ void exit_one_arg(char *cmd, t_main_data *data)
 		exit(2);
 	}
 	exit_code = ft_atoi(cmd[1]);
-	cleanup(data);
-	exit(exit_code %= 256); //exit status: 0-255
+	clean_all_data_exit(data, exit_code %= 256);
+	//exit status: 0-255 exit(256) = exit(0)
 }
 
-void exit_multi_arg(char *cmd, t_main_data *data)
+static void	exit_multi_arg(char *cmd, t_main_data *data)
 {
 	if (ft_isnum(cmd[1]) != 1)
 	{
 		write(1, "exit: non-numeric argument\n", 28);
-		cleanup(data);
-		exit(2);
+		clean_all_data_exit(data, 2);
 	}
 	else
 	{
@@ -71,13 +60,12 @@ void exit_multi_arg(char *cmd, t_main_data *data)
 
 }
 
-void ft_exit(char *cmd, t_main_data *data)
+void	ft_exit(char *cmd, t_main_data *data)
 {
 	if (!cmd[1])
 	{
 		write(1, "exit\n", 5);
-		cleanup(data);
-		exit(0);
+		clean_all_data_exit(data, 0);
 	}
 	if (cmd[1] && !cmd[2])
 		exit_one_arg(cmd, data);

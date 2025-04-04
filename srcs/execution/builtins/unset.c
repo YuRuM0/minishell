@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:41:41 by yulpark           #+#    #+#             */
-/*   Updated: 2025/03/31 20:30:00 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/04 18:44:33 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 //but as long as this case is going it must remember that the var is removed?
 //check if after deleting the variable the echo works or not. It shouldn't
 
-void ft_delete_node(t_env_var **envp, t_env_var *head, int i)
+void	ft_delete_node(t_env_var **envp, t_env_var *head, int i)
 {
-	t_env_var *temp;
+	t_env_var	*temp;
 
 	if (i == 1)
 	{
@@ -36,10 +36,10 @@ void ft_delete_node(t_env_var **envp, t_env_var *head, int i)
 
 //handling if the input is more than 2 (unset _ )
 //envp here: copied version of linked list
-int fd_unset(char **args, t_env_var **envp)
+int	fd_unset(char **args, t_env_var **envp)
 {
-	int i;
-	t_env_var *head;
+	int			i;
+	t_env_var	*head;
 
 	i = 0;
     if (!args[1] || !envp)
