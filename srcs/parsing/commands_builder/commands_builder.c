@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:44:02 by flima             #+#    #+#             */
-/*   Updated: 2025/04/03 16:23:01 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/03 23:16:14 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_pars_err	assign_redir(t_command *cmd, t_token *current)
 
 t_pars_err	assign_args(t_command *cmd, t_token *current, int *i) 
 {
-	(cmd->args)[*i] = strdup(current->value);
+	(cmd->args)[*i] = ft_strdup(current->value);
 	if ((cmd->args)[*i] == NULL)
 		return (ERROR_MEM_ALLOC);
 	(*i)++;

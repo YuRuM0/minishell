@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/04/03 23:05:50 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/04 11:45:10 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,25 @@ static	void	print_token(t_token *token, int i)
 static	void	print_commands(t_command *cmd, int nb)
 {
 	char	*str_cmd[4];
+	t_redir	*tmp;
 	int		i;
 
 	i = 0;
+	tmp = cmd->redir_list;
 	get_str_cmd(str_cmd);
 	printf("%s[%d] %-20s\n", "Command", nb, cmd->args[0]);
 	while (cmd->args[++i] != NULL)
 	{
 		printf("%s[%d] %-20s\n", "args", i, cmd->args[i]);
 	}
-	while (cmd->redir_list != NULL)
+	while (tmp != NULL)
 	{
-		if (cmd->redir_list->redir_id == REDIR_HEREDOC)
-			printf("REDIR : %-20s fd: %s\n", str_cmd[cmd->redir_list->redir_id], cmd->redir_list->fd);
+		
+		if (tmp->redir_id == REDIR_HEREDOC)
+			printf("REDIR : %-20s fd: %s\n", str_cmd[tmp->redir_id], tmp->fd);
 		else
-			printf("REDIR : %-20s fili_name: %s\n", str_cmd[cmd->redir_list->redir_id], cmd->redir_list->file);
-		cmd->redir_list = cmd->redir_list->next;
+			printf("REDIR : %-20s file_name: %s\n", str_cmd[tmp->redir_id], tmp->file);
+		tmp = tmp->next;
 	}
 	write(STDOUT_FILENO, "\n", 1);
 }
