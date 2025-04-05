@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:48:17 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/04 19:19:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:18:22 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int openfile(int fd, t_redir *redir, char *file)
 {
 	if (redir->redir_id == REDIR_IN)
 		fd = open(file, O_RDONLY);
+	else if (redir->redir_id == REDIR_OUT)
+		fd = open(file, O_WRONLY); // either overwrite or create new
 //	else if (ft_strncmp(redir_type, ">", 1) == 0)
 //	// either delete current one or create new
 //		fd = open(file, O_WRONLY);
@@ -53,7 +55,7 @@ int openfile(int fd, t_redir *redir, char *file)
 //	return (0);
 }
 
-int redirect();
+//int redirect();
 
 int iter_redir(t_command *cmd)
 {

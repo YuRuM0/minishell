@@ -1,0 +1,34 @@
+
+Error Parsing
+
+Error #1
+Input: var=value
+	   echo $var
+Expected output: value
+Output: lue
+
+
+Error #2
+Input: export var2=value2
+	   echo $var2
+Output: Error message: SUMMARY: AddressSanitizer: heap-buffer-overflow /home/yulpark/Desktop/minishell/srcs/parsing/env_variables/environment_var.c:99:9 in expand_env_instr
+
+
+
+====================================================================================================================
+
+Error execution
+
+Error #1
+Input: unset $home
+	   echo $HOME
+Expected output:
+Output: /home/yulpark
+
+Error #2
+Input: env 1
+Expected output: Env: Wrong input
+Output: Env: Wrong input: Success
+
+Error #3
+cd ... doesn't work oops

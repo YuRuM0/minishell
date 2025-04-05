@@ -6,11 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/04 19:42:17 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/05 18:17:24 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execution.h"
+#include "execution.h"
 //need to change because we ain't printing envp but export variables
 
 // must check for the input
@@ -45,7 +45,6 @@ static int	input_checker(char *input)
 // if the args[1] is empty; "export"
 static int	export_noarg(t_env_var *envp)
 {
-	char	*to_print;
 	int		i;
 
 	if (!envp)
@@ -82,7 +81,6 @@ int	ft_add_key_val(t_env_var **head, char *keyvalue)
 		while (temp->next != NULL)
 			temp = temp->next;
 		temp->variable = ft_strdup(keyvalue);
-		free(keyvalue);
 		return (0);
 	}
 }

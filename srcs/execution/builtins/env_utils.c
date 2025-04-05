@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 00:00:31 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/04 19:22:45 by yulpark          ###   ########.fr       */
+/*   Created: 2025/03/06 00:00:31 by yulpark           #+#    #+#             */
+/*   Updated: 2025/04/05 17:15:01 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execution.h"
+#include "execution.h"
 
 t_env_var *ft_find_env(t_env_var *env, char *key)
 {

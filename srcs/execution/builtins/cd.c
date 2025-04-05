@@ -6,11 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:46:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/04 18:37:43 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:46:42 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execution.h"
+#include "execution.h"
 
 static char	*ft_strputjoin(char *src1, char *src2, char c)
 {
@@ -44,34 +44,33 @@ static char	*ft_strputjoin(char *src1, char *src2, char c)
 	return (dst);
 }
 
-static t_address *ft_init_addlist(void)
-{
-    t_address *current;
-    t_address *previous;
+//static t_address *ft_init_addlist(void)
+//{
+//    t_address *current;
+//    t_address *previous;
 
-    current = malloc(sizeof(t_address));
-    if (!current)
-        return NULL;
-    previous = malloc(sizeof(t_address));
-    if (!previous)
-    {
-        free(current);
-        return NULL;
-    }
-    current->address = NULL;
-    current->prev = previous;
-    current->next = NULL;
-    previous->address = NULL;
-    previous->prev = NULL;
-    previous->next = current;
+//    current = malloc(sizeof(t_address));
+//    if (!current)
+//        return NULL;
+//    previous = malloc(sizeof(t_address));
+//    if (!previous)
+//    {
+//        free(current);
+//        return NULL;
+//    }
+//    current->address = NULL;
+//    current->prev = previous;
+//    current->next = NULL;
+//    previous->address = NULL;
+//    previous->prev = NULL;
+//    previous->next = current;
 
-    return current;
-}
+//    return current;
+//}
 
 // must be a checker that checks the number of input
 int ft_cd(char *path, t_address add_list)
 {
-	char *old_pwd;
 	char *current_dir;
 	char *temp;
 	char *joined;
@@ -92,12 +91,10 @@ int ft_cd(char *path, t_address add_list)
 			temp = ft_strdup(add_list.prev->address);
 			if (!temp)
 				return (-1);
-			//free(add_list.address);
 			add_list.prev->address = add_list.address;
 			chdir(add_list.address);
 			add_list.address = temp;
 			ft_putstr_fd(getcwd(NULL, 0), 1);
-			//free(temp);
 			return (0);
 		}
 	}
@@ -115,20 +112,10 @@ int ft_cd(char *path, t_address add_list)
 		path = joined;
 	}
 	if (chdir(path) != 0)
-	{
-		//free(current_dir);
-		if (joined)
-			//free(joined);
 		return (perror("No such file or directory."), -1);
-	}
-	if (add_list.prev) {
-        //free(add_list.prev->address);
+	if (add_list.prev)
         add_list.prev->address = current_dir;
-    }
-    //free(add_list.address);
     add_list.address = ft_strdup(path);
-	if (joined)
-		//free(joined);
 	return (0);
 }
 

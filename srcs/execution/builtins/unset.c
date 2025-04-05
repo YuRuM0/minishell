@@ -6,11 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:41:41 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/04 18:44:33 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:33:57 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execution.h"
+#include "execution.h"
 //given that the copy of the env_var is the input
 //but as long as this case is going it must remember that the var is removed?
 //check if after deleting the variable the echo works or not. It shouldn't
@@ -41,11 +41,11 @@ int	fd_unset(char **args, t_env_var **envp)
 	int			i;
 	t_env_var	*head;
 
-	i = 0;
-    if (!args[1] || !envp)
-        return (0);
+	if (!args[1] || !envp)
+		return (0);
 	head = *envp;
-    while (head->variable[i] != '=')
+	i = 0;
+	while (head->variable[i] != '=')
 		i++;
 	if (ft_strncmp(head->variable, args[1], i) == 0)
 	{
@@ -61,7 +61,7 @@ int	fd_unset(char **args, t_env_var **envp)
 		}
 		head = head->next;
 	}
-    return (0);
+	return (0);
 }
 
 //t_env_var  *create_node(char *key)
