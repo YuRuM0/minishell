@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/03 12:38:02 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/06 13:02:07 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	parser(t_main_data *data)
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
 		return (status_error(data, status));
-	debugging(data);
+	// debugging(data);
 	status = commands_builder(data);
 	if (status != SUCCESS)
 		return (status_error(data, status));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/03/31 21:45:26 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/06 12:59:54 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static t_pars_err	append_expanded_var(char **expand, char *var_value, int *i, \
 	ft_strlcat(new_expand, var_value, len);
 	ft_strlcat(new_expand, *expand + (*i + ft_strlen(var_name) + 1), len);
 	(*i) += ft_strlen(var_value) -1;
+	if (*i == -1)
+		(*i) = 0;
 	free(*expand);
 	*expand = new_expand;
 	return (SUCCESS);
@@ -57,10 +59,7 @@ static t_pars_err	expand_valid_env(t_env_var *envp, char **expand, int *i)
 		return (ERROR_MEM_ALLOC);
 	status = expand_environ_var(envp, var_name, &var_value);
 	if (status == ERROR_MEM_ALLOC)
-	{
-		free(var_name);
-		return (ERROR_MEM_ALLOC);
-	}
+		return (free(var_name), ERROR_MEM_ALLOC);
 	status = append_expanded_var(expand, var_value, i, var_name);
 	if (status == ERROR_MEM_ALLOC)
 	{

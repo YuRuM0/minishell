@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/04/04 11:45:10 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/05 21:45:48 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ static	void	print_commands(t_command *cmd, int nb)
 	i = 0;
 	tmp = cmd->redir_list;
 	get_str_cmd(str_cmd);
-	printf("%s[%d] %-20s\n", "Command", nb, cmd->args[0]);
-	while (cmd->args[++i] != NULL)
-	{
+	if (cmd->args[0] != NULL)
+		printf("%s[%d] %-20s\n", "Command", nb, cmd->args[0]);
+	while (cmd->args[0] && cmd->args[++i] != NULL)
 		printf("%s[%d] %-20s\n", "args", i, cmd->args[i]);
-	}
 	while (tmp != NULL)
 	{
 		

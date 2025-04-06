@@ -13,6 +13,17 @@ Input: export var2=value2
 	   echo $var2
 Output: Error message: SUMMARY: AddressSanitizer: heap-buffer-overflow /home/yulpark/Desktop/minishell/srcs/parsing/env_variables/environment_var.c:99:9 in expand_env_instr
 
+fixed: Error echo $var2 (if var2 does not exist yet)
+return:
+minishell$ echo $var
+--------------------------------------------
+Command[0] echo                
+args[1]        (obs: args[1] is an empty string, when the variable does not exist, it return an empty string)
+exemple:
+minishell$ echo "vuoi$var1 un caffe$var2"
+--------------------------------------------
+Command[0] echo                
+args[1] vuoi un caffe 
 
 
 ====================================================================================================================
