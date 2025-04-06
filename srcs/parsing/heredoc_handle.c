@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handle.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:57:30 by flima             #+#    #+#             */
-/*   Updated: 2025/03/31 19:46:20 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/06 15:22:00 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
 static int	read_heredoc_input(t_main_data *data, char *file_name, \
-	char *delimiter)
+	char *delimiter, t_token *current)
 {
 	int		fd;
 	int		exit_status;
@@ -21,7 +21,7 @@ static int	read_heredoc_input(t_main_data *data, char *file_name, \
 
 	child_pid = fork();
 	if (child_pid == 0)
-		heredoc_reading(data, file_name, delimiter);
+		heredoc_reading(data, file_name, delimiter, current);
 	waitpid(child_pid, &exit_status, 0);
 	if (WEXITSTATUS(exit_status) == EXIT_FAIL)
 	{
@@ -82,14 +82,7 @@ static t_pars_err	get_current_heredoc(t_main_data *data, \
 		return (status);
 	(*nbr_heredoc)++;
 	delimiter = current->next->value;
-	if (current->next->type == D_QUOTE || current->next->type == S_QUOTE)
-	{
-		if (delimiter[0] == '\'')
-			delimiter = ft_strtrim(delimiter, "\'");
-		else if (delimiter[0] == '\"')
-			delimiter = ft_strtrim(delimiter, "\"");
-	}
-	fd = read_heredoc_input(data, file_name, delimiter);
+	fd = read_heredoc_input(data, file_name, delimiter, current);
 	status = assign_fd_token(current, fd);
 	if (status != SUCCESS)
 		return (ERROR_MEM_ALLOC);

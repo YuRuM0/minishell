@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_read_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:13:08 by flima             #+#    #+#             */
-/*   Updated: 2025/03/31 19:47:45 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/06 15:21:24 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg)
 	}
 }
 
-static t_exit_code	readline_heredoc(int fd, char *delim)
+
+static t_exit_code	readline_heredoc(t_main_data *data, int fd, char *delim, \
+		t_syntax type)
 {
 	char	*input;
 
@@ -45,6 +47,9 @@ static t_exit_code	readline_heredoc(int fd, char *delim)
 			free(input);
 			break ;
 		}
+		if (type == WORD)
+			if (expand_env_instr(data->env_vars, &input) == ERROR_MEM_ALLOC)
+				return (EXIT_MEM_FAILURE);
 		write(fd, input, ft_strlen(input));
 		write(fd, "\n", 1);
 		free(input);
@@ -52,7 +57,8 @@ static t_exit_code	readline_heredoc(int fd, char *delim)
 	return (EXIT_SUCCESSFULLY);
 }
 
-void	heredoc_reading(t_main_data *data, char *file_name, char *delim)
+void	heredoc_reading(t_main_data *data, char *file_name, char *delim\
+		, t_token *current)
 {
 	int			fd;
 	t_exit_code	status;
@@ -64,7 +70,7 @@ void	heredoc_reading(t_main_data *data, char *file_name, char *delim)
 		free(file_name);
 		hered_err_exit(data, EXIT_FAIL, NULL);
 	}
-	status = readline_heredoc(fd, delim);
+	status = readline_heredoc(data, fd, delim, current->next->type);
 	close(fd);
 	if (status != EXIT_SUCCESSFULLY)
 	{

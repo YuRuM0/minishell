@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/04 19:19:01 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/06 15:16:34 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,8 @@ t_pars_err	commands_builder(t_main_data *data);
 // heredoc functions
 t_pars_err	capture_heredocs(t_main_data *data);
 void		hered_err_exit(t_main_data *data, t_exit_code status, char *msg);
-void		heredoc_reading(t_main_data *data, char *file_name, char *delim);
+void	heredoc_reading(t_main_data *data, char *file_name, char *delim\
+	, t_token *current);
 //debugging
 void		debugging(t_main_data *data);
 
