@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_commands_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:19:04 by flima             #+#    #+#             */
-/*   Updated: 2025/04/03 15:19:02 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/07 19:03:47 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,21 @@ void	add_redir_back(t_redir **head, t_redir *new)
 			temp = temp->next;
 		temp->next = new;
 	}
+}
+
+t_pars_err	init_cmd_args(t_command *cmd, t_token *current)
+{
+	int			size;
+	char		**args;
+
+	size = get_args_size(current);
+	if (size >= 0)
+	{
+		args = malloc(sizeof(char *) * (size + 1));
+		if (args == NULL)
+			return (ERROR_MEM_ALLOC);
+		args[size] = NULL;
+		cmd->args = args;
+	}
+	return (SUCCESS);
 }

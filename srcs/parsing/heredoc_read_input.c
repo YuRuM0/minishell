@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_read_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:13:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/06 15:21:24 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/07 18:56:37 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static t_exit_code	readline_heredoc(t_main_data *data, int fd, char *delim, \
 	return (EXIT_SUCCESSFULLY);
 }
 
-void	heredoc_reading(t_main_data *data, char *file_name, char *delim\
-		, t_token *current)
+void	heredoc_reading(t_main_data *data, char *file_name, \
+	char *delim, t_token *current)
 {
 	int			fd;
 	t_exit_code	status;

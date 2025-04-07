@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/04/05 21:45:48 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/07 16:48:42 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	get_str_cmd(char **cmd)
 	cmd[2] = "REDIR_OUT";
 	cmd[3] = "REDIR_APPEND";
 }
+
 static	void	print_token(t_token *token, int i)
 {
 	char	*str_tok[13];
@@ -64,11 +65,11 @@ static	void	print_commands(t_command *cmd, int nb)
 		printf("%s[%d] %-20s\n", "args", i, cmd->args[i]);
 	while (tmp != NULL)
 	{
-		
 		if (tmp->redir_id == REDIR_HEREDOC)
 			printf("REDIR : %-20s fd: %s\n", str_cmd[tmp->redir_id], tmp->fd);
 		else
-			printf("REDIR : %-20s file_name: %s\n", str_cmd[tmp->redir_id], tmp->file);
+			printf("REDIR : %-20s file_name: %s\n", str_cmd[tmp->redir_id], \
+				tmp->file);
 		tmp = tmp->next;
 	}
 	write(STDOUT_FILENO, "\n", 1);
@@ -76,9 +77,9 @@ static	void	print_commands(t_command *cmd, int nb)
 
 void	debugging(t_main_data *data)
 {
-	int		i;
-	t_token	*tmp;
-	t_command *cmd;
+	int			i;
+	t_token		*tmp;
+	t_command	*cmd;
 
 	i = 0;
 	tmp = data->tokens;

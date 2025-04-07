@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_builder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:44:02 by flima             #+#    #+#             */
-/*   Updated: 2025/04/04 19:10:11 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/07 19:03:38 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ int	get_args_size(t_token *tokens)
 	less = 0;
 	while (tokens && tokens->type != PIPE)
 	{
-		if (tokens->type == HEREDOC || tokens->type == APPEND\
-			|| tokens->type == GREAT || tokens->type == LESS)
+		if (tokens->type == HEREDOC || \
+			tokens->type == APPEND \
+			|| tokens->type == GREAT || \
+			tokens->type == LESS)
 		{
 			size++;
 			less++;
@@ -72,23 +74,6 @@ t_pars_err	assign_args(t_command *cmd, t_token *current, int *i)
 	return (SUCCESS);
 }
 
-t_pars_err	init_cmd_args(t_command *cmd, t_token *current)
-{
-	int			size;
-	char		**args;
-
-	size = get_args_size(current);
-	if (size >= 0)
-	{
-		args = malloc(sizeof(char *) * (size + 1));
-		if (args == NULL)
-			return (ERROR_MEM_ALLOC);
-		args[size] = NULL;
-		cmd->args = args;
-	}
-	return (SUCCESS);
-}
-
 // if the token is a redirection, assign it to the cmd->redir_list
 // if cmd->redir_list is NULL, input from STDIN
 t_pars_err	append_token_in_cmd(t_command *cmd, t_token **current)
@@ -100,14 +85,14 @@ t_pars_err	append_token_in_cmd(t_command *cmd, t_token **current)
 		return (ERROR_MEM_ALLOC);
 	while (*current && (*current)->type != PIPE)
 	{
-		if ((*current)->type == HEREDOC || (*current)->type == APPEND\
+		if ((*current)->type == HEREDOC || (*current)->type == APPEND \
 			|| (*current)->type == GREAT || (*current)->type == LESS)
 		{
 			if (assign_redir(cmd, *current) != SUCCESS)
 				return (ERROR_MEM_ALLOC);
 			*current = (*current)->next->next;
 		}
-		else if ((*current)->type == WORD || (*current)->type == D_QUOTE\
+		else if ((*current)->type == WORD || (*current)->type == D_QUOTE \
 			|| (*current)->type == S_QUOTE || (*current)->type == VARIABLE)
 		{
 			if (assign_args(cmd, *current, &i) != SUCCESS)

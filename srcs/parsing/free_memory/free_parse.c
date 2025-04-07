@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/03 23:48:34 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/07 18:57:12 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_env_vars(t_env_var *head)
 	}
 }
 
-void free_cmds(t_command *cmds)
+void	free_cmds(t_command *cmds)
 {
 	t_redir		*tmp;
 	t_command	*tmp_cmd;
@@ -66,6 +66,7 @@ void free_cmds(t_command *cmds)
 		free(tmp_cmd);
 	}
 }
+
 void	clean_temp_data(t_main_data *data)
 {
 	free_tokens(data->tokens);

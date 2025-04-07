@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/06 15:16:34 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/07 19:04:13 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,11 @@ void		remove_next_token(t_token *current);
 
 //	command builder functions
 t_command	*add_new_cmd(void);
-void		add_cmd_back(t_command **head, t_command *new);
 t_redir		*add_new_redir(void);
-void		add_redir_back(t_redir **head, t_redir *new);
+t_pars_err	init_cmd_args(t_command *cmd, t_token *current);
 t_pars_err	commands_builder(t_main_data *data);
+void		add_cmd_back(t_command **head, t_command *new);
+void		add_redir_back(t_redir **head, t_redir *new);
 
 // heredoc functions
 t_pars_err	capture_heredocs(t_main_data *data);
