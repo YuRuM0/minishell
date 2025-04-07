@@ -6,11 +6,12 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:48:17 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/05 17:18:22 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/07 14:13:56 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
 //redirec_hanlder
 //func that reconstructs the cmd to follow the correct format
 
@@ -38,49 +39,46 @@
 	return (node);
 }*/
 
-int openfile(int fd, t_redir *redir, char *file)
-{
-	if (redir->redir_id == REDIR_IN)
-		fd = open(file, O_RDONLY);
-	else if (redir->redir_id == REDIR_OUT)
-		fd = open(file, O_WRONLY); // either overwrite or create new
-//	else if (ft_strncmp(redir_type, ">", 1) == 0)
-//	// either delete current one or create new
-//		fd = open(file, O_WRONLY);
-//	else if (ft_strncmp(redir_type, ">>", 2) == 0)
-//	//append or create
-//		fd = open(file, O_WRONLY);
-//	else if (ft_strncmp(redir_type, "HERE", 4) == 0) // temp file already open, only saving fd.
-//	//error?
-//	return (0);
-}
+//fd is not an int?
+//int openfile(t_redir *redir)
+//{
+//	if (!redir || !redir->file)
+//		return (-1);   // what happens to whatever is in the struct then?
+//	if (redir->redir_id == REDIR_IN)
+//		redir->fd = open(redir->file, O_RDONLY);
+//	else if (redir->redir_id == REDIR_OUT)
+//		redir->fd = open(redir->file, O_WRONLY | O_CREAT, 0644);
+//	else if (redir->redir_id == REDIR_APPEND)
+//		redir->fd = open(redir->file, O_WRONLY | O_APPEND, 0644);
+//	else if (redir->redir_id == REDIR_HEREDOC)
+//		//redir->fd = //where is the temp file
+//	return (redir->fd);
+//}
 
 //int redirect();
 
-int iter_redir(t_command *cmd)
-{
-	t_redir *current;
-	int result;
+//int iter_redir(t_command *cmd)
+//{
+//	t_redir *current;
+//	int result;
 
-	if (!cmd)
-		return (-1);
-	if (!cmd->args[0]) //args[0] holds the command? e.g. export?
-		return (-1);
-	current = cmd->redir_list;
-	while (current)
-	{
-		if (current->file)
-		{
-			result = openfile(current->fd, current->redir_id, current->file);
-			if (result != 0)
-				return (-1);
-			redirect();
-		}
-
-
-		//redirect
-		current = current->next;
-	}
-	return (0);
-}
+//	if (!cmd)
+//		return (-1);
+//	if (!cmd->args[0]) //args[0] holds the command? e.g. export?
+//		return (-1);
+//	current = cmd->redir_list;
+//	while (current)
+//	{
+//		if (current->file)
+//		{
+//			result = openfile(current);
+//			if (result != 0)
+//				return (-1);
+//			redirect();
+//		}
+//		//redirect
+//		current = current->next;
+//	}
+//	return (0);
+//}
 // to read: https://www.gnu.org/software/bash/manual/html_node/Redirections.html

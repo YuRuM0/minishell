@@ -17,13 +17,13 @@ fixed: Error echo $var2 (if var2 does not exist yet)
 return:
 minishell$ echo $var
 --------------------------------------------
-Command[0] echo                
+Command[0] echo
 args[1]        (obs: args[1] is an empty string, when the variable does not exist, it return an empty string)
 exemple:
 minishell$ echo "vuoi$var1 un caffe$var2"
 --------------------------------------------
-Command[0] echo                
-args[1] vuoi un caffe 
+Command[0] echo
+args[1] vuoi un caffe
 
 
 ====================================================================================================================
@@ -35,11 +35,6 @@ Input: unset $home
 	   echo $HOME
 Expected output:
 Output: /home/yulpark
-
-Error #2
-Input: env 1
-Expected output: Env: Wrong input
-Output: Env: Wrong input: Success
 
 Error #3
 cd ... doesn't work oops

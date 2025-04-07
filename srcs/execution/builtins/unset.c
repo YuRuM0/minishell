@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:41:41 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/05 17:33:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/07 14:21:47 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ void	ft_delete_node(t_env_var **envp, t_env_var *head, int i)
 
 	if (i == 1)
 	{
-		*envp = head->next;
+		envp = &head->next;
 		head->next = NULL;
+		free(head->variable);
 		free(head);
 	}
 	else
@@ -30,6 +31,7 @@ void	ft_delete_node(t_env_var **envp, t_env_var *head, int i)
 		temp = head->next;
 		head->next = head->next->next;
 		temp->next = NULL;
+		free(head->variable);
 		free(temp);
 	}
 }
@@ -38,23 +40,19 @@ void	ft_delete_node(t_env_var **envp, t_env_var *head, int i)
 //envp here: copied version of linked list
 int	fd_unset(char **args, t_env_var **envp)
 {
-	int			i;
 	t_env_var	*head;
 
 	if (!args[1] || !envp)
 		return (0);
 	head = *envp;
-	i = 0;
-	while (head->variable[i] != '=')
-		i++;
-	if (ft_strncmp(head->variable, args[1], i) == 0)
+	if (ft_strncmp(head->variable, args[1], ft_strlen(args[1])) == 0)
 	{
 		ft_delete_node(envp, head, 1);
 		return (0);
 	}
-	while (head->next)
+	while (head)
 	{
-		if (ft_strncmp(head->next->variable, args[1], i) == 0) //include null
+		if (ft_strncmp(head->next->variable, args[1], ft_strlen(args[1])) == 0) //include null
 		{
 			ft_delete_node(envp, head, 0);
 			return (0);

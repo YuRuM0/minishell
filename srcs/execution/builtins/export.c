@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/05 18:17:24 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/07 18:56:54 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,6 @@
 // can contain underscores
 // = only appears once, after the identifier name
 
-static int	input_checker(char *input)
-{
-	int	i;
-	int	equal_counter;
-
-	i = 1;
-	if (input && !(ft_isalpha(input[0]) == 1 || input[0] == '_'))
-		return (-1);
-	equal_counter = 0;
-	while (input[i])
-	{
-		if (input[i] == '=')
-			equal_counter++;
-		else if (!(input[i] == '_' || ft_isalnum(input[i]) == 1))
-			return (-1);
-		i++;
-	}
-	if (equal_counter <= 1)
-		return (0);
-	return (-1);
-}
-
 // if the args[1] is empty; "export"
 static int	export_noarg(t_env_var *envp)
 {
@@ -51,19 +29,18 @@ static int	export_noarg(t_env_var *envp)
 		return (-1);
 	while (envp)
 	{
-		if (envp->is_exported == 1)
+		i = 0;
+		write(1, "declare -x ", 12);
+		while (envp->variable[i])
 		{
-			i = 0;
-			write(1, "declare -x ", 12);
-			while (envp->variable[i])
-			{
-				write(1, &envp->variable[i], 1);
-				if (envp->variable[i] == '=')
-					write(1, "\"", 1);
-				i++;
-			}
-			write(1, "\"\n", 2);
+			write(1, &envp->variable[i], 1);
+			if (envp->variable[i] == '=')
+				write(1, "\"", 1);
+			i++;
 		}
+		if (envp->is_exported == 1)
+			write(1, "\"", 1);
+		write(1, "\n", 1);
 		envp = envp->next;
 	}
 	return (0);
@@ -74,7 +51,7 @@ int	ft_add_key_val(t_env_var **head, char *keyvalue)
 	t_env_var	*temp;
 
 	if (*head == NULL)
-		return (perror("Export: empty environment var"), -1);
+		return (error_msg("Export: empty environment var"), -1);
 	else
 	{
 		temp = *head;
@@ -88,50 +65,73 @@ int	ft_add_key_val(t_env_var **head, char *keyvalue)
 // only handles one arg at a time from the long list with many args
 // envp - contains all env variables, coming from duplicate_env_var (?)
 
-int	export_arg(char *arg, t_env_var **envp, int builtchecker)
+static char	*replace_or_join_var(char *arg, t_env_var *head, char *name)
 {
-	t_env_var	*new_var;
-	int			j;
-	t_env_var	*head;
+	char *temp;
 
-	j = 0;
+	if (ft_strchr(head->variable, '+') == NULL)
+	{
+		if (ft_strchr(head->variable, '=') == NULL)
+			temp = ft_strjoin(head->variable, &arg[ft_strlen(name) + 1]);
+		else
+			temp = ft_strjoin(head->variable, &arg[ft_strlen(name) + 2]);
+	}
+	else
+		temp = ft_strdup(arg);
+	if (ft_strncmp(arg, name, ft_strlen(name) + 1) == 0)
+		head->is_exported = 0;
+	else
+		head->is_exported = 1;
+	free(head->variable);
+	free(name);
+	return (temp);
+}
+
+static int	export_arg(char *arg, t_env_var **envp)
+{
+	t_env_var	*head;
+	char		*name;
+
 	if (input_checker(arg) == -1)
 		return (-1);
 	head = *envp;
+	name = get_var_name(arg);
+	if (name)
+		printf("%s\n", name);
 	while (head)
 	{
-		if (ft_strncmp(head->variable, arg, j + 1) == 0)
+		if (ft_strncmp(head->variable, name, ft_strlen(name)) == 0)
 		{
-			head->is_exported = 1;
+			head->variable = replace_or_join_var(arg, head, name);
+			if (!head->variable)
+				return (-1);
 			return (0);
 		}
 		head = head->next;
 	}
-	new_var = add_new_var();
-	if (!new_var)
-		return(perror("Export: Malloc Error"), -1);
-	if (builtchecker == 0)
-		new_var->is_exported = 0;
-	add_var_back(envp, new_var);
-	ft_add_key_val(envp, arg);
+	free(name);
+	if (create_new_var(arg, envp) != 0)
+		return (-1);
 	return (0);
 }
 
 int	export(char **args, t_env_var **envp)
 {
 	int	i;
+	int	check;
 
 	if (!args)
-		return (perror("Export: no input"), -1);
+		return (error_msg("Export: no input\n"), -1);
 	if (!args[1])
 		return(export_noarg(*envp));
 	i = 1;
 	while (args[i])
 	{
-		if (export_arg(args[i], envp, 1) == -1)
-			return (perror("Export: Invalid Input"), -1);
-		if (export_arg(args[i], envp, 1) == -2)
-			return(perror("Export: Malloc Error"), -1);
+		check = export_arg(args[i], envp);
+		if (check == -1)
+			return (error_msg("Export: Invalid Input\n"), -1);
+		else if (check == -2)
+			return(error_msg(NULL), -1);
 		else
 			i++;
 	}

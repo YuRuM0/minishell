@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
+#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 21:12:39 by flima             #+#    #+#              #
-#    Updated: 2025/03/11 19:39:24 by flima            ###   ########.fr        #
+#    Updated: 2025/04/04 20:16:54 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ RESET   = \033[0m
 GREEN   = \033[32m
 
 CC= cc
+
 OBJ_DIR = objs
 CFLAGS = -Wall -Wextra -Werror -g -I../includes
 
@@ -45,7 +46,7 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
-	
+
 clean:
 	@rm -rf $(OBJ_DIR)
 

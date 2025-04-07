@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/01 16:52:14 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/07 13:44:23 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "tokenization.h"
+#include "execution.h"
 
 static char	*read_tty(void)
 {
@@ -61,6 +62,7 @@ static void	loop_minishell(t_main_data *data)
 		if (data->pipeline == NULL)
 			break ;
 		parser(data);
+		distribution(data); //exec
 		clean_temp_data(data);
 	}
 }

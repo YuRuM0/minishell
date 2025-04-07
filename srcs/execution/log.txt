@@ -21,7 +21,8 @@ EOF
 
 To do:
 fix cd
-fix pwd -> something is wrong i think?
+fix unset
+fix builtin checker
 
 
 // i made a func for var=value case: export_arg w/ builtchecker=0

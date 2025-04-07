@@ -6,7 +6,7 @@
 #    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/05 18:09:15 by yulpark          ###   ########.fr        #
+#    Updated: 2025/04/07 19:01:20 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,11 +76,13 @@ BUILTIN_FILES = $(BUILTIN_DIR)/echo.c \
 				$(BUILTIN_DIR)/env.c \
 				$(BUILTIN_DIR)/exit.c \
 				$(BUILTIN_DIR)/export.c \
+				$(BUILTIN_DIR)/export_utils.c \
 				$(BUILTIN_DIR)/pwd.c \
 				$(BUILTIN_DIR)/unset.c
 
 CONNECT_DIR = $(EXEC_DIR)/connect
 CONNECT_FILES = $(CONNECT_DIR)/main.c\
+				$(CONNECT_DIR)/redirection.c
 
 
 

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 23:50:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/05 18:37:16 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:53:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	env(t_env_var *envp, char **args)
 			i = 0;
 			while (envp->variable[i])
 			{
-				write(1, &envp->variable[i], 1);
+				if (envp->is_exported == 1)
+					write(1, &envp->variable[i], 1);
 				i++;
 			}
 			write(1, "\n", 1);
@@ -32,5 +33,8 @@ int	env(t_env_var *envp, char **args)
 		return (0);
 	}
 	else
-		return(perror("Env: env in this shell does not expect an argument\n"), -1);
+	{
+		write(1, "Env: env in this shell does not expect an argument\n", 52);
+		return (-1);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/05 18:08:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/07 18:57:59 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,15 @@ int			distribution(t_main_data *data);
 int			echo(char **args);
 int			env(t_env_var *envp, char **args);
 void		ft_exit(char **cmd, t_main_data *data);
-int			export_arg(char *arg, t_env_var **envp, int builtchecker);
+int			export_arg(char *arg, t_env_var **envp);
 int			export(char **args, t_env_var **envp);
 int			pwd();
 int			fd_unset(char **args, t_env_var **envp);
+
+//export_utils
+char		*get_var_name(char *arg);
+int			input_checker(char *input);
+int			create_new_var(char *arg, t_env_var **envp);
 
 //env_utils
 t_env_var	*ft_find_env(t_env_var *env, char *key);
