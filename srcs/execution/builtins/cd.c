@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:46:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 14:44:51 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:11:49 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ t_exec_error ft_cd(char **cmd, t_env_var *envp)
 	//update_env();
 	return (SUCCEED);
 }
-
 
 //// must be a checker that checks the number of input
 //int ft_cd(char *path, t_address add_list)

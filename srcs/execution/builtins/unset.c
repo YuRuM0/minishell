@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:41:41 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 13:34:22 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:05:14 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_delete_node(t_env_var **envp, t_env_var *head, int i)
 
 	if (i == 1)
 	{
-		envp = &head->next;
+		*envp = head->next;
 		head->next = NULL;
 		free(head->variable);
 		free(head);
@@ -31,7 +31,7 @@ void	ft_delete_node(t_env_var **envp, t_env_var *head, int i)
 		temp = head->next;
 		head->next = head->next->next;
 		temp->next = NULL;
-		free(head->variable);
+		free(temp->variable);
 		free(temp);
 	}
 }
