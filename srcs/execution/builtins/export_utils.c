@@ -6,15 +6,15 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 18:50:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 13:13:26 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:09:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-char *get_var_name(char *arg)
+char	*get_var_name(char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!arg)
@@ -29,11 +29,11 @@ int	input_checker(char *input)
 	int	i;
 	int	equal_counter;
 
-	if (input && (ft_isalpha(input[0]) == 0 && input[0] == '_'))
+	if (input[0] && (ft_isalpha(input[0]) == 0 && input[0] == '_'))
 		return (-1);
 	equal_counter = 0;
 	i = 1;
-	while (input[i] != '\0')
+	while (input[0] && input[i] != '\0')
 	{
 		if (input[i] == '+' && input[i + 1] && input[i + 1] != '=')
 			return (-1);
@@ -48,7 +48,7 @@ int	input_checker(char *input)
 	return (-1);
 }
 
-int create_new_var(char *arg, t_env_var **envp)
+int	create_new_var(char *arg, t_env_var **envp)
 {
 	t_env_var	*new_var;
 

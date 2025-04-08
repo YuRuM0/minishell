@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 14:45:30 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:40:43 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // if there is a command -> send the command to manage_builtins
 
+//change to return the values from each builtins
 static int	manage_builtins(t_main_data *data)
 {
 	if (ft_strncmp(data->cmds->args[0], "echo", ft_strlen(data->cmds->args[0])) == 0)
@@ -39,5 +40,6 @@ int	distribution(t_main_data *data)
 {
 	if (manage_builtins(data) == 0)
 		return 0; //check if func from system
+	// update $?
 	return (0);
 }

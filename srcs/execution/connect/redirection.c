@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:48:17 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/07 14:13:56 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:11:03 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,7 @@
 //	}
 //	return (0);
 //}
+
+
+
 // to read: https://www.gnu.org/software/bash/manual/html_node/Redirections.html

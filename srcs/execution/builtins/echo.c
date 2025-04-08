@@ -6,17 +6,17 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:45:11 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/05 17:22:14 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:09:04 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
 // add the part that checks with the environment variables
-int echo(char **args)
+int	echo(char **args)
 {
-	int n;
-	int i;
+	int	n;
+	int	i;
 
 	n = 0;
 	i = 1;

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/08 12:40:33 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:32:46 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,20 @@ static int	export_noarg(t_env_var *envp)
 	while (envp)
 	{
 		i = 0;
-		write(1, "declare -x ", 12);
-		while (envp->variable[i])
+		if (envp->is_exported != 2)
 		{
-			write(1, &envp->variable[i], 1);
-			if (envp->variable[i] == '=')
+			write(1, "declare -x ", 12);
+			while (envp->variable[i])
+			{
+				write(1, &envp->variable[i], 1);
+				if (envp->variable[i] == '=')
+					write(1, "\"", 1);
+				i++;
+			}
+			if (envp->is_exported == 1)
 				write(1, "\"", 1);
-			i++;
+			write(1, "\n", 1);
 		}
-		if (envp->is_exported == 1)
-			write(1, "\"", 1);
-		write(1, "\n", 1);
 		envp = envp->next;
 	}
 	return (0);
@@ -67,7 +70,7 @@ int	ft_add_key_val(t_env_var **head, char *keyvalue)
 
 static char	*replace_or_join_var(char *arg, t_env_var *head, char *name)
 {
-	char *temp;
+	char	*temp;
 
 	if (ft_strchr(head->variable, '+') == NULL)
 	{

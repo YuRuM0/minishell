@@ -30,12 +30,6 @@ args[1] vuoi un caffe
 
 Error execution
 
-Error #1
-Input: unset $home
-	   echo $HOME
-Expected output:
-Output: /home/yulpark
-
 Error #3
 cd ... doesn't work oops
 

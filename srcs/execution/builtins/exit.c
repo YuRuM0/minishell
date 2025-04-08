@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:22:40 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/05 18:33:09 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:09:25 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	ft_isnum(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (s[0] == '-')
@@ -31,7 +31,7 @@ static int	ft_isnum(char *s)
 
 static void	exit_one_arg(char **cmd, t_main_data *data)
 {
-	int exit_code;
+	int	exit_code;
 
 	if (ft_isnum(cmd[1]) != 1)
 	{
