@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:46:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 16:38:05 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 17:15:04 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,35 @@
 //	return (SUCCEED);
 //}
 
-t_exec_error	go_prev(char *PWD, char *OLDPWD)
-{
-	char	*temp;
-	char	*old;
+// t_exec_error	go_prev(char *PWD, char *OLDPWD)
+// {
+// 	char	*temp;
+// 	char	*old;
 
-	temp = ft_strdup(PWD);
-	old = ft_strdup(OLDPWD);
-	if (!temp || !old)
-		return (MALLOC_FAIL);
-	free(PWD);
-	PWD = update_env_value(temp, OLDPWD);
-	if (!PWD)
-	{
-		free(temp);
-		free(old);
-		return (MALLOC_FAIL);
-	}
-	free(OLDPWD);
-	OLDPWD = update_env_value(old, temp);
-	if (!OLDPWD)
-	{
-		free(temp);
-		free(old);
-		return (MALLOC_FAIL);
-	}
-	free(temp);
-	free(old);
-	return (SUCCEED);
-}
+// 	temp = ft_strdup(PWD);
+// 	old = ft_strdup(OLDPWD);
+// 	if (!temp || !old)
+// 		return (MALLOC_FAIL);
+// 	free(PWD);
+// 	PWD = update_env_value(temp, OLDPWD);
+// 	if (!PWD)
+// 	{
+// 		free(temp);
+// 		free(old);
+// 		return (MALLOC_FAIL);
+// 	}
+// 	free(OLDPWD);
+// 	OLDPWD = update_env_value(old, temp);
+// 	if (!OLDPWD)
+// 	{
+// 		free(temp);
+// 		free(old);
+// 		return (MALLOC_FAIL);
+// 	}
+// 	free(temp);
+// 	free(old);
+// 	return (SUCCEED);
+// }
 
 //t_exec_error	relative_path(char *cmd, t_env_var **envp)
 //{
