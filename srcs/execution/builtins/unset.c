@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:41:41 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/07 14:21:47 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 13:34:22 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_delete_node(t_env_var **envp, t_env_var *head, int i)
 
 //handling if the input is more than 2 (unset _ )
 //envp here: copied version of linked list
-int	fd_unset(char **args, t_env_var **envp)
+int	ft_unset(char **args, t_env_var **envp)
 {
 	t_env_var	*head;
 
@@ -50,7 +50,7 @@ int	fd_unset(char **args, t_env_var **envp)
 		ft_delete_node(envp, head, 1);
 		return (0);
 	}
-	while (head)
+	while (head->next)
 	{
 		if (ft_strncmp(head->next->variable, args[1], ft_strlen(args[1])) == 0) //include null
 		{

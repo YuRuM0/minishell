@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:46:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/05 17:46:42 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:29:01 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,68 @@ static char	*ft_strputjoin(char *src1, char *src2, char c)
 	return (dst);
 }
 
-//static t_address *ft_init_addlist(void)
-//{
-//    t_address *current;
-//    t_address *previous;
+t_exec_error go_home(t_env_var *envp, char *PWD, char *OLDPWD)
+{
+	char *path;
 
-//    current = malloc(sizeof(t_address));
-//    if (!current)
-//        return NULL;
-//    previous = malloc(sizeof(t_address));
-//    if (!previous)
-//    {
-//        free(current);
-//        return NULL;
-//    }
-//    current->address = NULL;
-//    current->prev = previous;
-//    current->next = NULL;
-//    previous->address = NULL;
-//    previous->prev = NULL;
-//    previous->next = current;
+	path = getenv("HOME");
+	if(!path)
+		return (FAIL_PATH_RETRIEVAL);
+	chdir(path);
+	free(OLDPWD);
+	OLDPWD = ft_strdup(PWD);
+	free(PWD);
+	PWD = ft_strdup(path);
+	return (SUCCEED);
+}
 
-//    return current;
-//}
+t_exec_error go_prev(t_env_var *envp, char *PWD, char *OLDPWD)
+{
+	char *temp;
+
+	if (OLDPWD)
+	{
+		error_msg("minishell: cd : OLDPWD not set");
+		return (ENV_ERROR);
+	}
+	temp = ft_strdup(PWD);
+	if (!temp)
+		return (MALLOC_FAIL);
+	free(PWD);
+	PWD = ft_strdup(OLDPWD);
+	if (!PWD)
+		return (MALLOC_FAIL);
+	free(OLDPWD);
+	OLDPWD = ft_strdup(temp);
+	if (!OLDPWD)
+		return (MALLOC_FAIL);
+	free(temp);
+	return (SUCCEED);
+}
+
+t_exec_error ft_cd(char **cmd, t_env_var *envp)
+{
+	char *PWD;
+	char *OLDPWD;
+	t_pars_err res;
+	t_pars_err res1;
+
+	res = find_environment_var(envp, "PWD", PWD);
+	if (res != SUCCESS)
+		return (res);
+	res1 = find_environment_var(envp, "OLDPW", OLDPWD);
+	if (res1 != SUCCESS)
+		return (res1);
+	if (!cmd)
+		return (NO_INPUT);
+	if (!cmd[1] || (cmd[1] == '~' && !cmd[2]))
+		go_home(envp, PWD, OLDPWD);
+	else if (cmd[1] == '-' && cmd[2] == '\0')
+		go_prev(envp, PWD, OLDPWD);
+	else if ()
+	update_env();
+}
+
 
 // must be a checker that checks the number of input
 int ft_cd(char *path, t_address add_list)
@@ -75,29 +114,6 @@ int ft_cd(char *path, t_address add_list)
 	char *temp;
 	char *joined;
 
-	if (!path || path[0] == '~')
-	{
-		path = getenv("HOME");
-		if (!path)
-			return (perror("Failed to get path of home"), -1);
-		chdir(path);
-	}
-	else if (path[0] == '-' && path[1] == '\0')
-	{
-		if (!add_list.prev->address)
-			return (ft_putstr_fd(getcwd(NULL, 0), 1), 0);
-		else
-		{
-			temp = ft_strdup(add_list.prev->address);
-			if (!temp)
-				return (-1);
-			add_list.prev->address = add_list.address;
-			chdir(add_list.address);
-			add_list.address = temp;
-			ft_putstr_fd(getcwd(NULL, 0), 1);
-			return (0);
-		}
-	}
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
 		return (perror("getcwd fail"), -1);
@@ -118,68 +134,3 @@ int ft_cd(char *path, t_address add_list)
     add_list.address = ft_strdup(path);
 	return (0);
 }
-
-//void test_cd_dash(void)
-//{
-//    printf("\n===== Testing cd - functionality =====\n");
-
-//    t_address *add_list = ft_init_addlist();
-//    char *start_dir = getcwd(NULL, 0);
-//    printf("Starting directory: %s\n", start_dir);
-
-//    //// First cd to a different directory
-//    //char *first_dir = "/tmp";  // This should exist on most systems
-//    //printf("\n1. Changing to first directory: %s\n", first_dir);
-//    //add_list->address = ft_strdup(start_dir);
-//    //add_list->prev->address = NULL;  // No previous directory yet
-
-//    //int result1 = ft_cd(first_dir, *add_list);
-//    //printf("ft_cd result: %d\n", result1);
-//    //printf("Current directory: %s\n", getcwd(NULL, 0));
-//    //printf("Previous directory: %s\n", add_list->prev->address);
-
-//    // Now cd to another directory
-//    char *second_dir = "/";  // Root directory
-//    printf("\n2. Changing to second directory: %s\n", second_dir);
-
-//    int result2 = ft_cd(second_dir, *add_list);
-//    printf("ft_cd result: %d\n", result2);
-//    printf("Current directory: %s\n", getcwd(NULL, 0));
-//    printf("Previous directory: %s\n", add_list->prev->address);
-
-//    // Now test the cd - functionality
-//    printf("\n3. Testing cd -\n");
-
-//    int result3 = ft_cd("-", *add_list);
-//    printf("ft_cd(\"-\") result: %d\n", result3);
-//    printf("Current directory: %s\n", getcwd(NULL, 0));
-//    printf("Previous directory: %s\n", add_list->prev->address);
-
-//    // Test another cd - to swap back
-//    printf("\n4. Testing second cd -\n");
-
-//    int result4 = ft_cd("-", *add_list);
-//    printf("ft_cd(\"-\") result: %d\n", result4);
-//    printf("Current directory: %s\n", getcwd(NULL, 0));
-//    printf("Previous directory: %s\n", add_list->prev->address);
-
-//    // Cleanup
-//    free(start_dir);
-
-//    // Free the address list structures
-//    if (add_list->prev)
-//    {
-//        free(add_list->prev->address);
-//        free(add_list->prev);
-//    }
-//    free(add_list->address);
-//    free(add_list);
-//}
-
-//int main(void)
-//{
-//    //test_ft_cd();
-//	 test_cd_dash();
-//    printf("\n===== All tests completed =====\n");
-//    return (0);
-//}

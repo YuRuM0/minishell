@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 18:50:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/07 18:55:00 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 13:13:26 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ int	input_checker(char *input)
 	int	i;
 	int	equal_counter;
 
-	i = 1;
-	if (input && !(ft_isalpha(input[0]) == 1 || input[0] == '_'))
+	if (input && (ft_isalpha(input[0]) == 0 && input[0] == '_'))
 		return (-1);
 	equal_counter = 0;
-	while (input[i])
+	i = 1;
+	while (input[i] != '\0')
 	{
-		if (input[i + 1] && input[i] == '+' && input[i + 1] != '=')
+		if (input[i] == '+' && input[i + 1] && input[i + 1] != '=')
 			return (-1);
 		if (input[i] == '=')
 			equal_counter++;
-		else if (!(input[i] == '_' || ft_isalnum(input[i]) == 1 || input[i] == '+'))
+		else if (!(input[i] == '_' || ft_isalnum(input[i]) == 1 || input[i] == '+' || input[i] == '$'))
 			return (-1);
 		i++;
 	}

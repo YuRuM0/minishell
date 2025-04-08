@@ -38,3 +38,32 @@ Output: /home/yulpark
 
 Error #3
 cd ... doesn't work oops
+
+Error
+Input: export a=hi b=$a
+Output: ==60407==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000002bd1 at pc 0x0000004d84d2 bp 0x7ffecc8bcac0 sp 0x7ffecc8bcab8
+READ of size 1 at 0x602000002bd1 thread T0
+    #0 0x4d84d1 in input_checker /home/yulpark/Desktop/minishell/srcs/execution/builtins/export_utils.c:36:9
+    #1 0x4d7938 in export_arg /home/yulpark/Desktop/minishell/srcs/execution/builtins/export.c:95:6
+    #2 0x4d7eec in export /home/yulpark/Desktop/minishell/srcs/execution/builtins/export.c:130:11
+    #3 0x4d95c1 in manage_builtins /home/yulpark/Desktop/minishell/srcs/execution/connect/main.c:28:3
+    #4 0x4d8eb4 in distribution /home/yulpark/Desktop/minishell/srcs/execution/connect/main.c:40:6
+    #5 0x4cb65f in loop_minishell /home/yulpark/Desktop/minishell/srcs/parsing/main.c:65:3
+    #6 0x4cb4e1 in main /home/yulpark/Desktop/minishell/srcs/parsing/main.c:93:2
+    #7 0x7f6f4d824d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #8 0x7f6f4d824e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #9 0x41f334 in _start (/home/yulpark/Desktop/minishell/minishell+0x41f334)
+
+0x602000002bd1 is located 0 bytes to the right of 1-byte region [0x602000002bd0,0x602000002bd1)
+allocated by thread T0 here:
+    #0 0x49a1fd in malloc (/home/yulpark/Desktop/minishell/minishell+0x49a1fd)
+    #1 0x4d9ef5 in ft_strdup /home/yulpark/Desktop/minishell/Libft/ft_strdup.c:21:19
+    #2 0x4d5674 in assign_args /home/yulpark/Desktop/minishell/srcs/parsing/commands_builder/commands_builder.c:70:20
+    #3 0x4d60b0 in append_token_in_cmd /home/yulpark/Desktop/minishell/srcs/parsing/commands_builder/commands_builder.c:98:8
+    #4 0x4d651c in commands_builder /home/yulpark/Desktop/minishell/srcs/parsing/commands_builder/commands_builder.c:127:7
+    #5 0x4cbacf in parser /home/yulpark/Desktop/minishell/srcs/parsing/parse.c:36:11
+    #6 0x4cb656 in loop_minishell /home/yulpark/Desktop/minishell/srcs/parsing/main.c:64:3
+    #7 0x4cb4e1 in main /home/yulpark/Desktop/minishell/srcs/parsing/main.c:93:2
+    #8 0x7f6f4d824d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /home/yulpark/Desktop/minishell/srcs/execution/builtins/export_utils.c:36:9 in input_checker

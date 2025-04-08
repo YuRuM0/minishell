@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/07 18:57:59 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:28:51 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ typedef struct s_loc{
 	char *env;
 }	t_loc;
 
+
+typedef enum s_exec_error{
+	MALLOC_FAIL,
+	NO_INPUT,
+	INVALID_INPUT,
+	FAIL_PATH_RETRIEVAL,
+	ENV_ERROR,
+	SUCCEED
+}	t_exec_error;
 
 int			distribution(t_main_data *data);
 
