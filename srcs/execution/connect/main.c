@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/07 14:17:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:45:30 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	manage_builtins(t_main_data *data)
 	else if (ft_strncmp(data->cmds->args[0], "pwd", ft_strlen(data->cmds->args[0])) == 0)
 		pwd();
 	else if (ft_strncmp(data->cmds->args[0], "unset", ft_strlen(data->cmds->args[0])) == 0)
-		fd_unset(data->cmds->args, &data->env_vars);
+		ft_unset(data->cmds->args, &data->env_vars);
 	else
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 14:28:51 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:45:08 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef enum s_exec_error{
 	FAIL_PATH_RETRIEVAL,
 	ENV_ERROR,
 	SUCCEED
+
 }	t_exec_error;
 
 int			distribution(t_main_data *data);
@@ -52,7 +53,7 @@ void		ft_exit(char **cmd, t_main_data *data);
 int			export_arg(char *arg, t_env_var **envp);
 int			export(char **args, t_env_var **envp);
 int			pwd();
-int			fd_unset(char **args, t_env_var **envp);
+int			ft_unset(char **args, t_env_var **envp);
 
 //export_utils
 char		*get_var_name(char *arg);
