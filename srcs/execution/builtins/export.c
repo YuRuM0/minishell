@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/07 18:56:54 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/08 12:40:33 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static char	*replace_or_join_var(char *arg, t_env_var *head, char *name)
 	return (temp);
 }
 
-static int	export_arg(char *arg, t_env_var **envp)
+int	export_arg(char *arg, t_env_var **envp)
 {
 	t_env_var	*head;
 	char		*name;
