@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:31:20 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/05 18:31:29 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/09 15:27:51 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 //char *getcwd(char *buf, size_t size);
 
-int pwd()
+t_exec_error pwd()
 {
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (-1);
+		return (ENV_ERROR);
 	printf("%s\n", pwd);
 	free(pwd);
-	return (0);
+	return (SUCCEED);
 }
 
 //int main(void)
