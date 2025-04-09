@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:54:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/09 19:42:47 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/09 21:12:05 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_pars_err	set_exit_env_status(t_env_var *envp, int status)
 	tmp = ft_strjoin("?=", exit_status);
 	if (tmp == NULL)
 		return(ERROR_MEM_ALLOC);
+	free(exit_status);
 	free(envp->variable);
 	envp->variable = tmp;
 	return (SUCCESS);
