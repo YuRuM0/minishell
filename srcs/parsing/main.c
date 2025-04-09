@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/08 16:34:21 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/09 19:37:44 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	loop_minishell(t_main_data *data)
 			break ;
 		parser(data);
 		distribution(data); //exec
+		set_exit_env_status(data->env_vars, 130);
 		clean_temp_data(data);
 	}
 }
@@ -74,7 +75,7 @@ void	init_data(t_main_data *data)
 	data->env_vars = NULL;
 	data->cmds = NULL;
 	data->tokens = NULL;
-	data->errfile = NULL;
+	data->exit_status = 0;
 }
 
 int	main(int argc, char **argv, char **envp)

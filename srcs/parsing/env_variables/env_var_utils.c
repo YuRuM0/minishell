@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:54:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/08 16:22:20 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/09 19:42:47 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,22 @@ void	add_var_back(t_env_var **head, t_env_var *new)
 			temp = temp->next;
 		temp->next = new;
 	}
+}
+
+t_pars_err	set_exit_env_status(t_env_var *envp, int status)
+{
+	char	*exit_status;
+	char	*tmp;
+
+	exit_status = ft_itoa(status);
+	if (exit_status == NULL)
+		return(ERROR_MEM_ALLOC);
+	tmp = ft_strjoin("?=", exit_status);
+	if (tmp == NULL)
+		return(ERROR_MEM_ALLOC);
+	free(envp->variable);
+	envp->variable = tmp;
+	return (SUCCESS);
 }
 
 static void	creat_exit_status_var(t_main_data *data)

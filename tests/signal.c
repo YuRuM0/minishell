@@ -19,7 +19,8 @@ static void sigint_handler(int sig)
 {
 	write(1, "\n", 1);
 	write(STDOUT_FILENO, "SIGINT recebido, processando...\n", 32);
-	sleep(2); // Simulando algum trabalho com o arquivo
+	sleep(5); // Simulando algum trabalho com o arquivo
+	write(1, "opaaa\n", 6);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

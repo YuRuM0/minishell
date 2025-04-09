@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/04/03 12:53:34 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/09 19:36:37 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 \001\033[38;5;160m\002e\001\033[38;5;196m\002l\001\033[38;5;255m\002l\
 \001\033[38;5;240m\002$\001\033[0m\002 "
 
+extern int	g_last_signal;
+
 typedef enum e_exit_code
 {
 	EXIT_SUCCESSFULLY = 0,
@@ -47,19 +49,15 @@ typedef struct s_main_data
 {
 	int						nbr_of_cmds;
 	char					*pipeline;
-	char					*errfile; //where and when is it used?
+	int						exit_status;
 	struct s_env_var		*env_vars;
 	struct s_command		*cmds;
 	struct s_token			*tokens;
 }							t_main_data;
 
-//parsing function
-void	parser(t_main_data *data);
-// void	get_heredoc_delim(t_main_data *data);
-// char	*ft_strtoken(char *str);
-// char	*readline_heredoc(t_main_data *data, char *prompt, char *delim);
 
-// errors functions
+void	parser(t_main_data *data);
 void	error_msg(char *msg);
+
 
 #endif
