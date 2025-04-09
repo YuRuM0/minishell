@@ -8,3 +8,9 @@ Exit status codes in general:
 SAME BEHAVIOR AS BASH:
 	should I handle UNCLOSED QUOTE like bash or just return syntax_error and restart the prompt?
 
+signal: standart settings 
+	struct sigaction act;
+	memset(&act, 0, sizeof(struct sigaction)); // ou ft_bzero
+	sigemptyset(&act.sa_mask); // limpa tudo!
+	act.sa_handler = meu_handler;
+	sigaction(SIGINT, &act, NULL);
