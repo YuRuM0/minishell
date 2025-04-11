@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/04/09 19:36:37 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/10 22:04:00 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <sys/wait.h>
 # include <errno.h>
 # include "libft.h"
+# include <signal.h>
 //# include "../execution/execution.h"
 
 //mix of brasilian and corean flags haha
