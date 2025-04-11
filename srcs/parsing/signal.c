@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:16:27 by flima             #+#    #+#             */
-/*   Updated: 2025/04/10 22:12:51 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/11 20:31:38 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-void	interative_signal_handler(int sig)
+static void	interative_signal_handler(int sig)
 {
+	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -28,16 +28,30 @@ void	handle_signal_main_loop()
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		rl_redisplay();
 	}
 	g_last_signal = 0;
-	set_signal_handle()
+	setup_signal_handlers(INTERACTIVE);
 }
 
-void	handle_signal_child()
+void	setup_signal_handlers(t_signal_mode	mode)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	struct sigaction	act_sigint;
+	struct sigaction	act_sigquit;
+
+	ft_memset(&act_sigint, 0, sizeof(struct sigaction));
+	ft_memset(&act_sigquit, 0, sizeof(struct sigaction));
+	sigemptyset(&act_sigint.sa_mask);
+	sigemptyset(&act_sigquit.sa_mask);
+	sigaddset(&act_sigint.sa_mask, SIGINT);
+	act_sigquit.sa_handler = SIG_IGN;
+	if (mode == INTERACTIVE)
+		act_sigint.sa_handler = interative_signal_handler;
+	if (mode == NON_INTERACTIVE)
+		act_sigint.sa_handler = SIG_IGN;
+	else if (mode == HEREDOC_CHILD)
+		act_sigint.sa_handler = SIG_DFL;
+	sigaction(SIGINT, &act_sigint, NULL);
+	sigaction(SIGQUIT, &act_sigquit, NULL);
 }
 
 

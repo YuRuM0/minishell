@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:13:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/07 18:56:37 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/11 20:21:35 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg)
 	if (status == EXIT_FAIL)
 	{
 		error_msg("child process exit failure\n");
-		clean_all_data_exit(data, EXIT_FAIL);
+		clean_all_data_exit(data, EXIT_FAIL); //rever esse comportamento 
 	}
 	else if (status == EXIT_DENIED)
 	{
@@ -41,7 +41,10 @@ static t_exit_code	readline_heredoc(t_main_data *data, int fd, char *delim, \
 		if (input == NULL && errno == ENOMEM)
 			return (EXIT_MEM_FAILURE);
 		if (input == NULL)
+		{
+			error_msg("warning: here-document delimited by end-of-file\n");
 			break ;
+		}
 		if (!ft_strncmp(input, delim, ft_strlen(delim) + 1))
 		{
 			free(input);
@@ -63,6 +66,7 @@ void	heredoc_reading(t_main_data *data, char *file_name, \
 	int			fd;
 	t_exit_code	status;
 
+	setup_signal_handlers(HEREDOC_CHILD);
 	rl_clear_history();
 	fd = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)

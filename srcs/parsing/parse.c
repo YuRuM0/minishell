@@ -6,11 +6,12 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/09 21:04:36 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/11 20:17:45 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
+#include "execution.h"
 
 void	parser(t_main_data *data)
 {
@@ -29,12 +30,13 @@ void	parser(t_main_data *data)
 	status = merge_tokens_n_rm_blank_tokens(data);
 	if (status != SUCCESS)
 		return (status_error(data, status));
-	// debugging(data);
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
 		return (status_error(data, status));
+	debugging(data);
 	status = commands_builder(data);
 	if (status != SUCCESS)
 		return (status_error(data, status));
 	debugging(data);
+	distribution(data); //exec
 }

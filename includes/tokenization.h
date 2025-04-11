@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/09 19:36:51 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/11 20:01:55 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef enum e_parsing_err //modificar error codes
 	ERROR_UNEXPEC_APPEND,
 	ERROR_UNEXPEC_HERDOC,
 	ERROR_UNEXPEC_PARENTH,
+	HEREDOC_CHILD_SIGNALED,
 }	t_pars_err;
 
 typedef struct s_env_var

@@ -6,13 +6,13 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/09 19:37:44 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/11 20:17:39 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "tokenization.h"
-#include "execution.h"
+
+int g_last_signal;
 
 static char	*read_tty(void)
 {
@@ -53,17 +53,18 @@ static char	*read_file(void)
 
 static void	loop_minishell(t_main_data *data)
 {
+	
 	while (true)
 	{
+		handle_signal_main_loop();
 		if (isatty(STDIN_FILENO))
 			data->pipeline = read_tty();
 		else
 			data->pipeline = read_file();
 		if (data->pipeline == NULL)
 			break ;
+		setup_signal_handlers(NON_INTERACTIVE);
 		parser(data);
-		distribution(data); //exec
-		set_exit_env_status(data->env_vars, 130);
 		clean_temp_data(data);
 	}
 }

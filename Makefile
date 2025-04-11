@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
+#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/09 16:42:38 by yulpark          ###   ########.fr        #
+#    Updated: 2025/04/11 18:46:14 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,9 @@ DEBUG_FILES = $(DEBUG_DIR)/print_tokens.c
 FREE_DIR = $(PARSE_DIR)/free_memory
 FREE_FILE = $(FREE_DIR)/free_parse.c
 
+SIGNAL_DIR = $(PARSE_DIR)
+SIGNAL_FILES = $(SIGNAL_DIR)/signal.c
+
 
 EXEC_DIR = $(SCRS_DIR)/execution
 
@@ -93,7 +96,7 @@ CONNECT_FILES = $(CONNECT_DIR)/main.c\
 SRC_FILES = $(PARSE_FILES) $(ERROR_FILE) $(JUMP_PARSE_FILES) \
 				$(PARSE_UTILS_FILES) $(DEBUG_FILES) $(FREE_FILE) \
 				$(ENVIRONMENT_VAR_FILES) $(COMMANDS_FILES) \
-				$(BUILTIN_FILES) $(CONNECT_FILES)
+				$(BUILTIN_FILES) $(CONNECT_FILES) $(SIGNAL_FILES)
 
 OBJS_DIR = objs
 OBJS = $(patsubst $(SCRS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRC_FILES))

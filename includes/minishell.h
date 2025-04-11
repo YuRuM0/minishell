@@ -3,25 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/04/10 22:04:00 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/11 19:39:43 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define _GNU_SOURCE
+
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <string.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
 # include <errno.h>
 # include "libft.h"
 # include <signal.h>
+
 //# include "../execution/execution.h"
+
+# define _GNU_SOURCE
+
 
 //mix of brasilian and corean flags haha
 # define MINISHELL_PROMPT \
@@ -37,6 +43,7 @@ typedef enum e_exit_code
 	EXIT_SUCCESSFULLY = 0,
 	EXIT_FAIL = 1,
 	EXIT_DENIED,
+	EXIT_HEREDOC_EOF,
 	EXIT_MEM_FAILURE = 3, //should be 137?
 	EXIT_CHILD_FAILURE,
 	EXIT_CMD_NOT_EXECUTABLE = 126,
@@ -45,6 +52,7 @@ typedef enum e_exit_code
 	EXIT_SIGINT = 130,
 	EXIT_SIGQUIT = 131
 }	t_exit_code;
+
 //main structure to hold all the data
 typedef struct s_main_data
 {
@@ -56,9 +64,19 @@ typedef struct s_main_data
 	struct s_token			*tokens;
 }							t_main_data;
 
+typedef enum	e_signal_mode
+{
+	INTERACTIVE,
+	NON_INTERACTIVE,
+	HEREDOC_CHILD,
+	CMD_CHILD,
+	CMD_PARENT,
+}				t_signal_mode;
 
 void	parser(t_main_data *data);
 void	error_msg(char *msg);
+void	handle_signal_main_loop();
+void	setup_signal_handlers(t_signal_mode	mode);
 
 
 #endif
