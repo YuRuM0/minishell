@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handle.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:57:30 by flima             #+#    #+#             */
-/*   Updated: 2025/04/11 20:30:05 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/12 15:24:05 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,16 @@ static t_pars_err	read_heredoc_input(t_main_data *data, char *file_name, \
 	if (child_pid == 0)
 		heredoc_reading(data, file_name, delimiter, current);
 	waitpid(child_pid, &exit_status, 0);
-	if (WEXITSTATUS(exit_status) == EXIT_FAIL)
+	if (WEXITSTATUS(exit_status))
 	{
-		data->exit_status = WEXITSTATUS(exit_status);
-		set_exit_env_status(data->env_vars, data->exit_status);
+		if (set_exit_env_status(data->env_vars, EXIT_FAIL) != SUCCESS)
+			return (ERROR_MEM_ALLOC);
 		return(SUCCESS);
-		//think better about it 
-		// free(file_name);
-		// clean_all_data_exit(data, EXIT_CHILD_FAILURE);
 	}
 	else if (WIFSIGNALED(exit_status))
 	{
-		set_exit_env_status(data->env_vars, EXIT_SIGINT);
+		if (set_exit_env_status(data->env_vars, EXIT_SIGINT) != SUCCESS)
+			return (ERROR_MEM_ALLOC);
 		g_last_signal = EXIT_SIGINT;
 		return (HEREDOC_CHILD_SIGNALED);
 	}
@@ -83,11 +81,11 @@ static t_pars_err	get_current_heredoc(t_main_data *data, \
 	(*nbr_heredoc)++;
 	delimiter = current->next->value;
 	status = read_heredoc_input(data, file_name, delimiter, current);
-	if (status == HEREDOC_CHILD_SIGNALED)
+	if (status != SUCCESS)
 	{
 		unlink(file_name);
 		free(file_name);
-		return (HEREDOC_CHILD_SIGNALED);
+		return (status);
 	}
 	fd = open(file_name, O_RDONLY);
 	unlink(file_name);
@@ -112,7 +110,11 @@ t_pars_err	capture_heredocs(t_main_data *data)
 		{
 			status = get_current_heredoc(data, current, &nbr_of_heredoc);
 			if (status != SUCCESS)
+			{
+				if (status == HEREDOC_CHILD_SIGNALED)
+					close_fd_heredoc(data->tokens, current);
 				return (status);
+			}
 		}
 		current = current->next;
 	}

@@ -3,21 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_read_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:13:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/11 20:21:35 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/12 15:14:46 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg)
+void	close_fd_heredoc(t_token *head, t_token *current)
+{
+	int	fd;
+
+	while (head != NULL && head != current)
+	{
+		if (head->type == HEREDOC)
+		{
+			fd = ft_atoi(head->next->value);
+			if (fd > 2)
+				close(fd);
+		}
+		head = head->next;
+	}
+}
+
+static void	heredoc_err_exit(t_main_data *data, t_exit_code status, char *msg)
 {
 	if (status == EXIT_FAIL)
 	{
 		error_msg("child process exit failure\n");
-		clean_all_data_exit(data, EXIT_FAIL); //rever esse comportamento 
+		clean_all_data_exit(data, EXIT_FAIL);
 	}
 	else if (status == EXIT_DENIED)
 	{
@@ -70,18 +86,13 @@ void	heredoc_reading(t_main_data *data, char *file_name, \
 	rl_clear_history();
 	fd = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
-	{
-		free(file_name);
-		hered_err_exit(data, EXIT_FAIL, NULL);
-	}
+		heredoc_err_exit(data, EXIT_DENIED, file_name);
 	status = readline_heredoc(data, fd, delim, current->next->type);
 	close(fd);
 	if (status != EXIT_SUCCESSFULLY)
 	{
-		if (status == EXIT_MEM_FAILURE)
-			hered_err_exit(data, EXIT_FAIL, NULL);
-		else
-			hered_err_exit(data, EXIT_DENIED, file_name);
+		free(file_name);
+		heredoc_err_exit(data, EXIT_FAIL, NULL);
 	}
 	free(file_name);
 	clean_all_data_exit(data, EXIT_SUCCESSFULLY);
