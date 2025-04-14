@@ -6,12 +6,12 @@
 /*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:48:17 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/11 18:25:01 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:49:34 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
+/*
 //redirec_hanlder
 //func that reconstructs the cmd to follow the correct format
 
@@ -82,3 +82,4 @@ int iter_redir(t_command *cmd)
 }
 
 // to read: https://www.gnu.org/software/bash/manual/html_node/Redirections.html
+*/

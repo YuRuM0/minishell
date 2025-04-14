@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:26:38 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/14 16:40:20 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:48:35 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_exec_error set_env(t_env_var **envp, char *var)
 	curr = *envp;
 	while (curr)
 	{
-		if (ft_strcmp(curr->variable, var) == 0)
+		if (ft_strncmp(curr->variable, var, ft_strlen(var)) == 0)
 		{
 			free(curr->variable);
 			curr->variable = ft_strdup(var);
