@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 16:40:43 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/14 18:43:26 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	manage_builtins(t_main_data *data)
 {
 	if (ft_strncmp(data->cmds->args[0], "echo", ft_strlen(data->cmds->args[0])) == 0)
 		echo(data->cmds->args);
-	//else if (ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])) == 0)
-	//	ft_cd(*cmd->args, add_list);
+	else if (ft_strncmp(data->cmds->args[0], "cd", ft_strlen(data->cmds->args[0])) == 0)
+		ft_cd(data->cmds->args, data->env_vars);
 	else if (ft_strncmp(data->cmds->args[0], "env", ft_strlen(data->cmds->args[0])) == 0)
 		env(data->env_vars, data->cmds->args);
 	else if (ft_strncmp(data->cmds->args[0], "exit", ft_strlen(data->cmds->args[0])) == 0)

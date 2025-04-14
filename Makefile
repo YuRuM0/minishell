@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
+#    By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/11 18:46:14 by flima            ###   ########.fr        #
+#    Updated: 2025/04/14 18:40:34 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,10 +82,7 @@ BUILTIN_FILES = $(BUILTIN_DIR)/echo.c \
 				$(BUILTIN_DIR)/export_utils.c \
 				$(BUILTIN_DIR)/pwd.c \
 				$(BUILTIN_DIR)/unset.c \
-				$(BUILTIN_DIR)/cd.c \
-				$(BUILTIN_DIR)/cd_utils.c \
-				$(BUILTIN_DIR)/cd_cases.c \
-				$(BUILTIN_DIR)/cd_dots.c
+				$(BUILTIN_DIR)/cd_main.c 
 
 CONNECT_DIR = $(EXEC_DIR)/connect
 CONNECT_FILES = $(CONNECT_DIR)/main.c\
