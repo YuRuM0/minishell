@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 00:00:31 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 16:09:12 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/11 18:07:15 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_env_var	*ft_find_env(t_env_var *env, char *key)
 	}
 	return (NULL);
 }
-
 
 int	ft_env_update(t_env_var *env, char *name, char *path)
 {

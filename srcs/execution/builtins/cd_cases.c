@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cd_cases.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:46:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/09 17:19:08 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:41:57 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 #include "execution.h"
+// t_exec_error set_env(t_env_var **envp, char *var)
 
 t_exec_error	go_home(t_env_var **envp, t_env_var *PWD)
 {
@@ -36,7 +36,7 @@ t_exec_error	go_home(t_env_var **envp, t_env_var *PWD)
 	free(cwd);
 	if (!oldpwd || !pwd)
 		return (MALLOC_FAIL);
-	if (export_arg(&oldpwd, envp) != 0 || export_arg(&pwd, envp) != 0)
+	if (set_env(envp, oldpwd) != SUCCEED || set_env(envp, pwd) != SUCCEED)
 	{
 		error_msg("minishell: cd: Failed to update the env");
 		return (ENV_ERROR);
@@ -53,7 +53,7 @@ t_exec_error	go_prev(t_env_var **envp,  t_env_var *PWD, t_env_var *OLDPWD)
 	path_curr = update_env_value("PWD=", OLDPWD->variable);
 	if (!path_old || !path_curr)
 		return (MALLOC_FAIL);
-	if (export_arg(&path_old, envp) != 0 || export_arg(&path_curr, envp) != 0)
+	if (set_env(envp, path_old) != SUCCEED || set_env(envp, path_curr) != SUCCEED)
 	{
 		error_msg("minishell: cd: Failed to update the env");
 		return (ENV_ERROR);
@@ -63,7 +63,7 @@ t_exec_error	go_prev(t_env_var **envp,  t_env_var *PWD, t_env_var *OLDPWD)
 	return (SUCCEED);
 }
 
-t_exec_error	relative_path(char *cmd, t_env_var **envp, t_env_var *PWD, t_env_var *OLDPWD)
+t_exec_error	relative_path(char *cmd, t_env_var **envp, t_env_var *PWD)
 {
 	char	*new_path;
 	char	*path_curr;
@@ -79,7 +79,7 @@ t_exec_error	relative_path(char *cmd, t_env_var **envp, t_env_var *PWD, t_env_va
 	path_curr = update_env_value("PWD=", new_path);
 	if (!path_old || !path_curr)
 		return (MALLOC_FAIL);
-	if (export_arg(&path_old, envp) != 0 || export_arg(&path_curr, envp) != 0)
+	if (set_env(envp, path_old) != SUCCEED || set_env(envp, path_curr) != SUCCEED)
 	{
 		error_msg("minishell: cd: Failed to update the env");
 		return (ENV_ERROR);
@@ -89,7 +89,7 @@ t_exec_error	relative_path(char *cmd, t_env_var **envp, t_env_var *PWD, t_env_va
 	return (SUCCEED);
 }
 
-t_exec_error	absolute_path(char *cmd, t_env_var **envp, t_env_var *PWD, t_env_var *OLDPWD)
+t_exec_error	absolute_path(char *cmd, t_env_var **envp, t_env_var *PWD)
 {
 	char	*path_curr;
 	char	*path_old;
@@ -107,7 +107,7 @@ t_exec_error	absolute_path(char *cmd, t_env_var **envp, t_env_var *PWD, t_env_va
 	path_curr = update_env_value("PWD=", cwd);
 	if (!path_curr || !path_old)
 		return (MALLOC_FAIL);
-	if (export_arg(&path_old, envp) != 0 || export_arg(&path_curr, envp) != 0)
+	if (set_env(envp, path_old) != SUCCEED || set_env(envp, path_curr) != SUCCEED)
 	{
 		error_msg("minishell: cd: Failed to update the env");
 		return (ENV_ERROR);
@@ -116,4 +116,3 @@ t_exec_error	absolute_path(char *cmd, t_env_var **envp, t_env_var *PWD, t_env_va
 	free(path_curr);
 	return (SUCCEED);
 }
-*/

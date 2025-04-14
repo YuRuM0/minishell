@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:26:38 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/09 17:19:22 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:40:20 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 #include "execution.h"
 
 t_exec_error	input_counter(char **cmd)
@@ -67,4 +66,28 @@ char	*ft_strputjoin(char *src1, char *src2, char c)
 	ft_strlcpy(dst + i + 1, src2, j + 1);
 	return (dst);
 }
-*/
+
+t_exec_error set_env(t_env_var **envp, char *var)
+{
+	t_env_var *curr;
+	t_env_var *new;
+
+	curr = *envp;
+	while (curr)
+	{
+		if (ft_strcmp(curr->variable, var) == 0)
+		{
+			free(curr->variable);
+			curr->variable = ft_strdup(var);
+			return (SUCCEED);
+		}
+		curr = curr->next;
+	}
+	new = malloc(sizeof(t_env_var));
+	if (!new)
+		return (MALLOC_FAIL);
+	new->variable = ft_strdup(var);
+	new->next = *envp;
+	*envp = new;
+	return (SUCCEED);
+}
