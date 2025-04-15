@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/14 18:43:26 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:43:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,21 @@ static int	manage_builtins(t_main_data *data)
 
 int	distribution(t_main_data *data)
 {
-	if (manage_builtins(data) == 0)
-		return 0; //check if func from system
+	char	*path;
+	t_exec_error	res;
+	
+	if (data->nbr_of_cmds > 1)
+	{
+		if (manage_builtins(data) == 0)
+			return 0; //check if func from system
+		path = executable_path(data);
+		res = execute_one(path, data);
+		if (path)
+			free (path);
+		return (res);
+	}
+	else if (pipecounter(data->pipeline))
+	
 	// update $?
 	return (0);
 }
