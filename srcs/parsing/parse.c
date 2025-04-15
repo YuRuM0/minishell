@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/15 18:24:55 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 18:42:25 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ t_pars_err	parser(t_main_data *data)
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
 		return (status_error(data, status), FAILURE);
-	debugging(data);
+	// debugging(data);
 	status = commands_builder(data);
 	if (status != SUCCESS)
 		return (status_error(data, status), FAILURE);
-	debugging(data);
 	return (SUCCESS);
 }
 
@@ -68,6 +67,7 @@ static t_pars_err	open_file(t_redir *redir)
 	}
 	return (SUCCESS);
 }
+
 void	parsing_and_execution(t_main_data *data)
 {
 	t_command	*cmd;
@@ -87,6 +87,7 @@ void	parsing_and_execution(t_main_data *data)
 		}
 		cmd = cmd->next;
 	}
-	distribution(data); //exec
+	debugging(data);
+	// distribution(data); //exec
 }
 
