@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/07 18:57:12 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 16:36:44 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	free_cmds(t_command *cmds)
 		{
 			tmp = cmds->redir_list;
 			cmds->redir_list = cmds->redir_list->next;
-			free(tmp->fd);
 			free(tmp->file);
 			free(tmp);
 		}

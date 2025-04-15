@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/04/15 15:21:55 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 15:33:35 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_main_data
 {
 	int						nbr_of_cmds;
 	char					*pipeline;
+	int						last_fd_in;
 	int						exit_status;
 	struct s_env_var		*env_vars;
 	struct s_command		*cmds;
@@ -73,10 +74,10 @@ typedef enum	e_signal_mode
 	CMD_PARENT,
 }				t_signal_mode;
 
-void	parser(t_main_data *data);
-void	error_msg(char *msg);
-void	handle_signal_main_loop();
-void	setup_signal_handlers(t_signal_mode	mode);
+void		parsing_and_execution(t_main_data *data);
+void		error_msg(char *msg);
+void		handle_signal_main_loop();
+void		setup_signal_handlers(t_signal_mode	mode);
 
 
 #endif

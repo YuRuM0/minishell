@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/11 20:17:39 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 15:34:18 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	loop_minishell(t_main_data *data)
 		if (data->pipeline == NULL)
 			break ;
 		setup_signal_handlers(NON_INTERACTIVE);
-		parser(data);
+		parsing_and_execution(data);
 		clean_temp_data(data);
 	}
 }
@@ -72,6 +72,7 @@ static void	loop_minishell(t_main_data *data)
 void	init_data(t_main_data *data)
 {
 	data->nbr_of_cmds = 0;
+	data->last_fd_in = STDIN_FILENO;
 	data->pipeline = NULL;
 	data->env_vars = NULL;
 	data->cmds = NULL;

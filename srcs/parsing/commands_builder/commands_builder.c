@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:44:02 by flima             #+#    #+#             */
-/*   Updated: 2025/04/07 19:03:38 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 16:16:04 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ t_pars_err	assign_redir(t_command *cmd, t_token *current)
 	if (current->type == HEREDOC)
 	{
 		new_redir->redir_id = REDIR_HEREDOC;
-		new_redir->fd = ft_strdup(current->next->value);
-		if (new_redir->fd == NULL)
-			return (ERROR_MEM_ALLOC);
+		new_redir->fd = ft_atoi(current->next->value);
 		return (SUCCESS);
 	}
 	else if (current->type == APPEND)

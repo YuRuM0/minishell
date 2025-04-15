@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/14 18:37:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:25:44 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef enum s_exec_error{
 	NO_INPUT,
 	INVALID_INPUT,
 	FAIL_PATH_RETRIEVAL,
-	ENV_ERROR
+	ENV_ERROR,
+	ERROR = -1,
 }	t_exec_error;
 
 int				distribution(t_main_data *data);

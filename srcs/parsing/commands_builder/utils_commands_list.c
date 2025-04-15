@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:19:04 by flima             #+#    #+#             */
-/*   Updated: 2025/04/07 19:03:47 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 16:16:18 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_redir	*add_new_redir(void)
 	if (node == NULL)
 		return (NULL);
 	node->redir_id = -1;
-	node->fd = NULL;
+	node->fd = -2;
 	node->file = NULL;
 	node->next = NULL;
 	return (node);

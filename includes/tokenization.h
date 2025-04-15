@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/12 15:15:42 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/15 16:17:06 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef enum e_parsing_err //modificar error codes
 	ERROR_UNEXPEC_HERDOC,
 	ERROR_UNEXPEC_PARENTH,
 	HEREDOC_CHILD_SIGNALED,
+	FAILURE = -1,
 }	t_pars_err;
 
 typedef struct s_env_var
@@ -81,7 +82,7 @@ typedef struct s_command
 typedef struct s_redir
 {
 	t_redir_id		redir_id;
-	char			*fd;
+	int				fd;
 	char			*file;
 	struct s_redir 	*next;
 }					t_redir;
@@ -96,6 +97,7 @@ typedef struct s_token
 //Jump table tokenization
 
 //Tokanization
+t_pars_err	parser(t_main_data *data);
 t_pars_err	tokenize_input(t_main_data *data, char	*input);
 t_token		*add_new_token(void);
 void		add_token_back(t_token **head, t_token *new);

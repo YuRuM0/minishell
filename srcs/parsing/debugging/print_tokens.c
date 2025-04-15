@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/04/07 16:48:42 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 16:35:55 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static	void	print_commands(t_command *cmd, int nb)
 	while (tmp != NULL)
 	{
 		if (tmp->redir_id == REDIR_HEREDOC)
-			printf("REDIR : %-20s fd: %s\n", str_cmd[tmp->redir_id], tmp->fd);
+			printf("REDIR : %-20s fd: %d\n", str_cmd[tmp->redir_id], tmp->fd);
 		else
 			printf("REDIR : %-20s file_name: %s\n", str_cmd[tmp->redir_id], \
 				tmp->file);
