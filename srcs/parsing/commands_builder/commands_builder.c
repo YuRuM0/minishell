@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:44:02 by flima             #+#    #+#             */
-/*   Updated: 2025/04/15 16:16:04 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 19:25:25 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ t_pars_err	assign_args(t_command *cmd, t_token *current, int *i)
 	return (SUCCESS);
 }
 
-// if the token is a redirection, assign it to the cmd->redir_list
-// if cmd->redir_list is NULL, input from STDIN
 t_pars_err	append_token_in_cmd(t_command *cmd, t_token **current)
 {
 	int			i;
@@ -113,6 +111,7 @@ t_pars_err	commands_builder(t_main_data *data)
 	token = data->tokens;
 	while (token != NULL)
 	{
+		data->nbr_of_cmds++;
 		if (token->type == PIPE)
 		{
 			cmd->is_pipe_next = true;

@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/15 18:42:25 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 19:46:02 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,23 @@ static t_pars_err	open_file(t_redir *redir)
 		redir = redir->next;
 	}
 	return (SUCCESS);
+}
+
+void	drop_left_redirect_if_duplicate()
+//doing
+void	right_associate_redirects(t_redir *redir)
+{
+	while(redir != NULL)
+	{
+		if (redir->redir_id == REDIR_IN)
+			//call fuction;
+		else if (redir->redir_id == REDIR_OUT)
+			///tt
+		else if (redir->redir_id == REDIR_APPEND)
+			///
+		else if (redir->redir_id == REDIR_HEREDOC)
+			//	
+	}
 }
 
 void	parsing_and_execution(t_main_data *data)

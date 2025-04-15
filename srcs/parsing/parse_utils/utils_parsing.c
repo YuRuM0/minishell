@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/09 19:40:17 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 19:34:57 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,14 @@ t_pars_err	expand_token_n_trim_quote(t_env_var *envp, t_token *token)
 		token = token->next;
 	}
 	return (SUCCESS);
+}
+
+void	delete_redir_node(t_redir **redir)
+{
+	t_redir	*tmp;
+
+	tmp = *redir;
+	redir = (*redir)->next;
+	free(tmp->file);
+	free(tmp);
 }

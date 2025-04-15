@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/15 16:17:06 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 19:35:35 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,10 +142,11 @@ void		remove_next_token(t_token *current);
 //	command builder functions
 t_command	*add_new_cmd(void);
 t_redir		*add_new_redir(void);
+void		delete_redir_node(t_redir **redir);
+void		add_redir_back(t_redir **head, t_redir *new);
+void		add_cmd_back(t_command **head, t_command *new);
 t_pars_err	init_cmd_args(t_command *cmd, t_token *current);
 t_pars_err	commands_builder(t_main_data *data);
-void		add_cmd_back(t_command **head, t_command *new);
-void		add_redir_back(t_redir **head, t_redir *new);
 int			get_args_size(t_token *tokens);
 
 // heredoc functions

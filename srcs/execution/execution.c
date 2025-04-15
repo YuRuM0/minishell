@@ -6,18 +6,20 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/15 15:26:53 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/15 19:16:09 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-t_exec_error	wait_child(pid_t pid)
+void	wait_all_children(t_main_data *data, pid_t *pid)
 {
+	int	i;
 	int	status;
-	
-	waitpid(pid, &status, NULL);
-	//handle signal and exit status of child (status)
+
+	i = 0;
+	while (i < data->nbr_of_cmds)
+		waitpid(pid[i], &status, 0);
 }
 
 static int	create_pipe_n_fork(int *fd)
@@ -43,19 +45,19 @@ void	execution(t_main_data *data, t_command *cmd)
 {
 	int	fd[2];
 	int	i;
-	pid_t	pid;
+	pid_t	pid[data->nbr_of_cmds];
 
 	i = 0;
 	while (cmd != NULL)
 	{
-		pid = create_pipe_n_fork(&fd);
+		pid[i] = create_pipe_n_fork(&fd);
 		if (pid == ERROR)
 			return ;
 		if (pid == 0)
 			cmd_executor(data, cmd, i);
-		wait_child(pid);
 		data->last_fd_in = fd[0];
 		close(fd[1]);
 		cmd = cmd->next;
 	}
+	wait_all_children(data, pid);
 }
