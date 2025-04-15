@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/15 15:43:58 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/15 16:00:08 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ char	*ft_strputjoin(char *src1, char *src2, char c)
 	return (dst);
 }
 
+int free_double(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+	retrun (0);
+}
+
 char	*executable_path(t_main_data *data)
 {
 	char	 **env_path_var;
@@ -60,7 +74,7 @@ char	*executable_path(t_main_data *data)
 		path = ft_strputjoin(env_path_var[i], data->cmds->args[0], '/');
 		if (access(path, X_OK | F_OK) == 0)
 		{
-			//free_double(env_path_char);
+			free_double(env_path_var);
 			return (path);
 		}
 		i++;
