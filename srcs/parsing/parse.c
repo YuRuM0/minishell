@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/15 19:46:02 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/16 23:03:55 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,24 @@ static t_pars_err	open_file(t_redir *redir)
 	return (SUCCESS);
 }
 
-void	drop_left_redirect_if_duplicate()
-//doing
-void	right_associate_redirects(t_redir *redir)
+static void	right_associate_redirects(t_redir *redir, t_command *cmd)
 {
-	while(redir != NULL)
+	t_redir	*tmp;
+
+	tmp = redir;
+	while (redir != NULL)
 	{
-		if (redir->redir_id == REDIR_IN)
-			//call fuction;
-		else if (redir->redir_id == REDIR_OUT)
-			///tt
-		else if (redir->redir_id == REDIR_APPEND)
-			///
-		else if (redir->redir_id == REDIR_HEREDOC)
-			//	
+		if (redir->redir_id == REDIR_APPEND || redir->redir_id == REDIR_OUT)
+			cmd->outfile = redir;
+		else
+			cmd->infile = redir;
+		redir = redir->next;
+	}
+	while (tmp != NULL)
+	{
+		if (tmp != cmd->infile && tmp != cmd->outfile)
+			close(tmp->fd);
+		tmp = tmp->next;
 	}
 }
 
@@ -102,6 +106,7 @@ void	parsing_and_execution(t_main_data *data)
 				status_error(data, status);
 			return ;
 		}
+		right_associate_redirects(cmd->redir_list, cmd);
 		cmd = cmd->next;
 	}
 	debugging(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/15 19:35:35 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/16 22:07:44 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct s_command
 {
 	char				**args;
 	struct s_redir		*redir_list;
+	struct s_redir		*infile;
+	struct s_redir		*outfile;
 	bool				is_builtin;
 	bool				is_pipe_next;
 	struct s_command	*next;
@@ -142,7 +144,6 @@ void		remove_next_token(t_token *current);
 //	command builder functions
 t_command	*add_new_cmd(void);
 t_redir		*add_new_redir(void);
-void		delete_redir_node(t_redir **redir);
 void		add_redir_back(t_redir **head, t_redir *new);
 void		add_cmd_back(t_command **head, t_command *new);
 t_pars_err	init_cmd_args(t_command *cmd, t_token *current);

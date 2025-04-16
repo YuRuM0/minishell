@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_commands_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:19:04 by flima             #+#    #+#             */
-/*   Updated: 2025/04/15 16:16:18 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/16 22:07:05 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_command	*add_new_cmd(void)
 		return (NULL);
 	node->args = NULL;
 	node->redir_list = NULL;
+	node->infile = NULL;
+	node->outfile = NULL;
 	node->is_builtin = false;
 	node->is_pipe_next = false;
 	node->next = NULL;
