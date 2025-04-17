@@ -6,37 +6,28 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/04/16 23:06:39 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/17 21:01:22 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-static void	get_str_type(char **tokens)
+static	void	print_redir(t_redir *redir, char **id)
 {
-	tokens[0] = "SPACE_CHAR";
-	tokens[1] = "TAB_CHAR";
-	tokens[2] = "NEW_LINE";
-	tokens[3] = "PIPE";
-	tokens[4] = "LESS";
-	tokens[5] = "GREAT";
-	tokens[6] = "VARIABLE";
-	tokens[7] = "D_QUOTE";
-	tokens[8] = "S_QUOTE";
-	tokens[9] = "AND";
-	tokens[10] = "WORD";
-	tokens[11] = "APPEND";
-	tokens[12] = "HEREDOC";
-}
+	t_redir	*tmp;
 
-static void	get_str_cmd(char **cmd)
-{
-	cmd[0] = "REDIR_IN";
-	cmd[1] = "REDIR_HEREDOC";
-	cmd[2] = "REDIR_OUT";
-	cmd[3] = "REDIR_APPEND";
+	write(STDOUT_FILENO, "\n\n", 2);
+	tmp = redir;
+	while (tmp != NULL)
+	{
+		if (tmp->redir_id == REDIR_HEREDOC)
+			printf("ALL REDIR : %-20s fd: %d\n", id[tmp->redir_id], tmp->fd);
+		else
+			printf("ALL REDIR : %-20s file_name: %-10sfd : %-20d\n", id[tmp->redir_id], \
+				tmp->file, tmp->fd);
+		tmp = tmp->next;
+	}
 }
-
 static	void	print_token(t_token *token, int i)
 {
 	char	*str_tok[13];
@@ -53,26 +44,30 @@ static	void	print_token(t_token *token, int i)
 static	void	print_commands(t_command *cmd, int nb)
 {
 	char	*str_cmd[4];
-	t_redir	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = cmd->redir_list;
 	get_str_cmd(str_cmd);
 	if (cmd->args[0] != NULL)
 		printf("%s[%d] %-20s\n", "Command", nb, cmd->args[0]);
 	while (cmd->args[0] && cmd->args[++i] != NULL)
 		printf("%s[%d] %-20s\n", "args", i, cmd->args[i]);
-	while (tmp != NULL)
+	if (cmd->infile)
 	{
-		if (tmp->redir_id == REDIR_HEREDOC)
-			printf("ALL REDIR : %-20s fd: %d\n", str_cmd[tmp->redir_id], tmp->fd);
+		if (cmd->infile->redir_id == REDIR_HEREDOC)
+			printf("ID : %-20s fd: %d\n", str_cmd[cmd->infile->redir_id], cmd->infile->fd);
 		else
-			printf("ALL REDIR : %-20s file_name: %-5sfd : %-20d\n", str_cmd[tmp->redir_id], \
-				tmp->file, tmp->fd);
-		tmp = tmp->next;
+		printf("ID : %-20s file_name: %-10sfd : %-20d\n", str_cmd[cmd->infile->redir_id], \
+			cmd->infile->file, cmd->infile->fd);
 	}
-	write(STDOUT_FILENO, "\n", 1);
+	else
+		printf("No infile redirection\n");
+	if (cmd->outfile)
+		printf("ID: %-28s file_name: %-10sfd : %-20d\n", str_cmd[cmd->outfile->redir_id], \
+			cmd->outfile->file, cmd->outfile->fd);
+	else
+		printf("No outfile redirection\n");
+	print_redir(cmd->redir_list, str_cmd);
 }
 
 void	debugging(t_main_data *data)
@@ -98,6 +93,7 @@ void	debugging(t_main_data *data)
 	while (cmd != NULL)
 	{
 		print_commands(cmd, i);
+		write(STDOUT_FILENO, "\n", 1);
 		cmd = cmd->next;
 		i++;
 	}

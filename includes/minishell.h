@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/04/15 15:33:35 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/17 21:41:01 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ typedef enum e_exit_code
 {
 	EXIT_SUCCESSFULLY = 0,
 	EXIT_FAIL = 1,
-	EXIT_DENIED,
-	EXIT_HEREDOC_EOF,
+	EXIT_SYNTAX,
 	EXIT_MEM_FAILURE = 3, //should be 137?
+	EXIT_DENIED,
 	EXIT_CHILD_FAILURE,
 	EXIT_CMD_NOT_EXECUTABLE = 126,
 	EXIT_CMD_NOT_FOUND = 127,

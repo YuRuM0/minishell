@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
+#    By: filipe <filipe@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/15 16:54:50 by flima            ###   ########.fr        #
+#    Updated: 2025/04/17 21:27:12 by filipe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ PARSE_FILES = $(PARSE_DIR)/main.c \
 				$(PARSE_DIR)/syntax.c \
 				$(PARSE_DIR)/merge_tokens.c \
 				$(PARSE_DIR)/heredoc_handle.c \
-				$(PARSE_DIR)/heredoc_read_input.c
+				$(PARSE_DIR)/heredoc_read_input.c \
+				$(PARSE_DIR)/setup_file_descriptors.c
 
 ENVIRONMENT_VAR_DIR = $(PARSE_DIR)/env_variables
 ENVIRONMENT_VAR_FILES = $(ENVIRONMENT_VAR_DIR)/env_var_utils.c \
@@ -62,7 +63,8 @@ PARSE_UTILS_FILES = $(PARSE_UTILS_DIR)/utils_parsing.c \
 					$(PARSE_UTILS_DIR)/utils_errors_handler.c
 
 DEBUG_DIR = $(PARSE_DIR)/debugging
-DEBUG_FILES = $(DEBUG_DIR)/print_tokens.c
+DEBUG_FILES = $(DEBUG_DIR)/print_tokens.c \
+				$(DEBUG_DIR)/debug_utils.c
 
 FREE_DIR = $(PARSE_DIR)/free_memory
 FREE_FILE = $(FREE_DIR)/free_parse.c

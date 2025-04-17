@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/16 22:07:44 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/17 21:18:19 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void		add_cmd_back(t_command **head, t_command *new);
 t_pars_err	init_cmd_args(t_command *cmd, t_token *current);
 t_pars_err	commands_builder(t_main_data *data);
 int			get_args_size(t_token *tokens);
+t_pars_err setup_file_descriptors(t_command *cmd, t_main_data *data);
 
 // heredoc functions
 t_pars_err	capture_heredocs(t_main_data *data);
@@ -157,6 +158,8 @@ void		heredoc_reading(t_main_data *data, char *file_name, char *delim\
 	, t_token *current);
 //debugging
 void		debugging(t_main_data *data);
+void		get_str_cmd(char **cmd);
+void		get_str_type(char **tokens);
 
 //free functions
 void		init_data(t_main_data *data);
