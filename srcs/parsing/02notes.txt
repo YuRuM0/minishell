@@ -10,21 +10,7 @@ SAME BEHAVIOR AS BASH:
 
 
 
-handle better 
-
-// void	hered_err_exit(t_main_data *data, t_exit_code status, char *msg)
-// {
-// 	if (status == EXIT_FAIL)
-// 	{
-// 		error_msg("child process exit failure\n");
-// 		clean_all_data_exit(data, EXIT_FAIL); //rever esse comportamento 
-// 	}
-// 	else if (status == EXIT_DENIED)
-// 	{
-// 		error_msg("permission denied or no such file or directory: ");
-// 		write (STDOUT_FILENO, msg, ft_strlen(msg));
-// 		write (STDOUT_FILENO, "\n", 1);
-// 		free(msg);
-// 		clean_all_data_exit(data, EXIT_FAIL);
-// 	}
-// }
+TODO: 
+	1 - check name of the files rules and implement
+	2 - move function to opne file to the child process in execution ( files should be open in parallel )
+		input :  cat > out | cat < out should return an error - bash: out: No such file or directory

@@ -5,12 +5,21 @@
 int main()
 {
 	int fd;
-	fd = open("script_test", O_RDWR);
-	printf("%d\n", fd);
-	close(fd);
-	perror("first");
-	close(fd);
-	perror("first");
-	printf("%d\n", fd);
+	// int pid;
+	char *a[2] = {"eduarda", "filipe"};
+
+	// pid = open("../out", O_RDWR);
+	fd = fork();
+	if (fd == 0)
+	{
+		a[1] = NULL;
+		printf("%s\n", a[0]);
+		printf("%s\n", a[1]);
+		// printf("%s\n", a);
+		exit(0);
+	}
+	wait(NULL);
+	printf("%s\n", a[0]);
+	printf("%s\n", a[1]);
 	return (0);
 }
