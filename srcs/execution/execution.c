@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/15 19:16:09 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/18 21:20:49 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ void	execution(t_main_data *data, t_command *cmd)
 	pid_t	pid[data->nbr_of_cmds];
 
 	i = 0;
+	//set_signals
 	while (cmd != NULL)
 	{
 		pid[i] = create_pipe_n_fork(&fd);
 		if (pid == ERROR)
-			return ;
+			return ; // msg of error (perror)
 		if (pid == 0)
-			cmd_executor(data, cmd, i);
+			cmd_executor(data, cmd, i, fd);
 		data->last_fd_in = fd[0];
 		close(fd[1]);
 		cmd = cmd->next;
