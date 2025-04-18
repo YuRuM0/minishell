@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/08 16:32:46 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/18 19:26:13 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static char	*replace_or_join_var(char *arg, t_env_var *head, char *name)
 	free(name);
 	return (temp);
 }
-
 int	export_arg(char *arg, t_env_var **envp)
 {
 	t_env_var	*head;
@@ -107,38 +106,39 @@ int	export_arg(char *arg, t_env_var **envp)
 		{
 			head->variable = replace_or_join_var(arg, head, name);
 			if (!head->variable)
-				return (-1);
+				return (1);
 			return (0);
 		}
 		head = head->next;
 	}
 	free(name);
 	if (create_new_var(arg, envp) != 0)
-		return (-1);
+		return (1);
 	return (0);
 }
 
-int	export(char **args, t_env_var **envp)
+t_exec_error	export(char **args, t_main_data *data)
 {
 	int	i;
 	int	check;
 
-	if (!args)
-		return (error_msg("Export: no input\n"), -1);
 	if (!args[1])
-		return(export_noarg(*envp));
+		return(export_noarg(data->env_vars));
 	i = 1;
 	while (args[i])
 	{
-		check = export_arg(args[i], envp);
+		check = export_arg(args[i], data->env_vars);
 		if (check == -1)
-			return (error_msg("Export: Invalid Input\n"), -1);
+		{
+			error_msg("Export: Invalid Input\n");
+			clean_all_data_exit(data, 1);
+		}
 		else if (check == -2)
-			return(error_msg(NULL), -1);
+			clean_all_data_exit(data, 1);
 		else
 			i++;
 	}
-	return (0);
+	return (SUCCEED);
 }
 
 //int main()

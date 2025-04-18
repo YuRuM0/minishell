@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:41:37 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/14 22:37:53 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/18 19:18:49 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,33 +73,36 @@ static int	cases(char *cmd, t_env_var *envp, char *tb_old_pwd)
 	return (2);
 }
 
-t_exec_error	ft_cd(char **cmd, t_env_var *envp)
+t_exec_error	ft_cd(char **cmd, t_main_data *data)
 {
 	char	*tb_old_pwd;
 
 	if (cmd[2])
-		return (error_msg("minishell: cd: \
-		Too many arguments\n"), INVALID_INPUT);
+	{
+		error_msg("cd: Too many arguments\n");
+		clean_all_data_exit(data, 1);
+	}
 	tb_old_pwd = getcwd(NULL, 0);
 	if (cmd[1] == NULL || cmd[1][0] == '~')
 	{
-		if (go_home(envp, tb_old_pwd) == 1)
-			return (error_msg("minishell: \
-			cd: HOME doesn't exist\n"), ENV_ERROR);
+		if (go_home(data->env_vars, tb_old_pwd) == 1)
+		{
+			error_msg("cd: HOME doesn't exist\n");
+			clean_all_data_exit(data, 1);
+		}
 	}
 	else if (cmd[1][0] == '-')
 	{
-		if (go_prev(envp, tb_old_pwd))
+		if (go_prev(data->env_vars, tb_old_pwd))
 		{
-			error_msg("minishell: cd: OLDPWD doesn't exist\n");
-			return (ENV_ERROR);
+			error_msg("cd: OLDPWD doesn't exist\n");
+			clean_all_data_exit(data, 1);
 		}
 	}
-	else if (cases(cmd[1], envp, tb_old_pwd) == 1 || \
-	cases(cmd[1], envp, tb_old_pwd) == 2)
+	else if (cases(cmd[1], data->env_vars, tb_old_pwd) == 1 || cases(cmd[1], data->env_vars, tb_old_pwd) == 2)
 	{
-		error_msg("minishell: cd: Path doesn't exist or has no access\n");
-		return (ENV_ERROR);
+		error_msg("cd: Path doesn't exist or has no access\n");
+		clean_all_data_exit(data, 1);
 	}
 	return (SUCCEED);
 }

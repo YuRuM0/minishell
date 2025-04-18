@@ -6,14 +6,14 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:45:11 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 16:09:04 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/18 19:03:50 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
 // add the part that checks with the environment variables
-int	echo(char **args)
+void	echo(char **args)
 {
 	int	n;
 	int	i;
@@ -34,7 +34,6 @@ int	echo(char **args)
 	}
 	if (n == 0)
 		ft_putchar_fd('\n', 1);
-	return (0);
 }
 
 //int main(void)

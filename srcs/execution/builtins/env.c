@@ -6,35 +6,38 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 23:50:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/07 16:53:44 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/18 19:19:26 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 // if env: display env variables
 
-int	env(t_env_var *envp, char **args)
+t_exec_error	env(t_main_data *data, char **args)
 {
 	int	i;
+	t_env_var *temp;
+
+	temp = data->env_vars;
 	if (!args[1])
 	{
-		while (envp)
+		while (temp)
 		{
 			i = 0;
-			while (envp->variable[i])
+			while (temp->variable[i])
 			{
-				if (envp->is_exported == 1)
-					write(1, &envp->variable[i], 1);
+				if (temp->is_exported == 1)
+					write(1, &temp->variable[i], 1);
 				i++;
 			}
 			write(1, "\n", 1);
-			envp = envp->next;
+			temp = temp->next;
 		}
-		return (0);
 	}
 	else
 	{
-		write(1, "Env: env in this shell does not expect an argument\n", 52);
-		return (-1);
+		error_msg("Env: env in this shell does not expect an argument\n");
+		clean_all_data_exit(data, 1);
 	}
+	return (SUCCEED);
 }
