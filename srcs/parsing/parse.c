@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/19 17:11:20 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:42:29 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	parsing_and_execution(t_main_data *data)
 			status_error(data, ERROR_MEM_ALLOC);
 		return ;
 	}
-	
+	//debugging(data);
 	execution(data, data->cmds);
 	// echo(data->cmds->args);
 	// distribution(data); //exec

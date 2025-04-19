@@ -4,11 +4,12 @@
 
 int main(void)
 {
-    char *current_dir = getenv("PWD");
-    if (current_dir)
-        printf("Diretório atual: %s\n", current_dir);
-    else
-        printf("Variável PWD não encontrada.\n");
+  char	**str;
+  int	size = 1;
 
-    return 0;
+  str = malloc(sizeof(char *) * (size + 1));
+  str[size] = NULL;
+  str[0] = "jsafkj";
+  printf("%s\n%s\n%s\n", str[0], str[1], str[2]);
+  return (0);
 }

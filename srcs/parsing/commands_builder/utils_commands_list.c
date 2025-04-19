@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_commands_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:19:04 by flima             #+#    #+#             */
-/*   Updated: 2025/04/19 18:04:44 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:47:27 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_pars_err	init_cmd_args(t_command *cmd, t_token *current)
 		if (args == NULL)
 			return (ERROR_MEM_ALLOC);
 		args[size] = NULL;
+		
 		cmd->args = args;
 	}
 	return (SUCCESS);

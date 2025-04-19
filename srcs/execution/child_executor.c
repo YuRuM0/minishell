@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/19 18:31:08 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:27:27 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,15 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 	char *path;
 
 	setup_file_descriptors(cmd, data);
-	path = executable_path(data, cmd);
 	redir_in(cmd, cmd->infile, cmd->outfile, fd);
 	if (manage_builtins(cmd, data) == true)
 		clean_all_data_exit(data, EXIT_SUCCESS);
 	else
 	{
+		path = executable_path(data, cmd);
+		printf("%s\n", path);
+		if (!path)
+			error_msg("Couldn't find the path\n");
 		if (execve(path, cmd->args, data->envp_array) != 0)
 		{
 			perror("minishell");

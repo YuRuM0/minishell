@@ -3,18 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/19 18:29:29 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/19 20:00:33 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-void	exec_one_cmd(t_command *cmd)
+static void redir_one_cmd(t_command *cmd, int *savein, int *saveout)
 {
-	manage_builtins(cmd, cmd->data);
+	*savein = -2;
+	*saveout = -2;
+
+	if (cmd->infile != NULL)
+	{
+		*savein = dup(STDIN_FILENO);
+		if (dup2(cmd->infile->fd, STDIN_FILENO) == -1)
+		{
+			perror("minishell");
+			close(cmd->infile->fd);
+			return ;
+		}
+		close(cmd->infile->fd);
+	}
+	if (cmd->outfile != NULL)
+	{
+		*saveout = dup(STDOUT_FILENO);
+		if (dup2(cmd->outfile->fd, STDOUT_FILENO) == -1)
+		{
+			perror("minishell");
+			close(cmd->outfile->fd);
+			return ;
+		}
+		close(cmd->outfile->fd);
+	}
+}
+
+static void	exec_one_cmd(t_command *cmd, t_main_data *data)
+{
+	char *path;
+	int savein;
+	int saveout;
+
+	setup_file_descriptors(cmd, data);
+	redir_one_cmd(cmd, &savein, &saveout);
+	if (manage_builtins(cmd, data) == false)
+	{
+		path = executable_path(data, cmd);
+		printf("%s\n", path);
+		if (!path)
+			error_msg("Couldn't find the path\n");
+		else
+		{
+			if (execve(path, cmd->args, data->envp_array) != 0)
+			{
+				perror("minishell");
+				//printf("HERE!\n");
+				clean_all_data_exit(data, EXIT_FAIL);
+			}
+		}
+	}
+	if (savein != -2)
+	{
+		dup2(savein, STDIN_FILENO);
+		close(savein);
+	}
+	if (saveout != -2)
+	{
+		dup2(saveout, STDOUT_FILENO);
+		close(saveout);
+	}
 }
 
 
@@ -58,9 +118,8 @@ void	execution(t_main_data *data, t_command *cmd)
 	pid_t	pid[data->nbr_of_cmds];
 
 	i = 0;
-	printf("%d\n", data->nbr_of_cmds);
 	if (data->nbr_of_cmds == 1)
-		exec_one_cmd(cmd);
+		exec_one_cmd(cmd, data);
 	else
 	{
 		//set_signals

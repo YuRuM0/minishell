@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/15 16:36:44 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/19 18:38:40 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	clean_temp_data(t_main_data *data)
 	data->cmds = NULL;
 	data->pipeline = NULL;
 	data->tokens = NULL;
+	data->nbr_of_cmds = 0;
 }
 
 void	clean_all_data_exit(t_main_data *data, int out_status)
