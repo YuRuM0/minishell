@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_file_descriptors.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 21:12:40 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/17 21:25:42 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/19 16:24:42 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_pars_err	open_file(t_redir *redir)
 {
 	char *error_msg;
-	
+
 	while (redir != NULL)
 	{
 		if (redir->redir_id == REDIR_IN)
@@ -64,8 +64,8 @@ static void	right_associate_redirects(t_redir *redir, t_command *cmd)
 t_pars_err setup_file_descriptors(t_command *cmd, t_main_data *data)
 {
 	t_pars_err	status;
-	
-	while (cmd != NULL)
+
+	if (cmd != NULL)
 	{
 		status = open_file(cmd->redir_list);
 		if (status != SUCCESS)

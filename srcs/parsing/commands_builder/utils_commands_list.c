@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_commands_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:19:04 by flima             #+#    #+#             */
-/*   Updated: 2025/04/16 22:07:05 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/19 16:14:33 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-t_command	*add_new_cmd(void)
+t_command	*add_new_cmd(t_main_data *data)
 {
 	t_command	*node;
 
@@ -26,6 +26,7 @@ t_command	*add_new_cmd(void)
 	node->is_builtin = false;
 	node->is_pipe_next = false;
 	node->next = NULL;
+	node->data = data;
 	return (node);
 }
 

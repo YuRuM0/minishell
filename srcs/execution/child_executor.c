@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/18 21:33:56 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/19 16:50:53 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,39 +17,58 @@
 // identificar se ha pipe e redirecionar para o pipe, se nao houver file in
 //identificar o ultimo cmd e redirecionar para stdout ou um out file
 
-static redirection(t_command *simple_cmd, t_redir *infile,\
-	t_redir *outfile, int current_cmd)
+static void redir_out(t_command *cmd, t_redir *outfile, int *fd)
 {
-	simple_cmd->
+	if (outfile != NULL)
+	{
+		if (dup2(outfile->fd, STDOUT_FILENO) == -1)
+			perror("minishell");
+		close(outfile->fd);
+	}
+	else if (cmd->is_pipe_next == true)
+	{
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
+			perror("minishell");
+		close(fd[1]);
+	}
+}
+static int redir_in(t_command *cmd, t_redir *infile,\
+	t_redir *outfile, int *fd)
+{
 	if (infile != NULL)
 	{
 		if (dup2(infile->fd, STDIN_FILENO) == -1)
 			perror("minishell");
-		
+		close(infile->fd);
 	}
-	else if (last-in != STDIN_FILENO)
-		dup2(last-in, STDIN_FILENO)
-		close(last-In)
-
-
-		
-	if (outfile != NULL)
+	else if (cmd->data->last_fd_in != STDIN_FILENO) //not first
 	{
-		
+		if (dup2(cmd->data->last_fd_in, STDIN_FILENO) == -1)
+			perror("minishell");
+		close(cmd->data->last_fd_in);
 	}
+	close(cmd->data->last_fd_in);
+	redir_out(cmd, outfile, fd);
+	return (SUCCEED);
+}
+
+void	cmd_executor(t_main_data *data, t_command *cmd, int *fd, char **envp)
+{
+	char *path;
+
+	setup_file_descriptors(cmd, data);
+	redir_in(cmd, cmd->infile, cmd->outfile, fd);
+	if (manage_builtins(cmd, data) == true)
+		clean_all_data_exit(data, EXIT_SUCCESS);
 	else
 	{
-		if (simple_cmd->is_pipe_next == true)
-			//dup pipe
+		path = executable_path(data);
+		if (execve(path, cmd->args, envp) != 0)
+		{
+			perror("minishell");
+			clean_all_data_exit(data, EXIT_FAIL);
+		}
 	}
-}
-{
-	
-}
-void	cmd_executor(t_main_data *data, t_command *cmd, int current_cmd)
-{
-	// check the path
-	//redir 
 	//close fds
 	//execu
 	//error msg

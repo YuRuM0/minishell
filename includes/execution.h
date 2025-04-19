@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/15 15:25:44 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/19 16:40:33 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,19 @@ typedef enum s_exec_error{
 	INVALID_INPUT,
 	FAIL_PATH_RETRIEVAL,
 	ENV_ERROR,
-	ERROR = -1,
+	ERROR = -1
 }	t_exec_error;
-
-int				distribution(t_main_data *data);
 
 //builtins
 
-t_exec_error	ft_cd(char **cmd, t_env_var *envp);
-int				echo(char **args);
-int				env(t_env_var *envp, char **args);
+t_exec_error	ft_cd(char **cmd, t_main_data *data);
+t_exec_error	env(t_main_data *data, char **args);
 void			ft_exit(char **cmd, t_main_data *data);
 int				export_arg(char *arg, t_env_var **envp);
-int				export(char **args, t_env_var **envp);
-t_exec_error	pwd();
-int				ft_unset(char **args, t_env_var **envp);
+t_exec_error	export(char **args, t_main_data *data);
+void			echo(char **args);
+t_exec_error	pwd(t_main_data *data);
+t_exec_error	ft_unset(char **args, t_env_var **envp);
 
 //export_utils
 char			*get_var_name(char *arg);
@@ -51,6 +49,17 @@ int				ft_add_key_val(t_env_var **head, char *keyvalue);
 t_env_var		*ft_find_env(t_env_var *env, char *key);
 int				ft_env_update(t_env_var *env, char *name, char *path);
 void			ft_delete_node(t_env_var **envp, t_env_var *head, int i); // used in unset
+
+// execute
+bool	manage_builtins(t_command *cmd, t_main_data *data);
+void	execution(t_main_data *data, t_command *cmd);
+void	cmd_executor(t_main_data *data, t_command *cmd, int *fd);
+
+//executable_path
+char	*ft_strputjoin(char *src1, char *src2, char c);
+int		free_double(char **arr);
+char	*executable_path(t_main_data *data);
+
 #endif
 
 

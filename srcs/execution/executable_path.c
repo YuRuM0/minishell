@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   connect_utils.c                                    :+:      :+:    :+:   */
+/*   executable_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/15 16:00:08 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:42:38 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,21 @@ int free_double(char **arr)
 		i++;
 	}
 	free(arr);
-	retrun (0);
+	return (0);
 }
 
 char	*executable_path(t_main_data *data)
 {
-	char	 **env_path_var;
+	char		**env_path_var;
 	t_env_var	*env_path;
 	int			i;
 	char		*path;
-	
+
 	env_path = ft_find_env(data->env_vars, "PATH");
 	env_path_var = ft_split(env_path->variable, ':');
 	if (!env_path_var)
 		return (NULL);
+	i = 0;
 	while (env_path_var[i])
 	{
 		path = ft_strputjoin(env_path_var[i], data->cmds->args[0], '/');

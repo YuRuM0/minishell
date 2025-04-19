@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: filipe <filipe@student.42.fr>              +#+  +:+       +#+         #
+#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/17 21:27:12 by filipe           ###   ########.fr        #
+#    Updated: 2025/04/19 16:30:51 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,10 @@ SIGNAL_FILES = $(SIGNAL_DIR)/signal.c
 
 
 EXEC_DIR = $(SCRS_DIR)/execution
+EXEC_FILES = $(EXEC_DIR)/main.c\
+				$(EXEC_DIR)/execution.c\
+				$(EXEC_DIR)/executable_path.c\
+				$(EXEC_DIR)/child_executor.c\
 
 BUILTIN_DIR = $(EXEC_DIR)/builtins
 BUILTIN_FILES = $(BUILTIN_DIR)/echo.c \
@@ -84,18 +88,14 @@ BUILTIN_FILES = $(BUILTIN_DIR)/echo.c \
 				$(BUILTIN_DIR)/export_utils.c \
 				$(BUILTIN_DIR)/pwd.c \
 				$(BUILTIN_DIR)/unset.c \
-				$(BUILTIN_DIR)/cd_main.c 
-
-CONNECT_DIR = $(EXEC_DIR)/connect
-CONNECT_FILES = $(CONNECT_DIR)/main.c\
-				$(CONNECT_DIR)/redirection.c
-
+				$(BUILTIN_DIR)/cd_main.c
 
 
 SRC_FILES = $(PARSE_FILES) $(ERROR_FILE) $(JUMP_PARSE_FILES) \
 				$(PARSE_UTILS_FILES) $(DEBUG_FILES) $(FREE_FILE) \
 				$(ENVIRONMENT_VAR_FILES) $(COMMANDS_FILES) \
-				$(BUILTIN_FILES) $(CONNECT_FILES) $(SIGNAL_FILES)
+				$(BUILTIN_FILES) $(CONNECT_FILES) $(SIGNAL_FILES) \
+				$(EXEC_FILES)
 
 OBJS_DIR = objs
 OBJS = $(patsubst $(SCRS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRC_FILES))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/17 21:46:12 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/19 16:52:37 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ void	parsing_and_execution(t_main_data *data)
 			status_error(data, ERROR_MEM_ALLOC);
 		return ;
 	}
-	if (setup_file_descriptors(data->cmds, data) != SUCCESS)
-		return ;
-	debugging(data);
+	//if (setup_file_descriptors(data->cmds, data) != SUCCESS)
+	//	return ;
+	//debugging(data);
+	execution(data, data->cmds, envp);
 	// echo(data->cmds->args);
 	// distribution(data); //exec
 }

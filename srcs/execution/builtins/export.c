@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/18 19:26:13 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:41:21 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ t_exec_error	export(char **args, t_main_data *data)
 	i = 1;
 	while (args[i])
 	{
-		check = export_arg(args[i], data->env_vars);
+		check = export_arg(args[i], &data->env_vars);
 		if (check == -1)
 		{
 			error_msg("Export: Invalid Input\n");

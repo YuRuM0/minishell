@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_builder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:44:02 by flima             #+#    #+#             */
-/*   Updated: 2025/04/15 19:25:25 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/19 16:14:02 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_pars_err	commands_builder(t_main_data *data)
 	t_command	*cmd;
 	t_token		*token;
 
-	cmd = add_new_cmd();
+	cmd = add_new_cmd(data);
 	if (cmd == NULL)
 		return (ERROR_MEM_ALLOC);
 	data->cmds = cmd;
@@ -115,7 +115,7 @@ t_pars_err	commands_builder(t_main_data *data)
 		if (token->type == PIPE)
 		{
 			cmd->is_pipe_next = true;
-			cmd = add_new_cmd();
+			cmd = add_new_cmd(data);
 			if (cmd == NULL)
 				return (ERROR_MEM_ALLOC);
 			add_cmd_back(&data->cmds, cmd);
