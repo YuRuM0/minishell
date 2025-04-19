@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/19 16:40:33 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/19 17:36:59 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd);
 //executable_path
 char	*ft_strputjoin(char *src1, char *src2, char c);
 int		free_double(char **arr);
-char	*executable_path(t_main_data *data);
+char	*executable_path(t_main_data *data, t_command *cmd);
 
 #endif
 

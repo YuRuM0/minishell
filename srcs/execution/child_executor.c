@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/19 16:50:53 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/19 18:31:08 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,21 @@ static int redir_in(t_command *cmd, t_redir *infile,\
 	return (SUCCEED);
 }
 
-void	cmd_executor(t_main_data *data, t_command *cmd, int *fd, char **envp)
+void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 {
 	char *path;
 
 	setup_file_descriptors(cmd, data);
+	path = executable_path(data, cmd);
 	redir_in(cmd, cmd->infile, cmd->outfile, fd);
 	if (manage_builtins(cmd, data) == true)
 		clean_all_data_exit(data, EXIT_SUCCESS);
 	else
 	{
-		path = executable_path(data);
-		if (execve(path, cmd->args, envp) != 0)
+		if (execve(path, cmd->args, data->envp_array) != 0)
 		{
 			perror("minishell");
+			//printf("HERE!\n");
 			clean_all_data_exit(data, EXIT_FAIL);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/19 16:29:33 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/19 18:18:03 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 bool	manage_builtins(t_command *cmd, t_main_data *data)
  {
  	if (ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0])) == 0)
- 		echo(cmd->args);
+		echo(cmd->args);
  	else if (ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])) == 0)
  		ft_cd(cmd->args, data);
  	else if (ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0])) == 0)
@@ -32,7 +32,7 @@ bool	manage_builtins(t_command *cmd, t_main_data *data)
  	else if (ft_strncmp(cmd->args[0], "unset", ft_strlen(cmd->args[0])) == 0)
  		ft_unset(cmd->args, &data->env_vars);
  	else
- 		return (false);
+		return (false);
  	return (true);
  }
 

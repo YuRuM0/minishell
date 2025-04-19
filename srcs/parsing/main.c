@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/15 15:34:18 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/19 17:09:30 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	init_data(t_main_data *data)
 	data->cmds = NULL;
 	data->tokens = NULL;
 	data->exit_status = 0;
+	data->env_vars = NULL;
 }
 
 int	main(int argc, char **argv, char **envp)

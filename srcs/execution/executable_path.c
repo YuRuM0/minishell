@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executable_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/19 16:42:38 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/19 17:36:31 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int free_double(char **arr)
 	return (0);
 }
 
-char	*executable_path(t_main_data *data)
+char	*executable_path(t_main_data *data, t_command *cmd)
 {
 	char		**env_path_var;
 	t_env_var	*env_path;
@@ -72,7 +72,7 @@ char	*executable_path(t_main_data *data)
 	i = 0;
 	while (env_path_var[i])
 	{
-		path = ft_strputjoin(env_path_var[i], data->cmds->args[0], '/');
+		path = ft_strputjoin(env_path_var[i], cmd->args[0], '/');
 		if (access(path, X_OK | F_OK) == 0)
 		{
 			free_double(env_path_var);

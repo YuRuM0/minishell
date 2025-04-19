@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
+#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/19 16:30:51 by yulpark          ###   ########.fr        #
+#    Updated: 2025/04/19 17:10:39 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ PARSE_FILES = $(PARSE_DIR)/main.c \
 ENVIRONMENT_VAR_DIR = $(PARSE_DIR)/env_variables
 ENVIRONMENT_VAR_FILES = $(ENVIRONMENT_VAR_DIR)/env_var_utils.c \
 						$(ENVIRONMENT_VAR_DIR)/environment_var.c \
-						$(ENVIRONMENT_VAR_DIR)/env_expand_utils.c
+						$(ENVIRONMENT_VAR_DIR)/env_expand_utils.c \
+						$(ENVIRONMENT_VAR_DIR)/create_envp_array.c
 
 COMMANDS_DIR = $(PARSE_DIR)/commands_builder
 COMMANDS_FILES = $(COMMANDS_DIR)/commands_builder.c\

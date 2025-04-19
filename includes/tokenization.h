@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/19 16:14:19 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/19 17:14:46 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ t_pars_err 	expand_environ_var(t_env_var *envp, char *var_name, char **environ_v
 t_pars_err 	expand_env_instr(t_env_var *envp, char **expand);
 t_pars_err	expand_token_n_trim_quote(t_env_var *envp, t_token *token);
 t_pars_err	set_exit_env_status(t_env_var *envp, int status);
+void		create_envp_array(t_main_data *data, t_env_var *envp);
 
 //lexer functions
 typedef t_pars_err	(*t_lex_functions)(char *str, size_t *i, t_syntax *type);

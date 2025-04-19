@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:45:11 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/18 19:03:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/19 18:20:36 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@ void	echo(char **args)
 
 	n = 0;
 	i = 1;
-	if (args[1][0] == '-' && args[1][1] == 'n' && args[1][2] == '\0')
+	if (!args[1])
 	{
-		n = -1;
+		ft_putchar_fd('\n', 1);
+		return ;
+	}
+	if (ft_strncmp(args[1], "-n", ft_strlen(args[1])) == 0)
+	{
 		i++;
+		n = -1;
 	}
 	while (args[i])
 	{

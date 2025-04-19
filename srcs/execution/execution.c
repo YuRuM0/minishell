@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/19 16:51:32 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/19 18:29:29 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
+void	exec_one_cmd(t_command *cmd)
+{
+	manage_builtins(cmd, cmd->data);
+}
+
 
 static void	wait_all_children(t_main_data *data, pid_t *pid)
 {
@@ -37,6 +43,7 @@ static int	create_pipe_n_fork(int *fd)
 		return (ERROR);
 	}
 	pid = fork();
+	if (pid == -1)
 	{
 		error_msg("failed to create a new process.\n");
 		return (ERROR);
@@ -44,27 +51,33 @@ static int	create_pipe_n_fork(int *fd)
 	return (pid);
 }
 
-void	execution(t_main_data *data, t_command *cmd, char **envp)
+void	execution(t_main_data *data, t_command *cmd)
 {
 	int	fd[2];
 	int	i;
 	pid_t	pid[data->nbr_of_cmds];
 
 	i = 0;
-	//set_signals
-	while (cmd != NULL)
+	printf("%d\n", data->nbr_of_cmds);
+	if (data->nbr_of_cmds == 1)
+		exec_one_cmd(cmd);
+	else
 	{
-		pid[i] = create_pipe_n_fork(fd);
-		if (pid[i] == ERROR)
-			return ; // msg of error (perror)
-		if (pid[i] == 0)
-			cmd_executor(data, cmd, fd, envp);
-		if (data->last_fd_in != STDIN_FILENO)
-			close(data->last_fd_in);
-		data->last_fd_in = fd[0];
-		close(fd[1]);
-		cmd = cmd->next;
-		i++;
+		//set_signals
+		while (cmd != NULL)
+		{
+			pid[i] = create_pipe_n_fork(fd);
+			if (pid[i] == ERROR)
+				return ; // msg of error (perror)
+			if (pid[i] == 0)
+				cmd_executor(data, cmd, fd);
+			if (data->last_fd_in != STDIN_FILENO)
+				close(data->last_fd_in);
+			data->last_fd_in = fd[0];
+			close(fd[1]);
+			cmd = cmd->next;
+			i++;
+		}
+		wait_all_children(data, pid);
 	}
-	wait_all_children(data, pid);
 }
