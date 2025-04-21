@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/19 16:41:21 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/21 23:23:36 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int	export_noarg(t_env_var *envp)
 			{
 				write(1, &envp->variable[i], 1);
 				if (envp->variable[i] == '=')
-					write(1, "\"", 1);
+					write(1, "\"", 2);
 				i++;
 			}
 			if (envp->is_exported == 1)
-				write(1, "\"", 1);
-			write(1, "\n", 1);
+				write(1, "\"", 2);
+			write(1, "\n", 2);
 		}
 		envp = envp->next;
 	}
@@ -98,8 +98,8 @@ int	export_arg(char *arg, t_env_var **envp)
 		return (-1);
 	head = *envp;
 	name = get_var_name(arg);
-	if (name)
-		printf("%s\n", name);
+	// if (name)
+	// 	printf("%s\n", name);
 	while (head)
 	{
 		if (ft_strncmp(head->variable, name, ft_strlen(name)) == 0)

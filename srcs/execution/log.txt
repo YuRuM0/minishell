@@ -51,3 +51,13 @@ minishell$ export | grep var
 grep: (standard input): binary file matches
 minishell$ 
 
+
+minishell$ echo $HOME
+/home/filipe
+minishell$ echo $var
+lue
+minishell$ echo $var1
+lue
+minishell$ echo $var1
+lue
+minishell$ 
