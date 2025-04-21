@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/19 19:42:29 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/21 14:55:54 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	parsing_and_execution(t_main_data *data)
 			status_error(data, ERROR_MEM_ALLOC);
 		return ;
 	}
+	create_envp_array(data, data->env_vars);
 	//debugging(data);
 	execution(data, data->cmds);
 	// echo(data->cmds->args);
