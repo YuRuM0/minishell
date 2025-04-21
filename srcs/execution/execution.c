@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/21 16:28:22 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/21 23:04:46 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static t_exec_error redir_out_one_cmd(t_command *cmd, t_redir *outfile, int *saveout)
 {
-	if (cmd->outfile != NULL)
+	if (outfile != NULL)
 	{
-		if (*saveout = dup(STDOUT_FILENO) == -1)
+		*saveout = dup(STDOUT_FILENO);
+		if (*saveout == -1)
 		{
 			perror("minishell");
 			return (ERROR);
@@ -32,6 +33,7 @@ static t_exec_error redir_out_one_cmd(t_command *cmd, t_redir *outfile, int *sav
 	}
 	return (SUCCEED);
 }
+
 static t_exec_error redir_one_cmd(t_command *cmd, int *savein, int *saveout)
 {
 	*savein = -2;
@@ -39,7 +41,8 @@ static t_exec_error redir_one_cmd(t_command *cmd, int *savein, int *saveout)
 	
 	if (cmd->infile != NULL)
 	{
-		if (*savein = dup(STDIN_FILENO) == -1)
+		*savein = dup(STDIN_FILENO);
+		if (*savein == -1)
 		{
 			perror("minishell");
 			return (ERROR);
@@ -58,18 +61,29 @@ static t_exec_error redir_one_cmd(t_command *cmd, int *savein, int *saveout)
 	return (SUCCEED);
 }
 
-static void	reset_io_redirects(int	fd_in, int	fd_out)
+static t_exec_error	reset_io_redirects(int	fd_in, int	fd_out)
 {
 	if (fd_in != -2)
 	{
-		dup2(fd_in, STDIN_FILENO);
+		if (dup2(fd_in, STDIN_FILENO) == -1)
+		{
+			perror("minishell");
+			close(fd_in);
+			return (ERROR);
+		}
 		close(fd_in);
 	}
 	if (fd_out != -2)
 	{
-		dup2(fd_out, STDOUT_FILENO);
+		if (dup2(fd_out, STDOUT_FILENO) == -1)
+		{
+			perror("minishell");
+			close(fd_out);
+			return(ERROR);
+		}
 		close(fd_out);
 	}
+	return (SUCCEED);
 }
 
 static t_exec_error	exec_one_cmd(t_command *cmd, t_main_data *data)
@@ -90,12 +104,13 @@ static t_exec_error	exec_one_cmd(t_command *cmd, t_main_data *data)
 		else
 		{
 			if (path != NULL)
-				execve(path, cmd->args, data->envp_array);
+				execve(path, cmd->args, data->envp_array); //cant call execve in parent
 			perror("minishell");
 			clean_all_data_exit(data, EXIT_FAIL);
 		}
-	
 	}
+	if (reset_io_redirects(savein, saveout) != SUCCEED)
+		return (ERROR);
 	return (SUCCEED);
 }
 

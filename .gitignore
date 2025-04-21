@@ -8,3 +8,4 @@ minishell
 # /execution/tests/*
 /parsing/tests/*
 test.c
+tests
