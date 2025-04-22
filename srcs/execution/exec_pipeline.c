@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 17:52:29 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:03:17 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ static void	wait_all_children(t_main_data *data, pid_t *pid)
 	}
 	else if (WIFSIGNALED(exit_status))
 		data->exit_status = 128 + WTERMSIG(exit_status);
+	if (set_exit_env_status(data->env_vars, data->exit_status) != SUCCESS)
+		status_error(data, ERROR_MEM_ALLOC);
+	g_last_signal = data->exit_status;
 }
 
 static int	create_pipe_n_fork(int *fd)
