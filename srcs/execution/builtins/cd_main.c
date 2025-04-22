@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:41:37 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/22 15:01:43 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:06:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static void	change_pwd(t_env_var **envp, char *tb_oldpwd, char *home)
+static void	change_pwd(t_env_var **envp, char *tb_oldpwd, char *pwd)
 {
 	t_env_var	*temp;
 
@@ -27,11 +27,10 @@ static void	change_pwd(t_env_var **envp, char *tb_oldpwd, char *home)
 		if (ft_strncmp(temp->variable, "PWD", 3) == 0)
 		{
 			free (temp->variable);
-			temp->variable = ft_strdup(home);
+			temp->variable = ft_strdup(pwd);
 		}
 		temp = temp->next;
 	}
-	//free(tb_oldpwd);
 }
 
 static int	go_home(t_env_var **envp, char *oldpwd)
@@ -42,11 +41,9 @@ static int	go_home(t_env_var **envp, char *oldpwd)
 	home = ft_find_env(*envp, "HOME");
 	new_path = ft_strchr(home->variable, '=');
 	new_path++;
-	printf("%s\n", new_path);
 	if (!new_path || chdir(new_path) != 0)
 		return (1);
 	change_pwd(envp, oldpwd, home->variable);
-	free(oldpwd);
 	return (0);
 }
 
@@ -60,21 +57,24 @@ static int	go_prev(t_env_var **envp, char *tb_old_pwd)
 	new_path++;
 	if (!new_path || chdir(new_path) != 0)
 		return (1);
-	//free(new_path);
+	free(new_path);
 	change_pwd(envp, tb_old_pwd, tb_new_pwd->variable);
 	return (0);
 }
 
-static int	cases(char *cmd, t_env_var *envp, char *tb_old_pwd)
+static int	cases(char *cmd, t_env_var **envp, char *tb_old_pwd)
 {
 	char	*new_pwd;
+	struct stat stats;
 
-	if (access(cmd, F_OK) != -1)
+	if (access(cmd, F_OK) == 0)
 	{
+		if (stat(cmd, &stats) != 0)
+			return (3);
 		if (chdir(cmd) != 0)
 			return (1);
 		new_pwd = getcwd(NULL, 0);
-		change_pwd(&envp, tb_old_pwd, new_pwd);
+		change_pwd(envp, tb_old_pwd, new_pwd);
 		//free(new_pwd);
 		return (0);
 	}
@@ -84,6 +84,8 @@ static int	cases(char *cmd, t_env_var *envp, char *tb_old_pwd)
 t_exec_error	ft_cd(char **cmd, t_main_data *data)
 {
 	char	*tb_old_pwd;
+	char	*formatted_path;
+	int		res;
 
 	if (cmd[1] && cmd[2])
 	{
@@ -91,9 +93,10 @@ t_exec_error	ft_cd(char **cmd, t_main_data *data)
 		//clean_all_data_exit(data, 1);
 	}
 	tb_old_pwd = getcwd(NULL, 0);
+	formatted_path = ft_strjoin("OLDPWD=", tb_old_pwd);
 	if (cmd[1] == NULL || cmd[1][0] == '~')
 	{
-		if (go_home(&data->env_vars, tb_old_pwd) == 1)
+		if (go_home(&data->env_vars, formatted_path) == 1)
 		{
 			error_msg("cd: HOME doesn't exist\n");
 			//clean_all_data_exit(data, 1);
@@ -101,20 +104,21 @@ t_exec_error	ft_cd(char **cmd, t_main_data *data)
 	}
 	else if (cmd[1][0] == '-')
 	{
-		if (go_prev(&data->env_vars, tb_old_pwd) == 1)
+		if (go_prev(&data->env_vars, formatted_path) == 1)
 		{
 			error_msg("cd: OLDPWD doesn't exist\n");
 			//clean_all_data_exit(data, 1);
 		}
 	}
-	else if (cases(cmd[1], data->env_vars, tb_old_pwd) == 1)
+	else
 	{
-		error_msg("cd: Path doesn't exist\n");
-		//clean_all_data_exit(data, 1);
-	}
-	else if (cases(cmd[1], data->env_vars, tb_old_pwd) == 2)
-	{
-		error_msg("cd: Path no access\n");
+		res = cases(cmd[1], &data->env_vars, formatted_path);
+		if (res == 1)
+			error_msg("cd: no such file or directory\n");
+		else if (res == 3)
+			error_msg("cd: not a directory\n");
+		else if (res == 2)
+			error_msg("cd: permission denied\n");
 	}
 	return (SUCCEED);
 }

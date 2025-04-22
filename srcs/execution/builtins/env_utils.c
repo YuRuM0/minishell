@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 00:00:31 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/11 18:07:15 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:32:13 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_env_var	*ft_find_env(t_env_var *env, char *key)
 {
 	while (env)
 	{
-		if (ft_strncmp(env->variable, key, ft_strlen(key)) == 0)
+		if (ft_strncmp(env->variable, key, ft_strlen(key)) == 0 &&\
+		env->variable[ft_strlen(key)] == '=')
 			return (env);
 		env = env->next;
 	}

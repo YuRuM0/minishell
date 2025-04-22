@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 15:44:37 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:18:12 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	wait_all_children(t_main_data *data, pid_t *pid)
 	int	status;
 
 	i = 0;
-	//handle exit code 
+	//handle exit code
 	while (i < data->nbr_of_cmds)
 	{
 		waitpid(pid[i], &status, 0);
 		i++;
 	}
-	pipeline_status = status;
+	//pipeline_status = status;
 }
 
 static int	create_pipe_n_fork(int *fd)
