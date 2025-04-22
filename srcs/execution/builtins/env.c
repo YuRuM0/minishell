@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 23:50:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/18 19:19:26 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:53:15 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_exec_error	env(t_main_data *data, char **args)
 	}
 	else
 	{
-		error_msg("Env: env in this shell does not expect an argument\n");
-		clean_all_data_exit(data, 1);
+		return (error_msg("Env: env in this shell does not expect an argument\n"), ERROR);
+		//clean_all_data_exit(data, 1);
 	}
 	return (SUCCEED);
 }

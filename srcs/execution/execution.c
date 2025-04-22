@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 15:33:55 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 17:47:50 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,14 @@ static t_exec_error	exec_one_cmd(t_command *cmd, t_main_data *data)
 	//char *path;
 	int savein;
 	int saveout;
+	int flag;
 
+	flag = PARENT;
 	if (setup_file_descriptors(cmd, data) != SUCCESS)
 		return (ERROR);
 	if (redir_one_cmd(cmd, &savein, &saveout) != SUCCEED)
 		return (ERROR);
-	if (manage_builtins(cmd, data) != SUCCEED)
+	if (manage_builtins(cmd, data, flag) != SUCCEED)
 		return (ERROR);
 	if (reset_io_redirects(savein, saveout) != SUCCEED)
 		return (ERROR);
@@ -110,7 +112,7 @@ void	execution(t_main_data *data, t_command *cmd)
 	if (data->nbr_of_cmds == 1 && builtinchecker(cmd) == true)
 	{
 		status = exec_one_cmd(cmd, data);
-		if (set_exit_env_status(data->env_vars, ERROR) != SUCCESS)
+		if (set_exit_env_status(data->env_vars, FAILURE) != SUCCESS)
 			status_error(data, ERROR_MEM_ALLOC);
 		if (status != SUCCEED)
 			return ;
@@ -120,7 +122,7 @@ void	execution(t_main_data *data, t_command *cmd)
 		status = execute_pipeline(data, cmd);
 		if (status != SUCCEED)
 		{
-			if (set_exit_env_status(data->env_vars, ERROR) != SUCCESS)
+			if (set_exit_env_status(data->env_vars, FAILURE) != SUCCESS)
 				status_error(data, ERROR_MEM_ALLOC);
 		}
 	}

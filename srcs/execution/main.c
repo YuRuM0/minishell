@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/22 13:50:48 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:17:15 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,33 @@
 // if there is a command -> send the command to manage_builtins
 
 //change to return the values from each builtins
-t_exec_error	manage_builtins(t_command *cmd, t_main_data *data)
+t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag)
  {
+	t_exec_error stat;
+
  	if (ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0])) == 0)
-		return(echo(cmd->args), SUCCEED);
+ 	{
+		echo(cmd->args);
+		stat = SUCCEED;
+	}
  	else if (ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])) == 0)
- 		return(ft_cd(cmd->args, data));
+ 		stat = ft_cd(cmd->args, data);
  	else if (ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0])) == 0)
- 		return(env(data, cmd->args));
+ 		stat = env(data, cmd->args);
  	else if (ft_strncmp(cmd->args[0], "exit", ft_strlen(cmd->args[0])) == 0)
- 		return (ft_exit(cmd->args, data), SUCCEED);
+ 		ft_exit(cmd->args, data);
  	else if (ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])) == 0)
- 		return (export(cmd->args, data));
+ 		stat = export(cmd->args, data);
  	else if (ft_strncmp(cmd->args[0], "pwd", ft_strlen(cmd->args[0])) == 0)
- 		return(pwd(data));
+ 		stat = pwd(data);
+	else if (ft_strncmp(cmd->args[0], "unset", ft_strlen(cmd->args[0])) == 0)
+		stat = ft_unset(cmd->args, &data->env_vars);
+	if (flag == 2)
+		return (clean_all_data_exit(data, stat), stat);
  	else
- 		return (ft_unset(cmd->args, &data->env_vars));
+ 		return (stat);
  }
+
 
  bool	builtinchecker(t_command *cmd)
  {

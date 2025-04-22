@@ -1,45 +1,66 @@
 
-Error Parsing
-
-Error #1
-Input: var=value
-	   echo $var
-Expected output: value
-Output: lue
-
-
-Error #2
-Input: export var2=value2
-	   echo $var2
-Output: Error message: SUMMARY: AddressSanitizer: heap-buffer-overflow /home/yulpark/Desktop/minishell/srcs/parsing/env_variables/environment_var.c:99:9 in expand_env_instr
-
-fixed: Error echo $var2 (if var2 does not exist yet)
-return:
-minishell$ echo $var
---------------------------------------------
-Command[0] echo
-args[1]        (obs: args[1] is an empty string, when the variable does not exist, it return an empty string)
-exemple:
-minishell$ echo "vuoi$var1 un caffe$var2"
---------------------------------------------
-Command[0] echo
-args[1] vuoi un caffe
-
 
 ====================================================================================================================
 
 Error execution
 
-Error #3
-minishell$ export >out | grep PATH
-minishell$ export | grep PATH
-grep: (standard input): binary file matches
-minishell$ export >out.txt
-minishell$ export >out.txt | grep PATH <out.txt
-grep: (standard input): binary file matches
-minishell$ >out
-zsh: segmentation fault (core dumped)  ./minishell
+Error #
 
-Error #4
-cd .. goes HOME
-no access from /home/yulpark/Desktop/minishell to go into Libft
+
+
+To do:
+
+hanlde a fle without <
+
+
+minishell$ cat out
+token      token_type           token_value
+--------------------------------------------
+0          WORD                 cat
+
+1          WORD                 out
+
+--------------------------------------------
+
+--------------------------------------------
+
+Command[0] ca
+
+args[1] out // out here is a file not an arg
+
+
+printing name of the var
+
+minishell$ export var=test
+
+
+var
+
+minishell$ export var=test
+
+
+var
+
+
+minishell$ export var=test
+
+
+
+
+minishell$ echo $HOME
+
+
+/home/filipe
+
+
+minishell$ echo $var
+
+
+lue
+
+
+minishell$ echo $var1
+lue
+
+minishell$ echo $var1
+lue

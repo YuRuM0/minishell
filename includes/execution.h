@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/22 15:13:33 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:08:21 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "minishell.h"
 #include "libft.h"
 #include "tokenization.h"
+#include <sys/stat.h>
 
 typedef enum s_exec_error{
 	SUCCEED,
@@ -51,7 +52,7 @@ int				ft_env_update(t_env_var *env, char *name, char *path);
 void			ft_delete_node(t_env_var **envp, t_env_var *head, int i); // used in unset
 
 // execute
-t_exec_error	manage_builtins(t_command *cmd, t_main_data *data);
+t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag);
 void			execution(t_main_data *data, t_command *cmd);
 void			cmd_executor(t_main_data *data, t_command *cmd, int *fd);
 t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd);

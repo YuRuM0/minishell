@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 17:50:07 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 17:52:07 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ static int redir_in(t_command *cmd, t_redir *infile,\
 void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 {
 	char *path;
+	int flag;
 
+	flag = CHILD;
 	setup_signal_handlers(CMD_CHILD);
 	setup_file_descriptors(cmd, data);
 	redir_in(cmd, cmd->infile, cmd->outfile, fd);

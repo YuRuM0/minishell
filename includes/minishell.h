@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/04/19 17:09:14 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:01:37 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ typedef enum e_exit_code
 	EXIT_SIGINT = 130,
 	EXIT_SIGQUIT = 131
 }	t_exit_code;
+
+# define PARENT 1
+# define CHILD 2
 
 //main structure to hold all the data
 typedef struct s_main_data
