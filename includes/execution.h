@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/21 15:23:19 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 13:00:14 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ bool	manage_builtins(t_command *cmd, t_main_data *data);
 void	execution(t_main_data *data, t_command *cmd);
 void	cmd_executor(t_main_data *data, t_command *cmd, int *fd);
 void	execute_pipeline(t_main_data *data, t_command *cmd);
+bool	builtinchecker(t_command *cmd);
 
 //executable_path
 char	*ft_strputjoin(char *src1, char *src2, char c);

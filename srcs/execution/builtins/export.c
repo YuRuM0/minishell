@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/21 23:23:36 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/22 13:14:50 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ static int	export_noarg(t_env_var *envp)
 		i = 0;
 		if (envp->is_exported != 2)
 		{
-			write(1, "declare -x ", 12);
+			write(1, "declare -x ", 11);
 			while (envp->variable[i])
 			{
 				write(1, &envp->variable[i], 1);
 				if (envp->variable[i] == '=')
-					write(1, "\"", 2);
+					write(1, "\"", 1);
 				i++;
 			}
 			if (envp->is_exported == 1)
-				write(1, "\"", 2);
-			write(1, "\n", 2);
+				write(1, "\"", 1);
+			write(1, "\n", 1);
 		}
 		envp = envp->next;
 	}

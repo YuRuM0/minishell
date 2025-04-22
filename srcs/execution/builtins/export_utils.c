@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 18:50:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/08 16:09:44 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 13:23:24 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	input_checker(char *input)
 			return (-1);
 		if (input[i] == '=')
 			equal_counter++;
-		else if (!(input[i] == '_' || ft_isalnum(input[i]) == 1 || input[i] == '+' || input[i] == '$'))
+		else if (!(input[i] == '_' || ft_isalnum(input[i]) == 1 || input[i] == '+' || input[i] == '$' || input[i] == ' '))
 			return (-1);
 		i++;
 	}

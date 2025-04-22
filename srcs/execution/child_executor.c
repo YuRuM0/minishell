@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/21 15:00:03 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 12:55:21 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,4 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 	//execu
 	//error msg
 }
+
