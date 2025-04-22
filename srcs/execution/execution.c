@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 13:48:47 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 14:51:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,8 @@ static t_exec_error	exec_one_cmd(t_command *cmd, t_main_data *data)
 		return (ERROR);
 	if (redir_one_cmd(cmd, &savein, &saveout) != SUCCEED)
 		return (ERROR);
-	if (manage_builtins(cmd, data) == false)
-	{
-		//path = executable_path(data, cmd);
-		//if (!path)
-		//	error_msg("Couldn't find the path\n");
-		//else
-		//{
-		//	if (path != NULL)
-		//		execve(path, cmd->args, data->envp_array); //cant call execve in parent
-		//	perror("minishell");
-		//	clean_all_data_exit(data, EXIT_FAIL);
-		//}
-	}
+	if (manage_builtins(cmd, data) != SUCCEED)
+		return (ERROR);
 	if (reset_io_redirects(savein, saveout) != SUCCEED)
 		return (ERROR);
 	return (SUCCEED);
@@ -116,8 +105,16 @@ static t_exec_error	exec_one_cmd(t_command *cmd, t_main_data *data)
 
 void	execution(t_main_data *data, t_command *cmd)
 {
+	int	status;
+
 	if (data->nbr_of_cmds == 1 && builtinchecker(cmd) == true)
-		exec_one_cmd(cmd, data);
+	{
+		status = exec_one_cmd(cmd, data);
+		if (set_exit_env_status(data->env_vars, ERROR) != SUCCESS)
+			status_error(data, ERROR_MEM_ALLOC);
+		if (status != SUCCEED)
+			return ;
+	}
 	else
 	{
 		//set_signals
