@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:16:27 by flima             #+#    #+#             */
-/*   Updated: 2025/04/11 20:31:38 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 15:51:05 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	interative_signal_handler(int sig)
 	rl_redisplay();
 }
 
-void	handle_signal_main_loop()
+void	handle_signal\_main_loop()
 {
 	if (g_last_signal)
 	{
@@ -46,10 +46,15 @@ void	setup_signal_handlers(t_signal_mode	mode)
 	act_sigquit.sa_handler = SIG_IGN;
 	if (mode == INTERACTIVE)
 		act_sigint.sa_handler = interative_signal_handler;
-	if (mode == NON_INTERACTIVE)
+	else if (mode == NON_INTERACTIVE)
 		act_sigint.sa_handler = SIG_IGN;
 	else if (mode == HEREDOC_CHILD)
 		act_sigint.sa_handler = SIG_DFL;
+	else if (mode == CMD_CHILD)
+	{
+		act_sigquit.sa_handler = SIG_DFL;
+		act_sigint.sa_handler = SIG_DFL;
+	}
 	sigaction(SIGINT, &act_sigint, NULL);
 	sigaction(SIGQUIT, &act_sigquit, NULL);
 }

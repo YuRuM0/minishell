@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:41:37 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/22 14:39:01 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:01:43 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_exec_error	ft_cd(char **cmd, t_main_data *data)
 {
 	char	*tb_old_pwd;
 
-	if (cmd[2] || cmd[2] != NULL)
+	if (cmd[1] && cmd[2])
 	{
 		error_msg("cd: Too many arguments\n");
 		//clean_all_data_exit(data, 1);
