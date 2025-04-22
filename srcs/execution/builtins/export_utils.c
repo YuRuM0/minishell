@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 18:50:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/22 13:23:24 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 13:42:34 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	input_checker(char *input)
 	int	i;
 	int	equal_counter;
 
-	if (input[0] && (ft_isalpha(input[0]) == 0 && input[0] == '_'))
+	if (input[0] && (ft_isalpha(input[0]) == 0 && input[0] != '_'))
 		return (-1);
 	equal_counter = 0;
 	i = 1;

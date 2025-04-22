@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/22 14:07:10 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 14:55:29 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ int				ft_env_update(t_env_var *env, char *name, char *path);
 void			ft_delete_node(t_env_var **envp, t_env_var *head, int i); // used in unset
 
 // execute
-bool	manage_builtins(t_command *cmd, t_main_data *data);
-void	execution(t_main_data *data, t_command *cmd);
-void	cmd_executor(t_main_data *data, t_command *cmd, int *fd);
-t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd);
-bool	builtinchecker(t_command *cmd);
+t_exec_error	manage_builtins(t_command *cmd, t_main_data *data);
+void			execution(t_main_data *data, t_command *cmd);
+void			cmd_executor(t_main_data *data, t_command *cmd, int *fd);
+void			execute_pipeline(t_main_data *data, t_command *cmd);
+bool			builtinchecker(t_command *cmd);
 
 //executable_path
-char	*ft_strputjoin(char *src1, char *src2, char c);
-int		free_double(char **arr);
-char	*executable_path(t_main_data *data, t_command *cmd);
+char			*ft_strputjoin(char *src1, char *src2, char c);
+int				free_double(char **arr);
+char			*executable_path(t_main_data *data, t_command *cmd);
 
 #endif
 
