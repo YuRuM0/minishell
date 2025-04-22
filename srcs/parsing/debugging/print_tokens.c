@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/04/17 21:01:22 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/22 14:41:23 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static	void	print_commands(t_command *cmd, int nb)
 
 	i = 0;
 	get_str_cmd(str_cmd);
-	if (cmd->args[0] != NULL)
+	if (cmd && cmd->args[0] != NULL)
 		printf("%s[%d] %-20s\n", "Command", nb, cmd->args[0]);
 	while (cmd->args[0] && cmd->args[++i] != NULL)
 		printf("%s[%d] %-20s\n", "args", i, cmd->args[i]);
