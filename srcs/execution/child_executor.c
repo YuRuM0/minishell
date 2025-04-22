@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 19:59:14 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 20:01:59 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,11 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 
 	flag = CHILD;
 	setup_signal_handlers(CMD_CHILD);
-	if (setup_file_descriptors(cmd, data) != SUCCESS)
-		clean_all_data_exit(data, EXIT_FAIL);
-	if (redir_in(cmd, cmd->infile, cmd->outfile, fd) != SUCCEED)
-		clean_all_data_exit(data, EXIT_FAIL); //set the return values
-	if (manage_builtins(cmd, data, flag) == true)
-		clean_all_data_exit(data, EXIT_SUCCESS);
+	setup_file_descriptors(cmd, data);
+	redir_in(cmd, cmd->infile, cmd->outfile, fd);
+	//sleep(1);
+	if (builtinchecker(cmd) == true)
+		manage_builtins(cmd, data, flag);
 	else
 	{
 		path = executable_path(data, cmd);

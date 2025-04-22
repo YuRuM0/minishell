@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:44:02 by flima             #+#    #+#             */
-/*   Updated: 2025/04/19 19:57:47 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 19:00:18 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_pars_err	assign_redir(t_command *cmd, t_token *current)
 	else if (current->type == LESS)
 		new_redir->redir_id = REDIR_IN;
 	new_redir->file = ft_strdup(current->next->value);
+	// file name condition
 	if (new_redir->file == NULL)
 		return (ERROR_MEM_ALLOC);
 	return (SUCCESS);
