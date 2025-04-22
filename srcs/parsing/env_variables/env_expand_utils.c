@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 19:04:52 by flima             #+#    #+#             */
-/*   Updated: 2025/04/07 17:17:58 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 18:54:09 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_pars_err	get_environ_var_value(char **environ_var, char *var_name)
 	tmp_name = ft_strjoin(var_name, "=");
 	if (tmp_name == NULL && errno == ENOMEM)
 		return (ERROR_MEM_ALLOC);
-	tmp_var = ft_strtrim(*environ_var, tmp_name);
+	tmp_var = ft_substr(*environ_var, ft_strlen(tmp_name), ft_strlen(*environ_var)-ft_strlen(tmp_name));
 	free(tmp_name);
 	if (tmp_var == NULL && errno == ENOMEM)
 		return (ERROR_MEM_ALLOC);

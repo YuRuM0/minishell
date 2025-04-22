@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 17:45:51 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 18:48:00 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static t_pars_err	expand_valid_env(t_env_var *envp, char **expand, int *i)
 		return (ERROR_MEM_ALLOC);
 	}
 	free(var_name);
-	free(var_value);
+	//free(var_value);
 	return (SUCCESS);
 }
 
