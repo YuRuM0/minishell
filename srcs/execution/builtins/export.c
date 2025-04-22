@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/22 13:14:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 13:35:02 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ static char	*replace_or_join_var(char *arg, t_env_var *head, char *name)
 {
 	char	*temp;
 
-	if (ft_strchr(head->variable, '+') == NULL)
+	if (ft_strchr(head->variable, '+') != NULL)
 	{
-		if (ft_strchr(head->variable, '=') == NULL)
+		if (ft_strchr(head->variable, '=') != NULL)
 			temp = ft_strjoin(head->variable, &arg[ft_strlen(name) + 1]);
 		else
 			temp = ft_strjoin(head->variable, &arg[ft_strlen(name) + 2]);
