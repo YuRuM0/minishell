@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 15:44:37 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 17:50:26 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 static void	wait_all_children(t_main_data *data, pid_t *pid)
 {
 	int	i;
-	int	status;
+	int	exit_status;
 
-	i = 0;
-	//handle exit code 
-	while (i < data->nbr_of_cmds)
+	i = -1;
+	while (++i < data->nbr_of_cmds)
+		waitpid(pid[i], &exit_status, 0);
+	if (WEXITSTATUS(exit_status))
 	{
-		waitpid(pid[i], &status, 0);
-		i++;
+		if (set_exit_env_status(data->env_vars, EXIT_FAIL) != SUCCESS)
+			status_error(data, ERROR_MEM_ALLOC);
 	}
-	pipeline_status = status;
+	else if (WIFSIGNALED(exit_status))
+		data->exit_status = 128 + WTERMSIG(exit_status);
 }
 
 static int	create_pipe_n_fork(int *fd)
