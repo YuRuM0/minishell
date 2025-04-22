@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 17:52:29 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:25:32 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ static int	create_pipe_n_fork(int *fd)
 	return (pid);
 }
 
+static void	close_parent_heredoc_fd(t_redir *redir_list)
+{
+	while (redir_list != NULL)
+	{
+		if (redir_list && redir_list->redir_id == REDIR_HEREDOC)
+			close(redir_list->fd);
+		redir_list = redir_list->next;
+	}
+}
+
 t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd)
 {
 	int	fd[2];
@@ -63,6 +73,7 @@ t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd)
 			return (ERROR);
 		if (pid[i] == 0)
 			cmd_executor(data, cmd, fd);
+		close_parent_heredoc_fd(cmd->redir_list);
 		if (data->last_fd_in != STDIN_FILENO)
 			close(data->last_fd_in);
 		data->last_fd_in = fd[0];
