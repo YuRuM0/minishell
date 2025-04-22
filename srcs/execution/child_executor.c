@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 20:01:59 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 20:05:31 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static int redir_in(t_command *cmd, t_redir *infile,\
 			perror("minishell");
 		close(cmd->data->last_fd_in);
 	}
-	// close(cmd->data->last_fd_in);
 	redir_out(cmd, outfile, fd);
 	return (SUCCEED);
 }
