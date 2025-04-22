@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 18:29:03 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:06:44 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	wait_all_children(t_main_data *data, pid_t *pid)
 		waitpid(pid[i], &exit_status, 0);
 	if (WEXITSTATUS(exit_status))
 	{
-		if (set_exit_env_status(data->env_vars, EXIT_FAIL) != SUCCESS)
+		data->exit_status = WEXITSTATUS(exit_status);
+		if (set_exit_env_status(data->env_vars, data->exit_status) != SUCCESS)
 			status_error(data, ERROR_MEM_ALLOC);
 	}
 	else if (WIFSIGNALED(exit_status))

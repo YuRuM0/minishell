@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 18:28:52 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:59:14 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // se nao, usar o STDIN
 // identificar se ha pipe e redirecionar para o pipe, se nao houver file in
 //identificar o ultimo cmd e redirecionar para stdout ou um out file
+
 
 static void redir_out(t_command *cmd, t_redir *outfile, int *fd)
 {
@@ -32,6 +33,7 @@ static void redir_out(t_command *cmd, t_redir *outfile, int *fd)
 		close(fd[1]);
 	}
 }
+
 static int redir_in(t_command *cmd, t_redir *infile,\
 	t_redir *outfile, int *fd)
 {
@@ -41,13 +43,13 @@ static int redir_in(t_command *cmd, t_redir *infile,\
 			perror("minishell");
 		close(infile->fd);
 	}
-	else if (cmd->data->last_fd_in != STDIN_FILENO) //not first
+	else if (cmd->data->last_fd_in != STDIN_FILENO)
 	{
 		if (dup2(cmd->data->last_fd_in, STDIN_FILENO) == -1)
 			perror("minishell");
 		close(cmd->data->last_fd_in);
 	}
-	close(cmd->data->last_fd_in);
+	// close(cmd->data->last_fd_in);
 	redir_out(cmd, outfile, fd);
 	return (SUCCEED);
 }
@@ -59,9 +61,10 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 
 	flag = CHILD;
 	setup_signal_handlers(CMD_CHILD);
-	setup_file_descriptors(cmd, data);
-	redir_in(cmd, cmd->infile, cmd->outfile, fd);
-	sleep(5);
+	if (setup_file_descriptors(cmd, data) != SUCCESS)
+		clean_all_data_exit(data, EXIT_FAIL);
+	if (redir_in(cmd, cmd->infile, cmd->outfile, fd) != SUCCEED)
+		clean_all_data_exit(data, EXIT_FAIL); //set the return values
 	if (manage_builtins(cmd, data, flag) == true)
 		clean_all_data_exit(data, EXIT_SUCCESS);
 	else
