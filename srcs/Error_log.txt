@@ -25,42 +25,25 @@ token      token_type           token_value
 --------------------------------------------
 
 Command[0] ca
-
 args[1] out // out here is a file not an arg
-
-
 printing name of the var
 
 minishell$ export var=test
-
-
 var
 
 minishell$ export var=test
-
-
 var
 
-
 minishell$ export var=test
-
-
-
 
 minishell$ echo $HOME
-
-
 /home/filipe
-
-
 minishell$ echo $var
-
-
 lue
-
-
+minishell$ echo $var1
+lue
 minishell$ echo $var1
 lue
 
-minishell$ echo $var1
-lue
+cat filenamethatdoesn'texist
+-> doesn't give an error
