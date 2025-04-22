@@ -39,3 +39,7 @@ minishell$ export >out.txt | grep PATH <out.txt
 grep: (standard input): binary file matches
 minishell$ >out
 zsh: segmentation fault (core dumped)  ./minishell
+
+Error #4
+cd .. goes HOME
+no access from /home/yulpark/Desktop/minishell to go into Libft

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/22 13:00:09 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/22 13:50:48 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,22 @@
 // if there is a command -> send the command to manage_builtins
 
 //change to return the values from each builtins
-bool	manage_builtins(t_command *cmd, t_main_data *data)
+t_exec_error	manage_builtins(t_command *cmd, t_main_data *data)
  {
  	if (ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0])) == 0)
-		echo(cmd->args);
+		return(echo(cmd->args), SUCCEED);
  	else if (ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])) == 0)
- 		ft_cd(cmd->args, data);
+ 		return(ft_cd(cmd->args, data));
  	else if (ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0])) == 0)
- 		env(data, cmd->args);
+ 		return(env(data, cmd->args));
  	else if (ft_strncmp(cmd->args[0], "exit", ft_strlen(cmd->args[0])) == 0)
- 		ft_exit(cmd->args, data);
+ 		return (ft_exit(cmd->args, data), SUCCEED);
  	else if (ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])) == 0)
- 		export(cmd->args, data);
+ 		return (export(cmd->args, data));
  	else if (ft_strncmp(cmd->args[0], "pwd", ft_strlen(cmd->args[0])) == 0)
- 		pwd(data);
- 	else if (ft_strncmp(cmd->args[0], "unset", ft_strlen(cmd->args[0])) == 0)
- 		ft_unset(cmd->args, &data->env_vars);
+ 		return(pwd(data));
  	else
-		return (false);
- 	return (true);
+ 		return (ft_unset(cmd->args, &data->env_vars));
  }
 
  bool	builtinchecker(t_command *cmd)
