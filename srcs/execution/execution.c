@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 21:27:54 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:22:42 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	execution(t_main_data *data, t_command *cmd)
 	if (data->nbr_of_cmds == 1 && builtinchecker(cmd) == true)
 	{
 		status = exec_one_cmd(cmd, data);
-		if (set_exit_env_status(data->env_vars, FAILURE) != SUCCESS)
+		if (set_exit_env_status(data->env_vars, EXIT_FAIL) != SUCCESS)
 			status_error(data, ERROR_MEM_ALLOC);
 		if (status != SUCCEED)
 			return ;
@@ -121,7 +121,7 @@ void	execution(t_main_data *data, t_command *cmd)
 		status = execute_pipeline(data, cmd);
 		if (status != SUCCEED)
 		{
-			if (set_exit_env_status(data->env_vars, FAILURE) != SUCCESS)
+			if (set_exit_env_status(data->env_vars, EXIT_FAIL) != SUCCESS)
 				status_error(data, ERROR_MEM_ALLOC);
 		}
 	}

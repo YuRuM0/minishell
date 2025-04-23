@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/23 16:24:25 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:02:55 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum s_exec_error
 	INVALID_INPUT,
 	FAIL_PATH_RETRIEVAL,
 	ENV_ERROR,
-	ERROR = -1
+	ERROR = 1
 }	t_exec_error;
 
 //builtins
