@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
+#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/23 16:22:27 by yulpark          ###   ########.fr        #
+#    Updated: 2025/04/23 22:32:18 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ YELLOW  = \033[33m
 BLUE    = \033[34m
 
 CFLAGS = -Wall -Werror -Wextra -g
-# CFLAGS += -fsanitize=address
+CFLAGS += -fsanitize=address
 
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
