@@ -1,29 +1,10 @@
-
-
 ====================================================================================================================
 
 Error execution
 
-Error #
-
-
-
 To do:
 
 hanlde a fle without <
-
-
-File rules e.g. >$111 makes 11
-
-
-Why sometimes \n at the end and sometimes not?
-minishell$ cat >""
-minishell: : No such file or directory
-minishell$ ls
-'$111'   includes   Libft   Makefile   minishell   objs   out   out0   out1   outmake   srcs   tests
-minishell$ cat objs
-cat: objs: Is a directory
-(\n here)
 
 minishell$ < out cat
 token      token_type           token_value
@@ -34,3 +15,16 @@ token      token_type           token_value
 --------------------------------------------
 hello!
 should we leave it like this?
+
+	int		fd[2];
+	int		i;
+	pid_t	pid[data->nbr_of_cmds]; is this allowed
+
+
+yulpark@f1r6s10:~/Desktop/exam_prep/rank3!$ echo hello'
+> hello
+> hello
+> '
+hello
+hello
+hello

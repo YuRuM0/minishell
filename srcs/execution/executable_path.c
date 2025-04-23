@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executable_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/19 17:36:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 17:05:56 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,27 @@
 
 char	*ft_strputjoin(char *src1, char *src2, char c)
 {
-	int	i;
-	int	j;
-	char *dst;
+	int		i;
+	int		j;
+	char	*dst;
 
 	i = 0;
 	j = 0;
 	dst = malloc(ft_strlen(src1) + ft_strlen(src2) + 2);
-    if (!dst)
-         return NULL;
-	if (!src1 || !src2)
-		return (0);
+	if (!dst || !src1 || !src2)
+		return (NULL);
 	while (src1 && src1[i])
-	{
-		dst[j] = src1[i];
-		i++;
-		j++;
-	}
+		dst[j++] = src1[i++];
 	dst[j] = c;
 	j++;
 	i = 0;
 	while (src2 && src2[i])
-	{
-		dst[j] = src2[i];
-		j++;
-		i++;
-	}
+		dst[j++] = src2[i++];
 	dst[j] = '\0';
 	return (dst);
 }
 
-int free_double(char **arr)
+int	free_double(char **arr)
 {
 	int	i;
 
@@ -58,6 +48,13 @@ int free_double(char **arr)
 	return (0);
 }
 
+static int	is_exec_file(t_command *cmd)
+{
+	if (ft_strncmp(cmd->args[0], "/", 1) != 0)
+		return (1);
+	return (0);
+}
+
 char	*executable_path(t_main_data *data, t_command *cmd)
 {
 	char		**env_path_var;
@@ -65,6 +62,8 @@ char	*executable_path(t_main_data *data, t_command *cmd)
 	int			i;
 	char		*path;
 
+	if (is_exec_file(cmd) == 0)
+		return (cmd->args[0]);
 	env_path = ft_find_env(data->env_vars, "PATH");
 	env_path_var = ft_split(env_path->variable, ':');
 	if (!env_path_var)

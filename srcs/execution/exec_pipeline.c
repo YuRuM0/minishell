@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 14:29:58 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 16:20:07 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	wait_all_children(t_main_data *data, pid_t *pid)
 
 static int	create_pipe_n_fork(int *fd)
 {
-	int	check;
+	int		check;
 	pid_t	pid;
 
 	check = pipe(fd);
@@ -65,8 +65,8 @@ static void	close_parent_heredoc_fd(t_redir *redir_list)
 
 t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd)
 {
-	int	fd[2];
-	int	i;
+	int		fd[2];
+	int		i;
 	pid_t	pid[data->nbr_of_cmds];
 
 	i = 0;

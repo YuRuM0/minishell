@@ -6,13 +6,14 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 17:47:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 16:07:14 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static t_exec_error redir_out_one_cmd(t_command *cmd, t_redir *outfile, int *saveout)
+static t_exec_error	redir_out_one_cmd(t_command *cmd, t_redir *outfile, \
+	int *saveout)
 {
 	if (outfile != NULL)
 	{
@@ -34,11 +35,10 @@ static t_exec_error redir_out_one_cmd(t_command *cmd, t_redir *outfile, int *sav
 	return (SUCCEED);
 }
 
-static t_exec_error redir_one_cmd(t_command *cmd, int *savein, int *saveout)
+static t_exec_error	redir_one_cmd(t_command *cmd, int *savein, int *saveout)
 {
 	*savein = -2;
 	*saveout = -2;
-
 	if (cmd->infile != NULL)
 	{
 		*savein = dup(STDIN_FILENO);
@@ -61,7 +61,7 @@ static t_exec_error redir_one_cmd(t_command *cmd, int *savein, int *saveout)
 	return (SUCCEED);
 }
 
-static t_exec_error	reset_io_redirects(int	fd_in, int	fd_out)
+static t_exec_error	reset_io_redirects(int fd_in, int fd_out)
 {
 	if (fd_in != -2)
 	{
@@ -79,7 +79,7 @@ static t_exec_error	reset_io_redirects(int	fd_in, int	fd_out)
 		{
 			perror("minishell");
 			close(fd_out);
-			return(ERROR);
+			return (ERROR);
 		}
 		close(fd_out);
 	}
@@ -88,10 +88,9 @@ static t_exec_error	reset_io_redirects(int	fd_in, int	fd_out)
 
 static t_exec_error	exec_one_cmd(t_command *cmd, t_main_data *data)
 {
-	//char *path;
-	int savein;
-	int saveout;
-	int flag;
+	int	savein;
+	int	saveout;
+	int	flag;
 
 	flag = PARENT;
 	if (setup_file_descriptors(cmd, data) != SUCCESS)

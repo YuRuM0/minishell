@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 15:37:58 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 17:06:35 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_pars_err	parser(t_main_data *data)
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
 		return (status_error(data, status), FAILURE);
-	debugging(data);
+	//debugging(data);
 	status = commands_builder(data);
 	if (status != SUCCESS)
 		return (status_error(data, status), FAILURE);

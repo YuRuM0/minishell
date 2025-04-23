@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
+#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/21 16:30:08 by flima            ###   ########.fr        #
+#    Updated: 2025/04/23 16:22:27 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,8 @@ BUILTIN_FILES = $(BUILTIN_DIR)/echo.c \
 				$(BUILTIN_DIR)/export_utils.c \
 				$(BUILTIN_DIR)/pwd.c \
 				$(BUILTIN_DIR)/unset.c \
-				$(BUILTIN_DIR)/cd_main.c
+				$(BUILTIN_DIR)/cd_main.c \
+				$(BUILTIN_DIR)/cd_utils.c
 
 
 SRC_FILES = $(PARSE_FILES) $(ERROR_FILE) $(JUMP_PARSE_FILES) \

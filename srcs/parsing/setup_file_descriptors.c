@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 21:12:40 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 15:59:26 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 16:23:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_pars_err	filename_checker(t_redir *redir)
 t_pars_err	setup_file_descriptors(t_command *cmd, t_main_data *data)
 {
 	t_pars_err	status;
+
 	if (cmd != NULL)
 	{
 		if (filename_checker(cmd->redir_list) != SUCCESS)

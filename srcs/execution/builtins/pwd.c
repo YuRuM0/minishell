@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:31:20 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/23 15:53:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 16:07:35 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //char *getcwd(char *buf, size_t size);
 
-t_exec_error pwd(t_main_data *data)
+t_exec_error	pwd(t_main_data *data)
 {
 	char	*pwd;
 

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 15:19:18 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 16:49:18 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 // identificar se ha pipe e redirecionar para o pipe, se nao houver file in
 //identificar o ultimo cmd e redirecionar para stdout ou um out file
 
-
-static void redir_out(t_command *cmd, t_redir *outfile, int *fd)
+static void	redir_out(t_command *cmd, t_redir *outfile, int *fd)
 {
 	if (outfile != NULL)
 	{
@@ -34,7 +33,7 @@ static void redir_out(t_command *cmd, t_redir *outfile, int *fd)
 	}
 }
 
-static int redir_in(t_command *cmd, t_redir *infile,\
+static int	redir_in(t_command *cmd, t_redir *infile, \
 	t_redir *outfile, int *fd)
 {
 	if (infile != NULL)
@@ -55,8 +54,8 @@ static int redir_in(t_command *cmd, t_redir *infile,\
 
 void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 {
-	char *path;
-	int flag;
+	char	*path;
+	int		flag;
 
 	flag = CHILD;
 	setup_signal_handlers(CMD_CHILD);
@@ -76,4 +75,3 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 		clean_all_data_exit(data, EXIT_FAIL);
 	}
 }
-
