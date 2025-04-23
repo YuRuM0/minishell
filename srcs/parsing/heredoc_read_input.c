@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_read_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:13:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/12 15:14:46 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/23 15:35:29 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	heredoc_err_exit(t_main_data *data, t_exit_code status, char *msg)
 		clean_all_data_exit(data, EXIT_FAIL);
 	}
 }
-
 
 static t_exit_code	readline_heredoc(t_main_data *data, int fd, char *delim, \
 		t_syntax type)

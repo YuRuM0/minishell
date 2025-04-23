@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:16:27 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 18:29:18 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 15:37:30 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	interative_signal_handler(int sig)
 	rl_redisplay();
 }
 
-void	handle_signal_main_loop()
+void	handle_signal_main_loop(void)
 {
 	if (g_last_signal)
 	{
@@ -58,4 +58,3 @@ void	setup_signal_handlers(t_signal_mode	mode)
 	sigaction(SIGINT, &act_sigint, NULL);
 	sigaction(SIGQUIT, &act_sigquit, NULL);
 }
-

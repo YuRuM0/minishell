@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 16:01:37 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:33:25 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 //# include "../execution/execution.h"
 
 # define _GNU_SOURCE
-
-
 //mix of brasilian and corean flags haha
 # define MINISHELL_PROMPT \
 "\001\033[38;5;46m\002m\001\033[38;5;154m\002i\001\033[38;5;226m\002n\
@@ -69,19 +67,18 @@ typedef struct s_main_data
 	char					**envp_array;
 }							t_main_data;
 
-typedef enum	e_signal_mode
+typedef enum e_signal_mode
 {
 	INTERACTIVE,
 	NON_INTERACTIVE,
 	HEREDOC_CHILD,
 	CMD_CHILD,
 	CMD_PARENT,
-}				t_signal_mode;
+}					t_signal_mode;
 
 void		parsing_and_execution(t_main_data *data);
 void		error_msg(char *msg);
-void		handle_signal_main_loop();
+void		handle_signal_main_loop(void);
 void		setup_signal_handlers(t_signal_mode	mode);
-
 
 #endif

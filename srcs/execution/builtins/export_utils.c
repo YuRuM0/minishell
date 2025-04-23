@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 18:50:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/22 13:42:34 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:45:17 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	input_checker(char *input)
 			return (-1);
 		if (input[i] == '=')
 			equal_counter++;
-		else if (!(input[i] == '_' || ft_isalnum(input[i]) == 1 || input[i] == '+' || input[i] == '$' || input[i] == ' '))
+		else if (!(input[i] == '_' || ft_isalnum(input[i]) == 1 \
+		|| input[i] == '+' || input[i] == '$' || input[i] == ' '))
 			return (-1);
 		i++;
 	}
@@ -54,7 +55,7 @@ int	create_new_var(char *arg, t_env_var **envp)
 
 	new_var = add_new_var();
 	if (!new_var)
-		return(error_msg(NULL), -1);
+		return (error_msg(NULL), -1);
 	add_var_back(envp, new_var);
 	if (ft_strchr(arg, '=') == NULL)
 		new_var->is_exported = 0;

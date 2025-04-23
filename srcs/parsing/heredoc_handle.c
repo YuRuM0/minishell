@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:57:30 by flima             #+#    #+#             */
-/*   Updated: 2025/04/18 19:33:18 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:35:09 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_pars_err	read_heredoc_input(t_main_data *data, char *file_name, \
 	{
 		if (set_exit_env_status(data->env_vars, EXIT_FAIL) != SUCCESS)
 			return (ERROR_MEM_ALLOC);
-		return(SUCCESS);
+		return (SUCCESS);
 	}
 	else if (WIFSIGNALED(exit_status))
 	{

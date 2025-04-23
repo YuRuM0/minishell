@@ -6,20 +6,21 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/22 16:08:21 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:32:56 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-#include <dirent.h>
-#include "minishell.h"
-#include "libft.h"
-#include "tokenization.h"
-#include <sys/stat.h>
+# include <dirent.h>
+# include "minishell.h"
+# include "libft.h"
+# include "tokenization.h"
+# include <sys/stat.h>
 
-typedef enum s_exec_error{
+typedef enum s_exec_error
+{
 	SUCCEED,
 	MALLOC_FAIL,
 	NO_INPUT,
@@ -48,8 +49,10 @@ int				ft_add_key_val(t_env_var **head, char *keyvalue);
 
 //env_utils
 t_env_var		*ft_find_env(t_env_var *env, char *key);
-int				ft_env_update(t_env_var *env, char *name, char *path);
-void			ft_delete_node(t_env_var **envp, t_env_var *head, int i); // used in unset
+int				ft_env_update(t_env_var *env, char *name, \
+	char *path);
+void			ft_delete_node(t_env_var **envp, t_env_var \
+	*head, int i);
 
 // execute
 t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag);
@@ -64,5 +67,3 @@ int				free_double(char **arr);
 char			*executable_path(t_main_data *data, t_command *cmd);
 
 #endif
-
-

@@ -24,3 +24,13 @@ minishell$ ls
 minishell$ cat objs
 cat: objs: Is a directory
 (\n here)
+
+minishell$ < out cat
+token      token_type           token_value
+--------------------------------------------
+0          LESS                 <
+1          WORD                 out
+2          WORD                 cat
+--------------------------------------------
+hello!
+should we leave it like this?

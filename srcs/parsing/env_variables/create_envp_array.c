@@ -6,11 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:54:42 by flima             #+#    #+#             */
-/*   Updated: 2025/04/19 19:30:24 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:42:02 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "execution.h"
+#include "execution.h"
 
 static int	count_envp_vars(t_env_var *envp)
 {
@@ -25,11 +25,10 @@ static int	count_envp_vars(t_env_var *envp)
 	return (i);
 }
 
-
 void	create_envp_array(t_main_data *data, t_env_var *envp)
 {
-	char **envp_array;
-	int	i;
+	char	**envp_array;
+	int		i;
 
 	i = 0;
 	envp_array = ft_calloc(count_envp_vars(envp) + 1, sizeof(char *));
@@ -44,7 +43,7 @@ void	create_envp_array(t_main_data *data, t_env_var *envp)
 			status_error(data, ERROR_MEM_ALLOC);
 		}
 		i++;
-		envp =  envp->next;
+		envp = envp->next;
 	}
 	envp_array[i] = NULL;
 	data->envp_array = envp_array;

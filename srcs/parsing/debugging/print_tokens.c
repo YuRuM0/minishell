@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 14:41:23 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 15:44:03 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ static	void	print_redir(t_redir *redir, char **id)
 		if (tmp->redir_id == REDIR_HEREDOC)
 			printf("ALL REDIR : %-20s fd: %d\n", id[tmp->redir_id], tmp->fd);
 		else
-			printf("ALL REDIR : %-20s file_name: %-10sfd : %-20d\n", id[tmp->redir_id], \
-				tmp->file, tmp->fd);
+			printf("ALL REDIR : %-20s file_name: %-10sfd : %-20d\n", \
+				id[tmp->redir_id], tmp->file, tmp->fd);
 		tmp = tmp->next;
 	}
 }
+
 static	void	print_token(t_token *token, int i)
 {
 	char	*str_tok[13];
@@ -55,16 +56,16 @@ static	void	print_commands(t_command *cmd, int nb)
 	if (cmd->infile)
 	{
 		if (cmd->infile->redir_id == REDIR_HEREDOC)
-			printf("ID : %-20s fd: %d\n", str_cmd[cmd->infile->redir_id], cmd->infile->fd);
+			printf("ID : %-20s fd: %d\n", str_cmd[cmd->infile->redir_id] \
+				, cmd->infile->fd);
 		else
-		printf("ID : %-20s file_name: %-10sfd : %-20d\n", str_cmd[cmd->infile->redir_id], \
-			cmd->infile->file, cmd->infile->fd);
+			printf("ID : %-20s file_name: %-10sfd : %-20d\n", \
+			str_cmd[cmd->infile->redir_id], cmd->infile->file, cmd->infile->fd);
 	}
 	else
 		printf("No infile redirection\n");
 	if (cmd->outfile)
-		printf("ID: %-28s file_name: %-10sfd : %-20d\n", str_cmd[cmd->outfile->redir_id], \
-			cmd->outfile->file, cmd->outfile->fd);
+		printf("ID: %-28s file_name: %-10sfd : %-20d\n", str_cmd[cmd->outfile->redir_id], cmd->outfile->file, cmd->outfile->fd);
 	else
 		printf("No outfile redirection\n");
 	print_redir(cmd->redir_list, str_cmd);

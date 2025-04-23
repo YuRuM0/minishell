@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/22 13:35:02 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:47:20 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static char	*replace_or_join_var(char *arg, t_env_var *head, char *name)
 	free(name);
 	return (temp);
 }
+
 int	export_arg(char *arg, t_env_var **envp)
 {
 	t_env_var	*head;
@@ -98,8 +99,6 @@ int	export_arg(char *arg, t_env_var **envp)
 		return (-1);
 	head = *envp;
 	name = get_var_name(arg);
-	// if (name)
-	// 	printf("%s\n", name);
 	while (head)
 	{
 		if (ft_strncmp(head->variable, name, ft_strlen(name)) == 0)
@@ -123,7 +122,7 @@ t_exec_error	export(char **args, t_main_data *data)
 	int	check;
 
 	if (!args[1])
-		return(export_noarg(data->env_vars));
+		return (export_noarg(data->env_vars));
 	i = 1;
 	while (args[i])
 	{

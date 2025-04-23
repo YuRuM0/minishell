@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:54:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/09 21:15:48 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 15:40:24 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ t_pars_err	set_exit_env_status(t_env_var *envp, int status)
 
 	exit_status = ft_itoa(status);
 	if (exit_status == NULL)
-		return(ERROR_MEM_ALLOC);
+		return (ERROR_MEM_ALLOC);
 	tmp = ft_strjoin("?=", exit_status);
 	if (tmp == NULL)
 	{
 		free(exit_status);
-		return(ERROR_MEM_ALLOC);
+		return (ERROR_MEM_ALLOC);
 	}
 	free(exit_status);
 	free(envp->variable);
@@ -64,7 +64,7 @@ static void	creat_exit_status_var(t_main_data *data)
 {
 	t_env_var	*exit_var;
 	t_env_var	*tmp;
-	
+
 	exit_var = add_new_var();
 	if (exit_var == NULL)
 		status_error(data, ERROR_MEM_ALLOC);

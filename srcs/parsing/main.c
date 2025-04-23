@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/19 17:09:30 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 15:43:34 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-int g_last_signal;
+int			g_last_signal;
 
 static char	*read_tty(void)
 {
@@ -53,7 +53,6 @@ static char	*read_file(void)
 
 static void	loop_minishell(t_main_data *data)
 {
-	
 	while (true)
 	{
 		handle_signal_main_loop();

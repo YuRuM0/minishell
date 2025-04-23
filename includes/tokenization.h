@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/19 17:14:46 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 15:34:23 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ typedef enum e_redir_id
 	REDIR_HEREDOC, // <<
 	REDIR_OUT, // >
 	REDIR_APPEND, // >>
-} 	t_redir_id;
-
+}						t_redir_id;
 
 typedef struct s_command
 {
@@ -87,15 +86,15 @@ typedef struct s_redir
 	t_redir_id		redir_id;
 	int				fd;
 	char			*file;
-	struct s_redir 	*next;
-}					t_redir;
+	struct s_redir	*next;
+}						t_redir;
 
 typedef struct s_token
 {
 	char			*value;
 	enum e_syntax	type;
 	struct s_token	*next;
-}					t_token;
+}						t_token;
 
 //Jump table tokenization
 
@@ -111,10 +110,12 @@ t_syntax	get_token_type(char cha);
 t_env_var	*add_new_var(void);
 void		add_var_back(t_env_var **head, t_env_var *new);
 void		duplicate_env_var(t_main_data *data, char **env);
-t_pars_err 	find_environment_var(t_env_var *envp, char *var_name, char **environ_var);
+t_pars_err	find_environment_var(t_env_var *envp, char *var_name, \
+	char **environ_var);
 t_pars_err	get_environ_var_value(char **environ_var, char *var_name);
-t_pars_err 	expand_environ_var(t_env_var *envp, char *var_name, char **environ_var);
-t_pars_err 	expand_env_instr(t_env_var *envp, char **expand);
+t_pars_err	expand_environ_var(t_env_var *envp, char *var_name, \
+	char **environ_var);
+t_pars_err	expand_env_instr(t_env_var *envp, char **expand);
 t_pars_err	expand_token_n_trim_quote(t_env_var *envp, t_token *token);
 t_pars_err	set_exit_env_status(t_env_var *envp, int status);
 void		create_envp_array(t_main_data *data, t_env_var *envp);
@@ -151,13 +152,13 @@ void		add_cmd_back(t_command **head, t_command *new);
 t_pars_err	init_cmd_args(t_command *cmd, t_token *current);
 t_pars_err	commands_builder(t_main_data *data);
 int			get_args_size(t_token *tokens);
-t_pars_err setup_file_descriptors(t_command *cmd, t_main_data *data);
+t_pars_err	setup_file_descriptors(t_command *cmd, t_main_data *data);
 
 // heredoc functions
 t_pars_err	capture_heredocs(t_main_data *data);
 void		close_fd_heredoc(t_token *head, t_token *current);
-void		heredoc_reading(t_main_data *data, char *file_name, char *delim\
-	, t_token *current);
+void		heredoc_reading(t_main_data *data, char *file_name, \
+	char *delim, t_token *current);
 //debugging
 void		debugging(t_main_data *data);
 void		get_str_cmd(char **cmd);

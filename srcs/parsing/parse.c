@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 15:15:37 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:37:58 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_pars_err	parser(t_main_data *data)
 	return (SUCCESS);
 }
 
-
 void	parsing_and_execution(t_main_data *data)
 {
 	if (parser(data) != SUCCESS)
@@ -55,4 +54,3 @@ void	parsing_and_execution(t_main_data *data)
 	// echo(data->cmds->args);
 	// distribution(data); //exec
 }
-

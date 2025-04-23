@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:22:40 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/18 18:35:37 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:44:58 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	exit_one_arg(char **cmd, t_main_data *data)
 	exit_code = ft_atoi(cmd[1]);
 	write(1, "exit\n", 5);
 	clean_all_data_exit(data, exit_code %= 256);
-	//exit status: 0-255 exit(256) = exit(0)
 }
 
 static void	exit_multi_arg(char **cmd, t_main_data *data)
