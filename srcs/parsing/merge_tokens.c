@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:45:28 by flima             #+#    #+#             */
-/*   Updated: 2025/04/01 14:41:23 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 21:26:57 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_pars_err	merge_quotes(t_token *current)
 
 	while (current->next && (current->next->type == D_QUOTE || \
 			current->next->type == S_QUOTE || \
-			current->next->type == WORD))
+			current->next->type == WORD || current->next->type == VARIABLE))
 	{
 		tmp_str = current->value;
 		current->value = ft_strjoin(tmp_str, current->next->value);
@@ -64,27 +64,27 @@ static t_pars_err	merge_quotes(t_token *current)
 	return (SUCCESS);
 }
 
-static t_pars_err	merge_env_var(t_token *current)
-{
-	char	*tmp_str;
+//static t_pars_err	merge_env_var(t_token *current)
+//{
+//	char	*tmp_str;
 
-	if (!current->next || (ft_strlen(current->value) == 1 \
-			&& current->next && \
-			(current->next->type == TAB_CHAR || \
-			current->next->type == NEW_LINE || \
-			current->next->type == SPACE_CHAR)))
-		current->type = WORD;
-	else if (current->next && current->next->type == WORD)
-	{
-		tmp_str = current->value;
-		current->value = ft_strjoin(tmp_str, current->next->value);
-		if (current == NULL && errno == ENOMEM)
-			return (ERROR_MEM_ALLOC);
-		free(tmp_str);
-		remove_next_token(current);
-	}
-	return (SUCCESS);
-}
+//	if (!current->next || (ft_strlen(current->value) == 1 \
+//			&& current->next && \
+//			(current->next->type == TAB_CHAR || \
+//			current->next->type == NEW_LINE || \
+//			current->next->type == SPACE_CHAR)))
+//		current->type = WORD; // case to echo $
+//	else if (current->next && current->next->type == WORD)
+//	{
+//		tmp_str = current->value;
+//		current->value = ft_strjoin(tmp_str, current->next->value);
+//		if (current == NULL && errno == ENOMEM)
+//			return (ERROR_MEM_ALLOC);
+//		free(tmp_str);
+//		remove_next_token(current);
+//	}
+//	return (SUCCESS);
+//}
 
 t_pars_err	merge_tokens_n_rm_blank_tokens(t_main_data *data)
 {
@@ -97,16 +97,17 @@ t_pars_err	merge_tokens_n_rm_blank_tokens(t_main_data *data)
 	{
 		if (current->type == D_QUOTE || \
 			current->type == S_QUOTE || \
-			current->type == WORD)
+			current->type == WORD || \
+			current->type == VARIABLE)
 		{
 			if (merge_quotes(current) != SUCCESS)
 				return (ERROR_MEM_ALLOC);
 		}
-		else if (current->type == VARIABLE)
-		{
-			if (merge_env_var(current) != SUCCESS)
-				return (ERROR_MEM_ALLOC);
-		}
+		//else if (current->type == VARIABLE)
+		//{
+		//	if (merge_env_var(current) != SUCCESS)
+		//		return (ERROR_MEM_ALLOC);
+		//}
 		current = current->next;
 	}
 	remove_blank_tokens(&data->tokens);

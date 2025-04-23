@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 17:06:35 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:24:26 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,31 @@ t_pars_err	parser(t_main_data *data)
 		return (SUCCESS);
 	status = tokenize_input(data, data->pipeline);
 	if (status != SUCCESS)
-		return (status_error(data, status), FAILURE);
+		return (status_error(data, status), status);
+	debugging(data);
 	status = syntax(data);
 	if (status != SUCCESS)
-		return (status_error_syntax(data, status), FAILURE);
+		return (status_error_syntax(data, status), status);
 	status = merge_tokens_n_rm_blank_tokens(data);
 	if (status != SUCCESS)
-		return (status_error(data, status), FAILURE);
+		return (status_error(data, status), status);
+	debugging(data);
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
-		return (status_error(data, status), FAILURE);
-	//debugging(data);
+		return (status_error(data, status), status);
 	status = commands_builder(data);
 	if (status != SUCCESS)
-		return (status_error(data, status), FAILURE);
+		return (status_error(data, status), status);
+	//debugging(data);
 	return (SUCCESS);
 }
 
 void	parsing_and_execution(t_main_data *data)
 {
-	if (parser(data) != SUCCESS)
+	t_pars_err	status;
+
+	status = parser(data);
+	if (status != SUCCESS && status != HEREDOC_CHILD_SIGNALED)
 	{
 		if (set_exit_env_status(data->env_vars, EXIT_SYNTAX) == ERROR_MEM_ALLOC)
 			status_error(data, ERROR_MEM_ALLOC);
