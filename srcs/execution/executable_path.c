@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/23 17:05:56 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 23:09:24 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*executable_path(t_main_data *data, t_command *cmd)
 	i = 0;
 	while (env_path_var[i])
 	{
-		path = ft_strputjoin(env_path_var[i], cmd->args[0], '/');
+		path = ft_strputjoin(env_path_var[i], cmd->args[0], '/'); // leak
 		if (access(path, X_OK | F_OK) == 0)
 		{
 			free_double(env_path_var);
@@ -79,5 +79,7 @@ char	*executable_path(t_main_data *data, t_command *cmd)
 		}
 		i++;
 	}
+	free_double(env_path_var);
+	free(path);
 	return (NULL);
 }

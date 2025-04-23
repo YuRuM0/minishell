@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 22:43:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 23:02:50 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 		path = executable_path(data, cmd);
 		if (!path)
 		{
-			perror("minishell");
+			error_msg("command not found");
 			clean_all_data_exit(data, EXIT_CMD_NOT_FOUND);
 		}
 		execve(path, cmd->args, data->envp_array);
