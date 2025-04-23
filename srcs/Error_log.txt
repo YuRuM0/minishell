@@ -21,10 +21,29 @@ should we leave it like this?
 	pid_t	pid[data->nbr_of_cmds]; is this allowed
 
 
-yulpark@f1r6s10:~/Desktop/exam_prep/rank3!$ echo hello'
-> hello
-> hello
-> '
-hello
-hello
-hello
+case: /bin/echo ""$?""
+error: "" expanded as space
+
+case: /bin/echo $?"42"
+error: " becomes a space too
+
+case: /bin/echo '"'$USER'"'
+result: " yulpark "
+
+case:  /bin/echo $"HOM"E$USER
+result: $ HOME yulpark
+
+case: /bin/echo $"42$"
+result: $ 42�
+
+case: /bin/echo hi >./outfiles/outfile01 | /bin/echo bye
+diff error than bash
+
+case:/bin/echo \$USER
+user shouldn't expand
+our case: \ yulpark
+
+/bin/echo $USER$TESTNOTFOUND$HOME$
+must return: yulpark/home/yulpark$
+
+136, 138,

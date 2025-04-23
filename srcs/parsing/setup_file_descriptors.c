@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 21:12:40 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 16:23:44 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:17:27 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	ft_isvalidfd(char *str)
 	while (str[i])
 	{
 		if (ft_isalnum(str[i]) == 1 || str[i] == '.' \
-		|| str[i] == '-' || str[i] == '_')
+		|| str[i] == '-' || str[i] == '_' || str[i] == '/')
 			i++;
 		else
 			return (0);

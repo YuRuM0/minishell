@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 22:07:13 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 22:13:23 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ static t_pars_err	expand_invalid_env(char **expand, int *i)
 	char		*var_name;
 	t_pars_err	status;
 
-	if ((*expand)[0] == '$' && (*expand)[1] == '\0')
+	if ((*expand)[*i] == '$' && (*expand)[*i + 1] == '\0')
 	{
-		*i = 1;
+		*i = *i + 1;
 		return (SUCCESS);
 	}
 	status = extract_var_name(*expand + *i + 1, &var_name);

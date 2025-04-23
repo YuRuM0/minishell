@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:41:37 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/23 16:22:58 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:55:00 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_exec_error	ft_cd(char **cmd, t_main_data *data, char *path)
 {
 	int		res;
 
-	if (cmd[1] == NULL || cmd[1][0] == '~')
+	if (cmd[1] == NULL)
 	{
 		if (go_home(&data->env_vars, path) == 1)
 			error_msg("cd: HOME doesn't exist\n");

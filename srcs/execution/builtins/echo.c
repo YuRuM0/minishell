@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:45:11 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/23 15:46:19 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:13:34 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ void	echo(char **args)
 
 	n = 0;
 	i = 1;
-	if (!args[1])
+	if (!args[1] || (args[1] && args[1][0] == '\0' && !args[2]))
 	{
 		ft_putchar_fd('\n', 1);
 		return ;
 	}
-	if (ft_strncmp(args[1], "-n", ft_strlen(args[1])) == 0)
+	if (ft_strlen(args[1]) > 0 && ft_strncmp(args[1], "-n", \
+		ft_strlen(args[1])) == 0)
 	{
 		i++;
 		n = -1;
@@ -33,9 +34,9 @@ void	echo(char **args)
 	while (args[i])
 	{
 		ft_putstr_fd(args[i], 1);
-		i++;
-		if (args[i])
+		if (args[i][0] != '\0' && args[i+1])
 			ft_putchar_fd(' ', 1);
+		i++;
 	}
 	if (n == 0)
 		ft_putchar_fd('\n', 1);
