@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_expand_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 19:04:52 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 15:40:01 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:10:09 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,26 @@ t_pars_err	get_environ_var_value(char **environ_var, char *var_name)
 	return (SUCCESS);
 }
 
-t_pars_err	expand_environ_var(t_env_var *envp, char *var_name, \
+t_pars_err	expand_environ_var(t_env_var *envp, char **var_name, \
 	char **environ_var)
 {
 	t_pars_err	status;
+	char 		*tmp;
 
-	status = find_environment_var(envp, var_name, environ_var);
+	if (ft_strncmp(*var_name, "~", 1))
+	{
+		tmp = *var_name;
+		*var_name = ft_strdup("HOME");
+		if (*var_name == NULL)
+			return (ERROR_MEM_ALLOC);
+		free(tmp);
+	}
+	status = find_environment_var(envp, *var_name, environ_var);
 	if (status == ERROR_MEM_ALLOC)
 		return (ERROR_MEM_ALLOC);
 	if (*environ_var[0] == '\0')
 		return (SUCCESS);
-	status = get_environ_var_value(environ_var, var_name);
+	status = get_environ_var_value(environ_var, *var_name);
 	if (status == ERROR_MEM_ALLOC)
 		return (ERROR_MEM_ALLOC);
 	return (SUCCESS);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 18:48:00 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:07:13 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_pars_err	expand_valid_env(t_env_var *envp, char **expand, int *i)
 	status = extract_var_name(*expand + *i + 1, &var_name);
 	if (status == ERROR_MEM_ALLOC)
 		return (ERROR_MEM_ALLOC);
-	status = expand_environ_var(envp, var_name, &var_value);
+	status = expand_environ_var(envp, &var_name, &var_value);
 	if (status == ERROR_MEM_ALLOC)
 		return (free(var_name), ERROR_MEM_ALLOC);
 	status = append_expanded_var(expand, var_value, i, var_name);

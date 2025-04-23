@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 15:41:10 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:11:22 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,16 @@ static t_pars_err	trim_quotes(t_token *token)
 static t_pars_err	expand_token(t_env_var *envp, t_token *token)
 {
 	t_pars_err	status;
+	char		*var_value;
 
+	if (token->type == WORD)
+	{
+		status = expand_environ_var(envp, &token->value, &var_value);
+		if (status == ERROR_MEM_ALLOC)
+			return (status);
+		free(token->value);
+		token->value = var_value;
+	}
 	status = expand_env_instr(envp, &token->value);
 	if (status == ERROR_MEM_ALLOC)
 		return (ERROR_MEM_ALLOC);
@@ -50,7 +59,8 @@ t_pars_err	expand_token_n_trim_quote(t_env_var *envp, t_token *token)
 			if (status == ERROR_MEM_ALLOC)
 				return (ERROR_MEM_ALLOC);
 		}
-		if (token->type == D_QUOTE || token->type == VARIABLE)
+		if (token->type == D_QUOTE || token->type == VARIABLE ||\
+			(token->type == WORD && ft_strncmp(token->value, "~", 1) == 0))
 		{
 			status = expand_token(envp, token);
 			if (status == ERROR_MEM_ALLOC)
