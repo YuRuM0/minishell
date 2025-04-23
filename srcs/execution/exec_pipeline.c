@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 20:02:12 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 14:29:58 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	create_pipe_n_fork(int *fd)
 		error_msg("failed to create a pipe.\n");
 		return (ERROR);
 	}
-	pid = fork();
+	pid = fork(); //why does it print event not found?
 	if (pid == -1)
 	{
 		error_msg("failed to create a new process.\n");

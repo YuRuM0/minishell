@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 20:05:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 15:19:18 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 
 	flag = CHILD;
 	setup_signal_handlers(CMD_CHILD);
-	setup_file_descriptors(cmd, data);
+	if (setup_file_descriptors(cmd, data) != SUCCESS)
+		clean_all_data_exit(data, FAILURE);
 	redir_in(cmd, cmd->infile, cmd->outfile, fd);
 	//sleep(1);
 	if (builtinchecker(cmd) == true)

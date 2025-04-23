@@ -13,21 +13,14 @@ To do:
 hanlde a fle without <
 
 
-minishell$ cat out
-token      token_type           token_value
---------------------------------------------
-0          WORD                 cat
-
-1          WORD                 out
-
---------------------------------------------
---------------------------------------------
-
-Command[0] cat
-args[1] out // out here is a file not an arg
-printing name of the var
-
-cat filenamethatdoesn'texist
--> doesn't give an error
-
 File rules e.g. >$111 makes 11
+
+
+Why sometimes \n at the end and sometimes not?
+minishell$ cat >""
+minishell: : No such file or directory
+minishell$ ls
+'$111'   includes   Libft   Makefile   minishell   objs   out   out0   out1   outmake   srcs   tests
+minishell$ cat objs
+cat: objs: Is a directory
+(\n here)

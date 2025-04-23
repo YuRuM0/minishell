@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 21:12:40 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/19 16:24:42 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 14:09:26 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,43 @@ static void	right_associate_redirects(t_redir *redir, t_command *cmd)
 	}
 }
 
+static int ft_isvalidfd(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalnum(str[i]) == 1 || str[i] == '.' || str[i] == '-' || str[i] == '_')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+t_pars_err filename_checker(t_redir *redir)
+{
+	if (!redir->file || redir->file[0] == '\0')
+		return (FAILURE);
+	if (ft_strlen(redir->file) > 255)
+		return (FAILURE);
+	if (ft_isvalidfd(redir->file) == 0)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
 t_pars_err setup_file_descriptors(t_command *cmd, t_main_data *data)
 {
 	t_pars_err	status;
 
 	if (cmd != NULL)
 	{
+		if (filename_checker(cmd->redir_list) != SUCCESS)
+		{
+			error_msg("event not found\n");
+			return (FAILURE);
+		}
 		status = open_file(cmd->redir_list);
 		if (status != SUCCESS)
 		{

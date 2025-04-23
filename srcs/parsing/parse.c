@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/22 20:02:32 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 15:15:37 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_pars_err	parser(t_main_data *data)
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
 		return (status_error(data, status), FAILURE);
-	// debugging(data);
+	debugging(data);
 	status = commands_builder(data);
 	if (status != SUCCESS)
 		return (status_error(data, status), FAILURE);
