@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 21:24:26 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:16:28 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ t_pars_err	parser(t_main_data *data)
 	status = tokenize_input(data, data->pipeline);
 	if (status != SUCCESS)
 		return (status_error(data, status), status);
-	debugging(data);
+	// debugging(data);
 	status = syntax(data);
 	if (status != SUCCESS)
 		return (status_error_syntax(data, status), status);
 	status = merge_tokens_n_rm_blank_tokens(data);
 	if (status != SUCCESS)
 		return (status_error(data, status), status);
-	debugging(data);
+	// debugging(data);
 	status = capture_heredocs(data);
 	if (status != SUCCESS)
 		return (status_error(data, status), status);
