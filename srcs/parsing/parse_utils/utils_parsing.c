@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 22:11:22 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 22:29:04 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static t_pars_err	expand_token(t_env_var *envp, t_token *token)
 			return (status);
 		free(token->value);
 		token->value = var_value;
+		return (SUCCESS);
 	}
 	status = expand_env_instr(envp, &token->value);
 	if (status == ERROR_MEM_ALLOC)

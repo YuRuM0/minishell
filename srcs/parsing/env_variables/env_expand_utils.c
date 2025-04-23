@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 19:04:52 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 22:15:42 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/23 22:32:47 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_pars_err	expand_environ_var(t_env_var *envp, char **var_name, \
 	if (ft_strncmp(*var_name, "~", 1) == 0)
 	{
 		tmp = *var_name;
-		*var_name = ft_strdup("HOME=");
+		*var_name = ft_strdup("HOME");
 		if (*var_name == NULL)
 			return (ERROR_MEM_ALLOC);
 		free(tmp);
