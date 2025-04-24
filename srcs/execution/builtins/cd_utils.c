@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:20:38 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/23 16:21:14 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/24 12:53:02 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	go_prev(t_env_var **envp, char *tb_old_pwd)
 	new_path++;
 	if (!new_path || chdir(new_path) != 0)
 		return (1);
-	free(new_path);
+	// free(new_path);
 	change_pwd(envp, tb_old_pwd, tb_new_pwd->variable);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executable_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/23 23:09:24 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:28:11 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,19 @@ char	*ft_strputjoin(char *src1, char *src2, char c)
 	return (dst);
 }
 
-int	free_double(char **arr)
+void	free_double(char **arr)
 {
 	int	i;
 
 	i = 0;
+	if (arr == NULL)
+		return ;
 	while (arr[i])
 	{
 		free(arr[i]);
 		i++;
 	}
 	free(arr);
-	return (0);
 }
 
 static int	is_exec_file(t_command *cmd)
@@ -77,9 +78,9 @@ char	*executable_path(t_main_data *data, t_command *cmd)
 			free_double(env_path_var);
 			return (path);
 		}
+		free(path);
 		i++;
 	}
 	free_double(env_path_var);
-	free(path);
 	return (NULL);
 }

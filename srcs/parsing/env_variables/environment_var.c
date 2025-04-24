@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 22:13:23 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/24 13:40:00 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static t_pars_err	expand_valid_env(t_env_var *envp, char **expand, int *i)
 		return (ERROR_MEM_ALLOC);
 	}
 	free(var_name);
-	//free(var_value);
+	free(var_value);
 	return (SUCCESS);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:45:28 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 21:26:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/24 12:49:25 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ static t_pars_err	merge_quotes(t_token *current)
 //{
 //	char	*tmp_str;
 
-//	if (!current->next || (ft_strlen(current->value) == 1 \
-//			&& current->next && \
-//			(current->next->type == TAB_CHAR || \
-//			current->next->type == NEW_LINE || \
+	// if (!current->next || (ft_strlen(current->value) == 1 
+	// 		&& current->next && 
+	// 		(current->next->type == TAB_CHAR || 
+	// 		current->next->type == NEW_LINE || 
 //			current->next->type == SPACE_CHAR)))
 //		current->type = WORD; // case to echo $
 //	else if (current->next && current->next->type == WORD)

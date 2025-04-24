@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/23 22:02:55 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:06:50 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ bool			builtinchecker(t_command *cmd);
 
 //executable_path
 char			*ft_strputjoin(char *src1, char *src2, char c);
-int				free_double(char **arr);
+void			free_double(char **arr);
 char			*executable_path(t_main_data *data, t_command *cmd);
 
 #endif
