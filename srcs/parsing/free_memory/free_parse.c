@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/24 16:20:42 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/24 17:26:50 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	clean_temp_data(t_main_data *data)
 	data->pipeline = NULL;
 	data->tokens = NULL;
 	data->envp_array = NULL;
+	data->last_fd_in = STDIN_FILENO;
 	data->nbr_of_cmds = 0;
 	data->exit_status = 0;
 }

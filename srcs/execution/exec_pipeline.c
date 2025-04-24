@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 16:20:07 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/24 17:16:23 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,20 @@ static void	wait_all_children(t_main_data *data, pid_t *pid)
 	g_last_signal = data->exit_status;
 }
 
-static int	create_pipe_n_fork(int *fd)
+static t_exec_error	create_pipe_n_fork(int *fd, pid_t *pid, t_command *cmd)
 {
 	int		check;
-	pid_t	pid;
 
-	check = pipe(fd);
-	if (check == -1)
+	if (cmd->is_pipe_next == true)
 	{
-		error_msg("failed to create a pipe.\n");
-		return (ERROR);
+		check = pipe(fd);
+		if (check == -1)
+			return (error_msg("failed to create a pipe.\n"), ERROR);
 	}
-	pid = fork(); //why does it print event not found?
-	if (pid == -1)
-	{
-		error_msg("failed to create a new process.\n");
-		return (ERROR);
-	}
-	return (pid);
+	*pid = fork();
+	if (*pid == -1)
+		return (error_msg("failed to create a new process.\n"), ERROR);
+	return (SUCCEED);
 }
 
 static void	close_parent_heredoc_fd(t_redir *redir_list)
@@ -72,16 +68,18 @@ t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd)
 	i = 0;
 	while (cmd != NULL)
 	{
-		pid[i] = create_pipe_n_fork(fd);
-		if (pid[i] == ERROR)
+		if (create_pipe_n_fork(fd, &pid[i], cmd) != SUCCEED)
 			return (ERROR);
 		if (pid[i] == 0)
 			cmd_executor(data, cmd, fd);
 		close_parent_heredoc_fd(cmd->redir_list);
 		if (data->last_fd_in != STDIN_FILENO)
 			close(data->last_fd_in);
-		data->last_fd_in = fd[0];
-		close(fd[1]);
+		if (cmd->is_pipe_next == true)
+		{	
+			data->last_fd_in = fd[0];
+			close(fd[1]);
+		}
 		cmd = cmd->next;
 		i++;
 	}
