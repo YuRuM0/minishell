@@ -21,11 +21,49 @@ should we leave it like this?
 	pid_t	pid[data->nbr_of_cmds]; is this allowed
 
 
-firt cat works like expected but next one not
-minishell$ cat
-^C
-minishell$ echo $?
-130
-minishell$ cat
-minishell$ cat
-minishell$ cat
+minishell$ pwd
+/home/flima/Downloads
+minishell$ cd home/flima/Downloads/ttttt
+minishell: cd: not a directory
+minishell$ cd minishell-main
+minishell: cd: no such file or directory
+minishell$ pwd
+/home/flima/Downloads/minishell-main
+minishell$ 
+
+goes to the dir but still prints error
+minishell$ ls
+builtin_unit_tester.sh  en.subject.pdf  incs  libft  Makefile  README.md  srcs  tester.sh  testing_files
+minishell$ cd srcs
+minishell: cd: no such file or directory
+minishell$ pwd
+/home/flima/Downloads/minishell-main/srcs
+minishell$ 
+
+
+
+to implement in find_path to exec ./minishell
+static char	*check_name_as_path(t_shell *shell, char *cmd_name)
+{
+	struct stat	stat_buffer;
+
+	if (stat(cmd_name, &stat_buffer) != 0)
+	{
+		if (ft_ispath(cmd_name))
+			shell->exit_code = 0;
+		else
+			shell->exit_code = 127;
+		return (NULL);
+	}
+	if (access(cmd_name, F_OK) == 0)
+	{
+		if (S_ISDIR(stat_buffer.st_mode))
+			errno = EISDIR;
+		else if (access(cmd_name, R_OK) == 0 && access(cmd_name, X_OK) == 0)
+			return (cmd_name);
+		shell->exit_code = 126;
+		return (NULL);
+	}
+	shell->exit_code = 127;
+	return (NULL);
+}

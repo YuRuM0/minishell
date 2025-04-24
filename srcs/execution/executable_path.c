@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/24 16:23:30 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/24 20:55:49 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,33 @@ void	free_double(char **arr)
 	free(arr);
 }
 
-static int	is_exec_file(t_command *cmd)
+static char *check_executable_file(t_main_data *data, char *file)
 {
-	if (ft_strncmp(cmd->args[0], "/", 1) != 0)
-		return (1);
-	return (0);
+	struct stat	buf;
+
+	if (stat(file, &buf) != 0)
+	{
+		data->exit_status = EXIT_CMD_NOT_FOUND;
+		return (NULL);
+	}
+	if (access(file, F_OK) == 0)
+	{
+		if (S_ISDIR(buf.st_mode))
+			errno = EISDIR;
+		else if (access(file, R_OK | X_OK) == 0)
+			return (file);
+		data->exit_status = EXIT_CMD_NOT_EXECUTABLE;
+		return (NULL);
+	}
+	data->exit_status = EXIT_CMD_NOT_FOUND;
+	return (NULL);
+}
+
+static bool	is_exec_file(t_command *cmd)
+{
+	if (!ft_strncmp(cmd->args[0], "./", 2) || cmd->args[0][0] == '/')
+		return (true);
+	return (false);
 }
 
 char	*executable_path(t_main_data *data, t_command *cmd)
@@ -63,8 +85,8 @@ char	*executable_path(t_main_data *data, t_command *cmd)
 	int			i;
 	char		*path;
 
-	if (is_exec_file(cmd) == 0)
-		return (cmd->args[0]);
+	if (is_exec_file(cmd) == true)
+		return (check_executable_file(data, cmd->args[0]));
 	env_path = ft_find_env(data->env_vars, "PATH");
 	env_path_var = ft_split(env_path->variable, ':');
 	if (!env_path_var)
@@ -72,7 +94,7 @@ char	*executable_path(t_main_data *data, t_command *cmd)
 	i = 0;
 	while (env_path_var[i])
 	{
-		path = ft_strputjoin(env_path_var[i], cmd->args[0], '/'); // leak
+		path = ft_strputjoin(env_path_var[i], cmd->args[0], '/');
 		if (access(path, X_OK | F_OK) == 0)
 		{
 			free_double(env_path_var);

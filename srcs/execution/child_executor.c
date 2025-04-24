@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/24 18:26:01 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/24 21:18:46 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,26 @@ static t_exec_error	redir_in(t_command *cmd, t_redir *infile, \
 	return (SUCCEED);
 }
 
+static void	get_valid_path(t_main_data *data, t_command *cmd,\
+	 char **path)
+{
+	char *msg;
+	
+	*path = executable_path(data, cmd);
+	if (!*path)
+	{
+		if (data->exit_status == 0)
+		{
+			error_msg("command not found\n");
+			clean_all_data_exit(data, EXIT_CMD_NOT_FOUND);
+		}
+		msg = ft_strjoin("minishell: ", cmd->args[0]);
+		if (msg == NULL)
+			status_error(data, ERROR_MEM_ALLOC);
+		perror(msg);
+		clean_all_data_exit(data, data->exit_status);
+	}
+}
 void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 {
 	char	*path;
@@ -85,12 +105,7 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 		manage_builtins(cmd, data, flag);
 	else
 	{
-		path = executable_path(data, cmd);
-		if (!path)
-		{
-			error_msg("command not found\n");
-			clean_all_data_exit(data, EXIT_CMD_NOT_FOUND);
-		}
+		get_valid_path(data, cmd, &path);
 		execve(path, cmd->args, data->envp_array);
 		perror("minishell");
 		clean_all_data_exit(data, EXIT_FAIL);
