@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 22:29:04 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/24 18:04:02 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_pars_err	expand_token_n_trim_quote(t_env_var *envp, t_token *token)
 				return (ERROR_MEM_ALLOC);
 		}
 		if (token->type == D_QUOTE || token->type == VARIABLE ||\
-			(token->type == WORD && ft_strncmp(token->value, "~", 1) == 0))
+			(token->type == WORD && ft_strncmp(token->value, "~", 2) == 0))
 		{
 			status = expand_token(envp, token);
 			if (status == ERROR_MEM_ALLOC)

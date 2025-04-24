@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/23 15:47:20 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/24 18:57:43 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 // = only appears once, after the identifier name
 
 // if the args[1] is empty; "export"
-static int	export_noarg(t_env_var *envp)
+static t_exec_error	export_noarg(t_env_var *envp)
 {
 	int		i;
 
 	if (!envp)
-		return (-1);
+		return (ERROR);
 	while (envp)
 	{
 		i = 0;
@@ -46,10 +46,10 @@ static int	export_noarg(t_env_var *envp)
 		}
 		envp = envp->next;
 	}
-	return (0);
+	return (SUCCEED);
 }
 
-int	ft_add_key_val(t_env_var **head, char *keyvalue)
+int	ft_add_key_val(t_env_var **head, char *keyvalue, t_main_data *data)
 {
 	t_env_var	*temp;
 
@@ -61,6 +61,8 @@ int	ft_add_key_val(t_env_var **head, char *keyvalue)
 		while (temp->next != NULL)
 			temp = temp->next;
 		temp->variable = ft_strdup(keyvalue);
+		if (temp->variable == NULL)
+			status_error(data, ERROR_MEM_ALLOC);
 		return (0);
 	}
 }
@@ -90,7 +92,7 @@ static char	*replace_or_join_var(char *arg, t_env_var *head, char *name)
 	return (temp);
 }
 
-int	export_arg(char *arg, t_env_var **envp)
+int	export_arg(char *arg, t_env_var **envp, t_main_data *data)
 {
 	t_env_var	*head;
 	char		*name;
@@ -99,6 +101,8 @@ int	export_arg(char *arg, t_env_var **envp)
 		return (-1);
 	head = *envp;
 	name = get_var_name(arg);
+	if (!name)
+		status_error(data, ERROR_MEM_ALLOC);
 	while (head)
 	{
 		if (ft_strncmp(head->variable, name, ft_strlen(name)) == 0)
@@ -111,7 +115,7 @@ int	export_arg(char *arg, t_env_var **envp)
 		head = head->next;
 	}
 	free(name);
-	if (create_new_var(arg, envp) != 0)
+	if (create_new_var(arg, envp, data) != 0)
 		return (1);
 	return (0);
 }
@@ -126,14 +130,14 @@ t_exec_error	export(char **args, t_main_data *data)
 	i = 1;
 	while (args[i])
 	{
-		check = export_arg(args[i], &data->env_vars);
+		check = export_arg(args[i], &data->env_vars, data);
 		if (check == -1)
 		{
 			error_msg("Export: Invalid Input\n");
-			clean_all_data_exit(data, 1);
+			return (ERROR);
 		}
-		else if (check == -2)
-			clean_all_data_exit(data, 1);
+		else if (check == 1)
+			return (ERROR);
 		else
 			i++;
 	}

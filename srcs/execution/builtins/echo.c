@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:45:11 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/23 21:13:34 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/24 18:11:51 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	echo(char **args)
 	while (args[i])
 	{
 		ft_putstr_fd(args[i], 1);
-		if (args[i][0] != '\0' && args[i+1])
+		if (args[i+1])
 			ft_putchar_fd(' ', 1);
 		i++;
 	}

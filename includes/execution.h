@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/24 16:18:59 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/24 18:57:19 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ typedef enum s_exec_error
 t_exec_error	cd(char **cmd, t_main_data *data);
 t_exec_error	env(t_main_data *data, char **args);
 void			ft_exit(char **cmd, t_main_data *data);
-int				export_arg(char *arg, t_env_var **envp);
+int				export_arg(char *arg, t_env_var **envp, t_main_data *data);
 t_exec_error	export(char **args, t_main_data *data);
 void			echo(char **args);
-t_exec_error	pwd(t_main_data *data);
+t_exec_error	pwd(void);
 t_exec_error	ft_unset(char **args, t_env_var **envp);
 
 //cd_utils
@@ -49,8 +49,8 @@ void			change_pwd(t_env_var **envp, char *tb_oldpwd, char *pwd);
 //export_utils
 char			*get_var_name(char *arg);
 int				input_checker(char *input);
-int				create_new_var(char *arg, t_env_var **envp);
-int				ft_add_key_val(t_env_var **head, char *keyvalue);
+int				create_new_var(char *arg, t_env_var **envp, t_main_data *data);
+int				ft_add_key_val(t_env_var **head, char *keyvalue, t_main_data *data);
 
 //env_utils
 t_env_var		*ft_find_env(t_env_var *env, char *key);

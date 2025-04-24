@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/24 17:42:21 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/24 18:40:29 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag)
 	else if (ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])) == 0)
 		status = export(cmd->args, data);
 	else if (ft_strncmp(cmd->args[0], "pwd", ft_strlen(cmd->args[0])) == 0)
-		status = pwd(data);
+		status = pwd();
 	else if (ft_strncmp(cmd->args[0], "unset", ft_strlen(cmd->args[0])) == 0)
 		status = ft_unset(cmd->args, &data->env_vars);
-	if (flag == 2)
+	if (flag == CHILD)
 		return (clean_all_data_exit(data, status), status);
 	else
 		return (status);

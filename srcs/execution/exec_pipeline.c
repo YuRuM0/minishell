@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/24 17:16:23 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/24 18:24:30 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ static void	wait_all_children(t_main_data *data, pid_t *pid)
 			status_error(data, ERROR_MEM_ALLOC);
 	}
 	else if (WIFSIGNALED(exit_status))
+	{
 		data->exit_status = 128 + WTERMSIG(exit_status);
-	if (set_exit_env_status(data->env_vars, data->exit_status) != SUCCESS)
-		status_error(data, ERROR_MEM_ALLOC);
-	g_last_signal = data->exit_status;
+		if (set_exit_env_status(data->env_vars, data->exit_status) != SUCCESS)
+			status_error(data, ERROR_MEM_ALLOC);
+		g_last_signal = data->exit_status;
+	}
 }
 
 static t_exec_error	create_pipe_n_fork(int *fd, pid_t *pid, t_command *cmd)
@@ -76,7 +78,7 @@ t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd)
 		if (data->last_fd_in != STDIN_FILENO)
 			close(data->last_fd_in);
 		if (cmd->is_pipe_next == true)
-		{	
+		{
 			data->last_fd_in = fd[0];
 			close(fd[1]);
 		}
