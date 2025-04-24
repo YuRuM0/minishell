@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 18:16:47 by flima             #+#    #+#             */
-/*   Updated: 2025/04/12 15:10:26 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/24 16:37:55 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	status_error(t_main_data *data, t_pars_err status)
 		error_msg("arithmetic expansion or cmd substitution not supported\n");
 	else if (status == ERROR_AND_OPERATOR)
 		error_msg("logical AND or background operator not suported\n");
+	else if (status == HEREDOC_CHILD_SIGNALED)
+		return ;
 	else if (status == ERROR_MEM_ALLOC)
 	{
 		perror("minishell");

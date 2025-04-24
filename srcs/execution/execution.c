@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:08:33 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 22:22:42 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:44:18 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,15 @@ void	execution(t_main_data *data, t_command *cmd)
 	if (data->nbr_of_cmds == 1 && builtinchecker(cmd) == true)
 	{
 		status = exec_one_cmd(cmd, data);
-		if (set_exit_env_status(data->env_vars, EXIT_FAIL) != SUCCESS)
+		if (set_exit_env_status(data->env_vars, status) != SUCCESS)
 			status_error(data, ERROR_MEM_ALLOC);
-		if (status != SUCCEED)
-			return ;
 	}
 	else
 	{
 		status = execute_pipeline(data, cmd);
 		if (status != SUCCEED)
 		{
-			if (set_exit_env_status(data->env_vars, EXIT_FAIL) != SUCCESS)
+			if (set_exit_env_status(data->env_vars, status) != SUCCESS)
 				status_error(data, ERROR_MEM_ALLOC);
 		}
 	}

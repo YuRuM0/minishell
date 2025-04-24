@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 22:16:28 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/24 16:40:48 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ void	parsing_and_execution(t_main_data *data)
 	t_pars_err	status;
 
 	status = parser(data);
-	if (status != SUCCESS && status != HEREDOC_CHILD_SIGNALED)
+	if (status != SUCCESS)
 	{
-		if (set_exit_env_status(data->env_vars, EXIT_SYNTAX) == ERROR_MEM_ALLOC)
+		if (status == HEREDOC_CHILD_SIGNALED)
+			return ;
+		else if (set_exit_env_status(data->env_vars, EXIT_SYNTAX) == ERROR_MEM_ALLOC)
 			status_error(data, ERROR_MEM_ALLOC);
 		return ;
 	}
 	create_envp_array(data, data->env_vars);
 	//debugging(data);
 	execution(data, data->cmds);
-	// echo(data->cmds->args);
-	// distribution(data); //exec
 }

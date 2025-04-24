@@ -20,3 +20,12 @@ should we leave it like this?
 	int		i;
 	pid_t	pid[data->nbr_of_cmds]; is this allowed
 
+
+firt cat works like expected but next one not
+minishell$ cat
+^C
+minishell$ echo $?
+130
+minishell$ cat
+minishell$ cat
+minishell$ cat

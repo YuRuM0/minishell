@@ -6,11 +6,12 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/22 18:03:41 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/24 16:20:42 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
+#include "execution.h"
 
 void	free_tokens(t_token *tokens)
 {
@@ -70,10 +71,12 @@ void	clean_temp_data(t_main_data *data)
 {
 	free_tokens(data->tokens);
 	free_cmds(data->cmds);
+	free_double(data->envp_array);
 	free(data->pipeline);
 	data->cmds = NULL;
 	data->pipeline = NULL;
 	data->tokens = NULL;
+	data->envp_array = NULL;
 	data->nbr_of_cmds = 0;
 	data->exit_status = 0;
 }
