@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:41:37 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/24 18:51:21 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/25 18:40:34 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static int	cases(char *cmd, t_env_var **envp, char *tb_old_pwd)
 	char		*new_pwd;
 	struct stat	stats;
 
-	if (chdir(cmd) == 0)
-		return (1);
 	if (stat(cmd, &stats) != 0)
-		return (3);
-	if (access(cmd, F_OK) == 0)
-		return (2);
+		return (1);
+	if (access(cmd, F_OK) != 0)
+		return (1);
+	if (chdir(cmd) != 0)
+		return (1);
 	new_pwd = getcwd(NULL, 0);
 	change_pwd(envp, tb_old_pwd, new_pwd);
 	free(new_pwd);
@@ -35,7 +35,7 @@ static t_exec_error	ft_cd(char **cmd, t_main_data *data, char *path)
 
 	if (cmd[1] == NULL)
 	{
-		if (go_home(&data->env_vars, path) == 1)
+		if (go_home(&data->env_vars, path, data) == 1)
 			return (error_msg("cd: HOME doesn't exist\n"), ERROR);
 	}
 	else if (cmd[1][0] == '-')
@@ -47,19 +47,20 @@ static t_exec_error	ft_cd(char **cmd, t_main_data *data, char *path)
 	{
 		res = cases(cmd[1], &data->env_vars, path);
 		if (res == 1)
-			return (error_msg("cd: no such file or directory\n"), ERROR);
-		else if (res == 3)
-			return (error_msg("cd: not a directory\n"), ERROR);
-		else if (res == 2)
-			return (error_msg("cd: permission denied\n"), ERROR);
+			return (perror("minishell"), ERROR);
+		//else if (res == 3)
+		//	return (error_msg("cd: not a directory\n"), ERROR);
+		//else if (res == 2)
+		//	return (error_msg("cd: permission denied\n"), ERROR);
 	}
 	return (SUCCEED);
 }
 
 t_exec_error	cd(char **cmd, t_main_data *data)
 {
-	char	*formatted_path;
-	char	*tb_old_pwd;
+	char			*formatted_path;
+	char			*tb_old_pwd;
+	t_exec_error	temp;
 
 	if (cmd[1] && cmd[2])
 		return (error_msg("cd: Too many arguments\n"), ERROR);
@@ -68,5 +69,7 @@ t_exec_error	cd(char **cmd, t_main_data *data)
 	free(tb_old_pwd);
 	if (formatted_path == NULL)
 		status_error(data, ERROR_MEM_ALLOC);
-	return (ft_cd(cmd, data, formatted_path));
+	temp = ft_cd(cmd, data, formatted_path);
+	free(formatted_path);
+	return (temp);
 }

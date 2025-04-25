@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:31:20 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/24 18:40:12 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/25 18:56:54 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 //char *getcwd(char *buf, size_t size);
 
-t_exec_error	pwd(void)
+t_exec_error	pwd(char **cmd)
 {
 	char	*pwd;
 
+	if (cmd[0] && cmd[1])
+		return (error_msg("cd: Too many arguments\n"), ERROR);
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		return (ERROR);
