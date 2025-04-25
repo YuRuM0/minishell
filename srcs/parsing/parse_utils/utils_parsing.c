@@ -6,21 +6,36 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/24 19:34:08 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/25 21:08:50 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
+static char	*ft_chartrim(char const *s1, char const *set)
+{
+	size_t	i;
+
+	if (s1 == NULL || set == NULL)
+		return (NULL);
+	if (*s1 && ft_strchr(set, *s1))
+		s1++;
+	i = ft_strlen(s1);
+	if (i && ft_strchr(set, s1[i]))
+		i--;
+	return (ft_substr(s1, 0, i));
+}
+
+// static t_pars_err	handle
 static t_pars_err	trim_quotes(t_token *token)
 {
 	char	*tmp;
 
 	tmp = token->value;
 	if (token->type == D_QUOTE)
-		tmp = ft_strtrim(tmp, "\"");
+		tmp = ft_chartrim(tmp, "\"");
 	else if (token->type == S_QUOTE)
-		tmp = ft_strtrim(tmp, "\'");
+		tmp = ft_chartrim(tmp, "\'");
 	if (tmp == NULL)
 		return (ERROR_MEM_ALLOC);
 	free(token->value);

@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:44:47 by flima             #+#    #+#             */
-/*   Updated: 2025/03/20 19:50:12 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/25 19:18:49 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@
 t_pars_err	process_word_n_spaces(char *input, size_t *i, t_syntax *tok_type)
 {
 	while (input[*i] && get_token_type(input[*i]) == *tok_type)
+	{
+		if (input[*i] == '\\' && input[*i + 1] && \
+			(input[*i + 1] == '\"' || input[*i + 1] == '\'' || \
+			input[*i + 1] == '\\'))
+			(*i)++;
 		(*i)++;
+	}
 	return (SUCCESS);
 }
 
