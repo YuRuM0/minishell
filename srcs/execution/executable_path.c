@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executable_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/24 20:55:49 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/25 19:52:29 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	free_double(char **arr)
 	free(arr);
 }
 
-static char *check_executable_file(t_main_data *data, char *file)
+static char *check_executable_file(t_main_data *data, t_command *cmd, char *file)
 {
 	struct stat	buf;
 
+	if (cmd->args[0][0] == '\0')
+		return (NULL);
 	if (stat(file, &buf) != 0)
 	{
 		data->exit_status = EXIT_CMD_NOT_FOUND;
@@ -73,6 +75,8 @@ static char *check_executable_file(t_main_data *data, char *file)
 
 static bool	is_exec_file(t_command *cmd)
 {
+	if (cmd->args[0][0] == '\0')
+		return (true);
 	if (!ft_strncmp(cmd->args[0], "./", 2) || cmd->args[0][0] == '/')
 		return (true);
 	return (false);
@@ -86,7 +90,7 @@ char	*executable_path(t_main_data *data, t_command *cmd)
 	char		*path;
 
 	if (is_exec_file(cmd) == true)
-		return (check_executable_file(data, cmd->args[0]));
+		return (check_executable_file(data, cmd, cmd->args[0]));
 	env_path = ft_find_env(data->env_vars, "PATH");
 	env_path_var = ft_split(env_path->variable, ':');
 	if (!env_path_var)

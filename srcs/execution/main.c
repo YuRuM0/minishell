@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 18:55:11 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:30:57 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,22 @@ t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag)
 {
 	t_exec_error	status;
 
-	status = SUCCEED;
-	if (ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0])) == 0)
+	if (ft_strncmp(cmd->args[0], "echo", 5) == 0)
 	{
 		echo(cmd->args);
 		status = SUCCEED;
 	}
-	else if (ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "cd", 3) == 0)
 		status = cd(cmd->args, data);
-	else if (ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "env", 4) == 0)
 		status = env(data, cmd->args);
-	else if (ft_strncmp(cmd->args[0], "exit", ft_strlen(cmd->args[0])) == 0)
-		ft_exit(cmd->args, data);
-	else if (ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "exit", 5) == 0)
+		status = ft_exit(cmd->args, data);
+	else if (ft_strncmp(cmd->args[0], "export", 7) == 0)
 		status = export(cmd->args, data);
-	else if (ft_strncmp(cmd->args[0], "pwd", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "pwd", 4) == 0)
 		status = pwd(cmd->args);
-	else if (ft_strncmp(cmd->args[0], "unset", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "unset", 6) == 0)
 		status = ft_unset(cmd->args, &data->env_vars);
 	if (flag == CHILD)
 		return (clean_all_data_exit(data, status), status);
@@ -45,19 +44,23 @@ t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag)
 
 bool	builtinchecker(t_command *cmd)
 {
-	if (ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0])) == 0)
+	if (cmd->args[0][0] == '\0')
+		return (false);
+	if (ft_strlen(cmd->args[0]) == 0)
+		return (false);
+	if (ft_strncmp(cmd->args[0], "echo", 5) == 0)
 		return (true);
-	else if (ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "cd", 3) == 0)
 		return (true);
-	else if (ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "env", 4) == 0)
 		return (true);
-	else if (ft_strncmp(cmd->args[0], "exit", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "exit", 5) == 0)
 		return (true);
-	else if (ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "export", 7) == 0)
 		return (true);
-	else if (ft_strncmp(cmd->args[0], "pwd", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "pwd", 4) == 0)
 		return (true);
-	else if (ft_strncmp(cmd->args[0], "unset", ft_strlen(cmd->args[0])) == 0)
+	else if (ft_strncmp(cmd->args[0], "unset", 6) == 0)
 		return (true);
 	else
 		return (false);

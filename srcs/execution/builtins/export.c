@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/24 18:57:43 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:33:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	export_arg(char *arg, t_env_var **envp, t_main_data *data)
 		status_error(data, ERROR_MEM_ALLOC);
 	while (head)
 	{
-		if (ft_strncmp(head->variable, name, ft_strlen(name)) == 0)
+		if (ft_strncmp(head->variable, name, ft_strlen(head->variable)) == 0)
 		{
 			head->variable = replace_or_join_var(arg, head, name);
 			if (!head->variable)

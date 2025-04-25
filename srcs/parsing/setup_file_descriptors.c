@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 21:12:40 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 21:17:27 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/25 19:05:18 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static t_pars_err	open_file(t_redir *redir)
 			if (error_msg == NULL)
 				return (ERROR_MEM_ALLOC);
 			perror(error_msg);
+			free(error_msg);
 			return (FAILURE);
 		}
 		redir = redir->next;
@@ -97,7 +98,7 @@ t_pars_err	setup_file_descriptors(t_command *cmd, t_main_data *data)
 	{
 		if (filename_checker(cmd->redir_list) != SUCCESS)
 		{
-			error_msg("event not found\n");
+			error_msg("Invalid file name\n");
 			return (FAILURE);
 		}
 		status = open_file(cmd->redir_list);

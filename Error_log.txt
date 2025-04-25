@@ -4,10 +4,6 @@ Error execution
 
 To do:
 
-should we leave it like this?
-
 	int		fd[2];
 	int		i;
 	pid_t	pid[data->nbr_of_cmds]; is this allowed
-
-unset doesn't work???

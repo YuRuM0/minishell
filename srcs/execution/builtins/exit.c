@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:22:40 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 18:45:24 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/25 19:32:25 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ static void	exit_multi_arg(char **cmd, t_main_data *data)
 	{
 		write(1, "exit\n", 5);
 		write(1, "exit: too many arguments\n", 26);
-		clean_all_data_exit(data, 2);
+		//clean_all_data_exit(data, 1);
 	}
 }
 
-void	ft_exit(char **cmd, t_main_data *data)
+t_exec_error	ft_exit(char **cmd, t_main_data *data)
 {
 	if (!cmd[1])
 	{
@@ -69,4 +69,5 @@ void	ft_exit(char **cmd, t_main_data *data)
 		exit_one_arg(cmd, data);
 	else if (cmd[1] && cmd[2])
 		exit_multi_arg(cmd, data);
+	return (ERROR);
 }

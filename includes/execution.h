@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 18:57:04 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/25 19:32:36 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum s_exec_error
 
 t_exec_error	cd(char **cmd, t_main_data *data);
 t_exec_error	env(t_main_data *data, char **args);
-void			ft_exit(char **cmd, t_main_data *data);
+t_exec_error	ft_exit(char **cmd, t_main_data *data);
 int				export_arg(char *arg, t_env_var **envp, t_main_data *data);
 t_exec_error	export(char **args, t_main_data *data);
 void			echo(char **args);

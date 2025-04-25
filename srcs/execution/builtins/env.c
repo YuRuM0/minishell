@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 23:50:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 18:43:48 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:28:45 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ t_exec_error	env(t_main_data *data, char **args)
 		while (temp)
 		{
 			i = 0;
-			while (temp->variable[i])
+			if (temp->is_exported == 1)
 			{
-				if (temp->is_exported == 1)
+				while (temp->variable[i])
+				{
 					write(1, &temp->variable[i], 1);
-				i++;
+					i++;
+				}
+				write(1, "\n", 1);
 			}
-			write(1, "\n", 1);
 			temp = temp->next;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/24 16:40:48 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/25 21:11:13 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_pars_err	parser(t_main_data *data)
 	status = tokenize_input(data, data->pipeline);
 	if (status != SUCCESS)
 		return (status_error(data, status), status);
-	// debugging(data);
+	//debugging(data);
 	status = syntax(data);
 	if (status != SUCCESS)
 		return (status_error_syntax(data, status), status);
