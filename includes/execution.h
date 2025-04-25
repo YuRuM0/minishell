@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/24 18:57:19 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/25 18:57:04 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void			ft_exit(char **cmd, t_main_data *data);
 int				export_arg(char *arg, t_env_var **envp, t_main_data *data);
 t_exec_error	export(char **args, t_main_data *data);
 void			echo(char **args);
-t_exec_error	pwd(void);
+t_exec_error	pwd(char **cmd);
 t_exec_error	ft_unset(char **args, t_env_var **envp);
 
 //cd_utils
 int				go_prev(t_env_var **envp, char *tb_old_pwd);
-int				go_home(t_env_var **envp, char *oldpwd);
+int				go_home(t_env_var **envp, char *oldpwd, t_main_data *data);
 void			change_pwd(t_env_var **envp, char *tb_oldpwd, char *pwd);
 
 //export_utils
