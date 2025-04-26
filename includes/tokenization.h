@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/23 22:08:54 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/26 23:31:02 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ t_token		*add_new_token(void);
 void		add_token_back(t_token **head, t_token *new);
 t_token		*last_token(t_token *list);
 t_syntax	get_token_type(char cha);
+t_pars_err	handle_special_chars(t_token *token);
 
 //environment variables functions
 t_env_var	*add_new_var(void);

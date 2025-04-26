@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
+#    By: filipe <filipe@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/23 22:32:18 by flima            ###   ########.fr        #
+#    Updated: 2025/04/26 23:33:49 by filipe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ YELLOW  = \033[33m
 BLUE    = \033[34m
 
 CFLAGS = -Wall -Werror -Wextra -g
-CFLAGS += -fsanitize=address
+# CFLAGS += -fsanitize=address
 
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -61,7 +61,8 @@ JUMP_PARSE_FILES = $(JUMP_PARSE_DIR)/process_tokens01.c \
 PARSE_UTILS_DIR = $(PARSE_DIR)/parse_utils
 PARSE_UTILS_FILES = $(PARSE_UTILS_DIR)/utils_parsing.c \
 					$(PARSE_UTILS_DIR)/utils_token_list.c \
-					$(PARSE_UTILS_DIR)/utils_errors_handler.c
+					$(PARSE_UTILS_DIR)/utils_errors_handler.c \
+					$(PARSE_UTILS_DIR)/utils_especial_char.c 
 
 DEBUG_DIR = $(PARSE_DIR)/debugging
 DEBUG_FILES = $(DEBUG_DIR)/print_tokens.c \

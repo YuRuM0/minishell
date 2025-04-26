@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/25 21:08:50 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/26 23:33:18 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,25 @@ static char	*ft_chartrim(char const *s1, char const *set)
 	return (ft_substr(s1, 0, i));
 }
 
-// static t_pars_err	handle
 static t_pars_err	trim_quotes(t_token *token)
 {
 	char	*tmp;
 
-	tmp = token->value;
-	if (token->type == D_QUOTE)
-		tmp = ft_chartrim(tmp, "\"");
-	else if (token->type == S_QUOTE)
-		tmp = ft_chartrim(tmp, "\'");
-	if (tmp == NULL)
-		return (ERROR_MEM_ALLOC);
-	free(token->value);
-	token->value = tmp;
+	if (token->type != WORD)
+	{
+		tmp = token->value;
+		if (token->type == D_QUOTE)
+			tmp = ft_chartrim(tmp, "\"");
+		else if (token->type == S_QUOTE)
+			tmp = ft_chartrim(tmp, "\'");
+		if (tmp == NULL)
+			return (ERROR_MEM_ALLOC);
+		free(token->value);
+		token->value = tmp;
+	}
+	if (token->type == D_QUOTE || token->type == WORD)
+		if (handle_special_chars(token) != SUCCESS)
+			return (ERROR_MEM_ALLOC);
 	return (SUCCESS);
 }
 
@@ -69,7 +74,7 @@ t_pars_err	expand_token_n_trim_quote(t_env_var *envp, t_token *token)
 
 	while (token != NULL)
 	{
-		if (token->type == D_QUOTE || token->type == S_QUOTE)
+		if (token->type == D_QUOTE || token->type == S_QUOTE || token->type == WORD)
 		{
 			status = trim_quotes(token);
 			if (status == ERROR_MEM_ALLOC)
