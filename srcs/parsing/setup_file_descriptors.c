@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_file_descriptors.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 21:12:40 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/25 19:05:18 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 00:18:30 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static int	ft_isvalidfd(char *str)
 	int	i;
 
 	i = 0;
+	// add rule here to handle D_QUOTE and S_QUOTE or in cmd_builder
+	// add str[i] == ' ' in case token type is some above
 	while (str[i])
 	{
 		if (ft_isalnum(str[i]) == 1 || str[i] == '.' \

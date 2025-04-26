@@ -9,3 +9,4 @@ minishell
 /parsing/tests/*
 test.c
 tests
+minishell_tester

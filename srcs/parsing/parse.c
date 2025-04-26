@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/26 23:18:39 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/27 00:16:09 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	parsing_and_execution(t_main_data *data)
 		return ;
 	}
 	create_envp_array(data, data->env_vars);
-	//debugging(data);
+	debugging(data);
 	execution(data, data->cmds);
 }
