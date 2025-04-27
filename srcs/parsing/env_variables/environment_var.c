@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 21:04:03 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 22:25:10 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static t_pars_err	expand_invalid_env(char **expand, int *i)
 		*i = *i + 1;
 		return (SUCCESS);
 	}
-	status = extract_var_name(*expand + *i + 1, &var_name);
+	status = extract_invalid_var_name(*expand + *i + 1, &var_name);
 	if (status == ERROR_MEM_ALLOC)
 		return (ERROR_MEM_ALLOC);
 	status = append_expanded_var(expand, var_name + 1, i, var_name);
@@ -100,8 +100,6 @@ t_pars_err	expand_env_instr(t_env_var *envp, char **expand)
 	t_pars_err	status;
 
 	i = 0;
-	//printf("%s\n", *expand);
-
 	while ((*expand)[i])
 	{
 		if ((*expand)[i] == '$' && (*expand)[i + 1] && \

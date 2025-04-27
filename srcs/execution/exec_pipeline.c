@@ -6,20 +6,20 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 21:52:07 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 22:24:45 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static void	wait_all_children(t_main_data *data, pid_t *pid)
+static void	wait_all_children(t_main_data *data)
 {
-	int	i;
 	int	exit_status;
 
-	i = -1;
-	while (++i < data->nbr_of_cmds)
-		waitpid(pid[i], &exit_status, 0);
+	while (waitpid(-1, &exit_status, 0) > 0)
+	{
+	}
+	// waitpid(data->pid, &exit_status, 0);
 	if (WEXITSTATUS(exit_status))
 	{
 		data->exit_status = WEXITSTATUS(exit_status);
@@ -35,7 +35,7 @@ static void	wait_all_children(t_main_data *data, pid_t *pid)
 	}
 }
 
-static t_exec_error	create_pipe_n_fork(int *fd, pid_t *pid, t_command *cmd)
+static t_exec_error	create_pipe_n_fork(int *fd, t_main_data *data, t_command *cmd)
 {
 	int		check;
 
@@ -45,8 +45,8 @@ static t_exec_error	create_pipe_n_fork(int *fd, pid_t *pid, t_command *cmd)
 		if (check == -1)
 			return (error_msg("failed to create a pipe.\n"), ERROR);
 	}
-	*pid = fork();
-	if (*pid == -1)
+	data->pid = fork();
+	if (data->pid == -1)
 		return (error_msg("failed to create a new process.\n"), ERROR);
 	return (SUCCEED);
 }
@@ -65,14 +65,13 @@ t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd)
 {
 	int		fd[2];
 	int		i;
-	pid_t	pid[data->nbr_of_cmds];
 
 	i = 0;
 	while (cmd != NULL)
 	{
-		if (create_pipe_n_fork(fd, &pid[i], cmd) != SUCCEED)
+		if (create_pipe_n_fork(fd, data, cmd) != SUCCEED)
 			return (ERROR);
-		if (pid[i] == 0)
+		if (data->pid == 0)
 			cmd_executor(data, cmd, fd);
 		close_parent_heredoc_fd(cmd->redir_list);
 		if (data->last_fd_in != STDIN_FILENO)
@@ -85,6 +84,6 @@ t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd)
 		cmd = cmd->next;
 		i++;
 	}
-	wait_all_children(data, pid);
+	wait_all_children(data);
 	return (SUCCEED);
 }
