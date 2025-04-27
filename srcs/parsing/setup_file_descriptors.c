@@ -6,7 +6,7 @@
 /*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 21:12:40 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/27 00:18:30 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/27 13:36:45 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,19 @@ static int	ft_isvalidfd(char *str)
 	int	i;
 
 	i = 0;
-	// add rule here to handle D_QUOTE and S_QUOTE or in cmd_builder
-	// add str[i] == ' ' in case token type is some above
+	// better check whts is not allow bacause there are a lot of things that is alowed
 	while (str[i])
 	{
 		if (ft_isalnum(str[i]) == 1 || str[i] == '.' \
-		|| str[i] == '-' || str[i] == '_' || str[i] == '/')
+		|| str[i] == '-' || str[i] == '_' || str[i] == '/'\
+		|| str[i] == ' ' || str[i] == '\'' || str[i] == '\"'\
+		|| str[i] == ':' || str[i] == '=' || str[i] == '+'\
+		|| str[i] == '@' || str[i] == '#' || str[i] == '$'\
+		|| str[i] == '%' || str[i] == '^' || str[i] == '&'\
+		|| str[i] == '*' || str[i] == '(' || str[i] == ')'\
+		|| str[i] == '{' || str[i] == '}' || str[i] == '['\
+		|| str[i] == ']' || str[i] == ';' || str[i] == ','\
+		|| str[i] == '\\')
 			i++;
 		else
 			return (0);
@@ -82,12 +89,16 @@ static int	ft_isvalidfd(char *str)
 
 t_pars_err	filename_checker(t_redir *redir)
 {
-	if (redir && redir->file)
+	while (redir == NULL)
 	{
-		if (ft_strlen(redir->file) > 255)
-			return (FAILURE);
-		if (ft_isvalidfd(redir->file) == 0)
-			return (FAILURE);
+		if (redir->file != NULL)
+		{
+			if (ft_strlen(redir->file) > 255)
+				return (FAILURE);
+			if (ft_isvalidfd(redir->file) == 0)
+				return (FAILURE);
+		}
+		redir = redir->next;
 	}
 	return (SUCCESS);
 }

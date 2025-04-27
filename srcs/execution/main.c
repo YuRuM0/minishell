@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 21:30:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 12:52:41 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag)
 
 bool	builtinchecker(t_command *cmd)
 {
-	if (cmd->args[0][0] == '\0')
+	if (cmd->args[0] && cmd->args[0][0] == '\0')
 		return (false);
 	if (ft_strlen(cmd->args[0]) == 0)
 		return (false);
