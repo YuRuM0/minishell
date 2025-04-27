@@ -6,11 +6,24 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 19:04:52 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 16:43:59 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/27 21:46:08 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
+
+t_pars_err	extract_invalid_var_name(char *str, char **var_name)
+{
+	int	len;
+
+	len = 0;
+	while (str[len] && str[len] != ' ')
+		len++;
+	*var_name = ft_substr(str, 0, len);
+	if (*var_name == NULL && errno == ENOMEM)
+		return (ERROR_MEM_ALLOC);
+	return (SUCCESS);
+}
 
 t_pars_err	find_environment_var(t_env_var *envp, char *var_name, \
 	char **environ_var)

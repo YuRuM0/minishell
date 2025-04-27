@@ -6,22 +6,12 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:18:40 by flima             #+#    #+#             */
-/*   Updated: 2025/03/12 17:21:56 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/27 21:14:20 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-/**
- * @brief Creates a new token.
- *
- * This function allocates memory for a new token of type `t_token` and 
- * initializes its fields. The `id` is set to -1, `str` is set to NULL, 
- * and `next` is initialized to NULL.
- *
- * @return A pointer to the newly created token, or NULL if memory 
- *         allocation fails.
- */
 t_token	*add_new_token(void)
 {
 	t_token	*node;
@@ -35,16 +25,6 @@ t_token	*add_new_token(void)
 	return (node);
 }
 
-/**
- * @brief Adds a token to the end of a linked list of tokens.
- *
- * This function adds a new token to the end of the linked list. If the 
- * list is empty, it sets the new token as the head of the list.
- *
- * @param head Pointer to a pointer to the head of the token list. 
- *              The head of the list will be updated if it's currently NULL.
- * @param new Pointer to the new token to be added.
- */
 void	add_token_back(t_token **head, t_token *new)
 {
 	t_token	*temp;
@@ -60,18 +40,6 @@ void	add_token_back(t_token **head, t_token *new)
 	}
 }
 
-/**
- * @brief Retrieves the last token in a linked list of tokens.
- *
- * This function traverses the linked list of tokens until it finds the 
- * last token (the one that has a NULL next pointer). If the list is empty, 
- * it returns NULL.
- *
- * @param list Pointer to the head of the token list.
- * @return Pointer to the last token in the list, or NULL if the list 
- *         is empty.
- */
-
 t_token	*last_token(t_token *list)
 {
 	t_token	*last;
@@ -82,4 +50,14 @@ t_token	*last_token(t_token *list)
 	while (last->next)
 		last = last->next;
 	return (last);
+}
+
+void	remove_next_token(t_token *current)
+{
+	t_token	*tmp_token;
+
+	tmp_token = current->next;
+	current->next = current->next->next;
+	tmp_token->next = NULL;
+	free_tokens(tmp_token);
 }

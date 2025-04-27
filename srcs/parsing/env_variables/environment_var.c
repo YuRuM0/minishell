@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:29:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/24 16:18:38 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/27 21:51:23 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static t_pars_err	expand_invalid_env(char **expand, int *i)
 		*i = *i + 1;
 		return (SUCCESS);
 	}
-	status = extract_var_name(*expand + *i + 1, &var_name);
+	status = extract_invalid_var_name(*expand + *i + 1, &var_name);
 	if (status == ERROR_MEM_ALLOC)
 		return (ERROR_MEM_ALLOC);
 	status = append_expanded_var(expand, var_name + 1, i, var_name);
