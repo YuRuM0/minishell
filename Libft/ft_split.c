@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 19:06:44 by flima             #+#    #+#             */
-/*   Updated: 2024/10/21 14:32:19 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/27 16:19:40 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	**ft_split(char const *s, char c)
 	char	**array_strs;
 	char	**temp;
 
-	if (s == NULL)
+	if (s == NULL || s[0] == '\0')
 		return (NULL);
 	array_strs = (char **)malloc((ft_countchr(s, c) + 1) * sizeof(char *));
 	if (!array_strs)
