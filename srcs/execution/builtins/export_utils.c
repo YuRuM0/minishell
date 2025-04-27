@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 18:50:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/27 17:24:47 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 18:31:40 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ int	create_new_var(char *arg, t_env_var **envp, t_main_data *data)
 	if (!new_var)
 		return (error_msg(NULL), -1);
 	add_var_back(envp, new_var);
-	//if (ft_strchr(arg, '=') == NULL)
-	//	new_var->is_exported = 0;
-	ft_add_key_val(envp, arg, data);
+	if (ft_strchr(arg, '=') == NULL)
+		new_var->is_exported = 0;
+	if (ft_add_key_val(envp, arg, data) != 0)
+		return (-1);
 	return (0);
 }
