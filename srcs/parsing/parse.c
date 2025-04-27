@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 21:29:45 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/27 16:18:06 by yulpark          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/27 17:30:21 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "tokenization.h"
 #include "execution.h"
@@ -51,7 +52,8 @@ void	parsing_and_execution(t_main_data *data)
 	{
 		if (status == HEREDOC_CHILD_SIGNALED)
 			return ;
-		else if (set_exit_env_status(data->env_vars, EXIT_SYNTAX) == ERROR_MEM_ALLOC)
+		else if (set_exit_env_status(data->env_vars, \
+			EXIT_SYNTAX) == ERROR_MEM_ALLOC)
 			status_error(data, ERROR_MEM_ALLOC);
 		return ;
 	}

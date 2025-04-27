@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_especial_char.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:22:58 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/26 23:34:29 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/27 16:43:11 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-int		get_special_len(char *str)
+int	get_special_len(char *str)
 {
 	int	i;
 	int	len;
@@ -38,7 +38,7 @@ int		get_special_len(char *str)
 	return (len);
 }
 
-static char *ft_strcpy_without_slash(char *dest, char *src)
+static char	*ft_strcpy_without_slash(char *dest, char *src)
 {
 	int	i;
 	int	j;

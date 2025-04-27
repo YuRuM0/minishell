@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/24 17:26:50 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/27 16:43:31 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	clean_temp_data(t_main_data *data)
 void	clean_all_data_exit(t_main_data *data, int out_status)
 {
 	rl_clear_history();
-	//set_terminal
 	free_env_vars(data->env_vars);
 	free_tokens(data->tokens);
 	free_cmds(data->cmds);

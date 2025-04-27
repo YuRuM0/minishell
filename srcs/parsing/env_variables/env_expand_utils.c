@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 19:04:52 by flima             #+#    #+#             */
-/*   Updated: 2025/04/24 19:33:58 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/27 16:43:59 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_pars_err	expand_environ_var(t_env_var *envp, char **var_name, \
 	char **environ_var)
 {
 	t_pars_err	status;
-	char 		*tmp;
+	char		*tmp;
 
 	if (ft_strncmp(*var_name, "~", 2) == 0)
 	{
