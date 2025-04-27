@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_errors_handler.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:49:49 by flima             #+#    #+#             */
-/*   Updated: 2025/04/26 23:22:47 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/27 16:05:03 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	error_msg(char *msg)
 	if (!msg && errno == ENOMEM)
 	{
 		perror("minishell");
-		//set_terminal
 		if (isatty(STDIN_FILENO))
 			rl_clear_history();
 	}

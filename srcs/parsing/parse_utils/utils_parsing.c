@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:49:35 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/26 23:33:18 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/27 16:45:20 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,14 @@ t_pars_err	expand_token_n_trim_quote(t_env_var *envp, t_token *token)
 
 	while (token != NULL)
 	{
-		if (token->type == D_QUOTE || token->type == S_QUOTE || token->type == WORD)
+		if (token->type == D_QUOTE || token->type == S_QUOTE \
+			|| token->type == WORD)
 		{
 			status = trim_quotes(token);
 			if (status == ERROR_MEM_ALLOC)
 				return (ERROR_MEM_ALLOC);
 		}
-		if (token->type == D_QUOTE || token->type == VARIABLE ||\
+		if (token->type == D_QUOTE || token->type == VARIABLE || \
 			(token->type == WORD && ft_strncmp(token->value, "~", 2) == 0))
 		{
 			status = expand_token(envp, token);

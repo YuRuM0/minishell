@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 15:43:34 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 16:04:21 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static char	*read_tty(void)
 	else if (pipeline == NULL && errno == 0)
 	{
 		rl_clear_history();
-		//set teminal tcgetattr function, learn it
 		error_msg("exit\n");
 		exit(EXIT_SUCCESSFULLY);
 	}
@@ -90,7 +89,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_putstr_fd("Error\n No arguments needed", 2);
 		return (1);
 	}
-	//signals func
 	init_data(&data);
 	duplicate_env_var(&data, envp);
 	loop_minishell(&data);
