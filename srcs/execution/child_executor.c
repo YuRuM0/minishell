@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 16:40:31 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 20:50:13 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,28 @@ static void	get_valid_path(t_main_data *data, t_command *cmd,\
 		clean_all_data_exit(data, data->exit_status);
 	}
 }
+
+static void remove_empty_cmds(t_command *cmd)
+{
+	int i = 0;
+	char **args = cmd->args;
+
+	if (args == NULL)
+		return;
+
+	while (args[i])
+	{
+		if (ft_strlen(args[i]) > 0)
+			break;
+		free(args[i]);
+		i++;
+	}
+	if (args[i] == NULL)
+		cmd->args = NULL;
+	else
+		cmd->args = &args[i];
+}
+
 void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 {
 	char	*path;
@@ -107,6 +129,9 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 		clean_all_data_exit(data, EXIT_FAIL);
 	if (builtinchecker(cmd) == true)
 		manage_builtins(cmd, data, flag);
+	remove_empty_cmds(cmd);
+	if (cmd->args == NULL)
+		clean_all_data_exit(data, EXIT_SUCCESS);
 	else
 	{
 		get_valid_path(data, cmd, &path);
