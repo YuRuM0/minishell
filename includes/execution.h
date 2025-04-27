@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 19:32:36 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 16:41:03 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int				ft_add_key_val(t_env_var **head, char *keyvalue, t_main_data *data);
 t_env_var		*ft_find_env(t_env_var *env, char *key);
 int				ft_env_update(t_env_var *env, char *name, \
 	char *path);
-void			ft_delete_node(t_env_var **envp, t_env_var \
-	*head, int i);
 
 // execute
 t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag);
@@ -69,6 +67,7 @@ bool			builtinchecker(t_command *cmd);
 //executable_path
 char			*ft_strputjoin(char *src1, char *src2, char c);
 void			free_double(char **arr);
-char			*executable_path(t_main_data *data, t_command *cmd);
+char			*executable_path(t_main_data *data, t_command *cmd, \
+	char **env_path_var, int i);
 
 #endif

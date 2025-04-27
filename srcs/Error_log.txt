@@ -10,9 +10,6 @@ should we leave it like this?
 	int		i;
 	pid_t	pid[data->nbr_of_cmds]; is this allowed
 
-unset doesn't work???
-
-
 file names also use "" and '' in the name
 cat < filename			works
 cat < "filename"		works

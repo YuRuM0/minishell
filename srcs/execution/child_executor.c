@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/24 21:18:46 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/27 16:40:31 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,13 @@ static t_exec_error	redir_in(t_command *cmd, t_redir *infile, \
 static void	get_valid_path(t_main_data *data, t_command *cmd,\
 	 char **path)
 {
-	char *msg;
-	
-	*path = executable_path(data, cmd);
+	char	*msg;
+	char	**env_path_var;
+	int		i;
+
+	env_path_var = NULL;
+	i = 0;
+	*path = executable_path(data, cmd, env_path_var, i);
 	if (!*path)
 	{
 		if (data->exit_status == 0)
@@ -111,3 +115,4 @@ void	cmd_executor(t_main_data *data, t_command *cmd, int *fd)
 		clean_all_data_exit(data, EXIT_FAIL);
 	}
 }
+

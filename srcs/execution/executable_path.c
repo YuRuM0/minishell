@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 19:52:29 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 16:40:52 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,19 @@ static bool	is_exec_file(t_command *cmd)
 	return (false);
 }
 
-char	*executable_path(t_main_data *data, t_command *cmd)
+char	*executable_path(t_main_data *data, t_command *cmd, char **env_path_var, int i)
 {
-	char		**env_path_var;
 	t_env_var	*env_path;
-	int			i;
 	char		*path;
 
 	if (is_exec_file(cmd) == true)
 		return (check_executable_file(data, cmd, cmd->args[0]));
 	env_path = ft_find_env(data->env_vars, "PATH");
+	if (!env_path)
+		return (NULL);
 	env_path_var = ft_split(env_path->variable, ':');
 	if (!env_path_var)
 		return (NULL);
-	i = 0;
 	while (env_path_var[i])
 	{
 		path = ft_strputjoin(env_path_var[i], cmd->args[0], '/');

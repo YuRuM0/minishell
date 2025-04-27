@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_file_descriptors.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 21:12:40 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/27 13:36:45 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/27 15:38:38 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	ft_isvalidfd(char *str)
 
 t_pars_err	filename_checker(t_redir *redir)
 {
-	while (redir == NULL)
+	while (redir != NULL)
 	{
 		if (redir->file != NULL)
 		{

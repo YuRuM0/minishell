@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 18:50:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/24 18:56:12 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 17:24:47 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,17 @@ char	*get_var_name(char *arg)
 int	input_checker(char *input)
 {
 	int	i;
-	int	equal_counter;
 
 	if (input[0] && (ft_isalpha(input[0]) == 0 && input[0] != '_'))
 		return (-1);
-	equal_counter = 0;
 	i = 1;
 	while (input[0] && input[i] != '\0')
 	{
-		if (input[i] == '+' && input[i + 1] && input[i + 1] != '=')
-			return (-1);
-		if (input[i] == '=')
-			equal_counter++;
-		else if (!(input[i] == '_' || ft_isalnum(input[i]) == 1 \
-		|| input[i] == '+' || input[i] == '$' || input[i] == ' '))
+		if (input[i] == '+' || input[i] == '/')
 			return (-1);
 		i++;
 	}
-	if (equal_counter <= 1)
-		return (0);
-	return (-1);
+	return (0);
 }
 
 int	create_new_var(char *arg, t_env_var **envp, t_main_data *data)
@@ -57,8 +48,8 @@ int	create_new_var(char *arg, t_env_var **envp, t_main_data *data)
 	if (!new_var)
 		return (error_msg(NULL), -1);
 	add_var_back(envp, new_var);
-	if (ft_strchr(arg, '=') == NULL)
-		new_var->is_exported = 0;
+	//if (ft_strchr(arg, '=') == NULL)
+	//	new_var->is_exported = 0;
 	ft_add_key_val(envp, arg, data);
 	return (0);
 }
