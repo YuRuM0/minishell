@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 15:33:25 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 22:07:14 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_main_data
 	struct s_command		*cmds;
 	struct s_token			*tokens;
 	char					**envp_array;
+	pid_t					pid;
 }							t_main_data;
 
 typedef enum e_signal_mode
