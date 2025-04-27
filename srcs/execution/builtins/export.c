@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/27 17:53:45 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/27 18:46:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,30 @@ static t_exec_error	export_noarg(t_env_var *envp)
 int	ft_add_key_val(t_env_var **head, char *keyvalue, t_main_data *data)
 {
 	t_env_var	*temp;
+	char		*name;
+	int			i;
 
 	if (*head == NULL)
 		return (error_msg("Export: empty environment var"), -1);
-	else
+	i = 0;
+	while (keyvalue[i])
 	{
-		temp = *head;
-		while (temp->next != NULL)
-			temp = temp->next;
-		temp->variable = ft_strdup(keyvalue);
-		if (temp->variable == NULL)
-			status_error(data, ERROR_MEM_ALLOC);
-		return (0);
+		if (keyvalue[i] == '+' && keyvalue[i + 1] && keyvalue[i + 1] != '=')
+			return (-1);
+		i++;
 	}
+	name = ft_strtrim(get_var_name(keyvalue), "+");
+	temp = *head;
+	while (temp->next != NULL)
+		temp = temp->next;
+	if (ft_strchr(keyvalue, '+') == NULL)
+		temp->variable = ft_strputjoin(name, &keyvalue[ft_strlen(name) + 1], '=');
+	else
+		temp->variable = ft_strputjoin(name, &keyvalue[ft_strlen(name) + 2], '=');
+	free(name);
+	if (temp->variable == NULL)
+		status_error(data, ERROR_MEM_ALLOC);
+	return (0);
 }
 
 // only handles one arg at a time from the long list with many args
