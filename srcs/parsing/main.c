@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 16:04:21 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/27 17:09:13 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	init_data(t_main_data *data)
 	data->nbr_of_cmds = 0;
 	data->last_fd_in = STDIN_FILENO;
 	data->pipeline = NULL;
-	data->env_vars = NULL;
+	data->envp_array = NULL;
 	data->cmds = NULL;
 	data->tokens = NULL;
 	data->exit_status = 0;
