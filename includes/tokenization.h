@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/27 21:46:40 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/28 14:48:11 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_command
 	struct s_redir		*redir_list;
 	struct s_redir		*infile;
 	struct s_redir		*outfile;
+	int					fd[2];
 	bool				is_builtin;
 	bool				is_pipe_next;
 	struct s_command	*next;

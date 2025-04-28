@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_commands_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:19:04 by flima             #+#    #+#             */
-/*   Updated: 2025/04/23 15:38:26 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/28 14:54:56 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_command	*add_new_cmd(t_main_data *data)
 	node->outfile = NULL;
 	node->is_builtin = false;
 	node->is_pipe_next = false;
+	node->fd[0] = -2;
+	node->fd[1] = -2;
 	node->next = NULL;
 	node->data = data;
 	return (node);

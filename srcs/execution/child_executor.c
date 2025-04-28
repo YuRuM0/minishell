@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 20:50:13 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/28 15:28:42 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 // identificar se ha pipe e redirecionar para o pipe, se nao houver file in
 //identificar o ultimo cmd e redirecionar para stdout ou um out file
 
+
 static t_exec_error	redir_out(t_command *cmd, t_redir *outfile, int *fd)
 {
 	if (outfile != NULL)
@@ -24,20 +25,16 @@ static t_exec_error	redir_out(t_command *cmd, t_redir *outfile, int *fd)
 		if (dup2(outfile->fd, STDOUT_FILENO) == -1)
 		{
 			perror("minishell");
-			close(outfile->fd);
 			return (ERROR);
 		}
-		close(outfile->fd);
 	}
 	else if (cmd->is_pipe_next == true)
 	{
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
 		{
 			perror("minishell");
-			close(fd[1]);
 			return (ERROR);
 		}
-		close(fd[1]);
 	}
 	return (SUCCEED);
 }
@@ -45,29 +42,29 @@ static t_exec_error	redir_out(t_command *cmd, t_redir *outfile, int *fd)
 static t_exec_error	redir_in(t_command *cmd, t_redir *infile, \
 	t_redir *outfile, int *fd)
 {
+	t_exec_error	status;
+	
+	status = SUCCEED;
 	if (infile != NULL)
 	{
 		if (dup2(infile->fd, STDIN_FILENO) == -1)
 		{
 			perror("minishell");
-			close(infile->fd);
-			return (ERROR);
+			status = ERROR;
 		}
-		close(infile->fd);
 	}
 	else if (cmd->data->last_fd_in != STDIN_FILENO)
 	{
 		if (dup2(cmd->data->last_fd_in, STDIN_FILENO) == -1)
 		{
 			perror("minishell");
-			close(cmd->data->last_fd_in);
-			return (ERROR);
+			status = ERROR;
 		}
-		close(cmd->data->last_fd_in);
 	}
-	if (redir_out(cmd, outfile, fd) != SUCCEED)
-		return (ERROR);
-	return (SUCCEED);
+	if (status == SUCCEED)
+		status = redir_out(cmd, outfile, fd);
+	close_fds_child(cmd);
+	return (status);
 }
 
 static void	get_valid_path(t_main_data *data, t_command *cmd,\

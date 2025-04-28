@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 22:07:35 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/28 14:23:49 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	init_data(t_main_data *data)
 	data->cmds = NULL;
 	data->tokens = NULL;
 	data->exit_status = 0;
-	data->pid = -2;
+	data->last_pid = -2;
 	data->env_vars = NULL;
 }
 
