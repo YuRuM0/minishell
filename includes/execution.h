@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/28 15:30:17 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/28 16:09:55 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			execution(t_main_data *data, t_command *cmd);
 void			cmd_executor(t_main_data *data, t_command *cmd, int *fd);
 t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd);
 bool			builtinchecker(t_command *cmd);
-void			close_fds_child(t_command *cmd);
+t_exec_error	close_fds_child(t_command *cmd);
 
 //executable_path
 char			*ft_strputjoin(char *src1, char *src2, char c);

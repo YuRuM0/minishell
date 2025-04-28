@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:04:08 by flima             #+#    #+#             */
-/*   Updated: 2025/04/28 15:28:42 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/28 16:25:33 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_exec_error	redir_in(t_command *cmd, t_redir *infile, \
 	t_redir *outfile, int *fd)
 {
 	t_exec_error	status;
-	
+
 	status = SUCCEED;
 	if (infile != NULL)
 	{
@@ -63,7 +63,8 @@ static t_exec_error	redir_in(t_command *cmd, t_redir *infile, \
 	}
 	if (status == SUCCEED)
 		status = redir_out(cmd, outfile, fd);
-	close_fds_child(cmd);
+	if (close_fds_child(cmd) != SUCCEED)
+		return(ERROR);
 	return (status);
 }
 

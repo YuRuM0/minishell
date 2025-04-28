@@ -6,14 +6,18 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/28 15:32:35 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/28 16:26:02 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-void	close_fds_child(t_command *cmd)
+t_exec_error	close_fds_child(t_command *cmd)
 {
+	int	prev_errno;
+
+	prev_errno = errno;
+	errno = 0;
 	if (cmd->infile != NULL)
 		close(cmd->infile->fd);
 	if (cmd->outfile != NULL)
@@ -25,6 +29,12 @@ void	close_fds_child(t_command *cmd)
 	}
 	if (cmd->data->last_fd_in != STDIN_FILENO)
 		close(cmd->data->last_fd_in);
+	if (errno != 0 && prev_errno == 0)
+	{
+		perror("minishell");
+		return(ERROR);
+	}
+	return (SUCCEED);
 }
 
 static void	wait_all_children(t_main_data *data)
