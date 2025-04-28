@@ -15,3 +15,7 @@ cat < filename			works
 cat < "filename"		works
 cat < meu arquivo.txt	ERRO
 cat < "meu arquivo.txt" works
+
+echo $"HOME"
+
+yes "no" | head -n 10

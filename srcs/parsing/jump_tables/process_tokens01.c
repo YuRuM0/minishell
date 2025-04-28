@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   process_tokens01.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:44:47 by flima             #+#    #+#             */
-/*   Updated: 2025/04/25 19:18:49 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/27 20:40:21 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-// moves i true the input while tok_type is 
+// moves i true the input while tok_type is
 //equal the current token type in input[i]
 // returns a error code
 t_pars_err	process_word_n_spaces(char *input, size_t *i, t_syntax *tok_type)
