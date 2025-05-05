@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: filipe <filipe@student.42.fr>              +#+  +:+       +#+         #
+#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/26 23:33:49 by filipe           ###   ########.fr        #
+#    Updated: 2025/05/05 15:11:47 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,8 @@ EXEC_FILES = $(EXEC_DIR)/main.c\
 				$(EXEC_DIR)/execution.c\
 				$(EXEC_DIR)/executable_path.c\
 				$(EXEC_DIR)/child_executor.c\
-				$(EXEC_DIR)/exec_pipeline.c
+				$(EXEC_DIR)/exec_pipeline.c \
+				$(EXEC_DIR)/exec_utils.c
 
 BUILTIN_DIR = $(EXEC_DIR)/builtins
 BUILTIN_FILES = $(BUILTIN_DIR)/echo.c \

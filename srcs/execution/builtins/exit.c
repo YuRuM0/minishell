@@ -6,19 +6,18 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:22:40 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 19:32:25 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/29 15:59:19 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-// check extra leaks
 
 static int	ft_isnum(char *s)
 {
 	int	i;
 
 	i = 0;
-	if (s[0] == '-')
+	if (s[0] == '-' || s[0] == '+')
 		i++;
 	while (s[i])
 	{
@@ -35,6 +34,7 @@ static void	exit_one_arg(char **cmd, t_main_data *data)
 
 	if (ft_isnum(cmd[1]) != 1)
 	{
+		write(1, "exit\n", 5);
 		write(1, "exit: non-numeric argument\n", 28);
 		clean_all_data_exit(data, 2);
 	}
@@ -47,6 +47,7 @@ static void	exit_multi_arg(char **cmd, t_main_data *data)
 {
 	if (ft_isnum(cmd[1]) != 1)
 	{
+		write(1, "exit\n", 5);
 		write(1, "exit: non-numeric argument\n", 28);
 		clean_all_data_exit(data, 2);
 	}
@@ -54,7 +55,6 @@ static void	exit_multi_arg(char **cmd, t_main_data *data)
 	{
 		write(1, "exit\n", 5);
 		write(1, "exit: too many arguments\n", 26);
-		//clean_all_data_exit(data, 1);
 	}
 }
 

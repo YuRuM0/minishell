@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:26:53 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/28 16:09:55 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/29 16:46:08 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,9 @@ typedef enum s_exec_error
 t_exec_error	cd(char **cmd, t_main_data *data);
 t_exec_error	env(t_main_data *data, char **args);
 t_exec_error	ft_exit(char **cmd, t_main_data *data);
-int				export_arg(char *arg, t_env_var **envp, t_main_data *data);
 t_exec_error	export(char **args, t_main_data *data);
 void			echo(char **args);
-t_exec_error	pwd(char **cmd);
+t_exec_error	pwd(void);
 t_exec_error	ft_unset(char **args, t_env_var **envp);
 
 //cd_utils
@@ -50,7 +49,8 @@ void			change_pwd(t_env_var **envp, char *tb_oldpwd, char *pwd);
 char			*get_var_name(char *arg);
 int				input_checker(char *input);
 int				create_new_var(char *arg, t_env_var **envp, t_main_data *data);
-int				ft_add_key_val(t_env_var **head, char *keyvalue, t_main_data *data);
+int				ft_add_key_val(t_env_var **head, char *keyvalue, \
+	t_main_data *data);
 
 //env_utils
 t_env_var		*ft_find_env(t_env_var *env, char *key);
@@ -64,11 +64,15 @@ void			cmd_executor(t_main_data *data, t_command *cmd, int *fd);
 t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd);
 bool			builtinchecker(t_command *cmd);
 t_exec_error	close_fds_child(t_command *cmd);
+void			close_parent_heredoc_fd(t_redir *redir_list);
+t_exec_error	handle_files_n_redir(t_main_data *data, \
+	t_command *cmd, int *fd);
 
 //executable_path
 char			*ft_strputjoin(char *src1, char *src2, char c);
 void			free_double(char **arr);
 char			*executable_path(t_main_data *data, t_command *cmd, \
-	char **env_path_var, int i);
+	char **env_path_var);
+char			*get_path_from_left(t_command *cmd, char **env_path_var);
 
 #endif

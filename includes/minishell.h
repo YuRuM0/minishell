@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:59:25 by flima             #+#    #+#             */
-/*   Updated: 2025/04/28 14:23:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/29 15:33:35 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum e_exit_code
 	EXIT_SUCCESSFULLY = 0,
 	EXIT_FAIL = 1,
 	EXIT_SYNTAX,
-	EXIT_MEM_FAILURE = 3, //should be 137?
+	EXIT_MEM_FAILURE = 3,
 	EXIT_DENIED,
 	EXIT_CHILD_FAILURE,
 	EXIT_CMD_NOT_EXECUTABLE = 126,
@@ -54,7 +54,6 @@ typedef enum e_exit_code
 # define PARENT 1
 # define CHILD 2
 
-//main structure to hold all the data
 typedef struct s_main_data
 {
 	int						nbr_of_cmds;

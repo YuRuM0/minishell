@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:05:00 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/27 12:52:41 by filipe           ###   ########.fr       */
+/*   Updated: 2025/04/29 16:45:44 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // if there is a command -> send the command to manage_builtins
 
 //change to return the values from each builtins
+
 t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag)
 {
 	t_exec_error	status;
@@ -33,7 +34,7 @@ t_exec_error	manage_builtins(t_command *cmd, t_main_data *data, int flag)
 	else if (ft_strncmp(cmd->args[0], "export", 7) == 0)
 		status = export(cmd->args, data);
 	else if (ft_strncmp(cmd->args[0], "pwd", 4) == 0)
-		status = pwd(cmd->args);
+		status = pwd();
 	else if (ft_strncmp(cmd->args[0], "unset", 6) == 0)
 		status = ft_unset(cmd->args, &data->env_vars);
 	if (flag == CHILD)

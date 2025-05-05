@@ -3,63 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:18:37 by flima             #+#    #+#             */
-/*   Updated: 2025/04/28 16:26:02 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/28 20:29:35 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-t_exec_error	close_fds_child(t_command *cmd)
+static void	get_exit_child(t_main_data *data, int exit_status)
 {
-	int	prev_errno;
-
-	prev_errno = errno;
-	errno = 0;
-	if (cmd->infile != NULL)
-		close(cmd->infile->fd);
-	if (cmd->outfile != NULL)
-		close(cmd->outfile->fd);
-	if (cmd->fd[0] != -2 && cmd->fd[1] != -2)
+	if (WIFEXITED(exit_status))
 	{
-		close(cmd->fd[0]);
-		close(cmd->fd[1]);
+		data->exit_status = WEXITSTATUS(exit_status);
+		if (set_exit_env_status(data->env_vars, \
+			data->exit_status) != SUCCESS)
+			status_error(data, ERROR_MEM_ALLOC);
 	}
-	if (cmd->data->last_fd_in != STDIN_FILENO)
-		close(cmd->data->last_fd_in);
-	if (errno != 0 && prev_errno == 0)
+	else if (WIFSIGNALED(exit_status))
 	{
-		perror("minishell");
-		return(ERROR);
+		data->exit_status = 128 + WTERMSIG(exit_status);
+		if (set_exit_env_status(data->env_vars, \
+			data->exit_status) != SUCCESS)
+			status_error(data, ERROR_MEM_ALLOC);
+		g_last_signal = data->exit_status;
 	}
-	return (SUCCEED);
 }
 
 static void	wait_all_children(t_main_data *data)
 {
-	int	exit_status;
+	int		exit_status;
 	pid_t	pid;
 
-	while ((pid = waitpid(-1, &exit_status, 0)) > 0)
+	pid = 1;
+	while (pid > 0)
 	{
+		pid = waitpid(-1, &exit_status, 0);
 		if (pid == data->last_pid)
-		{
-			if (WEXITSTATUS(exit_status))
-			{
-				data->exit_status = WEXITSTATUS(exit_status);
-				if (set_exit_env_status(data->env_vars, data->exit_status) != SUCCESS)
-					status_error(data, ERROR_MEM_ALLOC);
-			}
-			else if (WIFSIGNALED(exit_status))
-			{
-				data->exit_status = 128 + WTERMSIG(exit_status);
-				if (set_exit_env_status(data->env_vars, data->exit_status) != SUCCESS)
-					status_error(data, ERROR_MEM_ALLOC);
-				g_last_signal = data->exit_status;
-			}
-		}
+			get_exit_child(data, exit_status);
 	}
 }
 
@@ -77,16 +59,6 @@ static t_exec_error	create_pipe_n_fork(t_main_data *data, t_command *cmd)
 	if (data->last_pid == -1)
 		return (error_msg("failed to create a new process.\n"), ERROR);
 	return (SUCCEED);
-}
-
-static void	close_parent_heredoc_fd(t_redir *redir_list)
-{
-	while (redir_list != NULL)
-	{
-		if (redir_list && redir_list->redir_id == REDIR_HEREDOC)
-			close(redir_list->fd);
-		redir_list = redir_list->next;
-	}
 }
 
 t_exec_error	execute_pipeline(t_main_data *data, t_command *cmd)

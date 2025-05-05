@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:45:28 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 21:19:49 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/28 20:01:24 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,13 @@ static t_pars_err	merge_quotes(t_token *current)
 			current->next->type == WORD || current->next->type == VARIABLE))
 	{
 		tmp_str = current->value;
-		current->value = ft_strjoin(tmp_str, current->next->value);
-		if (current == NULL && errno == ENOMEM)
+		if (current->type == VARIABLE && ft_strlen(current->value) == 1 \
+		&& current->value[0] == '$' && (current->next->type == D_QUOTE || \
+		current->next->type == S_QUOTE))
+			current->value = ft_strdup(current->next->value);
+		else
+			current->value = ft_strjoin(tmp_str, current->next->value);
+		if (current->value == NULL && errno == ENOMEM)
 			return (ERROR_MEM_ALLOC);
 		free(tmp_str);
 		remove_next_token(current);
@@ -82,6 +87,7 @@ t_pars_err	merge_variable(t_main_data *data)
 	}
 	return (SUCCESS);
 }
+
 t_pars_err	merge_tokens_n_rm_blank_tokens(t_main_data *data)
 {
 	t_token	*current;

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:58:46 by yuleumpark        #+#    #+#             */
-/*   Updated: 2025/04/27 18:46:44 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/28 20:01:40 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int	ft_add_key_val(t_env_var **head, char *keyvalue, t_main_data *data)
 	temp = *head;
 	while (temp->next != NULL)
 		temp = temp->next;
+	i = 2;
 	if (ft_strchr(keyvalue, '+') == NULL)
-		temp->variable = ft_strputjoin(name, &keyvalue[ft_strlen(name) + 1], '=');
-	else
-		temp->variable = ft_strputjoin(name, &keyvalue[ft_strlen(name) + 2], '=');
+		i = 1;
+	temp->variable = ft_strputjoin(name, &keyvalue[ft_strlen(name) + i], '=');
 	free(name);
 	if (temp->variable == NULL)
 		status_error(data, ERROR_MEM_ALLOC);
@@ -103,12 +103,14 @@ static char	*replace_or_join_var(char *arg, t_env_var *head, char *name)
 	return (temp);
 }
 
-int	export_arg(char *arg, t_env_var **envp, t_main_data *data)
+static int	export_arg(char *arg, t_env_var **envp, t_main_data *data, \
+	char *name)
 {
 	t_env_var	*head;
-	char		*name;
 
 	name = get_var_name(arg);
+	if (name == NULL && errno == 0)
+		return (-1);
 	if (!name)
 		status_error(data, ERROR_MEM_ALLOC);
 	if (input_checker(name) == -1)
@@ -133,15 +135,17 @@ int	export_arg(char *arg, t_env_var **envp, t_main_data *data)
 
 t_exec_error	export(char **args, t_main_data *data)
 {
-	int	i;
-	int	check;
+	int		i;
+	int		check;
+	char	*name;
 
+	name = NULL;
 	if (!args[1])
 		return (export_noarg(data->env_vars));
 	i = 1;
 	while (args[i])
 	{
-		check = export_arg(args[i], &data->env_vars, data);
+		check = export_arg(args[i], &data->env_vars, data, name);
 		if (check == -1)
 		{
 			error_msg("Export: Invalid Input\n");

@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:04:19 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 16:47:03 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/05 15:26:03 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@ static	void	print_redir(t_redir *redir, char **id)
 {
 	t_redir	*tmp;
 
-	write(STDOUT_FILENO, "\n\n", 2);
 	tmp = redir;
 	while (tmp != NULL)
 	{
 		if (tmp->redir_id == REDIR_HEREDOC)
 			printf("ALL REDIR : %-20s fd: %d\n", id[tmp->redir_id], tmp->fd);
 		else
-			printf("ALL REDIR : %-20s file_name: %-10sfd : %-20d\n", \
-				id[tmp->redir_id], tmp->file, tmp->fd);
+			printf("ALL REDIR : %-20s file_name: %-10s\n", \
+				id[tmp->redir_id], tmp->file);
 		tmp = tmp->next;
 	}
 }
@@ -87,8 +86,8 @@ void	debugging(t_main_data *data)
 			tmp = tmp->next;
 			i++;
 		}
+		printf("--------------------------------------------\n\n");
 	}
-	printf("--------------------------------------------\n");
 	cmd = data->cmds;
 	i = 0;
 	while (cmd != NULL)

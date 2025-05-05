@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:43:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/27 17:36:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/29 16:53:34 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	free_double(char **arr)
 	free(arr);
 }
 
-static char *check_executable_file(t_main_data *data, t_command *cmd, char *file)
+static char	*check_executable_file(t_main_data *data, \
+	t_command *cmd, char *file)
 {
 	struct stat	buf;
 
@@ -77,35 +78,31 @@ static bool	is_exec_file(t_command *cmd)
 {
 	if (cmd->args[0][0] == '\0')
 		return (true);
-	if (!ft_strncmp(cmd->args[0], "./", 2) || cmd->args[0][0] == '/')
+	if (!ft_strncmp(cmd->args[0], "./", 2) || \
+	cmd->args[0][0] == '/')
 		return (true);
 	return (false);
 }
 
-char	*executable_path(t_main_data *data, t_command *cmd, char **env_path_var, int i)
+char	*executable_path(t_main_data *data, t_command *cmd, \
+	char **env_path_var)
 {
 	t_env_var	*env_path;
 	char		*path;
+	char		*value;
 
 	if (is_exec_file(cmd) == true)
 		return (check_executable_file(data, cmd, cmd->args[0]));
 	env_path = ft_find_env(data->env_vars, "PATH");
 	if (!env_path)
 		return (NULL);
-	env_path_var = ft_split(env_path->variable, ':');
+	value = ft_strchr(env_path->variable, '=');
+	if (value == NULL)
+		return (NULL);
+	value++;
+	env_path_var = ft_split(value, ':');
 	if (!env_path_var)
 		return (NULL);
-	while (env_path_var[i])
-	{
-		path = ft_strputjoin(env_path_var[i], cmd->args[0], '/');
-		if (access(path, X_OK | F_OK) == 0)
-		{
-			free_double(env_path_var);
-			return (path);
-		}
-		free(path);
-		i++;
-	}
-	free_double(env_path_var);
-	return (NULL);
+	path = get_path_from_left(cmd, env_path_var);
+	return (path);
 }

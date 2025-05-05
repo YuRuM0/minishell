@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:41:37 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 18:40:34 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/29 15:27:11 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ static t_exec_error	ft_cd(char **cmd, t_main_data *data, char *path)
 		res = cases(cmd[1], &data->env_vars, path);
 		if (res == 1)
 			return (perror("minishell"), ERROR);
-		//else if (res == 3)
-		//	return (error_msg("cd: not a directory\n"), ERROR);
-		//else if (res == 2)
-		//	return (error_msg("cd: permission denied\n"), ERROR);
 	}
 	return (SUCCEED);
 }
@@ -67,8 +63,10 @@ t_exec_error	cd(char **cmd, t_main_data *data)
 	tb_old_pwd = getcwd(NULL, 0);
 	formatted_path = ft_strjoin("OLDPWD=", tb_old_pwd);
 	free(tb_old_pwd);
-	if (formatted_path == NULL)
+	if (formatted_path == NULL && errno == ENOMEM)
 		status_error(data, ERROR_MEM_ALLOC);
+	else if (formatted_path == NULL)
+		return (error_msg("cd: No such file or directory\n"), ERROR);
 	temp = ft_cd(cmd, data, formatted_path);
 	free(formatted_path);
 	return (temp);

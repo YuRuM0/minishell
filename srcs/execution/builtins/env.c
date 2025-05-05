@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 23:50:32 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 21:28:45 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/28 18:11:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_exec_error	env(t_main_data *data, char **args)
 		}
 	}
 	else
-		return (error_msg("Env: no argument expected\n")\
+		return (error_msg("Env: no argument expected\n") \
 		, ERROR);
 	return (SUCCEED);
 }

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 18:50:19 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/27 18:31:40 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/28 19:37:42 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*get_var_name(char *arg)
 
 	i = 0;
 	if (!arg)
+		return (NULL);
+	if (arg[0] == '+' || arg[0] == '=')
 		return (NULL);
 	while (arg[i] && (arg[i] != '=' && arg[i] != '+'))
 		i++;

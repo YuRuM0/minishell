@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:17:50 by flima             #+#    #+#             */
-/*   Updated: 2025/04/27 16:43:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/04/28 19:57:52 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	clean_temp_data(t_main_data *data)
 	data->last_fd_in = STDIN_FILENO;
 	data->nbr_of_cmds = 0;
 	data->exit_status = 0;
+	errno = 0;
 }
 
 void	clean_all_data_exit(t_main_data *data, int out_status)

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:20:38 by yulpark           #+#    #+#             */
-/*   Updated: 2025/04/25 18:20:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/04/29 15:17:29 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	go_home(t_env_var **envp, char *oldpwd, t_main_data *data)
 	char		*new_path;
 
 	home = ft_find_env(*envp, "HOME");
+	if (!home)
+		return (1);
 	new_path = ft_strchr(home->variable, '=');
 	if (!new_path)
 		status_error(data, ERROR_MEM_ALLOC);
@@ -55,6 +57,8 @@ int	go_prev(t_env_var **envp, char *tb_old_pwd)
 	char		*new_path;
 
 	tb_new_pwd = ft_find_env(*envp, "OLDPWD");
+	if (!tb_new_pwd)
+		return (1);
 	new_path = ft_strchr(tb_new_pwd->variable, '=');
 	new_path++;
 	if (!new_path || chdir(new_path) != 0)
