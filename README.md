@@ -91,27 +91,7 @@ minishell$ echo > outfile | cat <<EOF > outfile
 >minishell debug mode
 >EOF
 ```
-token      token_type           token_value         
---------------------------------------------
-0          WORD                 echo                
-1          GREAT                >                   
-2          WORD                 outfile             
-3          PIPE                 |                   
-4          WORD                 cat                 
-5          HEREDOC              <<                  
-6          WORD                 3                   
-7          GREAT                >                   
-8          WORD                 outfile             
---------------------------------------------
-
-Command[0] echo                
-REDIR_ID : REDIR_OUT            file_name: outfile   
-
-Command[1] cat                 
-REDIR_ID : REDIR_HEREDOC        fd: 3
-REDIR_ID : REDIR_OUT            file_name: outfile   
-
---------------------------------------------
+<pre> ``` token token_type token_value -------------------------------------------- 0 WORD echo 1 GREAT > 2 WORD outfile 3 PIPE | 4 WORD cat 5 HEREDOC << 6 WORD 3 7 GREAT > 8 WORD outfile -------------------------------------------- Command[0] echo REDIR_ID : REDIR_OUT file_name: outfile Command[1] cat REDIR_ID : REDIR_HEREDOC fd: 3 REDIR_ID : REDIR_OUT file_name: outfile -------------------------------------------- minishell$ ``` </pre>
 
 > This feature is for debugging purposes and helps visualize how the parser and executor understand and process the input.
 
