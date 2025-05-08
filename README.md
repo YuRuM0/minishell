@@ -118,7 +118,7 @@ REDIR_ID : REDIR_OUT            file_name: outfile
 minishell$ 
 ```
 
-> This feature is for debugging purposes and helps visualize how the parser and executor understand and process the input.
+This feature is for debugging purposes and helps visualize how the parser and executor understand and process the input.
 
 ---
 
