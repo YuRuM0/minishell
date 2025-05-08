@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:13 by filipe            #+#    #+#             */
-/*   Updated: 2025/04/28 14:48:11 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/08 20:35:51 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include "minishell.h"
 
 # define METACHARS " \t\n|<>$\"\'&"
+# define ON 1
+# define OFF 2
 
-//split the cmd line into token using these syntax
 typedef enum e_syntax
 {
 	SPACE_CHAR,

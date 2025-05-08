@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:03:24 by flima             #+#    #+#             */
-/*   Updated: 2025/03/23 15:22:42 by filipe           ###   ########.fr       */
+/*   Updated: 2025/05/08 20:32:55 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenization.h"
 
-// identify syntax erros in the tokens list
 t_token	*skip_blank_nodes_n_get_next(t_token *tokens, int flag)
 {
 	t_token	*current;

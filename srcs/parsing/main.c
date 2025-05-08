@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 21:24:38 by flima             #+#    #+#             */
-/*   Updated: 2025/04/28 14:23:49 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/08 20:44:03 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,16 @@ int	main(int argc, char **argv, char **envp)
 	t_main_data	data;
 
 	(void)argv;
+	data.debug_mode = OFF;
 	if (argc != 1)
 	{
-		ft_putstr_fd("Error\n No arguments needed", 2);
-		return (1);
+		if (argc == 2 && !ft_strncmp(argv[1], "-g", 2))
+			data.debug_mode = ON;
+		else
+		{
+			ft_putstr_fd("Error\nNo arguments needed", 2);
+			return (1);
+		}
 	}
 	init_data(&data);
 	duplicate_env_var(&data, envp);

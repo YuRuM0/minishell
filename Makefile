@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/05/05 15:11:47 by flima            ###   ########.fr        #
+#    Updated: 2025/05/08 20:34:11 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,17 +34,17 @@ PARSE_DIR = $(SCRS_DIR)/parsing
 PARSE_FILES = $(PARSE_DIR)/main.c \
 				$(PARSE_DIR)/parse.c \
 				$(PARSE_DIR)/tokenization.c \
-				$(PARSE_DIR)/syntax.c \
-				$(PARSE_DIR)/merge_tokens.c \
-				$(PARSE_DIR)/heredoc_handle.c \
-				$(PARSE_DIR)/heredoc_read_input.c \
-				$(PARSE_DIR)/setup_file_descriptors.c
+				$(PARSE_DIR)/syntax.c
 
 ENVIRONMENT_VAR_DIR = $(PARSE_DIR)/env_variables
 ENVIRONMENT_VAR_FILES = $(ENVIRONMENT_VAR_DIR)/env_var_utils.c \
 						$(ENVIRONMENT_VAR_DIR)/environment_var.c \
 						$(ENVIRONMENT_VAR_DIR)/env_expand_utils.c \
 						$(ENVIRONMENT_VAR_DIR)/create_envp_array.c
+
+HEREDORC_DIR = $(PARSE_DIR)/heredoc_handler
+HEREDOC_FILES = $(HEREDORC_DIR)/heredoc_handle.c \
+					$(HEREDORC_DIR)/heredoc_read_input.c
 
 COMMANDS_DIR = $(PARSE_DIR)/commands_builder
 COMMANDS_FILES = $(COMMANDS_DIR)/commands_builder.c\
@@ -62,7 +62,9 @@ PARSE_UTILS_DIR = $(PARSE_DIR)/parse_utils
 PARSE_UTILS_FILES = $(PARSE_UTILS_DIR)/utils_parsing.c \
 					$(PARSE_UTILS_DIR)/utils_token_list.c \
 					$(PARSE_UTILS_DIR)/utils_errors_handler.c \
-					$(PARSE_UTILS_DIR)/utils_especial_char.c 
+					$(PARSE_UTILS_DIR)/utils_especial_char.c \
+					$(PARSE_UTILS_DIR)/setup_file_descriptors.c \
+					$(PARSE_UTILS_DIR)/merge_tokens.c
 
 DEBUG_DIR = $(PARSE_DIR)/debugging
 DEBUG_FILES = $(DEBUG_DIR)/print_tokens.c \
@@ -76,7 +78,7 @@ SIGNAL_FILES = $(SIGNAL_DIR)/signal.c
 
 
 EXEC_DIR = $(SCRS_DIR)/execution
-EXEC_FILES = $(EXEC_DIR)/main.c\
+EXEC_FILES = $(EXEC_DIR)/manage_builtins.c\
 				$(EXEC_DIR)/execution.c\
 				$(EXEC_DIR)/executable_path.c\
 				$(EXEC_DIR)/child_executor.c\
@@ -100,7 +102,7 @@ SRC_FILES = $(PARSE_FILES) $(ERROR_FILE) $(JUMP_PARSE_FILES) \
 				$(PARSE_UTILS_FILES) $(DEBUG_FILES) $(FREE_FILE) \
 				$(ENVIRONMENT_VAR_FILES) $(COMMANDS_FILES) \
 				$(BUILTIN_FILES) $(CONNECT_FILES) $(SIGNAL_FILES) \
-				$(EXEC_FILES)
+				$(EXEC_FILES) $(HEREDOC_FILES)
 
 OBJS_DIR = objs
 OBJS = $(patsubst $(SCRS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRC_FILES))
