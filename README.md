@@ -55,15 +55,15 @@
 - `exit`
 
 ### 📝 Heredoc Internals
--The heredoc (<<) implementation in **Minishell** closely mimics the behavior of Bash, especially regarding signal handling and input redirection:
+- The heredoc (<<) implementation in **Minishell** closely mimics the behavior of Bash, especially regarding signal handling and input redirection:
   - When a heredoc is encountered, the shell creates a child process to handle user input until the delimiter is reached.
   - The input is written to a temporary file created in /tmp.
 -Signal behavior matches Bash during heredoc input:
-  -Ctrl-C: interrupts input and cancels the heredoc with an error status.
-  -Ctrl-\: is ignored.
-  -Ctrl-D: ends input as expected.
--Once writing is complete, the parent process opens the temporary file, saves the file descriptor, and immediately calls unlink() to remove the file path, ensuring the file is deleted automatically after use.
--This approach ensures that heredoc content is safely isolated, temporary, and leaves no residual files on the system.
+  - Ctrl-C: interrupts input and cancels the heredoc with an error status.
+  - Ctrl-\: is ignored.
+  - Ctrl-D: ends input as expected.
+- Once writing is complete, the parent process opens the temporary file, saves the file descriptor, and immediately calls unlink() to remove the file path, ensuring the file is deleted automatically after use.
+- This approach ensures that heredoc content is safely isolated, temporary, and leaves no residual files on the system.
 
 ### 📦 Memory Management
 
