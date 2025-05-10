@@ -1,6 +1,6 @@
 # Minishell
 
-> "This project is about creating a simple shell. Yes, your very own little Bash."
+> "As beautiful as a shell.....This project is about creating a simple shell. Yes, your very own little Bash."
 
 ## 🧠 About
 
