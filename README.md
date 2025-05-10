@@ -73,7 +73,7 @@
 
 ---
 
-## 🧩 Core Concepts Explored
+## 📚 Core Concepts Explored
 
 Working on **Minishell** offered a deep dive into low-level system programming, shell architecture, and efficient data handling. Some of the most valuable lessons and skills gained include:
 
@@ -160,4 +160,14 @@ minishell$
 This feature is for debugging purposes and helps visualize how the parser and executor understand and process the input.
 
 ---
+
+---
+
+## 👥 Contributors
+
+This project was developed in collaboration as part of the 42 School curriculum.
+
+- [@Filipe-FLima](https://github.com/Filipe-FLima) — Filipe Lima  
+- [@YuRuM0](https://github.com/YuRuM0) — Yuleum Park (project partner)
+
 
